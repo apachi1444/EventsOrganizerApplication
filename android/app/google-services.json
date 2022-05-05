@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1064133916830",
+    "project_id": "pfss-baba8",
+    "storage_bucket": "pfss-baba8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064133916830:android:5104c0f3a5d415185aa38f",
+        "android_client_info": {
+          "package_name": "com.example.pfs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1064133916830-k5o6cki5oev3p8vcvh4bppa6jerf3a0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC55B6Jzm3Qhv9IQjz4uI8tT5n-PGpkGRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1064133916830-k5o6cki5oev3p8vcvh4bppa6jerf3a0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
