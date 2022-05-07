@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pfs/Models/Userr.dart';
 import 'package:pfs/logic/wrapper_class.dart';
 import 'package:pfs/screens/calculatrice_page.dart';
 import 'package:pfs/screens/authPages/login_page.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'package:pfs/screens/welcomePages/get_started_page.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
+import 'package:pfs/services/authService.dart';
 import 'package:provider/provider.dart';
 
 import 'StateNotifier/count_model.dart';
@@ -24,10 +26,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner:  false ,
-      home: const WrapperElement(),
+    return StreamProvider<Userr?>.value(
+      initialData: null,
+      // what stream we gonna listen to
+      // and what data we want to get back
+      value: AuthService().get(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner:  false ,
+        home: WrapperElement(),
+      ),
     );
+    // return MaterialApp(
+    //   home : const WrapperElement(),
+    // );
   }
 }
 

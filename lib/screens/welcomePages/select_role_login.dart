@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pfs/logic/auth_page.dart';
 import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
 import 'package:pfs/screens/authPages/login_page.dart';
 
@@ -95,7 +96,7 @@ class SelectRoleLogin extends StatelessWidget {
                         onTap :(){
                           Navigator.push(context , MaterialPageRoute(
                             builder : (context) {
-                              return LogInAsAGuestPage();
+                              return AuthPage();
                             }
                           )
                           );
