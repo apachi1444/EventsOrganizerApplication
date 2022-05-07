@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
+import 'package:pfs/screens/authPages/login_page.dart';
 
 class SelectRoleLogin extends StatelessWidget {
   const SelectRoleLogin({Key? key}) : super(key: key);
@@ -89,13 +91,23 @@ class SelectRoleLogin extends StatelessWidget {
                           ]
                       ),
 
-                      child : const Center(
-                        child:  Text(
-                            "Join As U Progessional",
-                            style : TextStyle(
-                              color : Colors.black ,
-                              fontWeight : FontWeight.bold,
-                            )
+                      child : GestureDetector(
+                        onTap :(){
+                          Navigator.push(context , MaterialPageRoute(
+                            builder : (context) {
+                              return LogInAsAGuestPage();
+                            }
+                          )
+                          );
+                        },
+                        child: const Center(
+                          child:  Text(
+                              "Join As U Progessional",
+                              style : TextStyle(
+                                color : Colors.black ,
+                                fontWeight : FontWeight.bold,
+                              )
+                          ),
                         ),
                       ) ,
                     )

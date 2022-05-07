@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pfs/StateNotifier/count_model.dart';
 import 'package:pfs/screens/welcomePages/select_role_login.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_three.dart';
+import 'package:provider/provider.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final isDark = Provider.of<CounterModel>(context , listen : false).toggle();
+    // print('this is the value of our state in the provider ' + isDark );
     return Scaffold(
       backgroundColor: Color(0XFFFFFFF8),
       body : Center(
