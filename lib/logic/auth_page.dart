@@ -22,11 +22,11 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    if ( showLoginPage )
+    if ( showLoginPage ) {
       return  LoginPage(toggleView : toggleScreens);
-      // return LoginPage(showRegisterPage : toggleScreens);
-    else {
+    } else {
       return RegisterPage(toggleView : toggleScreens );
     }
   }
+
 }

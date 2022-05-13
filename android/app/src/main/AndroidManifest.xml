@@ -2,7 +2,8 @@
     package="com.example.pfs">
    <application
         android:label="pfs"
-        android:name="${applicationName}"
+       android:usesCleartextTraffic="true"
+       android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../Models/Userr.dart';
 import 'dbService.dart';
@@ -20,7 +22,7 @@ class AuthService {
 
   }
 
-  Stream<Userr?> get()=> _auth!.authStateChanges().map((user) => _useFromFirebaseUser(user!));
+  Stream<Userr?> get()=> _auth.authStateChanges().map((user) => _useFromFirebaseUser(user!));
 
   // StreamSubscription<User> listen(
   //     void Function(User event) onData,
@@ -38,21 +40,17 @@ class AuthService {
   Future SignOut() async {
     try {
       return await _auth.signOut();
-    } catch(e){
+    } on FirebaseAuthException catch(e){
+
       print(e.toString());
       return null;
     }
   }
 
-  Future registerWithEmailAndPassword(String email , String password) async {
-    UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password) ;
-    User? user = result.user;
 
-    // create a new document for the user with that uid
-    await DatabaseService(user!.uid).updateUserData("sugars", "ame", 1);
 
-    return _useFromFirebaseUser(user);
-  }
+
+
 
   Future signInWithEmailAndPassword(String email , String password) async {
     UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -74,10 +72,43 @@ class AuthService {
   }
   
   
-  Future signIn(emailController , passwordController) async {
-    await _auth.signInWithEmailAndPassword(
-      email : emailController.text.trim(),
-      password : passwordController.text.trim(),
+  Future signIn(String emailController , String passwordController) async {
+    try{
+      print("ahah");
+      await _auth.signInWithEmailAndPassword(
+      email : emailController,
+      password : passwordController,
     );
+    } on FirebaseAuthException catch(e){
+      print(e);
+    }
   }
+
+  Future signUp(String email , String password , String  first_name , String last_name, String age ) async {
+      // create user
+      try{
+        UserCredential result =await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: email,
+            password: password
+        );
+
+        User? user = result.user;
+        // create a new document for the user with that uid
+        await DatabaseService(uid:user!.uid).updateUserData(first_name, last_name,age);
+        return _useFromFirebaseUser(user);
+      // ignore: empty_catches
+      }catch(e){
+        print(e.toString());
+        return null;
+      }
+      // add user details
+      // addUserDetails(
+      //   _firstNameController.text.trim(),
+      //   _lastNameController.text.trim(),
+      //   _emailController.text.trim(),
+      //   int.parse(_ageController.text.trim()),
+      // );
+    }
+
+
 }

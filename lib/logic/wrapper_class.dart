@@ -21,14 +21,15 @@ class WrapperElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("the fkkkkk null valuein in the wrapper WrapperElement");
     final user = Provider.of<Userr?>(context);
-    print(user);
     if (user == null) {
       // we have to discuss it because id depends on the first time visit of our user
-      return GetStartedPage();
+      return const GetStartedPage();
     }
     else {
-      return HomePage();
+      print("haaaaaaaaaaaaaaaaaaaaaaaaaaaaa returning the home page in the wrapper WrapperElement");
+      return const HomePage();
       // }
       // return StreamBuilder<User?>(
       //     stream : FirebaseAuth.instance.authStateChanges(),

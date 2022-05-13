@@ -38,34 +38,17 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  Future signUp() async {
 
-      if ( passConfirmed()) {
-
-        // create user
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim()
-        );
-
-        // add user details
-        addUserDetails(
-          _firstNameController.text.trim(),
-          _lastNameController.text.trim(),
-          _emailController.text.trim(),
-          int.parse(_ageController.text.trim()),
-        );
-      }
+  Future  doTheSignUp() async {
+    if (passConfirmed()){
+      return _auth.signUp(_emailController.text.trim(), _passwordController.text.trim() , _firstNameController.text.trim() , _lastNameController.text.trim() , _ageController.text.trim());
+    }
+    else{
+      print("check your password and confirm password");
+      return null;
+    }
   }
 
-  Future addUserDetails(String first_name , String last_name, String email, int age) async{
-    await FirebaseFirestore.instance.collection("users").add({
-      'first_name' : first_name,
-      'last_name' : last_name,
-      'age' : age,
-      'email' : email,
-    });
-  }
 
   bool passConfirmed(){
     if ( _passwordController.text.trim() == _confirmPasswordController.text.trim()){
@@ -264,43 +247,37 @@ class _RegisterPageState extends State<RegisterPage> {
                       // Sign In Button
                       Padding(
                           padding  : const EdgeInsets.symmetric(horizontal : 20),
-                          child : GestureDetector(
-                            onTap : signUp,
                             child: Container(
                                 padding : EdgeInsets.all(25),
                                 decoration : BoxDecoration(
                                     color:Colors.deepPurple,
                                     borderRadius : BorderRadius.circular(20)
                                 ),
-                                child : GestureDetector(
-                                  onTap :() async{
 
+
+                                child: GestureDetector(
+                                  onTap :() async {
+                                    if (_formKey.currentState!.validate()){
+                                      dynamic result = doTheSignUp();
+                                      if (result == null){
+                                        setState((){
+                                          error = 'please supply a valid email and password' ;
+                                        });
+                                      }
+                                    }
                                   },
-                                  child: GestureDetector(
-                                    onTap :() async{
-                                      // if (_formKey.currentState.validate()){
-                                      //   dynamic result = await _auth.registerWithEmailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
-                                      //   if (result == null){
-                                      //     setState((){
-                                      //       error = 'please supply a valid email and password' ;
-                                      //     });
-                                      //   }
-                                      // }
-                                      _auth.registerWithEmailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
-                                    },
-                                    child: Center(
-                                        child : Text(
-                                            "Sign Up",
-                                            style : TextStyle(
-                                              color : Colors.white,
-                                              fontWeight : FontWeight.bold,
-                                            )
-                                        )
-                                    ),
+                                  child: Center(
+                                      child : Text(
+                                          "Sign Up",
+                                          style : TextStyle(
+                                            color : Colors.white,
+                                            fontWeight : FontWeight.bold,
+                                          )
+                                      )
                                   ),
-                                )
-                            ),
-                          )
+                                ),
+                              ),
+
                       ),
                       const SizedBox(height : 10),
 

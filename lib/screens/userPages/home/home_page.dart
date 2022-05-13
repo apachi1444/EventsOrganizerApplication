@@ -12,7 +12,8 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return StreamProvider<QuerySnapshot>.value(
-//       initialData: DatabaseService().ourCollectione,
+//       initialData: DatabaseService(uid:'').ourCollection,
+//       value: null,
 //       child: Scaffold(
 //         appBar: AppBar(
 //           backgroundColor: Color(0XFFFFFFF8),

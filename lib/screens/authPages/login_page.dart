@@ -203,9 +203,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../shared/loading_screen_page.dart';
-class LoginPage extends StatefulWidget {
 
+class LoginPage extends StatefulWidget {
   final Function toggleView;
+
   LoginPage({Key? key, required this.toggleView}) : super(key: key);
 
   @override
@@ -220,30 +221,29 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-
-
   @override
   Widget build(BuildContext context) {
-    return loading ? LoadingScreen() : Scaffold(
-      backgroundColor: Color(0XFFFFFFF8),
-      body : Center(
-          child : Form(
-            key : _formKey,
-            child: Column(
-                children : <Widget>[
+    return loading
+        ? LoadingScreen()
+        : Scaffold(
+            backgroundColor: Color(0XFFFFFFF8),
+            body: SingleChildScrollView(
+              child: Center(
+                  child: Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
                   Container(
-                    height : MediaQuery.of(context).size.height * 0.40  ,
-                    width : MediaQuery.of(context).size.width * 0.7,
-                    decoration : const BoxDecoration(
+                    height: MediaQuery.of(context).size.height * 0.40,
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(0),
                           topLeft: Radius.circular(0),
                           bottomRight: Radius.circular(70),
-                          bottomLeft: Radius.circular(70)
-                      ),
-                      color :  Color(0XFFFF006B),
+                          bottomLeft: Radius.circular(70)),
+                      color: Color(0XFFFF006B),
                     ),
-                    padding : const EdgeInsets.all(25),
+                    padding: const EdgeInsets.all(25),
                     child: SvgPicture.asset(
                       "assets/welcome.svg",
                       //fit: B,
@@ -252,189 +252,159 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
 
-                  SizedBox(height : 30),
+                  SizedBox(height: 30),
 
-                  const Text(
-                      "Welcome Abroad User",
-                      style : TextStyle(
+                  const Text("Welcome Abroad User",
+                      style: TextStyle(
                         // color : Color(0XFFFF006B),
-                        fontSize :30,
-                      )
-                  ),
+                        fontSize: 30,
+                      )),
 
-                  SizedBox(height :20),
-
-
+                  SizedBox(height: 20),
 
                   Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 40  , vertical : 0),
-                      child : Container(
-
-                        decoration : BoxDecoration(
-                            borderRadius : BorderRadius.circular(20),
-                            color : Color(0XFFF8F4F4),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                                color: Color(0XFFF8F4F4),
                             boxShadow: [
                               BoxShadow(
-                                  color : Colors.grey.withOpacity(0.6),
+                                  color: Colors.grey.withOpacity(0.6),
                                   blurRadius: 0.6,
-                                  spreadRadius : 0.8,
-                                  offset: Offset(0,4)
-                              )
-                            ]
-                        ),
-
-                        child : Padding(
-                          padding : EdgeInsets.symmetric(horizontal : 10 , vertical : 0),
+                                  spreadRadius: 0.8,
+                                  offset: Offset(0, 4))
+                            ]),
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                           child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              validator : (val) => (val!.length <6) ? 'must be at least 6' :null,
-                              style: const TextStyle(
+                              controller: _emailController,
+                              validator: (val) =>
+                                  val!.isEmpty ? 'Enter Your Email' : null,
+                              style: TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blueAccent,
                               ),
                               decoration: InputDecoration(
-                                  errorStyle: TextStyle(
-                                      fontSize: 16
-                                  ),
-                                  contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
+                                  prefixIcon: Icon(Icons.pause_rounded),
+                                  hintText: "Enter Your Email",
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ))),
+                        ),
+                      )),
+
+                  SizedBox(height: 20),
+
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0XFFF8F4F4),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.6),
+                                  blurRadius: 0.6,
+                                  spreadRadius: 0.8,
+                                  offset: Offset(0, 4))
+                            ]),
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          child: TextFormField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              validator: (val) => (val!.length < 6)
+                                  ? 'must be at least 6'
+                                  : null,
+                              style: const TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.blueAccent,
+                              ),
+                              decoration: const InputDecoration(
+                                  errorStyle: TextStyle(fontSize: 16),
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                      20.0, 15.0, 20.0, 15.0),
                                   prefixIcon: Icon(Icons.lock),
                                   hintText: "Enter Your Password",
                                   focusedBorder: OutlineInputBorder(
-                                     borderSide:  BorderSide.none
-                                  )
-                              )
-                          ),
-
-
+                                      borderSide: BorderSide.none))),
                         ),
-                      )
-                  ),
+                      )),
 
-                  SizedBox(height :20),
-
-
-                  Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 40  , vertical : 0),
-                      child : Container(
-
-                        decoration : BoxDecoration(
-                            borderRadius : BorderRadius.circular(20),
-                            color : Color(0XFFF8F4F4),
-                            boxShadow: [
-                              BoxShadow(
-                                  color : Colors.grey.withOpacity(0.6),
-                                  blurRadius: 0.6,
-                                  spreadRadius : 0.8,
-                                  offset: Offset(0,4)
-                              )
-                            ]
-                        ),
-
-                        child : Padding(
-                            padding : EdgeInsets.symmetric(horizontal : 10 , vertical : 0),
-                            child: TextFormField(
-                                controller: _emailController,
-                                validator : (val) => val!.isEmpty ? 'Enter Your Email' : null,
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.blueAccent,
-                                ),
-                                decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                                    prefixIcon: Icon(Icons.pause_rounded),
-                                    hintText: "Enter Your Email",
-                                    focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide.none,
-                                    )
-                                )
-                            ),
-
-
-                        ),
-                      )
-                  ),
-
-
-
-                  SizedBox(height : 20),
+                  SizedBox(height: 20),
 
                   // this part for the line of forget password and remember me !
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal : 43.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 43.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          child : Row(
-                            children: [
-                              Text("Remember Me "),
-                            ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            child: Row(
+                              children: [
+                                Text("Remember Me "),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                            child:
-                              Text(
-                                  "Forget Password?",
-                                  style : TextStyle(
-                                    color : Colors.grey[600]
-                                  )
-                              )
-                        )
-                      ]
-                    ),
+                          Container(
+                              child: Text("Forget Password?",
+                                  style: TextStyle(color: Colors.grey[600])))
+                        ]),
                   ),
 
-                  SizedBox(height :25),
-
+                  SizedBox(height: 25),
 
                   Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 20),
-                      child : Container(
-                        width : MediaQuery.of(context).size.width  * 0.6,
-                        padding : EdgeInsets.all(20),
-                        decoration : BoxDecoration(
-                            color :  Color(0XFFFF006B),
-                            borderRadius:BorderRadius.circular(40),
-
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Color(0XFFFF006B),
+                          borderRadius: BorderRadius.circular(40),
                         ),
-
-                        child : GestureDetector(
-                          onTap :() async{
-                            if (_formKey.currentState!.validate()){
-                              dynamic result = await _auth.registerWithEmailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
-                              if (result == null){
-                                setState((){
-                                  error = 'please supply a valid email and password' ;
+                        child: GestureDetector(
+                          onTap: () async {
+                            if (_formKey.currentState!.validate()) {
+                              dynamic result = await _auth.signIn(
+                                  _emailController.text.trim(),
+                                  _passwordController.text.trim());
+                              if (result == null) {
+                                setState(() {
+                                  print("ahah this is for the set State");
+                                  error =
+                                      'please supply a valid email and password';
                                 });
                               }
                             }
-                            print(_emailController.text.trim());
-                            _auth.registerWithEmailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
                           },
                           child: const Center(
-                            child:  Text(
-                                "Sign In",
-                                style : TextStyle(
-                                    color : Colors.white ,
-                                    fontWeight : FontWeight.bold,
-                                    fontSize : 17
-                                )
-                            ),
+                            child: Text("Sign In",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17)),
                           ),
-                        ) ,
-                      )
-                  ),
+                        ),
+                      )),
 
                   // this for the line indicating the OR Text with the lines next to the text
 
-                  SizedBox(height : 10),
+                  SizedBox(height: 10),
 
                   Row(children: <Widget>[
                     Expanded(
-                      child:  Container(
-                          margin: const EdgeInsets.only(left: 30.0, right: 20.0),
+                      child: Container(
+                          margin:
+                              const EdgeInsets.only(left: 30.0, right: 20.0),
                           child: Divider(
                             color: Colors.black,
                             height: 50,
@@ -442,8 +412,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Text("OR"),
                     Expanded(
-                      child:  Container(
-                          margin: const EdgeInsets.only(left: 20.0, right: 30.0),
+                      child: Container(
+                          margin:
+                              const EdgeInsets.only(left: 20.0, right: 30.0),
                           child: Divider(
                             color: Colors.black,
                             height: 36,
@@ -457,52 +428,48 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         CircleAvatar(
                           backgroundImage: AssetImage("assets/googleIcon.png"),
-                          radius : 15,
-                          backgroundColor : Color(0xFFC7D0D8),
+                          radius: 15,
+                          backgroundColor: Color(0xFFC7D0D8),
                         ),
-                        SizedBox(width : 10),
+                        SizedBox(width: 10),
                         CircleAvatar(
-                          backgroundImage: AssetImage("assets/facebookIcon.png"),
-                          radius : 15,
-                          backgroundColor : Color(0xFFC7D0D8),
+                          backgroundImage:
+                              AssetImage("assets/facebookIcon.png"),
+                          radius: 15,
+                          backgroundColor: Color(0xFFC7D0D8),
                         ),
-                        SizedBox(width : 10),
+                        SizedBox(width: 10),
                         CircleAvatar(
-                          backgroundImage: AssetImage("assets/instagramIcon.png"),
-                          radius : 15,
-                          backgroundColor : Color(0xFFC7D0D8),
+                          backgroundImage:
+                              AssetImage("assets/instagramIcon.png"),
+                          radius: 15,
+                          backgroundColor: Color(0xFFC7D0D8),
                         ),
                       ],
                     ),
                   ),
 
-                  SizedBox(height : 10),
+                  SizedBox(height: 10),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
+                    children: [
                       Text("Don't Have An Account !  "),
                       GestureDetector(
-                        onTap : (){
+                        onTap: () {
                           widget.toggleView();
                         },
-                        child: Text(
-                            "Sign Up Here",
-                            style : TextStyle(
-                              color  : Color(0XFFFF006B),
-                              fontWeight : FontWeight.bold,
-                            )
-                        ),
+                        child: Text("Sign Up Here",
+                            style: TextStyle(
+                              color: Color(0XFFFF006B),
+                              fontWeight: FontWeight.bold,
+                            )),
                       )
                     ],
                   )
-
-                ]
+                ]),
+              )),
             ),
-          )
-      ),
-    );
+          );
   }
-
 }
-

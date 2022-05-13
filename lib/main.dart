@@ -10,14 +10,16 @@ import 'package:pfs/services/authService.dart';
 import 'package:provider/provider.dart';
 
 import 'StateNotifier/count_model.dart';
-import 'logic/main_page.dart';
 
 void main() async  {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(ChangeNotifierProvider(
-      create : (context) => CounterModel(),
-      child: const MyApp()));
+  // runApp(ChangeNotifierProvider(
+  //     create : (context) => CounterModel(),
+  //     child: const MyApp()));
+  runApp(
+    const MyApp()
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,11 +28,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<Userr?>.value(
-      initialData: null,
+    return StreamProvider<Userr?>(
+      initialData:  null,
       // what stream we gonna listen to
       // and what data we want to get back
-      value: AuthService().get(),
+      create: (_) => AuthService().get(),
       child: const MaterialApp(
         debugShowCheckedModeBanner:  false ,
         home: WrapperElement(),
