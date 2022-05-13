@@ -207,7 +207,7 @@ import '../../shared/loading_screen_page.dart';
 class LoginPage extends StatefulWidget {
   final Function toggleView;
 
-  LoginPage({Key? key, required this.toggleView}) : super(key: key);
+  const LoginPage({Key? key, required this.toggleView}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -283,11 +283,11 @@ class _LoginPageState extends State<LoginPage> {
                               controller: _emailController,
                               validator: (val) =>
                                   val!.isEmpty ? 'Enter Your Email' : null,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blueAccent,
                               ),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.fromLTRB(
                                       20.0, 15.0, 20.0, 15.0),
                                   prefixIcon: Icon(Icons.pause_rounded),
@@ -298,11 +298,11 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       )),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                          const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),

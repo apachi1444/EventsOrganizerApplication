@@ -1,47 +1,93 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import "package:flutter/material.dart";
-import 'package:pfs/logic/auth_page.dart';
-import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
-import 'package:pfs/screens/welcomePages/get_started_page.dart';
-import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import "package:flutter/material.dart";
+// import 'package:pfs/logic/auth_page.dart';
+// import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
+// import 'package:pfs/screens/welcomePages/get_started_page.dart';
+// import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
+// import 'package:provider/provider.dart';
+//
+// import '../Models/Userr.dart';
+// import '../screens/authPages/login_page.dart';
+// import '../screens/userPages/home_page.dart';
+//
+//
+// class WrapperElement extends StatelessWidget {
+//
+//   // the wrapper class will listen for Auth Changes
+//   // and we need the provider to pass the auth changes to all the widgets
+//
+//   const WrapperElement({Key? key}) : super(key: key);
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final user = Provider.of<Userr?>(context);
+//     print(user?.uid);
+//     if (user == null) {
+//       print("the fkkkkk null valuein in the wrapper WrapperElement");
+//       // we have to discuss it because id depends on the first time visit of our user
+//       return const GetStartedPage();
+//     }
+//     else {
+//       print("haaaaaaaaaaaaaaaaaaaaaaaaaaaaa returning the home page in the wrapper WrapperElement");
+//       return const HomePage();
+//       // }
+//       // return StreamBuilder<User?>(
+//       //     stream : FirebaseAuth.instance.authStateChanges(),
+//       //     builder :(context , snapshot){
+//       //       if (snapshot.hasData){
+//       //         print(snapshot);
+//       //         return HomePage();
+//       //       }else{
+//       //         return GetStartedPage();
+//       //       }
+//       //     }
+//       // );
+//     }
+//   }
+// }
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../Models/Userr.dart';
-import '../screens/authPages/login_page.dart';
-import '../screens/userPages/home_page.dart';
+import 'applicationState.dart';
+import 'authenticate.dart';
 
+class WrapperPage extends StatefulWidget {
 
-class WrapperElement extends StatelessWidget {
+  const WrapperPage({Key? key}) : super(key: key);
 
-  // the wrapper class will listen for Auth Changes
-  // and we need the provider to pass the auth changes to all the widgets
+  @override
+  State<WrapperPage> createState() => _WrapperPageState();
+}
 
-  const WrapperElement({Key? key}) : super(key: key);
+class _WrapperPageState extends State<WrapperPage> {
 
 
   @override
   Widget build(BuildContext context) {
-    print("the fkkkkk null valuein in the wrapper WrapperElement");
-    final user = Provider.of<Userr?>(context);
-    if (user == null) {
-      // we have to discuss it because id depends on the first time visit of our user
-      return const GetStartedPage();
-    }
-    else {
-      print("haaaaaaaaaaaaaaaaaaaaaaaaaaaaa returning the home page in the wrapper WrapperElement");
-      return const HomePage();
-      // }
-      // return StreamBuilder<User?>(
-      //     stream : FirebaseAuth.instance.authStateChanges(),
-      //     builder :(context , snapshot){
-      //       if (snapshot.hasData){
-      //         print(snapshot);
-      //         return HomePage();
-      //       }else{
-      //         return GetStartedPage();
-      //       }
-      //     }
-      // );
-    }
+    final VoidCallback toggleView;
+    return Scaffold(
+      body:
+      // Add from here
+      Consumer<ApplicationState>(
+        builder: (context, appState, _) => Authentication(
+          email: appState.email,
+          loginState: appState.loginState,
+          startLoginFlow: appState.startLoginFlow,
+          verifyEmail: appState.verifyEmail,
+          signInWithEmailAndPassword: appState.signInWithEmailAndPassword,
+          cancelRegistration: appState.cancelRegistration,
+          registerAccount: appState.registerAccount,
+          signOut: appState.signOut,
+        ),
+      ),
+      // to here
+    );
   }
 }
+
+
+

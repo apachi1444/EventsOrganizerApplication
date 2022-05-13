@@ -1,47 +1,43 @@
+import 'dart:async'; // new
+
+import 'package:firebase_auth/firebase_auth.dart'; // new
+import 'package:firebase_core/firebase_core.dart'; // new
 import 'package:flutter/material.dart';
-import 'package:pfs/Models/Userr.dart';
-import 'package:pfs/logic/wrapper_class.dart';
-import 'package:pfs/screens/calculatrice_page.dart';
-import 'package:pfs/screens/authPages/login_page.dart';
-import "package:firebase_core/firebase_core.dart";
-import 'package:pfs/screens/welcomePages/get_started_page.dart';
-import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
-import 'package:pfs/services/authService.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart'; // new
 
-import 'StateNotifier/count_model.dart';
+import 'logic/applicationState.dart';
+import 'logic/authenticate.dart';
+import 'logic/wrapper_class.dart';
 
-void main() async  {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  // runApp(ChangeNotifierProvider(
-  //     create : (context) => CounterModel(),
-  //     child: const MyApp()));
+void main() {
   runApp(
-    const MyApp()
+    ChangeNotifierProvider(
+      create: (context) => ApplicationState(),
+      builder: (context, _) => const App(),
+    ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<Userr?>(
-      initialData:  null,
-      // what stream we gonna listen to
-      // and what data we want to get back
-      create: (_) => AuthService().get(),
-      child: const MaterialApp(
-        debugShowCheckedModeBanner:  false ,
-        home: WrapperElement(),
+    return MaterialApp(
+      title: 'Firebase Meetup',
+      theme: ThemeData(
+        buttonTheme: Theme.of(context).buttonTheme.copyWith(
+              highlightColor: Colors.deepPurple,
+            ),
+        primarySwatch: Colors.deepPurple,
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      home: const WrapperPage(),
     );
-    // return MaterialApp(
-    //   home : const WrapperElement(),
-    // );
   }
 }
-
 

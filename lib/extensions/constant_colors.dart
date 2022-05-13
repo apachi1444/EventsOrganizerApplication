@@ -1,8 +1,9 @@
 class ConstantColors {
-  String _ourGreyColor = "0XFFF8F4F4";
-  String _ourPinkColor = "0XFFFF006B";
+  String KGreyColor = "0XFFF8F4F4";
+  String KPinkColor = "0XFFFF006B";
 
-  String getGreyColor() {return _ourGreyColor;}
-  String getPinkColor() {return _ourPinkColor;}
+  String getGreyColor() {return KGreyColor;}
+  String getPinkColor() {return KPinkColor;}
+
 
 }
