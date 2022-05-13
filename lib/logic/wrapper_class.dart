@@ -52,7 +52,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'applicationState.dart';
+import '../services/authService.dart';
 import 'authenticate.dart';
 
 class WrapperPage extends StatefulWidget {
@@ -68,7 +68,7 @@ class _WrapperPageState extends State<WrapperPage> {
 
   @override
   Widget build(BuildContext context) {
-    final VoidCallback toggleView;
+    print("we are in the wrapper class");
     return Scaffold(
       body:
       // Add from here

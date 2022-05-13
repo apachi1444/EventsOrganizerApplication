@@ -4,7 +4,7 @@
 // import 'package:pfs/screens/userPages/home/settings_page.dart';
 //
 // import '../../Models/Person.dart';
-// import '../../services/authService.dart';
+// import '../../services/autheService.dart';
 // import '../../services/dbService.dart';
 //
 // class HomePage extends StatefulWidget {
@@ -165,7 +165,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:pfs/read_data/get_user_name.dart';
 
-import '../../services/authService.dart';
+import '../../services/autheService.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

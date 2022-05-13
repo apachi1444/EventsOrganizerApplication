@@ -4,7 +4,7 @@ import 'package:pfs/screens/welcomePages/select_role_login.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_three.dart';
 
-import '../../services/authService.dart';
+import '../../services/autheService.dart';
 
 class LogInAsAGuestPage extends StatefulWidget {
   const LogInAsAGuestPage({Key? key}) : super(key: key);

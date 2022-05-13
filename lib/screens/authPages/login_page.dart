@@ -200,7 +200,7 @@
 
 import "package:flutter/material.dart";
 import 'package:flutter_svg/svg.dart';
-import 'package:pfs/services/authService.dart';
+import 'package:pfs/services/autheService.dart';
 
 import '../../shared/loading_screen_page.dart';
 

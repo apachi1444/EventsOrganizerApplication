@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:pfs/services/authService.dart';
+import 'package:pfs/services/autheService.dart';
 
 class RegisterPage extends StatefulWidget {
 
@@ -69,19 +69,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                     mainAxisAlignment : MainAxisAlignment.center,
                     children : [
-                      Icon(
+                      const Icon(
                           Icons.verified_user,
                           size : 80
                       ),
-                      SizedBox(height :20),
-                      Text(
+                      const SizedBox(height :20),
+                      const Text(
                         "Hellow There",
                         style : TextStyle(
                           fontSize :35, fontWeight :FontWeight.bold,
                         )
                       ),
-                      SizedBox(height : 10),
-                      Text(
+                      const SizedBox(height : 10),
+                      const Text(
                           "Regiser below with your details",
                           style : TextStyle(
                             fontSize : 18,
