@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class GetUserName extends StatelessWidget {
   final String documentId;
-  GetUserName({required  this.documentId});
+  const GetUserName({required  this.documentId});
 
 
   @override
@@ -19,10 +19,10 @@ class GetUserName extends StatelessWidget {
               Map<String , dynamic> data =
                 snapshot.data!.data() as Map<String , dynamic>;
               return Text("${data['first_name']}"
-              + " "
-              + "${data['last_name']}");
+              ' '
+              "${data['last_name']}");
           }
-            return Text("Loading");
+            return const Text('Loading');
           }
         )
       );

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pfs/logic/auth_page.dart';
-import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
-import 'package:pfs/screens/authPages/login_page.dart';
 
 class SelectRoleLogin extends StatelessWidget {
   const SelectRoleLogin({Key? key}) : super(key: key);
@@ -10,7 +8,7 @@ class SelectRoleLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFF8),
+      backgroundColor: const Color(0XFFFFFFF8),
       body : Center(
           child : Column(
               children : <Widget>[
@@ -28,40 +26,40 @@ class SelectRoleLogin extends StatelessWidget {
                   ),
                   padding : const EdgeInsets.all(25),
                   child: SvgPicture.asset(
-                    "assets/welcome.svg",
+                    'assets/welcome.svg',
                     //fit: B,
                     height: MediaQuery.of(context).size.height * 0.2,
                     width: MediaQuery.of(context).size.height * 0.1,
                   ),
                 ),
 
-                SizedBox(height : 70),
+                const SizedBox(height : 70),
 
 
 
 
 
                 Padding(
-                    padding : EdgeInsets.symmetric(horizontal : 20),
+                    padding : const EdgeInsets.symmetric(horizontal : 20),
                     child : Container(
                       width : MediaQuery.of(context).size.width  * 0.7,
-                      padding : EdgeInsets.all(20),
+                      padding : const EdgeInsets.all(20),
                       decoration : BoxDecoration(
-                          color :  Color(0XFFF8F4F4),
+                          color :  const Color(0XFFF8F4F4),
                           borderRadius:BorderRadius.circular(40),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.6),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 2),
+                              offset: const Offset(0, 2),
                             )
                           ]
                       ),
 
                       child : const Center(
                         child:  Text(
-                            "Join As a guest",
+                            'Join As a guest',
                             style : TextStyle(
                               color : Colors.black ,
                               fontWeight : FontWeight.bold,
@@ -72,22 +70,22 @@ class SelectRoleLogin extends StatelessWidget {
                 ),
 
 
-                SizedBox(height : 20),
+                const SizedBox(height : 20),
 
                 Padding(
-                    padding : EdgeInsets.symmetric(horizontal : 20),
+                    padding : const EdgeInsets.symmetric(horizontal : 20),
                     child : Container(
                       width : MediaQuery.of(context).size.width  * 0.7,
-                      padding : EdgeInsets.all(20),
+                      padding : const EdgeInsets.all(20),
                       decoration : BoxDecoration(
-                          color :  Color(0XFFF8F4F4),
+                          color :  const Color(0XFFF8F4F4),
                           borderRadius:BorderRadius.circular(40),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.6),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 2),
+                              offset: const Offset(0, 2),
                             )
                           ]
                       ),
@@ -96,14 +94,14 @@ class SelectRoleLogin extends StatelessWidget {
                         onTap :(){
                           Navigator.push(context , MaterialPageRoute(
                             builder : (context) {
-                              return AuthPage();
+                              return const AuthPage();
                             }
                           )
                           );
                         },
                         child: const Center(
                           child:  Text(
-                              "Join As U Progessional",
+                              'Join As U Progessional',
                               style : TextStyle(
                                 color : Colors.black ,
                                 fontWeight : FontWeight.bold,

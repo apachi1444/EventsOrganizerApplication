@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../Models/Person.dart';
 
 class PersonTile extends StatelessWidget {
-  final Person person;
+  final Person? person;
 
-  PersonTile({required this.person});
+  const PersonTile({required this.person});
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +16,8 @@ class PersonTile extends StatelessWidget {
             child: ListTile(
                 leading: CircleAvatar(
                     radius: 25, backgroundColor: Colors.brown[200]),
-                title: Text(person.last_name),
+                title: Text(person!.last_name),
                 subtitle: Text(
-                    "This is the card of our person which is called the ${person.last_name}"))));
+                    'This is the card of our person which is called the ${person!.last_name}'))));
   }
 }

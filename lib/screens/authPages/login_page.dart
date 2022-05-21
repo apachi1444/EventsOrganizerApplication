@@ -198,10 +198,15 @@
 //   }
 // }
 
-import "package:flutter/material.dart";
-import 'package:flutter_svg/svg.dart';
-import 'package:pfs/services/autheService.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:pfs/extensions/utils.dart';
+import 'package:pfs/services/authService.dart';
+
+import '../../extensions/constant_colors.dart';
+import '../../main.dart';
 import '../../shared/loading_screen_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -216,17 +221,18 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool loading = false;
   final _formKey = GlobalKey<FormState>();
-  String error = "";
+  String error = '';
   final _auth = AuthService();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    bool? isChecked = false;
     return loading
-        ? LoadingScreen()
+        ? const LoadingScreen()
         : Scaffold(
-            backgroundColor: Color(0XFFFFFFF8),
+            backgroundColor: const Color(0XFFFFFFF8),
             body: SingleChildScrollView(
               child: Center(
                   child: Form(
@@ -245,44 +251,44 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     padding: const EdgeInsets.all(25),
                     child: SvgPicture.asset(
-                      "assets/welcome.svg",
+                      'assets/welcome.svg',
                       //fit: B,
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.height * 0.1,
                     ),
                   ),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
-                  const Text("Welcome Abroad User",
+                  const Text('Welcome Abroad User',
                       style: TextStyle(
                         // color : Color(0XFFFF006B),
                         fontSize: 30,
                       )),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 0),
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                                color: Color(0XFFF8F4F4),
+                            color: const Color(0XFFF8F4F4),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey.withOpacity(0.6),
                                   blurRadius: 0.6,
                                   spreadRadius: 0.8,
-                                  offset: Offset(0, 4))
+                                  offset: const Offset(0, 4))
                             ]),
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 0),
                           child: TextFormField(
                               controller: _emailController,
-                              validator: (val) =>
-                                  val!.isEmpty ? 'Enter Your Email' : null,
+                              // validator: (val) =>
+                              //     val != null ? 'Enter a valid email' : null,
                               style: const TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blueAccent,
@@ -291,7 +297,7 @@ class _LoginPageState extends State<LoginPage> {
                                   contentPadding: EdgeInsets.fromLTRB(
                                       20.0, 15.0, 20.0, 15.0),
                                   prefixIcon: Icon(Icons.pause_rounded),
-                                  hintText: "Enter Your Email",
+                                  hintText: 'Enter Your Email',
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                   ))),
@@ -301,28 +307,29 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
 
                   Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 40, vertical: 0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 0),
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: Color(0XFFF8F4F4),
+                            color: const Color(0XFFF8F4F4),
                             boxShadow: [
                               BoxShadow(
                                   color: Colors.grey.withOpacity(0.6),
                                   blurRadius: 0.6,
                                   spreadRadius: 0.8,
-                                  offset: Offset(0, 4))
+                                  offset: const Offset(0, 4))
                             ]),
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 0),
                           child: TextFormField(
                               controller: _passwordController,
                               obscureText: true,
-                              validator: (val) => (val!.length < 6)
-                                  ? 'must be at least 6'
-                                  : null,
+                              validator: (val) =>
+                                  val != null && (val.length < 6)
+                                      ? 'must be at least 6'
+                                      : null,
                               style: const TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blueAccent,
@@ -332,62 +339,112 @@ class _LoginPageState extends State<LoginPage> {
                                   contentPadding: EdgeInsets.fromLTRB(
                                       20.0, 15.0, 20.0, 15.0),
                                   prefixIcon: Icon(Icons.lock),
-                                  hintText: "Enter Your Password",
+                                  hintText: 'Enter Your Password',
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide.none))),
                         ),
                       )),
 
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
                   // this part for the line of forget password and remember me !
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 43.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 0.0),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Container(
-                            child: Row(
-                              children: [
-                                Text("Remember Me "),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Checkbox(
+                                  activeColor:
+                                      const Color(ConstantColors.KPinkColor),
+                                  checkColor:
+                                      const Color(ConstantColors.KPinkColor),
+                                  hoverColor:
+                                      const Color(ConstantColors.KPinkColor),
+                                  focusColor:
+                                      const Color(ConstantColors.KPinkColor),
+                                  value: isChecked,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      isChecked = value;
+                                    });
+                                  }),
+                              const Text('Remember Me '),
+                            ],
                           ),
-                          Container(
-                              child: Text("Forget Password?",
-                                  style: TextStyle(color: Colors.grey[600])))
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                                child: Text('Forget Password?',
+                                    style: TextStyle(color: Colors.grey[600]))),
+                          )
                         ]),
                   ),
 
-                  SizedBox(height: 25),
+                  const SizedBox(height: 25),
 
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.6,
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Color(0XFFFF006B),
+                          color: const Color(0XFFFF006B),
                           borderRadius: BorderRadius.circular(40),
                         ),
                         child: GestureDetector(
                           onTap: () async {
-                            if (_formKey.currentState!.validate()) {
-                              dynamic result = await _auth.signIn(
+                            final isValid = _formKey.currentState!.validate();
+                            if (!isValid) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text("This is the Error"),
+                                        content: Text(
+                                            'Please check again your email and your password'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: Text("Cancel")),
+                                        ],
+                                      ));
+                              log("this is not valid");
+                              return;
+                            }
+                            try {
+                              await AuthService().signInWithEmailAndPassword(
                                   _emailController.text.trim(),
-                                  _passwordController.text.trim());
-                              if (result == null) {
-                                setState(() {
-                                  print("ahah this is for the set State");
-                                  error =
-                                      'please supply a valid email and password';
-                                });
-                              }
+                                  _passwordController.text.trim(),
+                                  context);
+                              navigatorKey.currentState!
+                                  .popUntil((route) => route.isFirst);
+                            } catch (e) {
+                              print(e);
+                              navigatorKey.currentState!
+                                  .popUntil((route) => route.isFirst);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text(
+                                            "There is An error in the server"),
+                                        content: Text(
+                                            'There was an error in the login please try again'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: Text("Cancel")),
+                                        ],
+                                      ));
+                              Utils.showSnackBar(e.toString());
                             }
                           },
                           child: const Center(
-                            child: Text("Sign In",
+                            child: Text('Sign In',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -398,68 +455,64 @@ class _LoginPageState extends State<LoginPage> {
 
                   // this for the line indicating the OR Text with the lines next to the text
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   Row(children: <Widget>[
                     Expanded(
                       child: Container(
                           margin:
                               const EdgeInsets.only(left: 30.0, right: 20.0),
-                          child: Divider(
+                          child: const Divider(
                             color: Colors.black,
                             height: 50,
                           )),
                     ),
-                    Text("OR"),
+                    const Text('OR'),
                     Expanded(
                       child: Container(
                           margin:
                               const EdgeInsets.only(left: 20.0, right: 30.0),
-                          child: Divider(
+                          child: const Divider(
                             color: Colors.black,
                             height: 36,
                           )),
                     ),
                   ]),
 
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        CircleAvatar(
-                          backgroundImage: AssetImage("assets/googleIcon.png"),
-                          radius: 15,
-                          backgroundColor: Color(0xFFC7D0D8),
-                        ),
-                        SizedBox(width: 10),
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage("assets/facebookIcon.png"),
-                          radius: 15,
-                          backgroundColor: Color(0xFFC7D0D8),
-                        ),
-                        SizedBox(width: 10),
-                        CircleAvatar(
-                          backgroundImage:
-                              AssetImage("assets/instagramIcon.png"),
-                          radius: 15,
-                          backgroundColor: Color(0xFFC7D0D8),
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const <Widget>[
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/googleIcon.png'),
+                        radius: 15,
+                        backgroundColor: Color(0xFFC7D0D8),
+                      ),
+                      SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/facebookIcon.png'),
+                        radius: 15,
+                        backgroundColor: Color(0xFFC7D0D8),
+                      ),
+                      SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/instagramIcon.png'),
+                        radius: 15,
+                        backgroundColor: Color(0xFFC7D0D8),
+                      ),
+                    ],
                   ),
 
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't Have An Account !  "),
+                      const Text("Don't Have An Account !  "),
                       GestureDetector(
                         onTap: () {
                           widget.toggleView();
                         },
-                        child: Text("Sign Up Here",
+                        child: const Text('Sign Up Here',
                             style: TextStyle(
                               color: Color(0XFFFF006B),
                               fontWeight: FontWeight.bold,

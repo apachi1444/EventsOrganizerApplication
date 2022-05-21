@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pfs">
    <application
-        android:label="pfs"
+       android:label="pfs"
        android:usesCleartextTraffic="true"
        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

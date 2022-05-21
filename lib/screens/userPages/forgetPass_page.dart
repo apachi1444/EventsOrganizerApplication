@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class ForgetPassPage extends StatefulWidget {
   const ForgetPassPage({Key? key}) : super(key: key);
@@ -25,8 +24,8 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-                content: Text("password reset was sent ! check your email"));
+            return const AlertDialog(
+                content: Text('password reset was sent ! check your email'));
           });
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -43,17 +42,17 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text("Get Back Your Password"),
+        title: const Text('Get Back Your Password'),
         centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text("Enter Your Email To Send A confirmation code"),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text('Enter Your Email To Send A confirmation code'),
           ),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Container(
@@ -66,14 +65,14 @@ class _ForgetPassPageState extends State<ForgetPassPage> {
                 padding: const EdgeInsets.only(left: 20),
                 child: TextField(
                     controller: _emailController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none, hintText: "Email")),
+                    decoration: const InputDecoration(
+                        border: InputBorder.none, hintText: 'Email')),
               ),
             ),
           ),
           MaterialButton(
             onPressed: passwordReset,
-            child: Text("Reset pass now "),
+            child: const Text('Reset pass now '),
             color: Colors.deepPurple[200],
           )
         ],

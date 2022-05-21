@@ -1,6 +1,6 @@
 // this page will be user for doing the drop down forms
 
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 class SettingsForm extends StatefulWidget {
   const SettingsForm({Key? key}) : super(key: key);
@@ -13,10 +13,10 @@ class _SettingsFormState extends State<SettingsForm> {
   final _formKey = GlobalKey<FormState>();
 
   String _firstName = '';
-  String _lastName = "yessine";
+  final String _lastName = 'yessine';
   double _age = 0;
 
-  String _selectedValue = "5";
+  String _selectedValue = '5';
   List<String> listOfValue = ['1', '2', '3', '4', '5'];
 
   @override
@@ -25,7 +25,7 @@ class _SettingsFormState extends State<SettingsForm> {
         key: _formKey,
         child: Column(
           children: [
-            const Text("Update Your Person Settings",
+            const Text('Update Your Person Settings',
                 style: TextStyle(
                   fontSize: 19,
                   color: Colors.red,
@@ -54,7 +54,7 @@ class _SettingsFormState extends State<SettingsForm> {
 
             DropdownButtonFormField(
               value: _selectedValue,
-              hint: Text(
+              hint: const Text(
                 'choose one',
               ),
               isExpanded: true,

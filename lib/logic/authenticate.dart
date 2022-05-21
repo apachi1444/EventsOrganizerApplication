@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/authPages/register_page.dart';
-import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
 import 'package:pfs/switch_between_pages/signup_login_toggle.dart';
 
-import '../screens/authPages/login_page.dart';
-import '../screens/welcomePages/get_started_page.dart';
 import '../screens/welcomePages/select_role_login.dart';
 import '../shared/widgets.dart';
 

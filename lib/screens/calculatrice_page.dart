@@ -74,7 +74,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                 color : Colors.deepPurple[50],
                                 child : Center(
                                   child : Text(
-                                  "0",
+                                  '0',
                                   style:TextStyle(
                                     color : Colors.deepPurple,
                                     fontSize: fontSize
@@ -95,7 +95,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                                   color : Colors.deepPurple[50],
                                   child : Center(
                                     child : Text(
-                                        "0",
+                                        '0',
                                         style:TextStyle(
                                             color : Colors.deepPurple,
                                             fontSize: fontSize

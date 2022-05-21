@@ -47,47 +47,34 @@
 //   }
 // }
 
-
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../services/authService.dart';
-import 'authenticate.dart';
+import 'package:pfs/screens/userPages/home/home_page.dart';
+import 'package:pfs/switch_between_pages/signup_login_toggle.dart';
 
 class WrapperPage extends StatefulWidget {
-
   const WrapperPage({Key? key}) : super(key: key);
-
   @override
   State<WrapperPage> createState() => _WrapperPageState();
 }
 
 class _WrapperPageState extends State<WrapperPage> {
-
-
   @override
   Widget build(BuildContext context) {
-    print("we are in the wrapper class");
+    print('we are in the wrapper class');
     return Scaffold(
-      body:
-      // Add from here
-      Consumer<ApplicationState>(
-        builder: (context, appState, _) => Authentication(
-          email: appState.email,
-          loginState: appState.loginState,
-          startLoginFlow: appState.startLoginFlow,
-          verifyEmail: appState.verifyEmail,
-          signInWithEmailAndPassword: appState.signInWithEmailAndPassword,
-          cancelRegistration: appState.cancelRegistration,
-          registerAccount: appState.registerAccount,
-          signOut: appState.signOut,
-        ),
-      ),
-      // to here
-    );
+        body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return const Center(child: Text('Sometihng went wrong'));
+              } else if (snapshot.hasData) {
+                return const HomePageGuest();
+              } else {
+                return const AuthSwitchPage();
+              }
+            }));
   }
 }
-
-
-

@@ -1,95 +1,122 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-import '../logic/authenticate.dart';
+import '../Models/Userr.dart';
+import 'dbService.dart';
 
-class ApplicationState extends ChangeNotifier {
-  ApplicationState() {
-    init();
+class AuthService {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Userr? _useFromFirebaseUser(User user){
+    return user !=null ? Userr(uid: user.uid) : null;
   }
 
-  final _auth = FirebaseAuth.instance;
-  Future<void> init() async {
-    await Firebase.initializeApp();
+  // Userr ? it might be null
+  Future<Userr?> getCurrentUser() async {
+    final user = _auth.currentUser;
+    return _useFromFirebaseUser(user!);
 
-    _auth.userChanges().listen((user) {
-      if (user != null) {
-        _loginState = ApplicationLoginState.loggedIn;
-      } else {
-        _loginState = ApplicationLoginState.loggedOut;
+  }
+
+  Stream<Userr?> get() {
+    print(_auth.authStateChanges());
+    return _auth.authStateChanges().map((user) => _useFromFirebaseUser(user!));
+  }
+
+    // StreamSubscription<User> listen(
+    //     void Function(User event) onData,
+    //     {
+    //       required Function onError,
+    //       required void Function() onDone,
+    //       required bool cancelOnError
+    //     }
+    //     )
+    //     {
+    //         print(onData);
+    //         throw UnimplementedError();
+    //     }
+
+    Future SignOut() async {
+      try {
+        return await _auth.signOut();
+      } on FirebaseAuthException catch(e){
+
+        print(e.toString());
+        return null;
       }
-      notifyListeners();
-    });
-  }
-
-  ApplicationLoginState _loginState = ApplicationLoginState.loggedOut;
-
-  ApplicationLoginState get loginState => _loginState;
-
-  String? _email;
-
-  String? get email => _email;
-
-  void startLoginFlow() {
-    _loginState = ApplicationLoginState.emailAddress;
-    notifyListeners();
-  }
-
-  Future<void> verifyEmail(
-    String email,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
-    try {
-      var methods =
-          await _auth.fetchSignInMethodsForEmail(email);
-      if (methods.contains('password')) {
-        _loginState = ApplicationLoginState.password;
-      } else {
-        _loginState = ApplicationLoginState.register;
-      }
-      _email = email;
-      notifyListeners();
-    } on FirebaseAuthException catch (e) {
-      errorCallback(e);
     }
-  }
 
-  Future<void> signInWithEmailAndPassword(
-    String email,
-    String password,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
-    try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+
+
+
+
+
+    Future signInWithEmailAndPassword(String email , String password , BuildContext context) async {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+
       );
-    } on FirebaseAuthException catch (e) {
-      errorCallback(e);
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _useFromFirebaseUser(user!);
+    }
+
+
+    Future signInAnon() async {
+      try{
+        UserCredential result  = await _auth.signInAnonymously();
+        User? user = result.user;
+        return _useFromFirebaseUser(user!);
+      }
+      catch(e){
+        print(e.toString());
+        return null;
+      }
+    }
+
+
+    Future signIn(String emailController , String passwordController) async {
+      try{
+        print('ahah');
+        await _auth.signInWithEmailAndPassword(
+          email : emailController,
+          password : passwordController,
+        );
+      } on FirebaseAuthException catch(e){
+        print(e);
+      }
+    }
+
+    Future signUp(String email , String password , String  firstName , String lastName, String age ) async {
+      // create user
+      try{
+        UserCredential result =await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: email,
+            password: password
+        );
+
+        User? user = result.user;
+        // create a new document for the user with that uid
+        await DatabaseService(uid:user!.uid).updateUserData(email ,firstName, lastName,age);
+        return _useFromFirebaseUser(user);
+        // ignore: empty_catches
+      }catch(e){
+        print(e.toString());
+        return null;
+      }
+      // add user details
+      // addUserDetails(
+      //   _firstNameController.text.trim(),
+      //   _lastNameController.text.trim(),
+      //   _emailController.text.trim(),
+      //   int.parse(_ageController.text.trim()),
+      // );
     }
   }
 
-  void cancelRegistration() {
-    _loginState = ApplicationLoginState.emailAddress;
-    notifyListeners();
-  }
 
-  Future<void> registerAccount(
-      String email,
-      String displayName,
-      String password,
-      void Function(FirebaseAuthException e) errorCallback) async {
-    try {
-      var credential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
-      await credential.user!.updateDisplayName(displayName);
-    } on FirebaseAuthException catch (e) {
-      errorCallback(e);
-    }
-  }
-
-  void signOut() {
-    FirebaseAuth.instance.signOut();
-  }
-}

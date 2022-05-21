@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pfs/screens/welcomePages/select_role_login.dart';
 import 'package:pfs/screens/welcomePages/welcome_page_one.dart';
-import 'package:pfs/screens/welcomePages/welcome_page_three.dart';
 
-import '../../services/autheService.dart';
+import '../../services/authService.dart';
 
 class LogInAsAGuestPage extends StatefulWidget {
   const LogInAsAGuestPage({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class LogInAsAGuestPage extends StatefulWidget {
 class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
   final _emailController  = TextEditingController();
   final _nameController = TextEditingController();
-  final authService = new AuthService();
+  final authService = AuthService();
   // the dispose method is called when the object is removed from the
   // tree permanently
   // use case : when the widget is replaced with another widget using the navigator
@@ -56,7 +54,7 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFF8),
+      backgroundColor: const Color(0XFFFFFFF8),
       body : SingleChildScrollView(
         child: Center(
             child : Column(
@@ -75,55 +73,55 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                     ),
                     padding : const EdgeInsets.all(25),
                     child: SvgPicture.asset(
-                      "assets/welcome.svg",
+                      'assets/welcome.svg',
                       //fit: B,
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.height * 0.1,
                     ),
                   ),
 
-                  SizedBox(height : 30),
+                  const SizedBox(height : 30),
 
                   const Text(
-                      "Enter Your Coordinates",
+                      'Enter Your Coordinates',
                       style : TextStyle(
                         color : Color(0XFF000000),
                         fontSize :30,
                       )
                   ),
 
-                  SizedBox(height :20),
+                  const SizedBox(height :20),
 
 
                   // this part is for the text fields
 
 
                   Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 40 ),
+                      padding : const EdgeInsets.symmetric(horizontal : 40 ),
                       child : Container(
 
                         decoration : BoxDecoration(
                           borderRadius : BorderRadius.circular(20),
-                          color : Color(0XFFF8F4F4),
+                          color : const Color(0XFFF8F4F4),
                           boxShadow: [
                             BoxShadow(
                               color : Colors.grey.withOpacity(0.6),
                               blurRadius: 0.6,
                               spreadRadius : 0.8,
-                              offset: Offset(0,4)
+                              offset: const Offset(0,4)
                             )
                           ]
                         ),
 
                           child : Padding(
-                            padding : EdgeInsets.symmetric(horizontal : 10),
+                            padding : const EdgeInsets.symmetric(horizontal : 10),
 
 
                             child : TextField(
                               controller : _emailController,
                               decoration : const InputDecoration(
                                 border : InputBorder.none,
-                                hintText : "Type Your Email Here",
+                                hintText : 'Type Your Email Here',
                                 prefixIcon: Icon(
                                     Icons.email,
                                     size : 22,
@@ -140,36 +138,36 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                       )
                     ),
 
-                  SizedBox(height : 0),
+                  const SizedBox(height : 0),
 
                   // this is for the second input field for the user
 
                   Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 40 , vertical : 10),
+                      padding : const EdgeInsets.symmetric(horizontal : 40 , vertical : 10),
                       child : Container(
 
                         decoration : BoxDecoration(
                             borderRadius : BorderRadius.circular(20),
-                            color : Color(0XFFF8F4F4),
+                            color : const Color(0XFFF8F4F4),
                             boxShadow: [
                               BoxShadow(
                                   color : Colors.grey.withOpacity(0.6),
                                   blurRadius: 0.6,
                                   spreadRadius : 0.8,
-                                  offset: Offset(0,4)
+                                  offset: const Offset(0,4)
                               )
                             ]
                         ),
 
                         child : Padding(
-                            padding : EdgeInsets.symmetric(horizontal : 10),
+                            padding : const EdgeInsets.symmetric(horizontal : 10),
 
 
                             child : TextField(
                                 controller : _nameController,
                                 decoration : const InputDecoration(
                                   border : InputBorder.none,
-                                  hintText : "Type Your Name Here",
+                                  hintText : 'Type Your Name Here',
                                   prefixIcon: Icon(
                                     Icons.verified_user,
                                     size : 22,
@@ -187,23 +185,23 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                   ),
 
 
-                  SizedBox(height : 15),
+                  const SizedBox(height : 15),
 
                   // this is for the button of JOIN US
                   Padding(
-                      padding : EdgeInsets.symmetric(horizontal : 20),
+                      padding : const EdgeInsets.symmetric(horizontal : 20),
                       child : Container(
                         width : MediaQuery.of(context).size.width  * 0.6,
-                        padding : EdgeInsets.all(20),
+                        padding : const EdgeInsets.all(20),
                         decoration : BoxDecoration(
-                            color :  Color(0XFFFF006B),
+                            color :  const Color(0XFFFF006B),
                             borderRadius:BorderRadius.circular(40),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.6),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 2),
+                                offset: const Offset(0, 2),
                               )
                             ]
                         ),
@@ -212,7 +210,7 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                           onTap : (){
                             Navigator.push(context , MaterialPageRoute(builder:
                                 (context){
-                              return WelcomePageOne();
+                              return const WelcomePageOne();
                                 }
                             )
                             );
@@ -221,16 +219,16 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                             onTap: ()async{
                               dynamic result = await authService.signInAnon();
                               if ( result == null){
-                                print("error ");
+                                print('error ');
                               }
                               else{
-                                print("signed in");
+                                print('signed in');
                                 print(result.uid);
                               }
                             },
                             child: const Center(
                               child:  Text(
-                                  "Start The Adventure",
+                                  'Start The Adventure',
                                   style : TextStyle(
                                       color : Colors.white ,
                                       fontWeight : FontWeight.bold,

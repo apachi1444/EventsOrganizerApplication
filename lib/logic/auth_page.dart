@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 import '../screens/authPages/login_page.dart';
 import '../screens/authPages/register_page.dart';
