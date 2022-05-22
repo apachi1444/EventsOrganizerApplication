@@ -1,8 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NavbarItemHomePage extends StatelessWidget {
-  const NavbarItemHomePage({Key? key}) : super(key: key);
+  final String? firstName;
+  final String? lastName;
+  const NavbarItemHomePage(
+      {Key? key, required this.firstName, required this.lastName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class NavbarItemHomePage extends StatelessWidget {
                 radius: 17.0,
               ),
             ),
-            const Text('Welcome Micheal Boston'),
+            Text('Welcome $firstName! $lastName!'),
             Material(
               borderRadius: BorderRadius.circular(50),
               child: InkWell(

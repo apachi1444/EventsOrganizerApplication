@@ -10,10 +10,13 @@ class UserData {
   final String last_name;
   final int age;
 
-  UserData({
-    required this.uid, required this.first_name, required this.last_name, required this.age
-  });
+  UserData(
+      {required this.uid,
+      required this.first_name,
+      required this.last_name,
+      required this.age});
 
-
-
+  String get firstName {
+    return first_name;
+  }
 }

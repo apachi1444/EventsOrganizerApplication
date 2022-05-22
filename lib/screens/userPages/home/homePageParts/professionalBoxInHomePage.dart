@@ -39,7 +39,10 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Stack(children: [
                   GestureDetector(
-                    onTap: () {Navigator.pushNamed(context, '/profile/professionalDetail');},
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, '/profileGuest/professionalDetail');
+                    },
                     child: Container(
                         constraints: const BoxConstraints.expand(height: 136),
                         decoration: const BoxDecoration(

@@ -3,6 +3,8 @@ import 'package:pfs/extensions/constant_colors.dart';
 import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/services/authService.dart';
 
+import 'inputTextWidget.dart';
+
 class RegisterrPage extends StatefulWidget {
   final VoidCallback toggleView;
 
@@ -104,77 +106,39 @@ class _RegisterrPageState extends State<RegisterrPage> {
                     const SizedBox(height: 30),
                     // this part for the email inputs
 
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: const Color(ConstantColors.KGreyColor),
-                            border: Border.all(color: Colors.white),
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.35),
-                                  spreadRadius: 2,
-                                  blurRadius: 2,
-                                  offset: const Offset(0, 3))
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 0),
-                          child: TextFormField(
-                              controller: _emailController,
-                              // validator: (val) =>
-                              //     val != null
-                              //         ? 'Enter a valid email'
-                              //         : null,
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.purple,
-                              ),
-                              decoration: const InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(0, 15.0, 0, 15.0),
-                                  prefixIcon: Icon(Icons.pause_rounded),
-                                  hintText: 'Enter Your Email',
-                                  hintStyle: TextStyle(fontSize: 14),
-                                  border: InputBorder.none,
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ))),
-                        ),
-                      ),
-                    ),
+                    InputTextWidget(
+                        inputHintText: 'Enter Your Email Here',
+                        controllerUsedInInput: _emailController,
+                        icon: Icons.lock,
+                        isPassword: true),
 
                     // this part for the first name
 
                     const SizedBox(height: 15),
-                    // this part for the email inputs
 
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(ConstantColors.KGreyColor),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.grey.withOpacity(0.35),
-                                      spreadRadius: 2,
-                                      blurRadius: 2,
-                                      offset: const Offset(0, 3))
-                                ]),
-                            child: TextFormField(
-                                controller: _firstNameController,
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'Enter Your First Name',
-                                  hintStyle: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                  prefixIcon: Icon(Icons.verified_user),
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(0, 15, 0, 15),
-                                )))),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Container(
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                padding: const EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  color: const Color(0XFFFF006B),
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                child: TextFormField(
+                                    controller: _firstNameController,
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Enter Your First Name',
+                                      hintStyle: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                      prefixIcon: Icon(Icons.verified_user),
+                                      contentPadding:
+                                          EdgeInsets.fromLTRB(0, 15, 0, 15),
+                                    ))))),
 
                     // this part for the last name
 

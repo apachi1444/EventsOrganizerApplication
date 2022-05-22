@@ -8,7 +8,7 @@
 //
 // import '../Models/Userr.dart';
 // import '../screens/authPages/login_page.dart';
-// import '../screens/userPages/home_page.dart';
+// import '../screens/userPages/home_page_test_animation.dart';
 //
 //
 // class WrapperElement extends StatelessWidget {
@@ -50,10 +50,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/userPages/home/home_page.dart';
-import 'package:pfs/switch_between_pages/signup_login_toggle.dart';
+import 'package:pfs/screens/welcomePages/get_started_page.dart';
 
 class WrapperPage extends StatefulWidget {
   const WrapperPage({Key? key}) : super(key: key);
+
   @override
   State<WrapperPage> createState() => _WrapperPageState();
 }
@@ -69,11 +70,11 @@ class _WrapperPageState extends State<WrapperPage> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
-                return const Center(child: Text('Sometihng went wrong'));
+                return const Center(child: Text('Something went wrong'));
               } else if (snapshot.hasData) {
                 return const HomePageGuest();
               } else {
-                return const AuthSwitchPage();
+                return const GetStartedPage();
               }
             }));
   }

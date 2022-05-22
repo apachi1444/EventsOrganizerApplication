@@ -201,13 +201,15 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../extensions/constant_colors.dart';
 import '../../main.dart';
 import '../../shared/loading_screen_page.dart';
+import '../welcomePages/navbarItemsStartedPages/navbarItemStartPages.dart';
+import 'inputTextWidget.dart';
+import 'loginPageParts/signInUsingThirdApis.dart';
 
 class LoginPage extends StatefulWidget {
   final Function toggleView;
@@ -238,25 +240,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Form(
                 key: _formKey,
                 child: Column(children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.40,
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(0),
-                          topLeft: Radius.circular(0),
-                          bottomRight: Radius.circular(70),
-                          bottomLeft: Radius.circular(70)),
-                      color: Color(0XFFFF006B),
-                    ),
-                    padding: const EdgeInsets.all(25),
-                    child: SvgPicture.asset(
-                      'assets/welcome.svg',
-                      //fit: B,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.height * 0.1,
-                    ),
-                  ),
+                  const NavBarItemStartPages(),
 
                   const SizedBox(height: 30),
 
@@ -268,82 +252,20 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 20),
 
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0XFFF8F4F4),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.6),
-                                  blurRadius: 0.6,
-                                  spreadRadius: 0.8,
-                                  offset: const Offset(0, 4))
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 0),
-                          child: TextFormField(
-                              controller: _emailController,
-                              // validator: (val) =>
-                              //     val != null ? 'Enter a valid email' : null,
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.blueAccent,
-                              ),
-                              decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.fromLTRB(
-                                      20.0, 15.0, 20.0, 15.0),
-                                  prefixIcon: Icon(Icons.pause_rounded),
-                                  hintText: 'Enter Your Email',
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ))),
-                        ),
-                      )),
+                  InputTextWidget(
+                      inputHintText: 'Enter Your Email Here',
+                      controllerUsedInInput: _emailController,
+                      icon: Icons.email,
+                      isPassword: false),
 
                   const SizedBox(height: 20),
 
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0XFFF8F4F4),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.6),
-                                  blurRadius: 0.6,
-                                  spreadRadius: 0.8,
-                                  offset: const Offset(0, 4))
-                            ]),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 0),
-                          child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: true,
-                              validator: (val) =>
-                                  val != null && (val.length < 6)
-                                      ? 'must be at least 6'
-                                      : null,
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.blueAccent,
-                              ),
-                              decoration: const InputDecoration(
-                                  errorStyle: TextStyle(fontSize: 16),
-                                  contentPadding: EdgeInsets.fromLTRB(
-                                      20.0, 15.0, 20.0, 15.0),
-                                  prefixIcon: Icon(Icons.lock),
-                                  hintText: 'Enter Your Password',
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide.none))),
-                        ),
-                      )),
+                  InputTextWidget(
+                    inputHintText: 'Enter Your Password Here',
+                    controllerUsedInInput: _passwordController,
+                    icon: Icons.lock,
+                    isPassword: true,
+                  ),
 
                   const SizedBox(height: 20),
 
@@ -429,15 +351,15 @@ class _LoginPageState extends State<LoginPage> {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: Text(
-                                            "There is An error in the server"),
-                                        content: Text(
+                                        title: const Text(
+                                            'There is An error in the server'),
+                                        content: const Text(
                                             'There was an error in the login please try again'),
                                         actions: [
                                           TextButton(
                                               onPressed: () =>
                                                   Navigator.pop(context),
-                                              child: Text("Cancel")),
+                                              child: const Text('Cancel')),
                                         ],
                                       ));
                               Utils.showSnackBar(e.toString());
@@ -457,50 +379,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 10),
 
-                  Row(children: <Widget>[
-                    Expanded(
-                      child: Container(
-                          margin:
-                              const EdgeInsets.only(left: 30.0, right: 20.0),
-                          child: const Divider(
-                            color: Colors.black,
-                            height: 50,
-                          )),
-                    ),
-                    const Text('OR'),
-                    Expanded(
-                      child: Container(
-                          margin:
-                              const EdgeInsets.only(left: 20.0, right: 30.0),
-                          child: const Divider(
-                            color: Colors.black,
-                            height: 36,
-                          )),
-                    ),
-                  ]),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/googleIcon.png'),
-                        radius: 15,
-                        backgroundColor: Color(0xFFC7D0D8),
-                      ),
-                      SizedBox(width: 10),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/facebookIcon.png'),
-                        radius: 15,
-                        backgroundColor: Color(0xFFC7D0D8),
-                      ),
-                      SizedBox(width: 10),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/instagramIcon.png'),
-                        radius: 15,
-                        backgroundColor: Color(0xFFC7D0D8),
-                      ),
-                    ],
-                  ),
+                  const SignInUsingThirdApis(),
 
                   const SizedBox(height: 10),
 
