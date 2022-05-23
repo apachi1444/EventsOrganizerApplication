@@ -34,7 +34,7 @@ class Setting extends StatelessWidget  {
           ),
           leading: IconButton(
             onPressed: () {},
-            color: Colors.black, icon: const Icon(Icons.arrow_back),
+            color: Colors.white, icon: const Icon(Icons.arrow_back),
           ),
           backgroundColor: const Color.fromARGB(255, 255, 0, 107),
         ),
