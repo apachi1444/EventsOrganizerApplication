@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pfs/screens/settings/setting.dart';
 
+import '../../../userPages/parametersPages/settings/settings_page.dart';
 
-
-class MyCheckingList extends StatelessWidget  {
+class MyCheckingList extends StatelessWidget {
   const MyCheckingList({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +16,15 @@ class MyCheckingList extends StatelessWidget  {
           title: Container(
             child: const Center(
               child: Text('My Checking List'),
-
             ),
           ),
           leading: IconButton(
             onPressed: () {},
-            color: Colors.black, icon: const Icon(Icons.arrow_back,color: Colors.white,),
+            color: Colors.black,
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
           ),
           backgroundColor: const Color.fromARGB(255, 255, 0, 107),
         ),
@@ -32,12 +32,12 @@ class MyCheckingList extends StatelessWidget  {
 
         body: Center(
           child: Container(
-
             decoration: const BoxDecoration(
-              // color: Color.fromARGB(255, 231, 178, 204),
+                // color: Color.fromARGB(255, 231, 178, 204),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),)),
+              topLeft: Radius.circular(50),
+              topRight: Radius.circular(50),
+            )),
 
             child: Column(
               children: [
@@ -52,34 +52,31 @@ class MyCheckingList extends StatelessWidget  {
                       color: Color.fromARGB(255, 255, 0, 107),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(50),
-                        bottomRight:Radius.circular(50) ,
+                        bottomRight: Radius.circular(50),
                         topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),)),
-
+                        topRight: Radius.circular(50),
+                      )),
                   child: TextButton(
                     style: TextButton.styleFrom(
-                        primary:const Color.fromARGB(255, 255, 255, 255)
-
-                    ),
+                        primary: const Color.fromARGB(255, 255, 255, 255)),
                     onPressed: () => {
-                      print('You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
-
+                      print(
+                          'You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Setting()),
                       )
                     },
-                    child: const Text('+',style: TextStyle(fontSize: 50,)),
+                    child: const Text('+',
+                        style: TextStyle(
+                          fontSize: 50,
+                        )),
                   ),
                 )
-
 
                 //),
               ],
             ),
-
-
-
 
             // child: Container(
             //    child : const Text("My checklist asmae ",style: TextStyle(fontSize: 18),),
@@ -98,26 +95,17 @@ class MyCheckingList extends StatelessWidget  {
             //     ), //BorderRadius.all
             //   ), //BoxDecoration
             // ),
-
-
           ),
-        ),// SafeArea
-
-
-
+        ), // SafeArea
       ),
-
-
     );
-
-
   }
 // SwitchSettingsTile
 }
 
-Padding CheckingCard(String title,IconData icon){
+Padding CheckingCard(String title, IconData icon) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 8),
+    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
     child: Container(
       width: 100,
       decoration: const BoxDecoration(
@@ -127,7 +115,6 @@ Padding CheckingCard(String title,IconData icon){
             bottomRight: Radius.circular(20),
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20)),
-
         boxShadow: [
           BoxShadow(
             blurRadius: 7.0,
@@ -136,20 +123,24 @@ Padding CheckingCard(String title,IconData icon){
               5,
             ),
           ),
-
         ],
       ),
       child: Container(
         child: Column(
           //mainAxisSize: MainAxisSize.min,
 
-          children:  [
+          children: [
             SizedBox(height: 15),
-            Icon(icon,size: 40,),//text=Icons.account_balance
+            Icon(
+              icon,
+              size: 40,
+            ), //text=Icons.account_balance
             Align(
               alignment: Alignment.topRight,
               child: ListTile(
-                title: Text(title,),
+                title: Text(
+                  title,
+                ),
                 subtitle: Text('0/100'),
               ),
             ),
@@ -157,19 +148,14 @@ Padding CheckingCard(String title,IconData icon){
         ),
       ),
     ),
-
-
-
   );
-
-
 }
-Padding MainCard(String title){
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-    child: Container(
-      padding:  const EdgeInsets.symmetric(vertical: 30,horizontal: 0),
 
+Padding MainCard(String title) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+    child: Container(
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
       decoration: const BoxDecoration(
           color: Color.fromARGB(255, 252, 252, 252),
           borderRadius: BorderRadius.only(
@@ -178,28 +164,22 @@ Padding MainCard(String title){
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20))),
       child: Container(
-
-        child :Column(
+        child: Column(
           children: [
-            Text(title,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+            Text(title,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
             const SizedBox(height: 15),
             Row(
               children: [
-                CheckingCard("Guist",Icons.account_balance),
-                CheckingCard("Guist",Icons.article),
-                CheckingCard("Guist",Icons.wallet_travel),],
+                CheckingCard("Guist", Icons.account_balance),
+                CheckingCard("Guist", Icons.article),
+                CheckingCard("Guist", Icons.wallet_travel),
+              ],
             ),
           ],
         ),
-
       ),
     ),
-
-
-
-
-
   );
-
 }
-
