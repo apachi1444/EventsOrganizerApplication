@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/userPages/home/person_tile.dart';
+import 'package:pfs/screens/guestPages//home/person_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Models/Person.dart';

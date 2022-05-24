@@ -165,7 +165,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pfs/screens/userPages/home/settings_form.dart';
+import 'package:pfs/screens/guestPages//home/settings_form.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/Person.dart';

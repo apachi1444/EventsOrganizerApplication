@@ -5,7 +5,8 @@ import 'package:firebase_core/firebase_core.dart'; // new
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
-import 'package:pfs/screens/userPages/home/professionalsPart/professionalDetail.dart';
+import 'package:pfs/screens/guestPages/professional/professionalDetail.dart';
+import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
 import 'package:pfs/switch_between_pages/signup_login_toggle.dart';
 
 // new
@@ -56,6 +57,7 @@ class App extends StatelessWidget {
         '/authProfessional': (context) => const AuthSwitchPage(),
         '/profileGuest/professionalDetail': (context) =>
             const ProfessionalDetail(),
+        '/guest/ProfilePage': (context) => const ProfilePageGuest(),
       },
     );
   }

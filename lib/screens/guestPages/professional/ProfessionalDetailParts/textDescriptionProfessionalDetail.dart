@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/buttonCallProfessionalDetail.dart';
+import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/expandedButtonProfessionalDetail.dart';
 
 import '../../../../../extensions/constant_colors.dart';
 
@@ -45,42 +47,13 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
           // this is the for the line of the add to list and the call button
 
           Row(
-            children: [
+            children: const [
               Expanded(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                      primary: const Color(ConstantColors.KPinkColor),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50))),
-                  onPressed: () {},
-                  icon: const Icon(
-                    // <-- Icon
-                    Icons.add_box_outlined,
-                    size: 24.0,
-                  ),
-                  label: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text('Add To List'),
-                  ), // <-- Text
-                ),
+                child: ExpandedButtonProfessionalDetail(),
               ),
-              const SizedBox(width: 15),
-              Ink(
-                decoration: const ShapeDecoration(
-                  color: Color(ConstantColors.KPinkColor),
-                  shape: CircleBorder(),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    // You enter here what you want the button to do once the user interacts with it
-                  },
-                  icon: const Icon(
-                    Icons.phone,
-                    color: Colors.white,
-                  ),
-                  iconSize: 20.0,
-                ),
-              ), // Ink
+              SizedBox(width: 15),
+              ButtonCallProfessionalDetail(),
+              // Ink
             ],
           )
         ],

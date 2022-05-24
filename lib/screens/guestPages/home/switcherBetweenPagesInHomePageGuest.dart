@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/userPages/home/homePageParts/RowFilterSearchHomePage.dart';
-import 'package:pfs/screens/userPages/home/homePageParts/professionalSlider.dart';
 import 'package:pfs/services/authService.dart';
 
-import '../../../extensions/navbar/navbarButtom.dart';
-import 'homePageParts/CategoryNameAndViewAllRow.dart';
-import 'homePageParts/navbarItemHomePage.dart';
+import '../../../extensions/navbar/navbarBottom.dart';
+import '../profilePage/profilePageGuest.dart';
+import 'home_page.dart';
 
-class HomePageGuest extends StatefulWidget {
-  const HomePageGuest({Key? key}) : super(key: key);
+class SwitcherBetweenPagesInHomePageGuest extends StatefulWidget {
+  const SwitcherBetweenPagesInHomePageGuest({Key? key}) : super(key: key);
 
   @override
-  State<HomePageGuest> createState() => _HomePageGuestState();
+  State<SwitcherBetweenPagesInHomePageGuest> createState() =>
+      _SwitcherBetweenPagesInHomePageGuestState();
 }
 
-class _HomePageGuestState extends State<HomePageGuest> {
+class _SwitcherBetweenPagesInHomePageGuestState
+    extends State<SwitcherBetweenPagesInHomePageGuest> {
+  final screen = [
+    const HomePageGuest(),
+    const ProfilePageGuest(),
+    const Text('this is the third element of our page')
+  ];
+
   @override
   Widget build(BuildContext context) {
     var user = AuthService().getCurrentUser();
     var size = MediaQuery.of(context).size;
+    int selectedIndex = 0;
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: const NavBarButtom(),
+        bottomNavigationBar:
+            NavBarBottom(selectedIndex: selectedIndex, isGuest: true),
         // appBar: PreferredSize(
         //   preferredSize: Size(size.width, size.height * 0.1),
         //   child: AppBar(
@@ -61,26 +69,7 @@ class _HomePageGuestState extends State<HomePageGuest> {
         //   ),
         // ),
         backgroundColor: const Color(0XFFFFFFF8),
-        body: SingleChildScrollView(
-          child: Center(
-              child: Column(children: <Widget>[
-            NavbarItemHomePage(
-              firstName: user.hashCode.toString(),
-              lastName: user.hashCode.toString(),
-            ),
-            SizedBox(height: 7),
-            RowFilterSearchHomePage(),
-            SizedBox(height: 10),
-            CategoryNameAndViewAllRow(),
-            SizedBox(height: 15),
-            ProfessionalSlider(),
-            SizedBox(height: 15),
-            CategoryNameAndViewAllRow(),
-            SizedBox(height: 15),
-            ProfessionalSlider(),
-            SizedBox(height: 20),
-          ])),
-        ),
+        body: screen[selectedIndex],
       ),
     );
   }
