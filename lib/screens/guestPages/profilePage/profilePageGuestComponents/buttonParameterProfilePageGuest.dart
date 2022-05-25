@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../extensions/constant_colors.dart';
 
 class ButtonParameterProfilePageGuest extends StatefulWidget {
   final String text;
@@ -18,6 +21,31 @@ class _ButtonParameterProfilePageGuestState
     extends State<ButtonParameterProfilePageGuest> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+        width: MediaQuery.of(context).size.width * 0.28,
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(20),
+            color: const Color(ConstantColors.KGreyColor),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  blurRadius: 7,
+                  spreadRadius: 3,
+                  offset: const Offset(0, 1.2))
+            ]),
+        child: Padding(
+          padding: const EdgeInsets.all(17.0),
+          child: AspectRatio(
+            aspectRatio: 1.5,
+            child: Center(
+              child: Column(children: [
+                Icon(widget.logo),
+                SizedBox(height: 10),
+                Text(widget.text)
+              ]),
+            ),
+          ),
+        ));
   }
 }

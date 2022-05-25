@@ -29,7 +29,7 @@ class _SwitcherBetweenPagesInHomePageGuestState
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar:
-            NavBarBottom(selectedIndex: selectedIndex, isGuest: true),
+            NavBarBottom(selectedIndex: selectedIndex, isGuest: false),
         // appBar: PreferredSize(
         //   preferredSize: Size(size.width, size.height * 0.1),
         //   child: AppBar(

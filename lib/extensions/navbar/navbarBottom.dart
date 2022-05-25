@@ -1,7 +1,7 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../services/authService.dart';
 import '../constant_colors.dart';
 
 class NavBarBottom extends StatefulWidget {
@@ -24,6 +24,10 @@ class _NavBarBottomState extends State<NavBarBottom> {
     selectedIndex = widget.selectedIndex;
     super.initState();
   }
+
+  int index = 0;
+
+  final navigationKey = GlobalKey<CurvedNavigationBarState>();
 
   @override
   Widget build(BuildContext context) {
@@ -56,33 +60,53 @@ class _NavBarBottomState extends State<NavBarBottom> {
               ],
             ),
           )
-        : BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.business),
-                label: 'Profile',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.school),
-                label: 'LogOut',
-              ),
-            ],
-            currentIndex: selectedIndex,
-            selectedItemColor: const Color(ConstantColors.KPinkColor),
-            onTap: (value) {
-              // if we type on the log out button which has the index number two it will lead us to the login page
-              if (selectedIndex == 2) {
-                AuthService().SignOut();
-                return;
-              }
-              setState(() {
-                selectedIndex = value;
-              });
-            },
+        : Theme(
+            data: Theme.of(context)
+                .copyWith(iconTheme: const IconThemeData(color: Colors.green)),
+            child: CurvedNavigationBar(
+              backgroundColor: Colors.blue,
+              color: Colors.red,
+              buttonBackgroundColor: const Color(ConstantColors.KGreyColor),
+              items: items,
+              animationCurve: Curves.easeIn,
+              animationDuration: const Duration(milliseconds: 410),
+              height: 60,
+              index: index,
+              onTap: (index) {
+                setState(() {
+                  index = index;
+                  print(index);
+                });
+              },
+            ),
           );
+    // : BottomNavigationBar(
+    //     items: const <BottomNavigationBarItem>[
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.home),
+    //         label: 'Home',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.business),
+    //         label: 'Profile',
+    //       ),
+    //       BottomNavigationBarItem(
+    //         icon: Icon(Icons.school),
+    //         label: 'LogOut',
+    //       ),
+    //     ],
+    //     currentIndex: selectedIndex,
+    //     selectedItemColor: const Color(ConstantColors.KPinkColor),
+    //     onTap: (value) {
+    //       // if we type on the log out button which has the index number two it will lead us to the login page
+    //       if (selectedIndex == 2) {
+    //         AuthService().SignOut();
+    //         return;
+    //       }
+    //       setState(() {
+    //         selectedIndex = value;
+    //       });
+    //     },
+    //   );
   }
 }

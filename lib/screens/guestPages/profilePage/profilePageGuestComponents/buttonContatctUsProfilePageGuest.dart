@@ -16,12 +16,12 @@ class ButtonContactUsProfilePageGuest extends StatelessWidget {
       onPressed: () {},
       icon: const Icon(
         // <-- Icon
-        Icons.add_box_outlined,
+        Icons.warning_amber,
         size: 24.0,
       ),
       label: const Padding(
         padding: EdgeInsets.all(16.0),
-        child: Text('Add To List'),
+        child: Text('Contact Us'),
       ), // <-- Text
     );
     ;
