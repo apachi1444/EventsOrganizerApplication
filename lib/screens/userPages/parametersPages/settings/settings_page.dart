@@ -37,7 +37,7 @@ class Setting extends StatelessWidget {
         ),
         // backgroundColor: Color.fromARGB(255, 198, 127, 121),
         body: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
               const SizedBox(

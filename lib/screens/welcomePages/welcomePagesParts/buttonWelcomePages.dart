@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/authPages/log_in_as_a_guest_page.dart';
 
 import '../../../logic/auth_page.dart';
 
@@ -33,9 +34,15 @@ class _ButtonWelcomePagesState extends State<ButtonWelcomePages> {
               ]),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const AuthPage();
-              }));
+              if (widget.textInsideButton == 'Start The Adventure') {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const LogInAsAGuestPage();
+                }));
+              } else {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const AuthPage();
+                }));
+              }
             },
             child: Center(
               child: Text(widget.textInsideButton,

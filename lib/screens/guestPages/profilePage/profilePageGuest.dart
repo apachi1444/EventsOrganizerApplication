@@ -5,6 +5,7 @@ import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/bu
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/navImageGuestProfilePage.dart';
 
 import '../../../extensions/constant_colors.dart';
+import '../../../services/authService.dart';
 
 class ProfilePageGuest extends StatelessWidget {
   const ProfilePageGuest({Key? key}) : super(key: key);
@@ -13,24 +14,32 @@ class ProfilePageGuest extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Column(
-      children: const [
-        NavImageGuestProfilePage(),
-        SizedBox(height: 15),
-        Text(
+      children: [
+        const NavImageGuestProfilePage(),
+        const SizedBox(height: 15),
+        const Text(
           'Micheal Boston',
           style: TextStyle(
               color: Color(ConstantColors.KPinkColor),
               fontWeight: FontWeight.bold,
               fontSize: 22),
         ),
-        SizedBox(height: 15),
-        ButtonParameterProfilePageGuest(text: 'Edit Profile', logo: Icons.edit),
-        SizedBox(height: 15),
-        ButtonParameterProfilePageGuest(text: 'Log Out', logo: Icons.logout),
-        SizedBox(height: 15),
-        Text('Do You Have Any Problem ?'),
-        SizedBox(height: 15),
-        ButtonContactUsProfilePageGuest(),
+        const SizedBox(height: 15),
+        ButtonParameterProfilePageGuest(
+            text: 'Edit Profile',
+            logo: Icons.edit,
+            functionToDoWhenClickOnTheButton:
+                AuthService().SignOut() as Function),
+        const SizedBox(height: 15),
+        // ButtonParameterProfilePageGuest(
+        //     text: 'Log Out',
+        //     logo: Icons.logout,
+        //     functionToDoWhenClickOnTheButton:
+        //         AuthService().SignOut() as Function),
+        const SizedBox(height: 15),
+        const Text('Do You Have Any Problem ?'),
+        const SizedBox(height: 15),
+        const ButtonContactUsProfilePageGuest(),
       ],
     ));
   }

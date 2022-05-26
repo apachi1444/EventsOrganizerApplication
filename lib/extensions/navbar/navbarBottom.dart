@@ -31,55 +31,33 @@ class _NavBarBottomState extends State<NavBarBottom> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.isGuest
-        ? NavigationBarTheme(
-            data: NavigationBarThemeData(
-                indicatorColor: Colors.blue.shade100,
-                labelTextStyle: MaterialStateProperty.all(const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.bold))),
-            child: NavigationBar(
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-              animationDuration: const Duration(seconds: 1),
-              height: 60,
-              backgroundColor: const Color(ConstantColors.KGreyColor),
-              selectedIndex: widget.selectedIndex,
-              onDestinationSelected: (index) => setState(() {
-                selectedIndex = index;
-              }),
-              destinations: const [
-                NavigationDestination(
-                  label: 'Home',
-                  icon: Icon(Icons.house_siding_rounded),
-                  selectedIcon: Icon(Icons.logout_outlined),
-                ),
-                NavigationDestination(
-                    label: 'Profile', icon: Icon(Icons.pause_rounded)),
-                NavigationDestination(
-                    label: 'LogOut', icon: Icon(Icons.logout_outlined)),
-              ],
-            ),
-          )
-        : Theme(
-            data: Theme.of(context)
-                .copyWith(iconTheme: const IconThemeData(color: Colors.green)),
-            child: CurvedNavigationBar(
-              backgroundColor: Colors.blue,
-              color: Colors.red,
-              buttonBackgroundColor: const Color(ConstantColors.KGreyColor),
-              items: items,
-              animationCurve: Curves.easeIn,
-              animationDuration: const Duration(milliseconds: 410),
-              height: 60,
-              index: index,
-              onTap: (index) {
-                setState(() {
-                  index = index;
-                  print(index);
-                });
-              },
-            ),
-          );
+    return NavigationBarTheme(
+      data: NavigationBarThemeData(
+          indicatorColor: Colors.blue.shade100,
+          labelTextStyle: MaterialStateProperty.all(
+              const TextStyle(fontSize: 14, fontWeight: FontWeight.bold))),
+      child: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        animationDuration: const Duration(seconds: 1),
+        height: 60,
+        backgroundColor: const Color(ConstantColors.KGreyColor),
+        selectedIndex: widget.selectedIndex,
+        onDestinationSelected: (index) => setState(() {
+          selectedIndex = index;
+        }),
+        destinations: const [
+          NavigationDestination(
+            label: 'Home',
+            icon: Icon(Icons.house_siding_rounded),
+            selectedIcon: Icon(Icons.logout_outlined),
+          ),
+          NavigationDestination(
+              label: 'Profile', icon: Icon(Icons.pause_rounded)),
+          NavigationDestination(
+              label: 'LogOut', icon: Icon(Icons.logout_outlined)),
+        ],
+      ),
+    );
     // : BottomNavigationBar(
     //     items: const <BottomNavigationBarItem>[
     //       BottomNavigationBarItem(
