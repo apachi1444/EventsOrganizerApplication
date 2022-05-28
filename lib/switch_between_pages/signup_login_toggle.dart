@@ -19,7 +19,7 @@ class _AuthSwitchPageState extends State<AuthSwitchPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (!showSignIn) {
+    if (showSignIn) {
       return LoginPage(toggleView: toggleView);
     } else {
       return RegisterrPage(toggleView: toggleView);

@@ -299,9 +299,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           GestureDetector(
                             onTap: () {},
-                            child: Container(
-                                child: Text('Forget Password?',
-                                    style: TextStyle(color: Colors.grey[600]))),
+                            child: Text('Forget Password?',
+                                style: TextStyle(color: Colors.grey[600])),
                           )
                         ]),
                   ),
@@ -348,20 +347,20 @@ class _LoginPageState extends State<LoginPage> {
                               print(e);
                               navigatorKey.currentState!
                                   .popUntil((route) => route.isFirst);
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: const Text(
-                                            'There is An error in the server'),
-                                        content: const Text(
-                                            'There was an error in the login please try again'),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context),
-                                              child: const Text('Cancel')),
-                                        ],
-                                      ));
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (context) => AlertDialog(
+                              //           title: const Text(
+                              //               'There is An error in the server'),
+                              //           content: const Text(
+                              //               'There was an error in the login please try again'),
+                              //           actions: [
+                              //             TextButton(
+                              //                 onPressed: () =>
+                              //                     Navigator.pop(context),
+                              //                 child: const Text('Cancel')),
+                              //           ],
+                              //         ));
                               Utils.showSnackBar(e.toString());
                             }
                           },

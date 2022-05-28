@@ -175,6 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     backgroundColor: Colors.green,
                                     textColor: Colors.white,
                                     fontSize: 25);
+                                Navigator.pushReplacementNamed(context, '/authProfessional');
                               }
                             },
                             child: const Center(
