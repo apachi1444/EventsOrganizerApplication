@@ -5,7 +5,6 @@ import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/bu
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/navImageGuestProfilePage.dart';
 
 import '../../../extensions/constant_colors.dart';
-import '../../../services/authService.dart';
 
 class ProfilePageGuest extends StatelessWidget {
   const ProfilePageGuest({Key? key}) : super(key: key);
@@ -25,17 +24,16 @@ class ProfilePageGuest extends StatelessWidget {
               fontSize: 22),
         ),
         const SizedBox(height: 15),
-        ButtonParameterProfilePageGuest(
-            text: 'Edit Profile',
-            logo: Icons.edit,
-            functionToDoWhenClickOnTheButton:
-                AuthService().SignOut() as Function),
-        const SizedBox(height: 15),
         // ButtonParameterProfilePageGuest(
-        //     text: 'Log Out',
-        //     logo: Icons.logout,
+        //     text: 'Edit Profile',
+        //     logo: Icons.edit,
         //     functionToDoWhenClickOnTheButton:
         //         AuthService().SignOut() as Function),
+        const SizedBox(height: 15),
+        const ButtonParameterProfilePageGuest(
+          text: 'Log Out',
+          logo: Icons.logout,
+        ),
         const SizedBox(height: 15),
         const Text('Do You Have Any Problem ?'),
         const SizedBox(height: 15),

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:pfs/extensions/constant_colors.dart';
+import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
 
 import '../../../userPages/parametersPages/settings/settings_page.dart';
 
@@ -19,7 +21,11 @@ class MyCheckingList extends StatelessWidget {
             ),
           ),
           leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              WidgetsBinding.instance?.addPostFrameCallback((_) {
+                Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  const Setting(), )) ;});
+
+            },
             color: Colors.black,
             icon: const Icon(
               Icons.arrow_back,
@@ -49,7 +55,7 @@ class MyCheckingList extends StatelessWidget {
 
                 Container(
                   decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 255, 0, 107),
+                      color: Color(ConstantColors.KPinkColor),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(50),
                         bottomRight: Radius.circular(50),
@@ -62,10 +68,15 @@ class MyCheckingList extends StatelessWidget {
                     onPressed: () => {
                       print(
                           'You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Setting()),
-                      )
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   'Setting'),
+                   // Navigator.pop(context),
+                      WidgetsBinding.instance?.addPostFrameCallback((_) {
+                        Navigator.pushReplacement( context,
+                            MaterialPageRoute( builder: (context) =>  const Setting(), )) ;}),
+
+
                     },
                     child: const Text('+',
                         style: TextStyle(
@@ -96,8 +107,57 @@ class MyCheckingList extends StatelessWidget {
             //   ), //BoxDecoration
             // ),
           ),
-        ), // SafeArea
-      ),
+        ),
+        ////////////////////////SafeArea
+        bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+    type: BottomNavigationBarType.shifting,//we can fixed
+    backgroundColor: Colors.black,
+    items: const [
+    BottomNavigationBarItem(
+    icon: Icon(Icons.home, color: Color(ConstantColors.KPinkColor),),
+    label: "home",
+    //title :Text('home'),
+    backgroundColor: Color.fromARGB(255, 248, 244, 244),),
+
+    BottomNavigationBarItem(
+    icon: Icon(
+    Icons.article_outlined, color: Color.fromARGB(255, 0, 0, 0),),
+    label: "checkList",
+    //title :Text('home'),
+    backgroundColor: Color.fromARGB(255, 248, 244, 244),),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.search, color: Color.fromARGB(255, 0, 0, 0),),
+    label: "search",
+    //title :Text('home'),
+    backgroundColor: Color.fromARGB(255, 248, 244, 244),),
+    BottomNavigationBarItem(
+    icon: Icon(
+    Icons.account_balance, color: Color.fromARGB(255, 0, 0, 0),),
+    label: "budget",
+    //title :Text('home'),
+    backgroundColor: Color.fromARGB(255, 248, 244, 244),),
+    BottomNavigationBarItem(
+    icon: Icon(Icons.person, color: Color.fromARGB(255, 0, 0, 0),),
+    label: "profile",
+    //title :Text('home'),
+    backgroundColor: Color.fromARGB(255, 248, 244, 244),
+
+    ),
+
+
+    ],
+              onTap: (index) {
+
+               if(index == 1){
+                WidgetsBinding.instance?.addPostFrameCallback((_) { Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => const Setting(), )) ;});
+             }
+               if(index == 3){
+                 WidgetsBinding.instance?.addPostFrameCallback((_) { Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => const BudgetPage(), )) ;});
+               }
+    },
+    ),
+      )
     );
   }
 // SwitchSettingsTile

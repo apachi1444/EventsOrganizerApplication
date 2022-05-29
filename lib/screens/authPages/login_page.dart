@@ -323,17 +323,17 @@ class _LoginPageState extends State<LoginPage> {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: Text("This is the Error"),
-                                        content: Text(
+                                        title: const Text('This is the Error'),
+                                        content: const Text(
                                             'Please check again your email and your password'),
                                         actions: [
                                           TextButton(
                                               onPressed: () =>
                                                   Navigator.pop(context),
-                                              child: Text("Cancel")),
+                                              child: const Text('Cancel')),
                                         ],
                                       ));
-                              log("this is not valid");
+                              log('this is not valid');
                               return;
                             }
                             try {

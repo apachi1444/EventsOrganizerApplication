@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pfs/extensions/listOfCities.dart';
 import 'package:pfs/services/authService.dart';
 
 import 'inputTextWidget.dart';
@@ -20,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
+  final _localisationController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   final _auth = AuthService();
@@ -43,7 +45,8 @@ class _RegisterPageState extends State<RegisterPage> {
           _passwordController.text.trim(),
           _firstNameController.text.trim(),
           _lastNameController.text.trim(),
-          _ageController.text.trim());
+          _ageController.text.trim(),
+          _localisationController.text.trim());
     } else {
       print('check your password and confirm password');
       return null;
@@ -58,8 +61,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return false;
   }
 
+  var list = cities;
+  String? selectedItem = cities[0];
+
   @override
   Widget build(BuildContext context) {
+    print('this is the list of all the cities ' + list.toString());
     return Scaffold(
         backgroundColor: Colors.grey[300],
         body: SafeArea(
@@ -72,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     children: [
                       const Icon(Icons.verified_user, size: 80),
                       const SizedBox(height: 20),
-                      const Text('Hellow There',
+                      const Text('Hello There',
                           style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
@@ -89,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       InputTextWidget(
                           inputHintText: 'Enter Your Email Here',
                           controllerUsedInInput: _emailController,
-                          icon: Icons.lock,
+                          icon: Icons.email,
                           isPassword: false),
 
                       // this part for the first name
@@ -128,6 +135,54 @@ class _RegisterPageState extends State<RegisterPage> {
                       // this part now for the password inputs
 
                       const SizedBox(height: 15),
+
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color(0XFFF8F4F4),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey.withOpacity(0.6),
+                                      blurRadius: 0.6,
+                                      spreadRadius: 0.8,
+                                      offset: const Offset(0, 4))
+                                ]),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 0),
+                              child: DropdownButtonFormField<String>(
+                                  // validator: (val) =>
+                                  //     val != null ? 'Enter a valid email' : null,
+                                  style: const TextStyle(
+                                    fontSize: 15.0,
+                                    color: Colors.blueAccent,
+                                  ),
+                                  decoration: const InputDecoration(
+                                      contentPadding: EdgeInsets.fromLTRB(
+                                          20.0, 15.0, 20.0, 15.0),
+                                      prefixIcon: Icon(Icons.map),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                      )),
+                                  value: selectedItem,
+                                  items: list
+                                      .map((item) => DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Text(item,
+                                              style: TextStyle(fontSize: 12))))
+                                      .toList(),
+                                  onChanged: (item) {
+                                    setState(() {
+                                      selectedItem = item;
+                                    });
+                                  }),
+                            ),
+                          )),
+
+                      const SizedBox(height: 20),
 
                       InputTextWidget(
                           inputHintText: 'Enter Your Password Here',
@@ -175,7 +230,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                     backgroundColor: Colors.green,
                                     textColor: Colors.white,
                                     fontSize: 25);
-                                Navigator.pushReplacementNamed(context, '/authProfessional');
+                                Navigator.pushReplacementNamed(
+                                    context, '/authProfessional');
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg:
+                                        'There Was An Error In The Registration',
+                                    backgroundColor: Colors.red,
+                                    textColor: Colors.white,
+                                    fontSize: 25);
                               }
                             },
                             child: const Center(

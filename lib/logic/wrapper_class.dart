@@ -51,7 +51,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/welcomePages/get_started_page.dart';
 
-import '../screens/guestPages/guestSwitchMainPage.dart';
+import '../screens/userPages/professionalSwitchMainPage.dart';
 
 class WrapperPage extends StatefulWidget {
   const WrapperPage({Key? key}) : super(key: key);
@@ -73,7 +73,7 @@ class _WrapperPageState extends State<WrapperPage> {
               } else if (snapshot.hasError) {
                 return const Center(child: Text('Something went wrong'));
               } else if (snapshot.hasData) {
-                return const GuestSwitchMainPage();
+                return const ProfessionalSwitchMainPage();
               } else {
                 return const GetStartedPage();
               }

@@ -2,16 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../extensions/constant_colors.dart';
+import '../../../../services/authService.dart';
 
 class ButtonParameterProfilePageGuest extends StatefulWidget {
   final String text;
   final IconData logo;
-  final Function functionToDoWhenClickOnTheButton;
   const ButtonParameterProfilePageGuest({
     Key? key,
     required this.text,
     required this.logo,
-    required this.functionToDoWhenClickOnTheButton,
   }) : super(key: key);
 
   @override
@@ -24,7 +23,13 @@ class _ButtonParameterProfilePageGuestState
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        if (widget.text == "Log Out") {
+          AuthService().SignOut();
+          Navigator.pushNamedAndRemoveUntil(
+              context, "/loginGuest", (r) => false);
+        }
+      },
       child: Container(
           width: MediaQuery.of(context).size.width * 0.28,
           decoration: BoxDecoration(
@@ -45,7 +50,7 @@ class _ButtonParameterProfilePageGuestState
               child: Center(
                 child: Column(children: [
                   Icon(widget.logo),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(widget.text)
                 ]),
               ),

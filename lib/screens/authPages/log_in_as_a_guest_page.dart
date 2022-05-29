@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
 
 import '../../services/authService.dart';
+import '../../services/dbService.dart';
 
 class LogInAsAGuestPage extends StatefulWidget {
   const LogInAsAGuestPage({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class LogInAsAGuestPage extends StatefulWidget {
 }
 
 class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
-  final _emailController = TextEditingController();
+  final _localisationController = TextEditingController();
   final _nameController = TextEditingController();
   final authService = AuthService();
 
@@ -107,12 +108,13 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: TextField(
-                        controller: _emailController,
+                        controller: _localisationController,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Type Your Email Here',
+                          hintText: 'Type Your Localisation Here',
+                          hintStyle: TextStyle(fontSize: 12),
                           prefixIcon: Icon(
-                            Icons.email,
+                            Icons.map_outlined,
                             size: 22,
                             color: Colors.black,
                           ),
@@ -144,7 +146,8 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                         controller: _nameController,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Type Your Name Here',
+                          hintText: 'Type Your Name And Last Name Here',
+                          hintStyle: TextStyle(fontSize: 12),
                           prefixIcon: Icon(
                             Icons.verified_user,
                             size: 22,
@@ -176,17 +179,19 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                     ]),
                 child: GestureDetector(
                   onTap: () async {
-                    // dynamic result = await authService.signInAnon();
-                    // if ( result == null){
-                    //   print('error ');
-                    // }
-                    // else{
-                    //   print('signed in');
-                    //   print(result.uid);
-                    // }
+                    dynamic result = await authService.signInAnon();
+                    if (result == null) {
+                      print('error ');
+                    } else {
+                      print('signed in');
+                      print(result.uid);
+                      DatabaseService(uid: result.uid).updateGuestData(
+                          _localisationController.text.trim(),
+                          _nameController.text.trim());
+                    }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return const GuestSwitchMainPage();
+                      return GuestSwitchMainPage(uid: result.uid);
                     }));
                   },
                   child: const Center(

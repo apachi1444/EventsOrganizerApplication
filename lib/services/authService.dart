@@ -83,7 +83,7 @@ class AuthService {
   }
 
   Future signUp(String email, String password, String firstName,
-      String lastName, String age) async {
+      String lastName, String age, String localisation) async {
     // create user
     try {
       UserCredential result = await FirebaseAuth.instance
@@ -92,7 +92,7 @@ class AuthService {
       User? user = result.user;
       // create a new document for the user with that uid
       await DatabaseService(uid: user!.uid)
-          .updateUserData(email, firstName, lastName, age);
+          .updateUserData(email, firstName, lastName, age, localisation);
       return _useFromFirebaseUser(user);
       // ignore: empty_catches
     } catch (e) {

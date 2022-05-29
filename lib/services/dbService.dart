@@ -11,14 +11,25 @@ class DatabaseService {
   final CollectionReference ourCollection =
       FirebaseFirestore.instance.collection('users');
 
-  Future updateUserData(String email ,String firstName, String lastName, String age) async {
+  final CollectionReference guestCollection =
+      FirebaseFirestore.instance.collection('guests');
+
+  Future updateUserData(String email, String firstName, String lastName,
+      String age, String localisation) async {
     // is gonna refer to that document with that id if not exists he will create that user with these infos
     return await ourCollection.doc(uid).set({
-      'email' : email,
+      'email': email,
       'first_name': firstName,
       'last_name': lastName,
       'age': int.parse(age),
+      'localisation': localisation
     });
+  }
+
+  Future updateGuestData(String wholeName, String localisation) async {
+    return await guestCollection
+        .doc(uid)
+        .set({'wholeName': wholeName, 'localisation': localisation});
   }
 
   // person list from the snapshot
@@ -48,37 +59,27 @@ class DatabaseService {
     }).toList();
   }
 
-
   // we convert the stream into the list of Perons to display them in the home HomePage
   // the getter method should always be without parameters
   Stream<List<Person?>> get getUsers {
     return ourCollection.snapshots().map(_personListFromSnapshot);
   }
 
-  Stream<UserData> get userData{
+  Stream<UserData> get userData {
     return ourCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
-  UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
-    final doc = snapshot as  Map<String , dynamic>;
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    final doc = snapshot as Map<String, dynamic>;
     return UserData(
-      uid:  uid,
+      uid: uid,
       first_name: doc['first_name'],
       last_name: doc['last_name'],
       age: doc['age'],
     );
   }
 
-  // Future<Person?> readUser() async{
-  //   final docUser = ourCollection.doc(uid);
-  //   final snapshot = await docUser!.get();
-  //   if (snapshot.exists){
-  //     return Person.fromJson(snapshot.data());
-  //   }
-  // }
-
-
-
+  bool exists = false;
 }
 
 // if we want to take only one docuemnt from the

@@ -3,7 +3,7 @@ import 'package:pfs/services/authService.dart';
 
 import '../../../extensions/navbar/navbarBottom.dart';
 import '../profilePage/profilePageGuest.dart';
-import 'home_page.dart';
+import 'home_page_guest.dart';
 
 class SwitcherBetweenPagesInHomePageGuest extends StatefulWidget {
   const SwitcherBetweenPagesInHomePageGuest({Key? key}) : super(key: key);

@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,40 @@ class _InputTextWidgetState extends State<InputTextWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter something';
+                  }
+                  if (widget.inputHintText == 'Enter Your Password Here') {
+                    if (value.length < 6) {
+                      return 'Must Be More than 6 characters';
+                    }
+                  }
+                  if (widget.inputHintText == 'Enter Your First Name Here') {
+                    if (value.length < 3) {
+                      return 'Must Be More than 3 characters';
+                    }
+                  }
+                  if (widget.inputHintText == 'Enter Your Last Name Here') {
+                    if (value.length < 3) {
+                      return 'Must Be More than 3 characters';
+                    }
+                  }
+
+                  if (widget.inputHintText == 'Confirm Your Password Here') {
+                    if (value.length < 6) {
+                      return 'Must Be More than 6 characters';
+                    }
+                  }
+                  if (widget.inputHintText == 'Confirm Your Email Here') {
+                    !EmailValidator.validate(
+                            widget.controllerUsedInInput.text.trim())
+                        ? 'Please '
+                        : null;
+                  }
+
+                  return null;
+                },
                 obscureText: widget.isPassword ? true : false,
                 controller: widget.controllerUsedInInput,
                 // validator: (val) =>
