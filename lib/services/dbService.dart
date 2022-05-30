@@ -69,6 +69,13 @@ class DatabaseService {
     return ourCollection.doc(uid).snapshots().map(_userDataFromSnapshot);
   }
 
+  Future<UserData> get getUserData async {
+    return ourCollection
+        .doc(uid)
+        .get()
+        .then((value) => _userDataFromSnapshot(value));
+  }
+
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     final doc = snapshot as Map<String, dynamic>;
     return UserData(
@@ -76,6 +83,7 @@ class DatabaseService {
       first_name: doc['first_name'],
       last_name: doc['last_name'],
       age: doc['age'],
+      localisation: doc['localisation'],
     );
   }
 

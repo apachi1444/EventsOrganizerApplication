@@ -19,7 +19,7 @@ class _ProfessionalSwitchMainPageState
   int _index = 2;
   final items = <Widget>[
     const Icon(Icons.home),
-    const Icon(Icons.home),
+    const Icon(Icons.supervised_user_circle_outlined),
     const Icon(Icons.design_services)
   ];
   final screens = [
@@ -32,13 +32,16 @@ class _ProfessionalSwitchMainPageState
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(iconTheme: const IconThemeData(color: Colors.green)),
+        data: Theme.of(context).copyWith(
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
+            indicatorColor: const Color(ConstantColors.KPinkColor)),
         child: CurvedNavigationBar(
           key: navigationKey,
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.transparent,
           color: Colors.red,
-          buttonBackgroundColor: const Color(ConstantColors.KGreyColor),
+          buttonBackgroundColor: const Color(ConstantColors.KPinkColor),
           items: items,
           animationCurve: Curves.easeIn,
           animationDuration: const Duration(milliseconds: 410),

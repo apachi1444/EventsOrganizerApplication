@@ -48,6 +48,9 @@ dependencies:
   carousel_slider: ^2.3.1
   fluttertoast: ^8.0.9
   curved_navigation_bar: ^1.0.3
+  image_picker: ^0.8.5+3
+  path_provider: ^2.0.10
+
 
 dev_dependencies:
   flutter_test:

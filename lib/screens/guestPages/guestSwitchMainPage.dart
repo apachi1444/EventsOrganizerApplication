@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/guestPages/events/event/todoList_page.dart';
 import 'package:pfs/screens/guestPages/home/home_page_guest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
-import 'package:pfs/screens/userPages/parametersPages/settings/settings_page.dart';
 
 import '../../extensions/constant_colors.dart';
 
@@ -20,12 +20,12 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
   final items = <Widget>[
     const Icon(Icons.home),
     const Icon(Icons.supervised_user_circle_rounded),
-    const Icon(Icons.settings),
+    const Icon(Icons.list_outlined),
   ];
   final screens = [
     const HomePageGuest(),
     const ProfilePageGuest(),
-    const Setting()
+    const TodoList()
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override

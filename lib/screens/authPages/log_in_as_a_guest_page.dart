@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
 
 import '../../services/authService.dart';
-import '../../services/dbService.dart';
 
 class LogInAsAGuestPage extends StatefulWidget {
   const LogInAsAGuestPage({Key? key}) : super(key: key);
@@ -179,19 +178,19 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                     ]),
                 child: GestureDetector(
                   onTap: () async {
-                    dynamic result = await authService.signInAnon();
-                    if (result == null) {
-                      print('error ');
-                    } else {
-                      print('signed in');
-                      print(result.uid);
-                      DatabaseService(uid: result.uid).updateGuestData(
-                          _localisationController.text.trim(),
-                          _nameController.text.trim());
-                    }
+                    // dynamic result = await authService.signInAnon();
+                    // if (result == null) {
+                    //   print('error ');
+                    // } else {
+                    //   print('signed in');
+                    //   print(result.uid);
+                    //   DatabaseService(uid: result.uid).updateGuestData(
+                    //       _localisationController.text.trim(),
+                    //       _nameController.text.trim());
+                    // }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return GuestSwitchMainPage(uid: result.uid);
+                      return GuestSwitchMainPage(uid: '');
                     }));
                   },
                   child: const Center(

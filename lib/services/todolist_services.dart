@@ -15,10 +15,10 @@ class TodoServices {
     await taskCollection.set(json);
   }
 
-  Stream<List<Task>> readTasks() {
-    return FirebaseFirestore.instance
-        .collection('tasks')
-        .snapshots() //to get docs
-        .map((doc) => Task.fromJson(doc.data()).toL);
-  }
+  // Stream<List<Task>> readTasks() {
+  //   return FirebaseFirestore.instance
+  //       .collection('tasks')
+  //       .snapshots() //to get docs
+  //       .map((doc) => Task.fromJson(doc.data()).toL);
+  // }
 }

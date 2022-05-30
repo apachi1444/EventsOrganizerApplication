@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:pfs/extensions/constant_colors.dart';
 
 class NavBarItem extends StatelessWidget {
-  const NavBarItem({Key? key}) : super(key: key);
+  final String name;
+  final String lastName;
+  const NavBarItem({Key? key, required this.name, required this.lastName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +23,12 @@ class NavBarItem extends StatelessWidget {
           const SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Hello', style: TextStyle(fontSize: 14)),
+            children: [
+              const Text('Hello', style: TextStyle(fontSize: 14)),
               Text(
-                'Micheal Boston',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                '$lastName $name',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ],
           )

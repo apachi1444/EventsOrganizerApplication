@@ -27,7 +27,7 @@ class _ButtonParameterProfilePageGuestState
         if (widget.text == "Log Out") {
           AuthService().SignOut();
           Navigator.pushNamedAndRemoveUntil(
-              context, "/loginGuest", (r) => false);
+              context, '/authProfessional', (r) => false);
         }
       },
       child: Container(

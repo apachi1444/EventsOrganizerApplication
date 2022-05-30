@@ -1,7 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/model/Task.dart';
-import 'package:hello_world/services/Todo_services.dart';
+import 'package:pfs/services/todolist_services.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({Key? key}) : super(key: key);
@@ -46,7 +44,7 @@ class _AddTaskState extends State<AddTask> {
                 //color: Color.fromARGB(255, 95, 18, 119),
               ),
               decoration: const InputDecoration(
-                hintText: "Title",
+                hintText: 'Title',
                 hintStyle: TextStyle(
                   color: Color.fromARGB(179, 63, 60, 60),
                 ),
@@ -62,7 +60,7 @@ class _AddTaskState extends State<AddTask> {
                 //color: Color.fromARGB(255, 216, 81, 81),
               ),
               decoration: const InputDecoration(
-                hintText: "Description",
+                hintText: 'Description',
                 hintStyle: TextStyle(color: Color.fromARGB(179, 63, 60, 60)),
 //                border: UnderlineInputBorder(),
               ),
@@ -89,8 +87,6 @@ class _AddTaskState extends State<AddTask> {
         ],
       );
 }
-
-
 
 // class TaskFormWidget extends StatelessWidget {
 //   const TaskFormWidget({Key? key}) : super(key: key);

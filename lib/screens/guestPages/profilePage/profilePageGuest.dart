@@ -13,31 +13,31 @@ class ProfilePageGuest extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Column(
-      children: [
-        const NavImageGuestProfilePage(),
-        const SizedBox(height: 15),
-        const Text(
+      children: const [
+        NavImageGuestProfilePage(),
+        SizedBox(height: 15),
+        Text(
           'Micheal Boston',
           style: TextStyle(
               color: Color(ConstantColors.KPinkColor),
               fontWeight: FontWeight.bold,
               fontSize: 22),
         ),
-        const SizedBox(height: 15),
+        SizedBox(height: 15),
         // ButtonParameterProfilePageGuest(
         //     text: 'Edit Profile',
         //     logo: Icons.edit,
         //     functionToDoWhenClickOnTheButton:
         //         AuthService().SignOut() as Function),
-        const SizedBox(height: 15),
-        const ButtonParameterProfilePageGuest(
+        SizedBox(height: 15),
+        ButtonParameterProfilePageGuest(
           text: 'Log Out',
           logo: Icons.logout,
         ),
-        const SizedBox(height: 15),
-        const Text('Do You Have Any Problem ?'),
-        const SizedBox(height: 15),
-        const ButtonContactUsProfilePageGuest(),
+        SizedBox(height: 15),
+        Text('Do You Have Any Problem ?'),
+        SizedBox(height: 15),
+        ButtonContactUsProfilePageGuest(),
       ],
     ));
   }

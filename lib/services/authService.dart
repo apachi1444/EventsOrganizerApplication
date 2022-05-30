@@ -13,6 +13,10 @@ class AuthService {
     return user != null ? Userr(uid: user.uid) : null;
   }
 
+  String? getCurrentIdUser() {
+    return _auth.currentUser!.uid;
+  }
+
   // Userr ? it might be null
   Future<Userr?> getCurrentUser() async {
     final user = _auth.currentUser!;

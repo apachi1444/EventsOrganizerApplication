@@ -11,7 +11,7 @@ class TwoButttonPartServicesAndArchives extends StatelessWidget {
       children: const [
         OneButtonServicePage(text: 'My Services', isClicked: false),
         SizedBox(width: 15),
-        OneButtonServicePage(text: "My Services", isClicked: true),
+        OneButtonServicePage(text: "Archivés", isClicked: true),
       ],
     );
   }

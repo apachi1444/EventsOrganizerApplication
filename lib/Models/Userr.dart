@@ -9,9 +9,11 @@ class UserData {
   final String first_name;
   final String last_name;
   final int age;
+  final String localisation;
 
   UserData(
-      {required this.uid,
+      {required this.localisation,
+      required this.uid,
       required this.first_name,
       required this.last_name,
       required this.age});

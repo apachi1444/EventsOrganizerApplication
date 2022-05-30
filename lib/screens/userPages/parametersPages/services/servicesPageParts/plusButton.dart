@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/constant_colors.dart';
 
+import 'addServicePopUpModal.dart';
+
 class PlusButton extends StatelessWidget {
   const PlusButton({Key? key}) : super(key: key);
 
@@ -31,19 +33,6 @@ void _showTheAddServiceBottomModal(BuildContext context) {
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return SizedBox(
-            height: MediaQuery.of(context).size.height * 0.7,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('This is pop modal')),
-                ],
-              ),
-            ));
+        return const AddServicePopUpModal();
       });
 }

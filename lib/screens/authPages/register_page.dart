@@ -46,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
           _firstNameController.text.trim(),
           _lastNameController.text.trim(),
           _ageController.text.trim(),
-          _localisationController.text.trim());
+          selectedItem!);
     } else {
       print('check your password and confirm password');
       return null;
@@ -172,7 +172,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                       .map((item) => DropdownMenuItem<String>(
                                           value: item,
                                           child: Text(item,
-                                              style: TextStyle(fontSize: 12))))
+                                              style: const TextStyle(
+                                                  fontSize: 12))))
                                       .toList(),
                                   onChanged: (item) {
                                     setState(() {
