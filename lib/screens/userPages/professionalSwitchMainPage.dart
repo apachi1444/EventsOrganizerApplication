@@ -1,10 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/sharedScreens/search/searchPage.dart';
 import 'package:pfs/screens/userPages/home_page_test_animation.dart';
 import 'package:pfs/screens/userPages/parametersPages/services/servicesPage.dart';
+import 'package:pfs/screens/userPages/parametersPages/settings/settings_page.dart';
+import 'package:pfs/screens/userPages/profile/profilePageProfTest.dart';
 
 import '../../extensions/constant_colors.dart';
-import '../guestPages/profilePage/profilePageGuest.dart';
 
 class ProfessionalSwitchMainPage extends StatefulWidget {
   const ProfessionalSwitchMainPage({Key? key}) : super(key: key);
@@ -19,13 +21,17 @@ class _ProfessionalSwitchMainPageState
   int _index = 2;
   final items = <Widget>[
     const Icon(Icons.home),
+    const Icon(Icons.article_outlined),
+    const Icon(Icons.search),
+    const Icon(Icons.settings),
     const Icon(Icons.supervised_user_circle_outlined),
-    const Icon(Icons.design_services)
   ];
   final screens = [
     const HomePage(),
-    const ProfilePageGuest(),
-    const ServicesPage()
+    const ServicesPage(),
+    const SearchPage(),
+    const Setting(),
+    const ProfilePageProfessional(),
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override

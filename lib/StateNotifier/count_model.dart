@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class CounterModel extends ChangeNotifier{
   bool _isDark = true;
 
-  bool getisDark() {
+  bool getIsDark() {
     return _isDark;
   }
 

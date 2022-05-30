@@ -1,11 +1,13 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/guestPages/events/event/todoList_page.dart';
+import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
+import 'package:pfs/screens/guestPages/events/chickList/MyChickList.dart';
 import 'package:pfs/screens/guestPages/home/home_page_guest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
 
 import '../../extensions/constant_colors.dart';
+import '../sharedScreens/search/searchPage.dart';
 
 class GuestSwitchMainPage extends StatefulWidget {
   final uid;
@@ -19,26 +21,33 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
   int _index = 1;
   final items = <Widget>[
     const Icon(Icons.home),
-    const Icon(Icons.supervised_user_circle_rounded),
-    const Icon(Icons.list_outlined),
+    const Icon(Icons.article_outlined),
+    const Icon(Icons.search_off),
+    const Icon(Icons.account_balance_outlined),
+    const Icon(Icons.person),
   ];
   final screens = [
     const HomePageGuest(),
+    const MyCheckingList(),
+    const SearchPage(),
+    const BudgetPage(),
     const ProfilePageGuest(),
-    const TodoList()
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(iconTheme: const IconThemeData(color: Colors.green)),
+        data: Theme.of(context).copyWith(
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
+            indicatorColor: const Color(ConstantColors.KPinkColor)),
         child: CurvedNavigationBar(
           key: navigationKey,
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.transparent,
           color: Colors.red,
-          buttonBackgroundColor: const Color(ConstantColors.KGreyColor),
+          buttonBackgroundColor: const Color(ConstantColors.KPinkColor),
           items: items,
           animationCurve: Curves.easeIn,
           animationDuration: const Duration(milliseconds: 410),

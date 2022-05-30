@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/userPages/parametersPages/settings/settings_page.dart';
+
 import '../../../../extensions/constant_colors.dart';
 
 class BudgetPage extends StatelessWidget {
@@ -11,16 +12,18 @@ class BudgetPage extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           appBar: AppBar(
-            title: Container(
-              child: const Center(
-                child: Text('My Budget'),
-              ),
+            title: const Center(
+              child: Text('My Budget'),
             ),
             leading: IconButton(
               onPressed: () {
-                WidgetsBinding.instance?.addPostFrameCallback((_) {
-                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>   Setting(), )) ;});
-
+                // WidgetsBinding.instance?.addPostFrameCallback((_) {
+                //   Navigator.pushReplacement(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => Setting(),
+                //       ));
+                // });
               },
               color: Colors.black,
               icon: const Icon(
@@ -32,78 +35,81 @@ class BudgetPage extends StatelessWidget {
           ),
           // backgroundColor: Color.fromARGB(255, 198, 127, 121),
 
-          body: Center(
-            child: Container(
-              decoration: const BoxDecoration(
-                // color: Color.fromARGB(255, 231, 178, 204),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                  )),
+          body: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                decoration: const BoxDecoration(
+                    // color: Color.fromARGB(255, 231, 178, 204),
+                    borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                )),
+                child: Column(
+                  children: [
+                    //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
+                    const SizedBox(height: 15),
+                    const Text("Today",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30)),
+                    MainCard(),
+                    const Text("Details",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 30)),
 
-              child: Column(
-                children: [
-                  //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
-                  const SizedBox(height: 15),
-                  const Text("Today",style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
-                  MainCard(),
-                  const Text("Details",style:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 30)),
+                    detailsCard("traiteur", '10000 DH', Icons.delete),
+                    detailsCard("salle", "10000 DH", Icons.delete),
+                    detailsCard("Nagafa", "10000 DH", Icons.delete),
+                    detailsCard("Robe", "10000 DH", Icons.delete),
+                    detailsCard("traiteur", "10000 DH", Icons.delete),
+                    const SizedBox(height: 15),
 
-                  detailsCard("traiteur",'10000 DH',Icons.delete),
-                  detailsCard("salle","10000 DH",Icons.delete),
-                  detailsCard("Nagafa","10000 DH",Icons.delete),
-                  detailsCard("Robe","10000 DH",Icons.delete),
-                  detailsCard("traiteur","10000 DH",Icons.delete),
-                  const SizedBox(height: 15),
-
-
-                  Container(
-                    decoration: const BoxDecoration(
-                        color: Color(ConstantColors.KPinkColor),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(50),
-                          bottomRight: Radius.circular(50),
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50),
-                        )),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                          primary: const Color.fromARGB(255, 255, 255, 255)),
-                      onPressed: () => {
-                        print(
-                            'You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   'Setting'),
-                        // Navigator.pop(context),
-                        WidgetsBinding.instance?.addPostFrameCallback((_) {
-                          Navigator.pushReplacement( context,
-                              MaterialPageRoute( builder: (context) =>  Setting(), )) ;}),
-
-
-                      },
-                      child: Container(
-                        width: 200,
-                        child: Row(
-                          children: const [
-                            Icon(Icons.add),
-                            SizedBox(width: 15),
-                            Text('Add Detail',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                )),
-                          ],
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Color(ConstantColors.KPinkColor),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                            bottomRight: Radius.circular(50),
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50),
+                          )),
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 255, 255, 255)),
+                        onPressed: () => {
+                          print(
+                              'You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
+                          // Navigator.pushNamed(
+                          //   context,
+                          //   'Setting'),
+                          // Navigator.pop(context),
+                          WidgetsBinding.instance?.addPostFrameCallback((_) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Setting(),
+                                ));
+                          }),
+                        },
+                        child: Container(
+                          width: 200,
+                          child: Row(
+                            children: const [
+                              Icon(Icons.add),
+                              SizedBox(width: 15),
+                              Text('Add Detail',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
+                    )
 
-                  //),
-                ],
+                    //),
+                  ],
+                ),
               ),
-
             ),
           ),
           ////////////////////////SafeArea
@@ -152,35 +158,37 @@ class BudgetPage extends StatelessWidget {
           //     }
           //   },
           // ),
-        )
-    );
+        ));
   }
-  Padding detailsCard(String title,String Budget,IconData icon) {
-return   Padding(
-  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-    child: Container(
-      width: 300,
+
+  Padding detailsCard(String title, String Budget, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+      child: Container(
+        width: 300,
         decoration: const BoxDecoration(
-       // color: Color.fromARGB(255, 206, 203, 203),
+          // color: Color.fromARGB(255, 206, 203, 203),
           border: Border(
             bottom: BorderSide(width: 1.0, color: Color(0x34000000)),
           ),
         ),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-        Text(title,style:  const TextStyle(
-          fontSize: 20,
-        )),
-        Text(Budget,style:  const TextStyle(
-          fontSize: 15,color: Color(0x34000000),),
-
-        ),
-            Icon(icon,color: const Color(ConstantColors.KPinkColor),size: 30),
-          ]
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(title,
+              style: const TextStyle(
+                fontSize: 20,
+              )),
+          Text(
+            Budget,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Color(0x34000000),
+            ),
+          ),
+          Icon(icon, color: const Color(ConstantColors.KPinkColor), size: 30),
+        ]),
       ),
-    ),
-);
+    );
   }
 // SwitchSettingsTile
 }
@@ -241,7 +249,6 @@ Padding MainCard() {
       child: Container(
         child: Column(
           children: [
-
             const SizedBox(height: 15),
             Row(
               children: [

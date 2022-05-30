@@ -49,9 +49,12 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
+import 'package:pfs/screens/userPages/professionalSwitchMainPage.dart';
 import 'package:pfs/screens/welcomePages/get_started_page.dart';
+import 'package:provider/provider.dart';
 
-import '../screens/userPages/professionalSwitchMainPage.dart';
+import '../StateNotifier/count_model.dart';
 
 class WrapperPage extends StatefulWidget {
   const WrapperPage({Key? key}) : super(key: key);
@@ -63,6 +66,9 @@ class WrapperPage extends StatefulWidget {
 class _WrapperPageState extends State<WrapperPage> {
   @override
   Widget build(BuildContext context) {
+    final providerOfCountModel = Provider.of<CounterModel>(context).getIsDark();
+    print("this is the response of the provider");
+    print(providerOfCountModel);
     print('we are in the wrapper class');
     return Scaffold(
         body: StreamBuilder<User?>(
@@ -73,7 +79,11 @@ class _WrapperPageState extends State<WrapperPage> {
               } else if (snapshot.hasError) {
                 return const Center(child: Text('Something went wrong'));
               } else if (snapshot.hasData) {
-                return const ProfessionalSwitchMainPage();
+                if (snapshot.data?.isAnonymous == false) {
+                  return const ProfessionalSwitchMainPage();
+                } else {
+                  return const GuestSwitchMainPage();
+                }
               } else {
                 return const GetStartedPage();
               }

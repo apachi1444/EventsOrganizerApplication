@@ -100,23 +100,23 @@ class _MySettingState extends State<MySetting> {
             Column(
               children: [
                 Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.add_moderator,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(
+                    const Text(
                       'Privacy Settings',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      width: 160,
+                      width: MediaQuery.of(context).size.width * 0.35,
                     ),
-                    Icon(Icons.arrow_downward),
+                    const Icon(Icons.arrow_downward),
                   ],
                 ),
                 const Divider(
@@ -143,23 +143,23 @@ class _MySettingState extends State<MySetting> {
 
 // others Settings
                 Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.add_moderator,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    Text(
+                    const Text(
                       'Others Settings',
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      width: 160,
+                      width: MediaQuery.of(context).size.width * 0.35,
                     ),
-                    Icon(Icons.arrow_downward),
+                    const Icon(Icons.arrow_downward),
                   ],
                 ),
                 const Divider(
@@ -189,6 +189,39 @@ class _MySettingState extends State<MySetting> {
   Padding buildNotificationOption(
       String title, bool value, Function onChangeMethode) {
     return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.person,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              activeColor: const Color(ConstantColors.KGreenColor),
+              trackColor: const Color(ConstantColors.KPinkColor),
+              value: value,
+              onChanged: (bool newValue) {
+                onChangeMethode(newValue);
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Padding fotter(String title, bool value, Function onChangeMethode) {
+    return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,7 +240,7 @@ class _MySettingState extends State<MySetting> {
           Transform.scale(
             scale: 0.7,
             child: CupertinoSwitch(
-              activeColor: const Color.fromARGB(255, 0, 205, 76),
+              activeColor: const Color(ConstantColors.KGreenColor),
               trackColor: const Color(ConstantColors.KPinkColor),
               value: value,
               onChanged: (bool newValue) {
@@ -216,41 +249,6 @@ class _MySettingState extends State<MySetting> {
             ),
           )
         ],
-      ),
-    );
-  }
-
-  Padding fotter(String title, bool value, Function onChangeMethode) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Icon(
-              Icons.person,
-            ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            Transform.scale(
-              scale: 0.7,
-              child: CupertinoSwitch(
-                activeColor: const Color.fromARGB(255, 0, 205, 76),
-                trackColor: const Color(ConstantColors.KPinkColor),
-                value: value,
-                onChanged: (bool newValue) {
-                  onChangeMethode(newValue);
-                },
-              ),
-            )
-          ],
-        ),
       ),
     );
   }
