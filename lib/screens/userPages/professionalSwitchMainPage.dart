@@ -19,12 +19,21 @@ class ProfessionalSwitchMainPage extends StatefulWidget {
 class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
   int _index = 4;
-  final items = <Widget>[
-    const Icon(Icons.home),
-    const Icon(Icons.article_outlined),
-    const Icon(Icons.search),
-    const Icon(Icons.settings),
-    const Icon(Icons.supervised_user_circle_outlined),
+
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _index = index;
+    });
+  }
+
+  final items = <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.list_outlined), label: 'Services'),
+    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.settings), label: 'Settings'),
+    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
   final screens = [
     const HomePage(),
@@ -38,29 +47,20 @@ class _ProfessionalSwitchMainPageState
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-            iconTheme: const IconThemeData(
-              color: Colors.white,
-            ),
-            indicatorColor: const Color(ConstantColors.KPinkColor)),
-        child: CurvedNavigationBar(
-          key: navigationKey,
-          backgroundColor: Colors.transparent,
-          color: Colors.red,
-          buttonBackgroundColor: const Color(ConstantColors.KPinkColor),
-          items: items,
-          animationCurve: Curves.easeIn,
-          animationDuration: const Duration(milliseconds: 410),
-          height: 60,
-          index: _index,
-          onTap: (index) {
-            setState(() {
-              _index = index;
-              print(index);
-            });
-          },
-        ),
-      ),
+          data: Theme.of(context).copyWith(
+              iconTheme: const IconThemeData(
+                color: Colors.white,
+              ),
+              indicatorColor: const Color(ConstantColors.KPinkColor)),
+          child: BottomNavigationBar(
+            backgroundColor:
+                const Color(ConstantColors.KGreyColor).withOpacity(0.9),
+            fixedColor: const Color(ConstantColors.KPinkColor),
+            onTap: _navigateBottomBar,
+            currentIndex: _index,
+            type: BottomNavigationBarType.fixed,
+            items: items,
+          )),
       body: screens[_index],
     );
   }

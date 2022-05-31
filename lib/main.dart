@@ -32,6 +32,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CounterModel()),
+        ChangeNotifierProvider(create: (context) => CounterModel()),
       ],
       child: MaterialApp(
         scaffoldMessengerKey: Utils.messengerKey,

@@ -163,7 +163,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pfs/screens/guestPages//home/settings_form.dart';
 import 'package:provider/provider.dart';
@@ -307,29 +306,6 @@ class _HomePageState extends State<HomePage>
               },
             )
           ],
-        ),
-        bottomNavigationBar: Container(
-          color: Colors.black,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
-            child: GNav(
-              gap: 8,
-              backgroundColor: Colors.black,
-              activeColor: Colors.white,
-              color: Colors.white,
-              // onTabChange: (index) => print(index),
-              tabBackgroundColor: Colors.blueGrey,
-              padding: EdgeInsets.all(8),
-              tabs: [
-                GButton(icon: Icons.home, text: 'Home'),
-                GButton(
-                    icon: Icons.supervised_user_circle_rounded,
-                    text: 'Profile'),
-                GButton(icon: Icons.home, text: 'Home'),
-                GButton(icon: Icons.home, text: 'Home')
-              ],
-            ),
-          ),
         ),
         body: Column(
           children: [

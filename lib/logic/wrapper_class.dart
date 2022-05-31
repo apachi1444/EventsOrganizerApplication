@@ -67,7 +67,7 @@ class _WrapperPageState extends State<WrapperPage> {
   @override
   Widget build(BuildContext context) {
     final providerOfCountModel = Provider.of<CounterModel>(context).getIsDark();
-    print("this is the response of the provider");
+    print('this is the response of the provider');
     print(providerOfCountModel);
     print('we are in the wrapper class');
     return Scaffold(
