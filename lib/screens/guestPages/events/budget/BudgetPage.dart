@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/userPages/parametersPages/settings/settings_page.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 
 import '../../../../extensions/constant_colors.dart';
 

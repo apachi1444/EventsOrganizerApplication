@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
 
 import 'failureStep.dart';
 

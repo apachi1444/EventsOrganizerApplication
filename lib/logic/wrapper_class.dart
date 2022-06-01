@@ -50,7 +50,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
-import 'package:pfs/screens/userPages/professionalSwitchMainPage.dart';
+import 'package:pfs/screens/professionalPages/professionalSwitchMainPage.dart';
 import 'package:pfs/screens/welcomePages/get_started_page.dart';
 import 'package:provider/provider.dart';
 

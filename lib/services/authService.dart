@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/StateNotifier/ProfessionalPreferences.dart';
+import 'package:pfs/services/professionalDbService.dart';
 
+import '../Models/Professional.dart';
 import '../Models/Userr.dart';
-import 'dbService.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,20 +30,7 @@ class AuthService {
     return _auth.authStateChanges().map((user) => _useFromFirebaseUser(user!));
   }
 
-  // StreamSubscription<User> listen(
-  //     void Function(User event) onData,
-  //     {
-  //       required Function onError,
-  //       required void Function() onDone,
-  //       required bool cancelOnError
-  //     }
-  //     )
-  //     {
-  //         print(onData);
-  //         throw UnimplementedError();
-  //     }
-
-  Future SignOut() async {
+  Future signOut() async {
     try {
       return await _auth.signOut();
     } on FirebaseAuthException catch (e) {
@@ -52,6 +41,7 @@ class AuthService {
 
   Future signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
+    Professional? currentProfessional;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -60,7 +50,21 @@ class AuthService {
     UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
     User? user = result.user;
-    return _useFromFirebaseUser(user!);
+    Userr? userr = _useFromFirebaseUser(user!);
+    var professional =
+        ProfessionalDatabaseService(uid: user.uid).readOneProfessional();
+    print(userr);
+    print(professional);
+
+    professional.then((value) => currentProfessional = value);
+    String firstName = currentProfessional!.first_name;
+    String lastName = currentProfessional!.last_name;
+    String localisation = currentProfessional!.localisation;
+    int age = currentProfessional!.age;
+    ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
+        email, age, firstName, lastName, localisation);
+
+    return userr;
   }
 
   Future signInAnon() async {
@@ -74,18 +78,6 @@ class AuthService {
     }
   }
 
-  Future signIn(String emailController, String passwordController) async {
-    try {
-      print('ahah');
-      await _auth.signInWithEmailAndPassword(
-        email: emailController,
-        password: passwordController,
-      );
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
-  }
-
   Future signUp(String email, String password, String firstName,
       String lastName, String age, String localisation) async {
     // create user
@@ -95,20 +87,13 @@ class AuthService {
 
       User? user = result.user;
       // create a new document for the user with that uid
-      await DatabaseService(uid: user!.uid)
-          .updateUserData(email, firstName, lastName, age, localisation);
+      await ProfessionalDatabaseService(uid: user!.uid).updateProfessionalData(
+          email, firstName, lastName, age, localisation);
       return _useFromFirebaseUser(user);
       // ignore: empty_catches
     } catch (e) {
       print(e.toString());
       return null;
     }
-    // add user details
-    // addUserDetails(
-    //   _firstNameController.text.trim(),
-    //   _lastNameController.text.trim(),
-    //   _emailController.text.trim(),
-    //   int.parse(_ageController.text.trim()),
-    // );
   }
 }

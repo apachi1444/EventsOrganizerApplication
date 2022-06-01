@@ -9,6 +9,6 @@ class ButtonGuestProfilePageRoleInterfaceImpl
 
   @override
   void logOut() {
-    AuthService().SignOut();
+    AuthService().signOut();
   }
 }

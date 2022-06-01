@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/userPages/parametersPages/editProfile/editProfileParts/fieldsOfProfessionals.dart';
-import 'package:pfs/screens/userPages/parametersPages/editProfile/editProfileParts/rowOfSpecificFieldOfProfessionalData.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/fieldsOfProfessionals.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/rowOfSpecificFieldOfProfessionalData.dart';
 
 class AllRowsOfFieldsProfessionalData extends StatelessWidget {
   const AllRowsOfFieldsProfessionalData({Key? key}) : super(key: key);
@@ -8,14 +8,7 @@ class AllRowsOfFieldsProfessionalData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var allFields = fieldsOfProfessionals;
-    var allInputs = [
-      'Yessine ',
-      'yessinejaoua@gmail.com',
-      'Jaoua',
-      'Jaoua',
-      'Jaoua',
-      'Jaoua'
-    ];
+    var allInputs = dataProfessional;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 6),
       child: Column(

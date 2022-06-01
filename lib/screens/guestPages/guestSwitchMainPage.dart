@@ -18,13 +18,22 @@ class GuestSwitchMainPage extends StatefulWidget {
 }
 
 class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
-  int _index = 1;
-  final items = <Widget>[
-    const Icon(Icons.home),
-    const Icon(Icons.article_outlined),
-    const Icon(Icons.search_off),
-    const Icon(Icons.account_balance_outlined),
-    const Icon(Icons.person),
+  int _index = 0;
+
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _index = index;
+    });
+  }
+
+  final items = <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.list_outlined), label: 'Services'),
+    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+    const BottomNavigationBarItem(
+        icon: Icon(Icons.settings), label: 'Settings'),
+    const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
   final screens = [
     const HomePageGuest(),
@@ -43,22 +52,14 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
               color: Colors.white,
             ),
             indicatorColor: const Color(ConstantColors.KPinkColor)),
-        child: CurvedNavigationBar(
-          key: navigationKey,
-          backgroundColor: Colors.transparent,
-          color: Colors.red,
-          buttonBackgroundColor: const Color(ConstantColors.KPinkColor),
+        child: BottomNavigationBar(
+          backgroundColor:
+              const Color(ConstantColors.KGreyColor).withOpacity(0.9),
+          fixedColor: const Color(ConstantColors.KPinkColor),
+          onTap: _navigateBottomBar,
+          currentIndex: _index,
+          type: BottomNavigationBarType.fixed,
           items: items,
-          animationCurve: Curves.easeIn,
-          animationDuration: const Duration(milliseconds: 410),
-          height: 60,
-          index: _index,
-          onTap: (index) {
-            setState(() {
-              _index = index;
-              print(index);
-            });
-          },
         ),
       ),
       body: screens[_index],

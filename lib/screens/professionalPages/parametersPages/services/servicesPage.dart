@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/listOfProfessionalServices.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/navbarItem.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/plusButton.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/twoButttonPartServicesAndArchives.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/listOfProfessionalServices.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/navbarItem.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/plusButton.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/twoButttonPartServicesAndArchives.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/Service.dart';
@@ -38,7 +38,7 @@ class _ServicesPageState extends State<ServicesPage> {
               SizedBox(height: 15),
               TwoButttonPartServicesAndArchives(),
               SizedBox(height: 15),
-              Expanded(child: ListOfProfessionalServices()),
+              ListOfProfessionalServices(),
               PlusButton(),
             ],
           ),

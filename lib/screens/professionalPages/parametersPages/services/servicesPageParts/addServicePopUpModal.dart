@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pfs/screens/userPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccesOrFailure.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccesOrFailure.dart';
 import 'package:pfs/services/professionalServiceService.dart';
 
 import '../../../../../extensions/constant_colors.dart';
@@ -47,18 +47,12 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
               final isLastStep = currentStep == getSteps().length - 1;
 
               if (isLastStep) {
-                print(selectedItem);
-                print(_descriptionController.text.trim());
-                print(_priceController.text.trim());
-                final result =
-                    professionalServiceService.addServiceToProfessional(
-                        selectedItem!,
-                        _descriptionController.text.trim(),
-                        _priceController.text.trim());
+                professionalServiceService.addServiceToProfessional(
+                    DateTime.now().toString(),
+                    selectedItem!,
+                    _descriptionController.text.trim(),
+                    _priceController.text.trim());
 
-                print(professionalServiceService
-                    .getAllServicesOfProfessional()
-                    .toString());
                 setState(() {
                   isFailure = false;
                 });
@@ -66,7 +60,6 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 setState(() {
                   isCompleted = true;
                 });
-                print('completed');
               } else {
                 setState(() {
                   currentStep++;

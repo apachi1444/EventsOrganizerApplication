@@ -7,38 +7,70 @@ class ProfessionalServiceService {
 
   ProfessionalServiceService({required this.professionalUid});
 
-  final serviceCollection = FirebaseFirestore.instance.collection('services');
+  final serviceCollection = 'services';
 
-  final usersCollection = FirebaseFirestore.instance.collection('users');
+  final professionalCollection =
+      FirebaseFirestore.instance.collection('professionals');
 
   Future addServiceToProfessional(
-      String title, String description, String price) async {
-    return await usersCollection
+      String dateTime, String title, String description, String price) async {
+    return await professionalCollection
         .doc(professionalUid)
         .collection('services')
-        .add({'title': title, 'description': description, 'price': price});
+        .add({
+      'dateTime': dateTime,
+      'title': title,
+      'description': description,
+      'price': price
+    });
   }
 
-  Stream<List<Service?>> getAllServicesOfProfessional() {
-    print("\n hahahahhaha");
-    print("\n");
-    return usersCollection
+  Stream<List<Service?>>? getAllServicesOfProfessional() {
+    List<Service>? services;
+    professionalCollection
+        .doc(professionalUid)
+        .collection(serviceCollection)
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        for (int i = 0; i < value.docs.length; i++) {
+          print(value.docs[i].data()['title']);
+          print(value.docs[i]);
+          services
+              ?.add(Service.fromJson(value.docs![i] as Map<String, dynamic>));
+        }
+      }
+    });
+
+    var stream = professionalCollection
+        .doc(professionalUid)
+        .collection(serviceCollection)
+        .snapshots();
+
+    var list = stream.map((snapshot) => snapshot.docs.map((doc) {
+          print(doc);
+          Service.fromJson(doc.data());
+        }).toList());
+    print(list);
+    return list;
+  }
+
+  Stream getStreamOfServicesOfParticularProfessional() {
+    return professionalCollection
         .doc(professionalUid)
         .collection('services')
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => (Service.fromJson(doc.data())))
-            .toList());
+        .snapshots();
   }
 
   Future deleteService(String uid) async {
-    usersCollection
+    professionalCollection
         .doc(professionalUid)
-        .collection('services')
+        .collection(serviceCollection)
         .doc(uid)
         .delete();
   }
 
+  // this is just for testing how the stream works in the flutter and dart in general
   Future<int> sumStream(Stream<int> stream) async {
     var sum = 0;
     await for (final value in stream) {
@@ -46,5 +78,15 @@ class ProfessionalServiceService {
       sum += value;
     }
     return sum;
+  }
+
+  String? getIdCurrentServiceProfessional(String date) {
+    print(professionalCollection
+        .doc(professionalUid)
+        .collection('services')
+        .where('dateTime', isEqualTo: date)
+        .get()
+        .then((snapshot) => {print(snapshot.docs[0].reference.delete())}));
+    return null;
   }
 }

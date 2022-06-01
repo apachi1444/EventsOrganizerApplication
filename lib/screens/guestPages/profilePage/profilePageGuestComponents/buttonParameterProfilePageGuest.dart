@@ -25,7 +25,7 @@ class _ButtonParameterProfilePageGuestState
     return GestureDetector(
       onTap: () {
         if (widget.text == "Log Out") {
-          AuthService().SignOut();
+          AuthService().signOut();
           Navigator.pushNamedAndRemoveUntil(
               context, '/loginGuest', (r) => false);
         }

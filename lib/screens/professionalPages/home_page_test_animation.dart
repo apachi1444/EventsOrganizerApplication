@@ -295,7 +295,7 @@ class _HomePageState extends State<HomePage>
               icon: const Icon(Icons.person),
               label: const Text('Log out'),
               onPressed: () {
-                _auth.SignOut();
+                _auth.signOut();
               },
             ),
             TextButton.icon(

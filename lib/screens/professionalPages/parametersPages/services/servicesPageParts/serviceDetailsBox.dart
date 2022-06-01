@@ -1,13 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ServiceDetailsBox extends StatelessWidget {
-  const ServiceDetailsBox({Key? key}) : super(key: key);
+import '../../../../../services/authService.dart';
+import '../../../../../services/professionalServiceService.dart';
 
+class ServiceDetailsBox extends StatelessWidget {
+  const ServiceDetailsBox(
+      {Key? key,
+      required this.category,
+      required this.date,
+      required this.description,
+      required this.price})
+      : super(key: key);
+  final String category;
+  final String date;
+  final String description;
+  final String price;
   @override
   Widget build(BuildContext context) {
+    String? uid = AuthService().getCurrentIdUser();
     var size = MediaQuery.of(context).size;
+    void _deleteService() {
+      print('deleted button selected');
+      ProfessionalServiceService(professionalUid: uid!).deleteService(uid!);
+    }
+
     return Container(
+        margin: EdgeInsets.only(bottom: size.height * 0.02),
         decoration: BoxDecoration(
             color: Colors.red, borderRadius: BorderRadius.circular(25)),
 
@@ -20,10 +39,16 @@ class ServiceDetailsBox extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Dj Category'),
-                  Row(children: const [
-                    Icon(Icons.delete_forever),
-                    Icon(Icons.update_disabled),
+                  Text(category ?? ''),
+                  Row(children: [
+                    GestureDetector(
+                        onTap: () {
+                          ProfessionalServiceService(professionalUid: uid!)
+                              .getIdCurrentServiceProfessional(date);
+                          _deleteService();
+                        },
+                        child: const Icon(Icons.delete_forever)),
+                    const Icon(Icons.update_disabled),
                   ]),
                 ],
               ),
@@ -60,14 +85,14 @@ class ServiceDetailsBox extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Row(
-                children: const [
-                  Text('A little description here'),
+                children: [
+                  Text(description ?? ''),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
-                children: const [
-                  Text('Price : 200'),
+                children: [
+                  Text(price ?? ''),
                 ],
               ),
 
@@ -78,11 +103,11 @@ class ServiceDetailsBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // this is for the date
-                  Row(children: const [
-                    Icon(Icons.date_range_outlined),
-                    SizedBox(width: 4),
-                    Text('11 March',
-                        style: TextStyle(fontWeight: FontWeight.bold))
+                  Row(children: [
+                    const Icon(Icons.date_range_outlined),
+                    const SizedBox(width: 4),
+                    Text(date ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.bold))
                   ]),
                 ],
               )

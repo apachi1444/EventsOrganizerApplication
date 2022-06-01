@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pfs/extensions/constant_colors.dart';
 
-import '../../../userPages/parametersPages/settings/settings_page.dart';
+import '../../../professionalPages/parametersPages/settings/settings_page.dart';
 
 class MyCheckingList extends StatelessWidget {
   const MyCheckingList({Key? key}) : super(key: key);

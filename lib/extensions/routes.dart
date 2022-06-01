@@ -6,10 +6,10 @@ import '../screens/guestPages/events/budget/BudgetPage.dart';
 import '../screens/guestPages/events/event/todoList_page.dart';
 import '../screens/guestPages/home/home_page_guest.dart';
 import '../screens/guestPages/profilePage/profilePageGuest.dart';
+import '../screens/professionalPages/parametersPages/services/servicesPage.dart';
+import '../screens/professionalPages/parametersPages/settings/settings_page.dart';
+import '../screens/professionalPages/profile/profilePageProfTest.dart';
 import '../screens/sharedScreens/search/searchPage.dart';
-import '../screens/userPages/parametersPages/services/servicesPage.dart';
-import '../screens/userPages/parametersPages/settings/settings_page.dart';
-import '../screens/userPages/profile/profilePageProfTest.dart';
 import '../switch_between_pages/signup_login_toggle.dart';
 
 Map<String, Widget Function(BuildContext context)> routesApplication = {
