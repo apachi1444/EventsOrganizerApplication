@@ -13,12 +13,12 @@ class EditProfileProfessionalPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
-        child: Column(children: const [
-          ImageAboveTheContainer(),
-          WholeContainerOfUpdatingDataProfessional(),
+        child: Column(children: [
+          const ImageAboveTheContainer(),
+          const WholeContainerOfUpdatingDataProfessional(),
           AllRowsOfFieldsProfessionalData(),
-          SizedBox(height: 15),
-          ButtonUpdate(text: 'Update', logo: Icons.update),
+          const SizedBox(height: 15),
+          const ButtonUpdate(text: 'Update', logo: Icons.update),
         ]),
       )),
     );

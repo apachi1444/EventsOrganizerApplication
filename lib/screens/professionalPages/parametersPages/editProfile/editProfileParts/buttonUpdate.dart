@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/updateProfessionalBottomModel.dart';
 
 class ButtonUpdate extends StatefulWidget {
   final String text;
@@ -35,7 +36,11 @@ class _ButtonUpdate extends State<ButtonUpdate> {
                 )
               ]),
           child: GestureDetector(
-            onTap: () async {},
+            onTap: () {
+              print(
+                  "we are in the button of the update before calling the method of showing the pop up modal");
+              _showTheUpdateBottomModel(context);
+            },
             child: const Center(
               child: Text('Update',
                   style: TextStyle(
@@ -46,4 +51,12 @@ class _ButtonUpdate extends State<ButtonUpdate> {
           ),
         ));
   }
+}
+
+void _showTheUpdateBottomModel(BuildContext context) {
+  showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc) {
+        return const UpdateProfessionalBottomModel();
+      });
 }

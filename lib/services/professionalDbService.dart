@@ -21,6 +21,16 @@ class ProfessionalDatabaseService {
     });
   }
 
+  Future changeProfessionalData(String firstName, String lastName, String age,
+      String localisation) async {
+    return await professionalCollection.doc(uid).update({
+      'first_name': firstName,
+      'last_name': lastName,
+      'age': int.parse(age),
+      'localisation': localisation
+    });
+  }
+
   Stream<List<Professional>> readProfessionals() =>
       professionalCollection.snapshots().map((snapshot) => snapshot.docs
           .map((doc) =>
@@ -54,19 +64,9 @@ class ProfessionalDatabaseService {
         (documentSnapshot) => _professionalFromSnapshot(documentSnapshot));
   }
 
-  // we convert the stream into the list of Perons to display them in the home HomePage
-  // the getter method should always be without parameters
   Stream<List<Professional?>> get getUsers {
     return professionalCollection
         .snapshots()
         .map(_professionalListFromSnapshot);
   }
-
-  // Stream<Professional> get userData {
-  //   return professionalCollection
-  //       .doc(uid)
-  //       .snapshots()
-  //       .map(_professionalListFromSnapshot);
-  // }
-
 }

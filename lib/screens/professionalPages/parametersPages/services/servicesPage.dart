@@ -7,6 +7,7 @@ import 'package:pfs/screens/professionalPages/parametersPages/services/servicesP
 import 'package:provider/provider.dart';
 
 import '../../../../Models/Service.dart';
+import '../../../../StateNotifier/ProfessionalPreferences.dart';
 import '../../../../services/authService.dart';
 import '../../../../services/professionalServiceService.dart';
 
@@ -21,7 +22,8 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
     String? user = AuthService().getCurrentIdUser();
-
+    String? firstName = ProfessionalPreferences.getFirstName();
+    String? lastName = ProfessionalPreferences.getLastName();
     return SafeArea(
         child: Scaffold(
             body: StreamProvider<List<Service?>>.value(
@@ -33,13 +35,13 @@ class _ServicesPageState extends State<ServicesPage> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35.0),
           child: Column(
-            children: const [
-              NavBarItem(lastName: 'Jaoua', name: 'Yessine'),
-              SizedBox(height: 15),
-              TwoButttonPartServicesAndArchives(),
-              SizedBox(height: 15),
-              ListOfProfessionalServices(),
-              PlusButton(),
+            children: [
+              NavBarItem(lastName: lastName!, name: firstName!),
+              const SizedBox(height: 15),
+              const TwoButttonPartServicesAndArchives(),
+              const SizedBox(height: 15),
+              const ListOfProfessionalServices(),
+              const PlusButton(),
             ],
           ),
         );

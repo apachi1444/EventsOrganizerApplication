@@ -50,11 +50,12 @@ class ProfessionalPreferences {
       _sharedPreferences?.getString(_keyLocalisation);
 
   static void addingProfessionalDataToSharedPreferences(String email, int age,
-      String firstName, String lastName, String localisation) {
+      String firstName, String lastName, String localisation, String uid) {
     ProfessionalPreferences.setEmail(email);
     ProfessionalPreferences.setAge(age);
     ProfessionalPreferences.setFirstName(firstName);
     ProfessionalPreferences.setLastName(lastName);
     ProfessionalPreferences.setLocalisation(localisation);
+    ProfessionalPreferences.setUid(uid);
   }
 }

@@ -10,6 +10,7 @@ import '../Models/Userr.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  late final String? _userUid;
 
   Userr? _useFromFirebaseUser(User user) {
     return user != null ? Userr(uid: user.uid) : null;
@@ -50,19 +51,22 @@ class AuthService {
     UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
     User? user = result.user;
+
+    _userUid = user?.uid;
+
     Userr? userr = _useFromFirebaseUser(user!);
     var professional =
         ProfessionalDatabaseService(uid: user.uid).readOneProfessional();
-    print(userr);
-    print(professional);
 
-    professional.then((value) => currentProfessional = value);
-    String firstName = currentProfessional!.first_name;
-    String lastName = currentProfessional!.last_name;
-    String localisation = currentProfessional!.localisation;
-    int age = currentProfessional!.age;
-    ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
-        email, age, firstName, lastName, localisation);
+    professional.then((currentProfessional) {
+      String firstName = currentProfessional.first_name;
+      String lastName = currentProfessional.last_name;
+      String localisation = currentProfessional.localisation;
+      int age = currentProfessional.age;
+
+      ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
+          email, age, firstName, lastName, localisation, _userUid!);
+    });
 
     return userr;
   }
