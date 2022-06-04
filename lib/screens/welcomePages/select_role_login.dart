@@ -12,11 +12,11 @@ class SelectRoleLogin extends StatelessWidget {
       backgroundColor: const Color(0XFFFFFFF8),
       body: Center(
           child: Column(children: const <Widget>[
-        NavBarItemStartPages(),
-        SizedBox(height: 70),
-        ButtonWelcomePages(textInsideButton: 'Start The Adventure'),
-        SizedBox(height: 20),
-        ButtonWelcomePages(textInsideButton: 'Join As A Professional'),
+            NavBarItemStartPages(),
+            SizedBox(height: 70),
+            ButtonWelcomePages(textInsideButton: 'Start The Adventure'),
+            SizedBox(height: 20),
+            ButtonWelcomePages(textInsideButton: 'Join As A Professional'),
       ])),
     );
   }
