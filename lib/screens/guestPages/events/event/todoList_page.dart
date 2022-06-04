@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/event/addTask.dart';
 
+import '../chickList/MyChickList.dart';
+
 class TodoList extends StatefulWidget {
   const TodoList({Key? key}) : super(key: key);
 
@@ -15,6 +17,28 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text('My Todo List'),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            WidgetsBinding.instance?.addPostFrameCallback((_) {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MyCheckingList(),
+                  ));
+            });
+          },
+          color: Colors.black,
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+      ),
       body: SafeArea(
         child: ListView.builder(
           itemCount: 5,
@@ -36,7 +60,8 @@ class _TodoListState extends State<TodoList> {
                 return const AddTask();
               },
             );
-          }),
+          }
+          ),
     );
   }
 }

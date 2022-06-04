@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
+import 'package:pfs/screens/guestPages/events/budget/addBudget.dart';
 
 import '../../../../extensions/constant_colors.dart';
+import '../chickList/MyChickList.dart';
 
 class BudgetPage extends StatelessWidget {
   const BudgetPage({Key? key}) : super(key: key);
@@ -17,13 +18,13 @@ class BudgetPage extends StatelessWidget {
             ),
             leading: IconButton(
               onPressed: () {
-                // WidgetsBinding.instance?.addPostFrameCallback((_) {
-                //   Navigator.pushReplacement(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => Setting(),
-                //       ));
-                // });
+                WidgetsBinding.instance?.addPostFrameCallback((_) {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyCheckingList(),
+                      ));
+                });
               },
               color: Colors.black,
               icon: const Icon(
@@ -75,20 +76,14 @@ class BudgetPage extends StatelessWidget {
                       child: TextButton(
                         style: TextButton.styleFrom(
                             primary: const Color.fromARGB(255, 255, 255, 255)),
-                        onPressed: () => {
-                          print(
-                              'You pressed the button.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'),
-                          // Navigator.pushNamed(
-                          //   context,
-                          //   'Setting'),
-                          // Navigator.pop(context),
+                        onPressed: () {
                           WidgetsBinding.instance?.addPostFrameCallback((_) {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Setting(),
+                                  builder: (context) => const AddBudget(),
                                 ));
-                          }),
+                          });
                         },
                         child: Container(
                           width: 200,
