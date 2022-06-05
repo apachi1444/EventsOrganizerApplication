@@ -1,15 +1,14 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
 import 'package:pfs/screens/guestPages/events/chickList/MyChickList.dart';
 import 'package:pfs/screens/guestPages/home/home_page_guest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
+import 'package:pfs/sharedPreferences/GuestPreferences.dart';
 
 import '../../extensions/constants.dart';
 import '../sharedScreens/search/searchPage.dart';
-//import '../../../guestPages/events/chickList/MyChickList.dart';
 import 'events/chickList/MyChickList.dart';
 import 'home/home_page_guest.dart';
 
@@ -40,13 +39,16 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
   final screens = [
     const HomePageGuest(),
     const MyCheckingList(),
+    const SearchPage(),
     const BudgetPage(),
     const ProfilePageGuest(),
-    const Setting()
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override
   Widget build(BuildContext context) {
+    print(GuestPreferences.getUid().toString());
+    print(GuestPreferences.getLocalisation());
+    print(GuestPreferences.getUsername());
     return Scaffold(
       bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(

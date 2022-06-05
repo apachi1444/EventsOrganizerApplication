@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccesOrFailure.dart';
 import 'package:pfs/services/professionalServiceService.dart';
+import 'package:pfs/services/uploadFileFirebase.dart';
 
 import '../../../../../extensions/constants.dart';
 import '../../../../../extensions/listOfCategories.dart';
@@ -31,8 +34,12 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
   late bool isFailure;
   String? currentUserUid = AuthService().getCurrentIdUser();
 
+  File? file;
+  UploadTask? task;
+
   @override
   Widget build(BuildContext context) {
+    final fileName = file != null ? basename(file!.path) : 'No File Selected';
     ProfessionalServiceService professionalServiceService =
         ProfessionalServiceService(professionalUid: currentUserUid);
     return isCompleted
@@ -41,10 +48,10 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
           )
         : Stepper(
             type: StepperType.vertical,
-            steps: getSteps(),
+            steps: getSteps(fileName),
             currentStep: currentStep,
             onStepContinue: () {
-              final isLastStep = currentStep == getSteps().length - 1;
+              final isLastStep = currentStep == getSteps(fileName).length - 1;
 
               if (isLastStep) {
                 professionalServiceService.addServiceToProfessional(
@@ -130,18 +137,29 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
           );
   }
 
+  Future pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) {
+      return;
+    }
+    final path = result.files.single.path!;
+    setState(() {
+      file = File(path);
+    });
+  }
+
   Future pickImage() async {
     print('aha');
 
     try {
       image =
-          (await ImagePicker().pickImage(source: ImageSource.camera)) as File?;
+          (await ImagePicker().pickImage(source: ImageSource.gallery)) as File?;
 
       if (image == null) {
         return;
       }
 
-      final permanentImage = await saveImagePermanenetly(image!.path);
+      // final permanentImage = await saveImagePermanenetly(image!.path);
 
       final imageTemporary = File(image!.path);
       setState(() {
@@ -159,10 +177,25 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
     return File(imagePath).copy(image.path);
   }
 
+  Future uploadFile() async {
+    if (file == null) return;
+    final fileName = basename(file!.path);
+    final destination = 'images/professional/$currentUserUid/$fileName';
+    task = UploadFilesFirebase.uploadFile(destination, file!);
+
+    if (task == null) {
+      return;
+    }
+    final snapshot = await task!.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    print('this is the download link  $urlDownload');
+  }
+
   var list = categories;
   String? selectedItem = categories[0];
 
-  List<Step> getSteps() => [
+  List<Step> getSteps(var fileName) => [
         Step(
             state: currentStep > 0 ? StepState.complete : StepState.indexed,
             isActive: currentStep >= 0,
@@ -240,7 +273,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
             title: const Text('Step 3 : Upload Your Images Here'),
             content: GestureDetector(
               onTap: () {
-                pickImage();
+                pickFile();
               },
               child: Container(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -251,13 +284,57 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 38.0, vertical: 22),
                     child: Center(
-                      child: Column(children: const [
-                        Icon(Icons.image),
-                        Text('Upload your images here'),
-                        SizedBox(height: 12)
+                      child: Column(children: [
+                        const Icon(Icons.image),
+                        const Text('Upload your images here'),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Text(
+                              fileName,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                uploadFile();
+                              },
+                              child: Container(
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(ConstantColors.KPinkColor),
+                                  ),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(3.0),
+                                    child: Icon(Icons.confirmation_num,
+                                        color: Colors.white),
+                                  )),
+                            )
+                          ],
+                        ),
+                        task != null ? buildUploadStatus(task!) : Container(),
+
                       ]),
                     ),
                   )),
             ))
       ];
+      Widget buildUploadStatus(UploadTask task)
+      {
+        StreamBuilder<TaskSnapshot>(
+          stream : task.snapshotEvents,
+          builder : (context , snapshot){
+            if(snapshot.hasData){
+              final snap = snapshot.data!;
+              final progress = snap.bytesTransferred / snap.totalBytes;
+              final percentage = (progress * 100).toStringAsFixed(2);
+              return Text(
+                '$percentage',
+                style : TextStyle(fontSize: 20 , fontWeight : FontWeight.bold)
+              );
+            }else{
+              return Container();
+            }
+          }
+        );
+        return Container();
+      }
 }

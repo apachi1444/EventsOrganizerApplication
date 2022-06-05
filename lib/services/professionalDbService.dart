@@ -47,7 +47,6 @@ class ProfessionalDatabaseService {
   }
 
   Professional _professionalFromSnapshot(DocumentSnapshot documentSnapshot) {
-    print('this is the place of the error');
     final doc = documentSnapshot.data() as Map<String, dynamic>;
     print(doc);
     return Professional(

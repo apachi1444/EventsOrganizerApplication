@@ -165,6 +165,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pfs/screens/guestPages//home/settings_form.dart';
+import 'package:pfs/services/professionalDbService.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/Person.dart';
@@ -283,80 +284,87 @@ class _HomePageState extends State<HomePage>
             return const SettingsForm();
           });
     }
-
-    return StreamProvider<List<Person?>?>.value(
-      value: DatabaseService(uid: '').getUsers,
-      initialData: null,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red,
-          actions: [
-            TextButton.icon(
-              icon: const Icon(Icons.person),
-              label: const Text('Log out'),
-              onPressed: () {
-                _auth.signOut();
-              },
-            ),
-            TextButton.icon(
-              icon: const Icon(Icons.settings),
-              label: const Text('settings'),
-              onPressed: () {
-                _showSettingsPanel();
-              },
-            )
-          ],
-        ),
-        body: Column(
-          children: [
-            // const ListUser(),
-            GestureDetector(
-              onTap: () {
-                print('this is the bookmarked boolean');
-                if (bookmarked == false) {
-                  bookmarked = true;
-                  _controller.forward();
-                } else {
-                  bookmarked = false;
-                  _controller.forward();
-                }
-              },
-              child: Lottie.network(
-                'https://assets6.lottiefiles.com/datafiles/SkdS7QDyJTKTdwA/data.json',
-                controller: _controller,
-              ),
-            ),
-
-            // we can add the curved animation to any animation build widget( animated container, opacity)
-            TweenAnimationBuilder(
-                child: const Text('this is the title for the curved animation'),
-                curve: Curves.bounceIn,
-                tween: Tween<double>(begin: 0, end: 1),
-                duration: const Duration(milliseconds: 3000),
-                builder: (context, double _val, child) {
-                  return Opacity(
-                      opacity: _val,
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: _val * 20),
-                          child: child));
-                }),
-            // the animate builder is something that will surround that element that we want to animate
-            // it will listen to changes in our animation controller and rebuild the tree automatically
-            AnimatedBuilder(
-                animation: _controller,
-                builder: (BuildContext context, _) {
-                  return IconButton(
-                    icon: Icon(Icons.password,
-                        color: _colorAnimation.value,
-                        size: _sizeAnimation.value),
-                    onPressed: () {
-                      isFav ? _controller.reverse() : _controller.forward();
-                    },
-                  );
-                }),
-          ],
-        ),
-      ),
-    );
+  return SafeArea(
+    child: ElevatedButton(
+      onPressed:(){
+        AuthService().signOut();
+      },
+      child: Text("Log Out Here")
+    ),
+  );
+    // return StreamProvider<List<Person?>?>.value(
+    //   value: DatabaseService(uid: '').getUsers,
+    //   initialData: null,
+    //   child: Scaffold(
+    //     appBar: AppBar(
+    //       backgroundColor: Colors.red,
+    //       actions: [
+    //         TextButton.icon(
+    //           icon: const Icon(Icons.person),
+    //           label: const Text('Log out'),
+    //           onPressed: () {
+    //             _auth.signOut();
+    //           },
+    //         ),
+    //         TextButton.icon(
+    //           icon: const Icon(Icons.settings),
+    //           label: const Text('settings'),
+    //           onPressed: () {
+    //             _showSettingsPanel();
+    //           },
+    //         )
+    //       ],
+    //     ),
+    //     body: Column(
+    //       children: [
+    //         // const ListUser(),
+    //         GestureDetector(
+    //           onTap: () {
+    //             print('this is the bookmarked boolean');
+    //             if (bookmarked == false) {
+    //               bookmarked = true;
+    //               _controller.forward();
+    //             } else {
+    //               bookmarked = false;
+    //               _controller.forward();
+    //             }
+    //           },
+    //           child: Lottie.network(
+    //             'https://assets6.lottiefiles.com/datafiles/SkdS7QDyJTKTdwA/data.json',
+    //             controller: _controller,
+    //           ),
+    //         ),
+    //
+    //         // we can add the curved animation to any animation build widget( animated container, opacity)
+    //         TweenAnimationBuilder(
+    //             child: const Text('this is the title for the curved animation'),
+    //             curve: Curves.bounceIn,
+    //             tween: Tween<double>(begin: 0, end: 1),
+    //             duration: const Duration(milliseconds: 3000),
+    //             builder: (context, double _val, child) {
+    //               return Opacity(
+    //                   opacity: _val,
+    //                   child: Padding(
+    //                       padding: EdgeInsets.symmetric(horizontal: _val * 20),
+    //                       child: child));
+    //             }),
+    //         // the animate builder is something that will surround that element that we want to animate
+    //         // it will listen to changes in our animation controller and rebuild the tree automatically
+    //         AnimatedBuilder(
+    //             animation: _controller,
+    //             builder: (BuildContext context, _) {
+    //               return IconButton(
+    //                 icon: Icon(Icons.password,
+    //                     color: _colorAnimation.value,
+    //                     size: _sizeAnimation.value),
+    //                 onPressed: () {
+    //                   isFav ? _controller.reverse() : _controller.forward();
+    //                 },
+    //               );
+    //             }),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }

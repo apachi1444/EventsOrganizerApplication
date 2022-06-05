@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
+import 'package:pfs/services/guestService.dart';
+import 'package:pfs/sharedPreferences/GuestPreferences.dart';
 
 import '../../services/authService.dart';
 
@@ -178,20 +180,18 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                     ]),
                 child: GestureDetector(
                   onTap: () async {
-                    // dynamic result = await authService.signInAnon();
-                    // if (result == null) {
-                    //   print('error ');
-                    // } else {
-                    //   print('signed in');
-                    //   print(result.uid);
-                    //   DatabaseService(uid: result.uid).updateGuestData(
-                    //       _localisationController.text.trim(),
-                    //       _nameController.text.trim());
-                    // }
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const GuestSwitchMainPage();
-                    }));
+                    String localisation = _localisationController.text.trim();
+                    String name = _nameController.text.trim();
+                    dynamic result =
+                        await authService.signInAnon(localisation, name);
+                    if (result == null) {
+                      print('error ');
+                    } else {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const GuestSwitchMainPage();
+                      }));
+                    }
                   },
                   child: const Center(
                     child: Text('Start The Adventure',

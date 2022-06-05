@@ -7,6 +7,8 @@ import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 
 import '../Models/Professional.dart';
 import '../Models/Userr.dart';
+import '../sharedPreferences/GuestPreferences.dart';
+import 'guestService.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -71,10 +73,18 @@ class AuthService {
     return userr;
   }
 
-  Future signInAnon() async {
+  Future signInAnon(String localisation, String name) async {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
+      print(
+          'this is the uid of the user after he clicks on the start the adventure button');
+      print(user?.uid);
+
+      GuestPreferences.addingGuestDataToSharedPreferences(
+          localisation, name, user?.uid);
+
+      GuestService(guestUid: user?.uid).updateGuestData(name, localisation);
       return _useFromFirebaseUser(user!);
     } catch (e) {
       print(e.toString());
