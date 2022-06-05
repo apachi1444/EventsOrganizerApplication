@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pfs/services/budget_services.dart';
 import 'package:pfs/services/todolist_services.dart';
 
 class AddBudget extends StatefulWidget {
@@ -76,10 +77,11 @@ class _AddBudgetState extends State<AddBudget> {
           final title = todoTitleController.text;
           final description = todoDescriptionController.text;
 
-          TodoServices add = TodoServices();
-          add.addTask(title: title, description: description);
+          BudgetServices add = BudgetServices();
+          add.addBudget(title: title, prix: description);
           // if (todoTitleController.text.isNotEmpty) {
           //   print(todoTitleController.text);
+          print("user added");
 
           Navigator.pop(context, 'add');
           // }

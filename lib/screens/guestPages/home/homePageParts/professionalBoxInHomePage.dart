@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/extensions/constant_colors.dart';
 
 class ProfessionalBoxInHomePage extends StatelessWidget {
   const ProfessionalBoxInHomePage({Key? key}) : super(key: key);
@@ -8,8 +9,11 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-        decoration: BoxDecoration(
-            color: Colors.red, borderRadius: BorderRadius.circular(25)),
+        decoration:  BoxDecoration(
+            border: Border.all( color: const Color(ConstantColors.KPinkColor),
+            ),
+
+            borderRadius: BorderRadius.circular(25)),
 
         // this is for fixing the flex problem in the our container
 

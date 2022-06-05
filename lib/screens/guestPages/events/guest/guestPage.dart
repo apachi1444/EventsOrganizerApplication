@@ -72,13 +72,18 @@ class TaskCard extends StatefulWidget {
 }
 
 class _TaskCardState extends State<TaskCard> {
+  bool isChecked = false;
   deleteTask() {}
 
   editTask() {}
 
   updateTodo() {}
 
-  completeTask(_) {}
+  completeTask(value) {
+    setState(() {
+      isChecked = value!;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -89,8 +94,11 @@ class _TaskCardState extends State<TaskCard> {
           child: Row(
             children: [
               Checkbox(
-                value: false,
+                value: isChecked,
                 onChanged: completeTask,
+                activeColor: const Color(ConstantColors.KPinkColor),
+                checkColor: Colors.white,
+
               ),
               const Expanded(
                 child: ListTile(
