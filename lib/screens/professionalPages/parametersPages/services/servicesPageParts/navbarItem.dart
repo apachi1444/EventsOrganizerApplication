@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/extensions/constant_colors.dart';
+import 'package:pfs/extensions/constants.dart';
 
 class NavBarItem extends StatelessWidget {
   final String name;

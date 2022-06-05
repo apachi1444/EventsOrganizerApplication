@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 
-import '../../../../extensions/constant_colors.dart';
+import '../../../../extensions/constants.dart';
 
 class BudgetPage extends StatelessWidget {
   const BudgetPage({Key? key}) : super(key: key);

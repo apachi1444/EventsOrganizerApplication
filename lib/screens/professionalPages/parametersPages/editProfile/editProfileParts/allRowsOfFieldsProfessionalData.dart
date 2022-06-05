@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/rowOfSpecificFieldOfProfessionalData.dart';
 
-import '../../../../../StateNotifier/ProfessionalPreferences.dart';
+import '../../../../../sharedPreferences/ProfessionalPreferences.dart';
 import 'fieldsOfProfessionals.dart';
 
 class AllRowsOfFieldsProfessionalData extends StatelessWidget {
@@ -18,9 +18,7 @@ class AllRowsOfFieldsProfessionalData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final allFields = allFieldsProfessional;
-    var name = ProfessionalPreferences.getFirstName();
-    print("this is the name of the porfessional");
-    print(name);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 6),
       child: Column(

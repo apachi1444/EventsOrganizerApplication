@@ -15,7 +15,7 @@ class ProfessionalPreferences {
       {_sharedPreferences = await SharedPreferences.getInstance()};
 
   static Future setUid(String uid) async =>
-      await _sharedPreferences?.setString(_keyUserName, uid);
+      await _sharedPreferences?.setString(_keyUid, uid);
 
   static String? getUid() => _sharedPreferences?.getString(_keyUid);
 
@@ -57,5 +57,12 @@ class ProfessionalPreferences {
     ProfessionalPreferences.setLastName(lastName);
     ProfessionalPreferences.setLocalisation(localisation);
     ProfessionalPreferences.setUid(uid);
+  }
+
+  static void updatingProfessionalData(
+      String firstName, String lastName, String localisation) {
+    ProfessionalPreferences.setFirstName(firstName);
+    ProfessionalPreferences.setLastName(lastName);
+    ProfessionalPreferences.setLocalisation(localisation);
   }
 }

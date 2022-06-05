@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:pfs/extensions/constant_colors.dart';
+import 'package:pfs/extensions/constants.dart';
 
 import '../../../professionalPages/parametersPages/settings/settings_page.dart';
 

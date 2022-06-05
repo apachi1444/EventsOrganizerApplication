@@ -24,7 +24,8 @@ class ListOfProfessionalServices extends StatelessWidget {
                 'there is waiting data for the moment in our stream');
           } else {
             var allDocs = snapshot.data.docs;
-
+            print("this is the value of all docs");
+            print(allDocs);
             if (snapshot.data.docs.length == 0) {
               return const NoDataFound();
             } else {

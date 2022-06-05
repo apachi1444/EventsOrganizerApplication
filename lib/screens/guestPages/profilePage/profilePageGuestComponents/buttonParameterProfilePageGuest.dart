@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../extensions/constant_colors.dart';
+import '../../../../extensions/constants.dart';
 import '../../../../services/authService.dart';
 
 class ButtonParameterProfilePageGuest extends StatefulWidget {

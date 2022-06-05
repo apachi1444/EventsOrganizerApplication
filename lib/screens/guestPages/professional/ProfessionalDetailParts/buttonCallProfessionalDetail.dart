@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../extensions/constant_colors.dart';
+import '../../../../../extensions/constants.dart';
 
 class ButtonCallProfessionalDetail extends StatelessWidget {
   const ButtonCallProfessionalDetail({Key? key}) : super(key: key);

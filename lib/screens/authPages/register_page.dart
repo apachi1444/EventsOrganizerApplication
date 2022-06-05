@@ -22,6 +22,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _lastNameController = TextEditingController();
   final _ageController = TextEditingController();
   final _localisationController = TextEditingController();
+  final _genderController = TextEditingController();
+  final _birthdayController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
   final _auth = AuthService();
@@ -35,6 +37,9 @@ class _RegisterPageState extends State<RegisterPage> {
     _confirmPasswordController.dispose();
     _passwordController.dispose();
     _emailController.dispose();
+    _localisationController.dispose();
+    _genderController.dispose();
+    _birthdayController.dispose();
     super.dispose();
   }
 

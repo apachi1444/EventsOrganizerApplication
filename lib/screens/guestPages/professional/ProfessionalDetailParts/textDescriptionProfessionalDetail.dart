@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/buttonCallProfessionalDetail.dart';
 import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/expandedButtonProfessionalDetail.dart';
 
-import '../../../../../extensions/constant_colors.dart';
+import '../../../../../extensions/constants.dart';
 
 class TextDescriptionProfessionalDetailPage extends StatelessWidget {
   const TextDescriptionProfessionalDetailPage({Key? key}) : super(key: key);

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/StateNotifier/ProfessionalPreferences.dart';
 import 'package:pfs/services/professionalDbService.dart';
+import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 
 import '../Models/Professional.dart';
 import '../Models/Userr.dart';
@@ -65,7 +65,7 @@ class AuthService {
       int age = currentProfessional.age;
 
       ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
-          email, age, firstName, lastName, localisation, _userUid!);
+          email, age, firstName, lastName, localisation, user.uid);
     });
 
     return userr;
@@ -91,8 +91,8 @@ class AuthService {
 
       User? user = result.user;
       // create a new document for the user with that uid
-      await ProfessionalDatabaseService(uid: user!.uid).updateProfessionalData(
-          email, firstName, lastName, age, localisation);
+      await ProfessionalDatabaseService(uid: user!.uid)
+          .updateProfessionalData(email, firstName, lastName, localisation);
       return _useFromFirebaseUser(user);
       // ignore: empty_catches
     } catch (e) {

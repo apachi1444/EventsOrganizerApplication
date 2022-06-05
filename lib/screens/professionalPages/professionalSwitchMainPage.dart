@@ -6,7 +6,7 @@ import 'package:pfs/screens/professionalPages/parametersPages/services/servicesP
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 import 'package:pfs/screens/sharedScreens/search/searchPage.dart';
 
-import '../../extensions/constant_colors.dart';
+import '../../extensions/constants.dart';
 
 class ProfessionalSwitchMainPage extends StatefulWidget {
   const ProfessionalSwitchMainPage({Key? key}) : super(key: key);

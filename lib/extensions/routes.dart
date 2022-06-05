@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/failureStep.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
 
 import '../logic/wrapper_class.dart';
 import '../screens/authPages/log_in_as_a_guest_page.dart';
@@ -44,5 +46,9 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/professional/profilePage/forgetPassword/thirdPage': (context) =>
       const ProfilePageProfessional(),
   '/professional/profilePage/services': (context) => const ServicesPage(),
+  '/professional/profilePage/editProfile/updatedSuccessfully': (context) =>
+      const SuccesStep(),
+  '/professional/profilePage/editProfile/updatingError': (context) =>
+      const FailureStep(),
 // ------------------------------------ //
 };

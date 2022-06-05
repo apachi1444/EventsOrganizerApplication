@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../extensions/constant_colors.dart';
+import '../../../../extensions/constants.dart';
 import '../../../guestPages/events/chickList/MyChickList.dart';
 
 class Setting extends StatelessWidget {
