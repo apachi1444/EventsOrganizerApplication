@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pfs/screens/guestPages/professional/professionalDetail.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/failureStep.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
 
@@ -24,6 +25,7 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/loginGuest': (context) => const LogInAsAGuestPage(),
   '/guest/profilePage': (context) => const ProfilePageGuest(),
   '/guest/homePage': (context) => const HomePageGuest(),
+  '/guest/homePage/professionalDetail': (context) => const ProfessionalDetail(),
   '/guest/eventPage': (context) => const ProfilePageGuest(),
   '/guest/eventPage/todoList': (context) => const TodoList(),
   '/guest/eventPage/guestPages': (context) => const ProfilePageGuest(),

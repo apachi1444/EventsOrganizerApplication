@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/constants.dart';
 
@@ -53,7 +52,7 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(
-                            context, '/profileGuest/professionalDetail');
+                            context, '/guest/homePage/professionalDetail');
                       },
                       child: Container(
                           constraints: const BoxConstraints.expand(height: 136),
