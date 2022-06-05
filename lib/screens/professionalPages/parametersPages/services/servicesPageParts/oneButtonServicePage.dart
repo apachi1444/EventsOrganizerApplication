@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../extensions/constant_colors.dart';
+import '../../../../../extensions/constants.dart';
 
 class OneButtonServicePage extends StatefulWidget {
   final bool isClicked;

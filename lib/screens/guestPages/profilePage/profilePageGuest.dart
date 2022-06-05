@@ -4,7 +4,7 @@ import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/bu
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/buttonParameterProfilePageGuest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuestComponents/navImageGuestProfilePage.dart';
 
-import '../../../extensions/constant_colors.dart';
+import '../../../extensions/constants.dart';
 
 class ProfilePageGuest extends StatelessWidget {
   const ProfilePageGuest({Key? key}) : super(key: key);

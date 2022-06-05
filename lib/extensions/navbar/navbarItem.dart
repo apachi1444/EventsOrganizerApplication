@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../constant_colors.dart';
+import '../constants.dart';
 
 class BottomNavItem extends StatelessWidget {
   final String svgImg;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../extensions/constant_colors.dart';
+import '../../../../../extensions/constants.dart';
 
 class NoDataFound extends StatelessWidget {
   const NoDataFound({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../../extensions/constant_colors.dart';
+import '../../../../../../extensions/constants.dart';
 
 class SuccesStep extends StatelessWidget {
   const SuccesStep({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../constant_colors.dart';
+import '../constants.dart';
 
 class NavBarBottom extends StatefulWidget {
   final bool isGuest;

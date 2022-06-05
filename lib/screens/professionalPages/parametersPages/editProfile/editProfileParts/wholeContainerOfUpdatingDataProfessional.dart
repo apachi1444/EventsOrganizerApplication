@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../../../extensions/constant_colors.dart';
+import '../../../../../extensions/constants.dart';
 
 class WholeContainerOfUpdatingDataProfessional extends StatelessWidget {
   const WholeContainerOfUpdatingDataProfessional({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/updateProfessionalBottomModel.dart';
+import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 
 class ButtonUpdate extends StatefulWidget {
   final String text;
@@ -38,7 +39,7 @@ class _ButtonUpdate extends State<ButtonUpdate> {
           child: GestureDetector(
             onTap: () {
               print(
-                  "we are in the button of the update before calling the method of showing the pop up modal");
+                  'we are in the button of the update before calling the method of showing the pop up modal');
               _showTheUpdateBottomModel(context);
             },
             child: const Center(
@@ -54,9 +55,11 @@ class _ButtonUpdate extends State<ButtonUpdate> {
 }
 
 void _showTheUpdateBottomModel(BuildContext context) {
+  String? uid = ProfessionalPreferences.getUid();
+
   showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
-        return const UpdateProfessionalBottomModel();
+        return UpdateProfessionalBottomModel(uid: uid);
       });
 }

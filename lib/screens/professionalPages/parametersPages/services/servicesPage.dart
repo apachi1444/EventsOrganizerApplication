@@ -7,9 +7,9 @@ import 'package:pfs/screens/professionalPages/parametersPages/services/servicesP
 import 'package:provider/provider.dart';
 
 import '../../../../Models/Service.dart';
-import '../../../../StateNotifier/ProfessionalPreferences.dart';
 import '../../../../services/authService.dart';
 import '../../../../services/professionalServiceService.dart';
+import '../../../../sharedPreferences/ProfessionalPreferences.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key? key}) : super(key: key);

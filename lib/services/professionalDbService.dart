@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/Models/Professional.dart';
 
+import '../sharedPreferences/ProfessionalPreferences.dart';
+
 class ProfessionalDatabaseService {
-  final String uid;
+  final String? uid;
 
   ProfessionalDatabaseService({required this.uid});
 
@@ -10,23 +12,23 @@ class ProfessionalDatabaseService {
       FirebaseFirestore.instance.collection('professionals');
 
   Future updateProfessionalData(String email, String firstName, String lastName,
-      String age, String localisation) async {
+      String localisation) async {
     // is gonna refer to that document with that id if not exists he will create that user with these infos
     return await professionalCollection.doc(uid).set({
       'email': email,
       'first_name': firstName,
       'last_name': lastName,
-      'age': int.parse(age),
       'localisation': localisation
     });
   }
 
-  Future changeProfessionalData(String firstName, String lastName, String age,
-      String localisation) async {
+  Future changeProfessionalData(
+      String firstName, String lastName, String localisation) async {
+    ProfessionalPreferences.updatingProfessionalData(
+        firstName, lastName, localisation);
     return await professionalCollection.doc(uid).update({
       'first_name': firstName,
       'last_name': lastName,
-      'age': int.parse(age),
       'localisation': localisation
     });
   }
