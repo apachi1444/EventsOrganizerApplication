@@ -190,7 +190,7 @@ class _LogInAsAGuestPageState extends State<LogInAsAGuestPage> {
                     // }
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return GuestSwitchMainPage(uid: '');
+                      return const GuestSwitchMainPage();
                     }));
                   },
                   child: const Center(

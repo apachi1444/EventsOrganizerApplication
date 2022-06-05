@@ -29,7 +29,7 @@ class BottomNavItem extends StatelessWidget {
               height: 40,
               width: 52,
               decoration: const BoxDecoration(
-                color: Color(ConstantColors.KPinkColor),
+                color: Color(ConstantColors.KGreyColor),
                 shape: BoxShape.circle,
               ),
               child: SvgPicture.asset(svgImg,

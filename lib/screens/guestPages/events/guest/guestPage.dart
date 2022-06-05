@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/event/addTask.dart';
 
+import '../../../../extensions/constants.dart';
 import '../chickList/MyChickList.dart';
 
-class TodoList extends StatefulWidget {
-  const TodoList({Key? key}) : super(key: key);
+class Guest extends StatefulWidget {
+  const Guest({Key? key}) : super(key: key);
 
   @override
-  State<TodoList> createState() => _TodoListState();
+  State<Guest> createState() => _GuestState();
 }
 
-class _TodoListState extends State<TodoList> {
+class _GuestState extends State<Guest> {
   //bool isDone = false; // just for now
   TextEditingController todoTitleController = TextEditingController();
 
@@ -19,7 +20,7 @@ class _TodoListState extends State<TodoList> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('My Todo List'),
+          child: Text('My Guests'),
         ),
         leading: IconButton(
           onPressed: () {
@@ -31,13 +32,10 @@ class _TodoListState extends State<TodoList> {
                   ));
             });
           },
-          color: Colors.black,
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
+          color: Colors.white,
+          icon: const Icon(Icons.arrow_back),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -61,7 +59,7 @@ class _TodoListState extends State<TodoList> {
               },
             );
           }
-          ),
+      ),
     );
   }
 }

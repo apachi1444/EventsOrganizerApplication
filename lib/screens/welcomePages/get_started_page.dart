@@ -15,14 +15,14 @@ class GetStartedPage extends StatelessWidget {
       body: Center(
           child: Column(children: <Widget>[
             const NavBarItemStartPages(),
-        const SizedBox(height: 30),
-        const Text('Who Are We',
+           const SizedBox(height: 30),
+           const Text('Who Are We',
             style: TextStyle(
               color: Color(0XFFFF006B),
               fontSize: 40,
             )),
-        const SizedBox(height: 20),
-        Padding(
+           const SizedBox(height: 20),
+           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Container(
             child: const Text(

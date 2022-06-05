@@ -19,10 +19,10 @@ class MySetting extends StatefulWidget {
   const MySetting({Key? key}) : super(key: key);
 
   @override
-  State<MySetting> createState() => _MySettingState();
+  State<MySetting> createState() => MySettingState();
 }
 
-class _MySettingState extends State<MySetting> {
+class MySettingState extends State<MySetting> {
   bool valNotify1 = true;
   bool valNotify2 = false;
   bool valNotify3 = false;
