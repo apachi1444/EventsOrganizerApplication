@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/services/professionalDbService.dart';
 import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/Professional.dart';
 import '../Models/Userr.dart';
@@ -35,6 +36,8 @@ class AuthService {
 
   Future signOut() async {
     try {
+      var aa = await SharedPreferences.getInstance();
+      aa.clear();
       return await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       print(e.toString());
@@ -77,12 +80,11 @@ class AuthService {
     try {
       UserCredential result = await _auth.signInAnonymously();
       User? user = result.user;
-      print(
-          'this is the uid of the user after he clicks on the start the adventure button');
-      print(user?.uid);
 
       GuestPreferences.addingGuestDataToSharedPreferences(
           localisation, name, user?.uid);
+
+      print('lskdf ${GuestPreferences.getUid()}');
 
       GuestService(guestUid: user?.uid).updateGuestData(name, localisation);
       return _useFromFirebaseUser(user!);
@@ -101,8 +103,8 @@ class AuthService {
 
       User? user = result.user;
       // create a new document for the user with that uid
-      await ProfessionalDatabaseService(uid: user!.uid)
-          .updateProfessionalData(email, firstName, lastName, localisation);
+      await ProfessionalDatabaseService(uid: user!.uid).updateProfessionalData(
+          email, firstName, lastName, localisation, age);
       return _useFromFirebaseUser(user);
       // ignore: empty_catches
     } catch (e) {

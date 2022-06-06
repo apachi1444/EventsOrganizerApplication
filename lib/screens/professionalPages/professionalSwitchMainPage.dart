@@ -38,7 +38,7 @@ class _ProfessionalSwitchMainPageState
   final screens = [
     const HomePage(),
     const ServicesPage(),
-    const SearchPage(),
+    const Setting(),
     const Setting(),
     const EditProfileProfessionalPage(),
   ];

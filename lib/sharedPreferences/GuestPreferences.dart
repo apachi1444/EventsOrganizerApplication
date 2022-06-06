@@ -27,10 +27,17 @@ class GuestPreferences {
       _sharedPreferences?.getString(_keyLocalisation);
 
   static void addingGuestDataToSharedPreferences(
-      String localisation, String name , String? uid)  {
-    GuestPreferences.setLocalisation(localisation);
+      String localisation, String name, String? uid) async {
+    _sharedPreferences?.setString(_keyLocalisation, localisation);
+    print("klsjdfklqjsdklfjqskldfjklqsdf");
+    print(_sharedPreferences?.getString(_keyLocalisation));
+
     GuestPreferences.setUid(uid!);
     GuestPreferences.setUserName(name);
+    SharedPreferences.getInstance().then((data) {
+      data.getKeys().forEach((key) {
+        print(key + "=" + data.get(key).toString());
+      });
+    });
   }
-
 }

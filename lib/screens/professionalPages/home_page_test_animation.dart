@@ -164,7 +164,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pfs/screens/guestPages//home/settings_form.dart';
+import 'package:pfs/screens/professionalPages/settings_form.dart';
 import 'package:pfs/services/professionalDbService.dart';
 import 'package:provider/provider.dart';
 

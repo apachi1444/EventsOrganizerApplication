@@ -89,4 +89,12 @@ class ProfessionalServiceService {
         .then((snapshot) => {print(snapshot.docs[0].reference.delete())}));
     return null;
   }
+
+  // Stream<List<Service>> getAllServicesOfAllProfessionals(){
+  //   professionalCollection.snapshots().map(
+  //       (professional) => professional.docs.forEach((element) {
+  //
+  //       })
+  //   )
+  // }
 }

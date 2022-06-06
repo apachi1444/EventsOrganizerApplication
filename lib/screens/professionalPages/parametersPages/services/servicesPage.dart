@@ -8,6 +8,7 @@ import 'package:pfs/services/getFileFirebase.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/Service.dart';
+import '../../../../extensions/constants.dart';
 import '../../../../services/authService.dart';
 import '../../../../services/professionalServiceService.dart';
 import '../../../../sharedPreferences/ProfessionalPreferences.dart';
@@ -74,8 +75,14 @@ class _ServicesPageState extends State<ServicesPage> {
                                                   snapshot.data!,
                                                   fit: BoxFit.cover));
                                         }
-                                        if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
-                                          return const CircularProgressIndicator();
+                                        if (snapshot.connectionState ==
+                                                ConnectionState.waiting ||
+                                            !snapshot.hasData) {
+                                          return const CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation(
+                                              Color(ConstantColors.KPinkColor),
+                                            ),
+                                          );
                                         }
                                         return Container();
                                       }));

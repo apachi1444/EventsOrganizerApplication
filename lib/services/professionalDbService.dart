@@ -12,10 +12,11 @@ class ProfessionalDatabaseService {
       FirebaseFirestore.instance.collection('professionals');
 
   Future updateProfessionalData(String email, String firstName, String lastName,
-      String localisation) async {
+      String localisation, String age) async {
     // is gonna refer to that document with that id if not exists he will create that user with these infos
     return await professionalCollection.doc(uid).set({
       'email': email,
+      'age': age,
       'first_name': firstName,
       'last_name': lastName,
       'localisation': localisation
@@ -53,7 +54,7 @@ class ProfessionalDatabaseService {
       email: doc['email'],
       first_name: doc['first_name'],
       last_name: doc['last_name'],
-      age: doc['age'],
+      age: doc['age'] as int,
       localisation: doc['localisation'],
     );
   }

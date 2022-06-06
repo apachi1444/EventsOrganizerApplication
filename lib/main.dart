@@ -29,6 +29,7 @@ class App extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CounterModel()),
+
         // StreamProvider<List<Service>>(
         //     create: (_) => ProfessionalServiceService(professionalUid: '')
         //         .getAllServicesOfProfessionalWithoutList(),

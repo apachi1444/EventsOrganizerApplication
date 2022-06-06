@@ -9,6 +9,7 @@ import '../screens/guestPages/events/budget/BudgetPage.dart';
 import '../screens/guestPages/events/event/todoList_page.dart';
 import '../screens/guestPages/home/home_page_guest.dart';
 import '../screens/guestPages/profilePage/profilePageGuest.dart';
+import '../screens/guestPages/searchPage/search_page.dart';
 import '../screens/professionalPages/parametersPages/services/servicesPage.dart';
 import '../screens/professionalPages/parametersPages/settings/settings_page.dart';
 import '../screens/professionalPages/profile/profilePageProfTest.dart';
@@ -31,7 +32,7 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/guest/eventPage/guestPages': (context) => const ProfilePageGuest(),
   '/guest/eventPage/professionalsList': (context) => const ProfilePageGuest(),
   '/guest/eventPage/budgetPages': (context) => const BudgetPage(),
-  '/guest/searchPage': (context) => const SearchPage(),
+  '/guest/searchPage': (context) =>  SearchScreen(),
 // ------------------------------------ //
 
 // ------------------------------------ //

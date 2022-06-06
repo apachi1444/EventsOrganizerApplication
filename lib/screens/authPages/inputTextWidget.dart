@@ -38,6 +38,7 @@ class _InputTextWidgetState extends State<InputTextWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: TextFormField(
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter something';

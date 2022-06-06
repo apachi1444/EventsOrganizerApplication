@@ -24,11 +24,6 @@ class ProfilePageGuest extends StatelessWidget {
               fontSize: 22),
         ),
         SizedBox(height: 15),
-        // ButtonParameterProfilePageGuest(
-        //     text: 'Edit Profile',
-        //     logo: Icons.edit,
-        //     functionToDoWhenClickOnTheButton:
-        //         AuthService().SignOut() as Function),
         SizedBox(height: 15),
         ButtonParameterProfilePageGuest(
           text: 'Log Out',
