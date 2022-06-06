@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/event/addTask.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pfs/services/todolist_services.dart';
 import '../../../../extensions/constants.dart';
 import '../chickList/MyChickList.dart';
 
@@ -13,10 +14,25 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
   //bool isDone = false; // just for now
-  TextEditingController todoTitleController = TextEditingController();
+  //TextEditingController todoTitleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> tasksStream =
+        FirebaseFirestore.instance.collection('tasks').snapshots();
+
+    bool isChecked = false;
+
+    editTask() {}
+
+    updateTodo() {}
+
+    completeTask(value) {
+      setState(() {
+        isChecked = value!;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -40,13 +56,56 @@ class _TodoListState extends State<TodoList> {
         ),
         backgroundColor: const Color.fromARGB(255, 255, 0, 107),
       ),
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return const TaskCard();
-          },
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: tasksStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+          return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                final DocumentSnapshot documentSnapshot =
+                    snapshot.data!.docs[index];
+                return Center(
+                  child: SizedBox(
+                    height: 100,
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 10),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: completeTask,
+                          ),
+                          Expanded(
+                            child: ListTile(
+                              title: Text(documentSnapshot['title']),
+                              subtitle: Text(""),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: editTask,
+                            icon: const Icon(Icons.edit_outlined),
+                          ),
+                          IconButton(
+                            onPressed: () =>
+                                TodoServices().deleteTask(documentSnapshot.id),
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
       floatingActionButton: FloatingActionButton(
           shape: RoundedRectangleBorder(
@@ -61,66 +120,52 @@ class _TodoListState extends State<TodoList> {
                 return const AddTask();
               },
             );
-          }
-          ),
+          }),
     );
   }
 }
 
-class TaskCard extends StatefulWidget {
-  const TaskCard({Key? key}) : super(key: key);
+// class TaskCard extends StatefulWidget {
+//   const TaskCard({Key? key}) : super(key: key);
 
-  @override
-  State<TaskCard> createState() => _TaskCardState();
-}
+//   @override
+//   State<TaskCard> createState() => _TaskCardState();
+// }
 
-class _TaskCardState extends State<TaskCard> {
-  bool isChecked = false;
-  deleteTask() {}
-
-  editTask() {}
-
-  updateTodo() {}
-
-  completeTask(value) {
-      setState(() {
-        isChecked = value!;
-      });
-
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: 100,
-        child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-          child: Row(
-            children: [
-              Checkbox(
-                value: isChecked,
-                onChanged: completeTask,
-                activeColor: const Color(ConstantColors.KPinkColor),
-                checkColor: Colors.white,
-              ),
-              const Expanded(
-                child: ListTile(
-                  title: Text('Two-line ListTile'),
-                  subtitle: Text('Here is a second line'),
-                ),
-              ),
-              IconButton(
-                onPressed: editTask,
-                icon: const Icon(Icons.edit_outlined),
-              ),
-              IconButton(
-                onPressed: deleteTask,
-                icon: Icon(Icons.delete),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class _TaskCardState extends State<TaskCard> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: SizedBox(
+//         height: 100,
+//         child: Card(
+//           margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+//           child: Row(
+//             children: [
+//               Checkbox(
+//                 value: isChecked,
+//                 onChanged: completeTask,
+//                 activeColor: const Color(ConstantColors.KPinkColor),
+//                 checkColor: Colors.white,
+//               ),
+//               const Expanded(
+//                 child: ListTile(
+//                   title: Text('Two-line ListTile'),
+//                   subtitle: Text('Here is a second line'),
+//                 ),
+//               ),
+//               IconButton(
+//                 onPressed: editTask,
+//                 icon: const Icon(Icons.edit_outlined),
+//               ),
+//               IconButton(
+//                 onPressed: deleteTask,
+//                 icon: Icon(Icons.delete),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
