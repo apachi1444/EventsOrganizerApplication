@@ -212,6 +212,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
+  print(user?.uid);
     // TODO: implement initState
     super.initState();
     // a ticket is like a clock and for every tick we get an animation value from point a to b

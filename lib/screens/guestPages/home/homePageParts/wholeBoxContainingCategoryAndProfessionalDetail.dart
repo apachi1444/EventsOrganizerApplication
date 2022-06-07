@@ -14,20 +14,17 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return StreamBuilder(
-        stream: GuestService(guestUid: '')
-            .listProfessionalsWithSameCity('Marrakech'),
+    return FutureBuilder(
+        future: GuestService(guestUid: '').getAll(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
             return Expanded(
                 child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      print("jlkqdsjf");
                       print(snapshot.data);
-                      return Container();
+                      return const Text("Yessine");
                     }));
           }
 

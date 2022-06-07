@@ -27,9 +27,9 @@ class FilterPage extends StatelessWidget {
                         fontSize: 25)),
               ],
             ),
-            const SizedBox(height : 15),
+            const SizedBox(height: 15),
             const CustomPriceFilter(),
-            const SizedBox(height : 15),
+            const SizedBox(height: 15),
             Row(
               children: const [
                 Text('Category',
@@ -39,9 +39,21 @@ class FilterPage extends StatelessWidget {
                         fontSize: 25)),
               ],
             ),
-            const SizedBox(height : 15),
+            const SizedBox(height: 15),
             const CustomCategoryFilter(),
-            const SizedBox(height : 15),
+            const SizedBox(height: 15),
+            Row(
+              children: const [
+                Text('Localisation',
+                    style: TextStyle(
+                        color: Color(ConstantColors.KPinkColor),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25)),
+              ],
+            ),
+            const SizedBox(height: 15),
+            const CustomLocalisationFilter(),
+            const SizedBox(height: 15),
             FloatingActionButton.extended(
               onPressed: () {
                 print('hi');
@@ -65,13 +77,13 @@ class CustomCategoryFilter extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(spacing: 5, runSpacing: 3, children: const [
-        ChoiceChipSelect(name:"Dj"),
-        SizedBox(width : 13),
-        ChoiceChipSelect(name:"Dj"),
-        SizedBox(width : 13),
-        ChoiceChipSelect(name:"Dj"),
-        SizedBox(width: 15),
-        ChoiceChipSelect(name: "Dj"),
+        RectangleOfLocalisationFilter(name: 'Dj', image: 'assets/djPhoto.jpg'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: 'Traiteur', image: 'assets/dollar.png'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: 'Neggafe', image: 'assets/dollar.png'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: 'Fiaaa', image: 'assets/dollar.png'),
       ]),
     );
     // return const ChoiceOfCategoryFilter(name: 'Dj');
@@ -83,20 +95,26 @@ class CustomPriceFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        RectangleOfPriceFilter(name : " > 200"),
-        RectangleOfPriceFilter(name : " <300 "),
-        RectangleOfPriceFilter(name : " <300 "),
-      ],
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Wrap(spacing: 5, runSpacing: 3, children: const [
+        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+        SizedBox(width: 5),
+        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+      ]),
     );
   }
 }
 
 class RectangleOfPriceFilter extends StatelessWidget {
-  const RectangleOfPriceFilter({Key? key, required this.name}) : super(key: key);
-  final String name ;
+  const RectangleOfPriceFilter({Key? key, required this.name})
+      : super(key: key);
+  final String name;
+
   @override
   Widget build(BuildContext context) {
     // return InkWell(
@@ -113,7 +131,7 @@ class RectangleOfPriceFilter extends StatelessWidget {
     //               color: Color(ConstantColors.KGreenColor), fontSize: 21))),
     // );
     return ChoiceChip(
-      label: const Text("<200"),
+      label: const Text('<200'),
       labelPadding: const EdgeInsets.all(16),
       labelStyle: const TextStyle(
           color: Color(ConstantColors.KPinkColor),
@@ -125,6 +143,48 @@ class RectangleOfPriceFilter extends StatelessWidget {
       selectedColor: const Color(ConstantColors.KGreenColor),
       clipBehavior: Clip.hardEdge,
       selected: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    );
+  }
+}
+
+class RectangleOfLocalisationFilter extends StatefulWidget {
+  const RectangleOfLocalisationFilter(
+      {Key? key, required this.name, required this.image})
+      : super(key: key);
+  final String name;
+  final String image;
+
+  @override
+  State<RectangleOfLocalisationFilter> createState() =>
+      _RectangleOfLocalisationFilterState();
+}
+
+class _RectangleOfLocalisationFilterState
+    extends State<RectangleOfLocalisationFilter> {
+  bool isSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoiceChip(
+      avatar:
+          Image.asset(widget.image, height: 20, width: 20, fit: BoxFit.cover),
+      label: Text(widget.name),
+      labelPadding: const EdgeInsets.all(3),
+      labelStyle: isSelected
+          ? const TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)
+          : const TextStyle(
+              color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
+      onSelected: (bool newValue) {
+        print(newValue);
+        setState(() {
+          isSelected = !isSelected;
+        });
+      },
+      clipBehavior: Clip.hardEdge,
+      selectedColor: const Color(ConstantColors.KGreenColor),
+      selected: isSelected,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     );
   }
@@ -168,7 +228,7 @@ class ChoiceChipSelect extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChoiceChip(
       label: Text(name),
-      labelPadding: const EdgeInsets.symmetric(horizontal :25 , vertical : 8),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
       labelStyle: const TextStyle(
           color: Color(ConstantColors.KPinkColor),
           fontSize: 16,
@@ -180,6 +240,28 @@ class ChoiceChipSelect extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       selected: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    );
+  }
+}
+
+class CustomLocalisationFilter extends StatelessWidget {
+  const CustomLocalisationFilter({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Wrap(spacing: 3, runSpacing: 2, children: const [
+        RectangleOfLocalisationFilter(
+            name: 'Casablanca', image: 'assets/casablance.jpg'),
+        SizedBox(width: 2),
+        RectangleOfLocalisationFilter(
+            name: 'Agadir', image: 'assets/googleIcon.png'),
+        SizedBox(width: 2),
+        RectangleOfLocalisationFilter(
+            name: 'Marrakech', image: 'assets/googleIcon.png'),
+        SizedBox(width: 8),
+      ]),
     );
   }
 }

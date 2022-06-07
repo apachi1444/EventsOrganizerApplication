@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/buttonUpdate.dart';
@@ -15,6 +16,8 @@ class EditProfileProfessionalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+    print(userId);
     // return SafeArea(
     //   child: Scaffold(
     //       body: SingleChildScrollView(

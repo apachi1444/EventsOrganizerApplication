@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/Models/Guest.dart';
@@ -57,6 +58,10 @@ class GuestService {
     );
   }
 
+  Future<Guest> getGuestFromDocumentSnapshot(){
+    return guestsCollection.doc(guestUid).get().then(_guestFromSnapshot);
+  }
+
   List<Service> _listServicesFromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs.map((doc) {
       print(doc);
@@ -71,10 +76,39 @@ class GuestService {
         .map(_listServicesFromQuerySnapshot);
   }
 
+  var response = {
+    'idProfessional': {
+      'idService': {
+        'title': 'title',
+        'description': 'description',
+        'type': 'type'
+      }
+    }
+  };
+
+  Future<List<List<Service>>> getAll(){
+    return professionalCollection.snapshots().map((professional) {
+      var aa = professional.docs
+          .map((service) => Service.fromJson(service.data()))
+          .toList();
+      print(aa);
+      return aa;
+    }).toList();
+  }
+  List getAllProfessionalsWithOwnServices() {
+
+     List returnList  =[];
+    professionalCollection.get().then((value){
+      value.docs.map((e) => returnList.add(
+        Service.fromJson(e.data())
+      ));
+    });
+    return returnList;
+  }
+
   List<Service> SearchByCityAndCategory(String city, String category) {
     return [];
   }
-
 }
 
 // Future<Guest> readOneGuest() async {
