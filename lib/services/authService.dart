@@ -68,7 +68,7 @@ class AuthService {
       String lastName = currentProfessional.last_name;
       String localisation = currentProfessional.localisation;
       int age = currentProfessional.age;
-
+      print('before doing the shared preferences');
       ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
           email, age, firstName, lastName, localisation, user.uid);
     });

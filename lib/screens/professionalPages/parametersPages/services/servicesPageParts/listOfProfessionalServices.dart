@@ -13,10 +13,13 @@ class ListOfProfessionalServices extends StatelessWidget {
   Widget build(BuildContext context) {
     // here we will call the provider who will give us the professional uid
     String? user = AuthService().getCurrentIdUser();
+    print("this is the user");
+    print(user);
     return StreamBuilder(
         stream: ProfessionalServiceService(professionalUid: user)
             .getStreamOfServicesOfParticularProfessional(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          print(snapshot);
           if (snapshot.connectionState == ConnectionState.none) {
             return const Text('there is no data for the moment in our stream');
           } else if (snapshot.connectionState == ConnectionState.waiting) {

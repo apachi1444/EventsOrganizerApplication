@@ -13,12 +13,11 @@ class AllRowsOfFieldsProfessionalData extends StatelessWidget {
     ProfessionalPreferences.getEmail().toString(),
     ProfessionalPreferences.getLocalisation().toString(),
     'Gender',
-    'Birth Date'
   ];
   @override
   Widget build(BuildContext context) {
     final allFields = allFieldsProfessional;
-
+    print(ProfessionalPreferences.getLastName().toString());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 6),
       child: Column(

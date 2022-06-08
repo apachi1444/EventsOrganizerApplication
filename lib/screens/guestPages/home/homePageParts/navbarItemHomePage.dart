@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class NavbarItemHomePage extends StatelessWidget {
   final String? firstName;
-  final String? lastName;
   const NavbarItemHomePage(
-      {Key? key, required this.firstName, required this.lastName})
+      {Key? key, required this.firstName})
       : super(key: key);
 
   @override
@@ -32,7 +31,7 @@ class NavbarItemHomePage extends StatelessWidget {
                 radius: 17.0,
               ),
             ),
-            Text('Welcome $firstName! $lastName!'),
+            Text('Welcome $firstName!'),
             Material(
               borderRadius: BorderRadius.circular(50),
               child: InkWell(

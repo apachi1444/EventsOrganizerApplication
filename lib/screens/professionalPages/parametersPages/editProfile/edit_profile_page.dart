@@ -14,13 +14,14 @@ import 'editProfileParts/wholeContainerOfUpdatingDataProfessional.dart';
 class EditProfileProfessionalPage extends StatelessWidget {
   const EditProfileProfessionalPage({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
     print(userId);
     // return SafeArea(
     //   child: Scaffold(
-    //       body: SingleChildScrollView(
+    //       body: SingleChildScrollsView(
     //     child: Column(children: [
     //       const ImageAboveTheContainer(),
     //       const WholeContainerOfUpdatingDataProfessional(),
@@ -78,7 +79,7 @@ class EditProfileProfessionalPage extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           radius: 45,
-                          backgroundImage: AssetImage("assets/googleIcon.png"),
+                          backgroundImage: AssetImage('assets/googleIcon.png'),
                         ),
                         GestureDetector(
                           onTap: () {

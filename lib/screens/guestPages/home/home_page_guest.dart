@@ -4,13 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/home/homePageParts/wholeBoxContainingCategoryAndProfessionalDetail.dart';
 import 'package:pfs/services/guestService.dart';
 
+import '../../../Models/Guest.dart';
 import 'homePageParts/CategoryNameAndViewAllRow.dart';
 import 'homePageParts/RowFilterSearchHomePage.dart';
 import 'homePageParts/navbarItemHomePage.dart';
 import 'homePageParts/professionalSlider.dart';
 
-class HomePageGuest extends StatelessWidget {
+class HomePageGuest extends StatefulWidget {
   const HomePageGuest({Key? key}) : super(key: key);
+
+  @override
+  State<HomePageGuest> createState() => _HomePageGuestState();
+}
+
+class _HomePageGuestState extends State<HomePageGuest> {
+  String finalName = '';
 
   @override
   Widget build(BuildContext context) {
@@ -19,39 +27,27 @@ class HomePageGuest extends StatelessWidget {
       const Text('ahah this is the first text '),
     ];
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    final name = FirebaseAuth.instance.currentUser?.toString();
-    late String finalName;
-
-    GuestService(guestUid: userId).getGuestFromDocumentSnapshot().then((value) {
-      finalName = value.name;
-    });
-
-    print(name);
+    print(userId);
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Center(
               child: Column(children: <Widget>[
             NavbarItemHomePage(
-              firstName: finalName, lastName: 'Jaguar',
-              // firstName: user.hashCode.toString(),
-              // lastName: user.hashCode.toString(),
+              firstName: finalName,
             ),
-            const SizedBox(height: 7),
-            const RowFilterSearchHomePage(),
             const SizedBox(height: 10),
-            const WholeBoxContainingCategoryAndProfessionalDetail(),
-            const SizedBox(height: 15),
+             WholeBoxContainingCategoryAndProfessionalDetail(userId : userId),
             const SizedBox(height: 20),
-            ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              // <-- this will disable scroll
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return itemData[index];
-              },
-              itemCount: itemData.length,
-            )
+            // ListView.builder(
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   // <-- this will disable scroll
+            //   shrinkWrap: true,
+            //   itemBuilder: (context, index) {
+            //     return itemData[index];
+            //   },
+            //   itemCount: itemData.length,
+            // )
           ])),
         ),
       ),

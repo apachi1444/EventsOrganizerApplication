@@ -4,5 +4,4 @@ final allFieldsProfessional = [
   'email',
   'localisation',
   'gender',
-  'birthDate',
 ];

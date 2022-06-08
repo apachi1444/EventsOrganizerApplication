@@ -31,13 +31,7 @@ class _ServicesPageState extends State<ServicesPage> {
     String? lastName = ProfessionalPreferences.getLastName();
     return SafeArea(
         child: Scaffold(
-            body: StreamProvider<List<Service?>>.value(
-      value: ProfessionalServiceService(professionalUid: user)
-          .getAllServicesOfProfessional(),
-      builder: (context, snapshot) {
-        print(null);
-        print(user);
-        return Padding(
+      body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35.0),
           child: Column(
             children: [
@@ -98,10 +92,7 @@ class _ServicesPageState extends State<ServicesPage> {
               const ListOfProfessionalServices(),
               const PlusButton(),
             ],
-          ),
-        );
-      },
-      initialData: [],
-    )));
+          )),
+    ));
   }
 }

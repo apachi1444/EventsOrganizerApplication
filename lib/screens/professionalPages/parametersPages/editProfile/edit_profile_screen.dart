@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pfs/screens/professionalPages/profile/profilePageProfTest.dart';
 import 'package:pfs/services/professionalDbService.dart';
 import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 
@@ -15,11 +17,22 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   final bool _isLoading = false;
-  TextEditingController dateCtl = TextEditingController();
   TextEditingController firstNameCtl = TextEditingController();
   TextEditingController lastNameCtl = TextEditingController();
-  TextEditingController ageCtl = TextEditingController();
   TextEditingController localisationCtl = TextEditingController();
+
+  String? firstName = ProfessionalPreferences.getFirstName();
+  String? lastName = ProfessionalPreferences.getLastName();
+  String? localisation = ProfessionalPreferences.getLocalisation();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    firstNameCtl = TextEditingController(text: '$firstName');
+    lastNameCtl = TextEditingController(text: '$lastName');
+    localisationCtl = TextEditingController(text: '$localisation');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +49,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 150,
                 ),
                 Container(
-                  height: 150,
-                  color: Colors.black54,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.camera_alt,
-                        size: 70,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        'Change Cover Photo',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    decoration: const BoxDecoration(
+                        color: Color(ConstantColors.KPinkColor),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/avatar.jpg'))),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox.shrink(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 15),
+                            child: PopupMenuButton(
+                                icon: const Icon(
+                                    Icons.arrow_circle_left_rounded,
+                                    color: Colors.white,
+                                    size: 50),
+                                itemBuilder: (_) {
+                                  return <PopupMenuItem<String>>[
+                                    const PopupMenuItem(
+                                        child: Text('Go Back'), value: 'logout')
+                                  ];
+                                },
+                                onSelected: (index) {
+                                  Navigator.pushReplacement(
+                                      context ,MaterialPageRoute<void>(
+                                    builder: (BuildContext context) => const EditProfileScreen(),
+                                  ),);
+                                }),
+                          )
+                        ]))
               ],
             ),
           ),
@@ -74,46 +97,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     GestureDetector(
                       onTap: () {},
                       child: Stack(
-                        children: [
-                          const CircleAvatar(
+                        children: const [
+                          CircleAvatar(
                             radius: 45,
                           ),
                           CircleAvatar(
                             radius: 45,
                             backgroundColor: Colors.black54,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: const [
-                                Icon(
-                                  Icons.camera_alt,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  'Change Profile Photo',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                )
-                              ],
-                            ),
+                            backgroundImage:
+                                AssetImage('assets/googleIcon.png'),
                           )
                         ],
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        print("haha");
+                        print(lastNameCtl.text.trim());
                         ProfessionalDatabaseService(
                                 uid: ProfessionalPreferences.getUid())
                             .changeProfessionalData(
                                 firstNameCtl.text.trim(),
                                 lastNameCtl.text.trim(),
-                                localisationCtl.text.trim());
+                                localisationCtl.text.trim())
+                            .then((value) {
+                          Fluttertoast.showToast(
+                              timeInSecForIosWeb: 1,
+                              msg: 'Updated successfully',
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 25);
+                          Navigator.pop(context);
+                        });
                       },
                       child: Container(
                         width: 100,
@@ -142,6 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       children: [
                         const SizedBox(height: 30),
                         TextFormField(
+                          controller: firstNameCtl,
                           decoration: const InputDecoration(
                             labelText: 'First Name',
                             labelStyle: TextStyle(
@@ -150,6 +165,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
+                          controller: lastNameCtl,
                           decoration: const InputDecoration(
                               labelText: 'Last Name',
                               labelStyle: TextStyle(
@@ -157,6 +173,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         const SizedBox(height: 10),
                         TextFormField(
+                          controller: localisationCtl,
                           decoration: const InputDecoration(
                               labelText: 'Localisation',
                               labelStyle: TextStyle(

@@ -3,6 +3,7 @@ import 'dart:core';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/Models/Guest.dart';
+import 'package:pfs/services/professionalDbService.dart';
 
 import '../Models/Professional.dart';
 import '../Models/Service.dart';
@@ -13,6 +14,7 @@ class GuestService {
 
   final professionalCollection =
       FirebaseFirestore.instance.collection('professionals');
+  final serviceCollection = FirebaseFirestore.instance.collection('services');
 
   GuestService({required this.guestUid});
 
@@ -58,13 +60,12 @@ class GuestService {
     );
   }
 
-  Future<Guest> getGuestFromDocumentSnapshot(){
+  Future<Guest> getGuestFromDocumentSnapshot() {
     return guestsCollection.doc(guestUid).get().then(_guestFromSnapshot);
   }
 
   List<Service> _listServicesFromQuerySnapshot(QuerySnapshot querySnapshot) {
     return querySnapshot.docs.map((doc) {
-      print(doc);
       return Service.fromJson(doc.data() as Map<String, dynamic>);
     }).toList();
   }
@@ -76,37 +77,48 @@ class GuestService {
         .map(_listServicesFromQuerySnapshot);
   }
 
-  var response = {
-    'idProfessional': {
-      'idService': {
-        'title': 'title',
-        'description': 'description',
-        'type': 'type'
+  var response = [
+    {
+      'idProfessional': [
+        {
+          'idService': {
+            'title': 'title',
+            'description': 'description',
+            'type': 'type'
+          }
+        },
+        {
+          'idService': {
+            'title': 'title',
+            'description': 'description',
+            'type': 'type'
+          }
+        }
+      ]
+    },
+    {
+      'idProfessional': {
+        'idService': {
+          'title': 'title',
+          'description': 'description',
+          'type': 'type'
+        }
       }
-    }
-  };
+    },
+  ];
 
-  Future<List<List<Service>>> getAll(){
-    return professionalCollection.snapshots().map((professional) {
-      var aa = professional.docs
-          .map((service) => Service.fromJson(service.data()))
-          .toList();
-      print(aa);
-      return aa;
-    }).toList();
-  }
-  List getAllProfessionalsWithOwnServices() {
-
-     List returnList  =[];
-    professionalCollection.get().then((value){
-      value.docs.map((e) => returnList.add(
-        Service.fromJson(e.data())
-      ));
-    });
-    return returnList;
+  Stream<List<Service>> getAllServicesOfParticularProfessional(String uid) {
+    return professionalCollection.doc(uid).collection('services').snapshots().map((snapshot) =>
+        snapshot.docs.map((doc) => (Service.fromJson(doc.data()))).toList());
   }
 
-  List<Service> SearchByCityAndCategory(String city, String category) {
+  Stream<List<Professional>> getAllProfessionalsInOutDb() {
+    return professionalCollection.snapshots().map((snapshot) => snapshot.docs
+        .map((doc) => (Professional.fromJson(doc.data())))
+        .toList());
+  }
+
+  List<Service> searchByCityAndCategory(String city, String category) {
     return [];
   }
 }

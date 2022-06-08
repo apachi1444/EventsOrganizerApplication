@@ -25,35 +25,7 @@ class ProfessionalServiceService {
     });
   }
 
-  Stream<List<Service?>>? getAllServicesOfProfessional() {
-    List<Service>? services;
-    professionalCollection
-        .doc(professionalUid)
-        .collection(serviceCollection)
-        .get()
-        .then((value) {
-      if (value.docs.isNotEmpty) {
-        for (int i = 0; i < value.docs.length; i++) {
-          print(value.docs[i].data()['title']);
-          print(value.docs[i]);
-          services
-              ?.add(Service.fromJson(value.docs![i] as Map<String, dynamic>));
-        }
-      }
-    });
 
-    var stream = professionalCollection
-        .doc(professionalUid)
-        .collection(serviceCollection)
-        .snapshots();
-
-    var list = stream.map((snapshot) => snapshot.docs.map((doc) {
-          print(doc);
-          Service.fromJson(doc.data());
-        }).toList());
-    print(list);
-    return list;
-  }
 
   Stream getStreamOfServicesOfParticularProfessional() {
     return professionalCollection

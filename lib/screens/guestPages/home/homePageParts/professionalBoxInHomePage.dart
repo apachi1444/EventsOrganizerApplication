@@ -13,7 +13,7 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
             border: Border.all( color: const Color(ConstantColors.KPinkColor),
             ),
 
-            borderRadius: BorderRadius.circular(25)),
+            borderRadius: BorderRadius.circular(20)),
 
         // this is for fixing the flex problem in the our container
 
@@ -21,7 +21,7 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5.0),
               child: Row(
                 children: [
                   const CircleAvatar(
