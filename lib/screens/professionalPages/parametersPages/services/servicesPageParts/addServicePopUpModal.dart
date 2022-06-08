@@ -12,6 +12,7 @@ import 'package:pfs/screens/professionalPages/parametersPages/services/servicesP
 import 'package:pfs/services/professionalServiceService.dart';
 import 'package:pfs/services/uploadFileFirebase.dart';
 
+import '../../../../../Models/Storage.dart';
 import '../../../../../extensions/constants.dart';
 import '../../../../../extensions/listOfCategories.dart';
 import '../../../../../services/authService.dart';
@@ -34,19 +35,39 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
   late bool isFailure;
   String? currentUserUid = AuthService().getCurrentIdUser();
 
-  File? file;
-  UploadTask? task;
+  late Storage storage;
+  final fileName = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    storage = Storage();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final fileName = file != null ? basename(file!.path) : 'No File Selected';
+    print('ahaaaqdsf');
     ProfessionalServiceService professionalServiceService =
         ProfessionalServiceService(professionalUid: currentUserUid);
-    return isCompleted
-        ? ChooseSuccessOrFailure(
-            isFailure: isFailure,
-          )
-        : Stepper(
+    if (isCompleted) {
+      return ChooseSuccessOrFailure(
+        isFailure: isFailure,
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(ConstantColors.KPinkColor),
+          title: const Text('Add Your Service'),
+          centerTitle: true,
+        ),
+        body: Theme(
+          data: ThemeData(
+              primarySwatch: Colors.orange,
+              colorScheme: const ColorScheme.light(
+                primary: Color(ConstantColors.KPinkColor),
+              )),
+          child: Stepper(
             type: StepperType.vertical,
             steps: getSteps(fileName),
             currentStep: currentStep,
@@ -54,16 +75,21 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
               final isLastStep = currentStep == getSteps(fileName).length - 1;
 
               if (isLastStep) {
+                print('jahahaa');
+                print(fileName);
+                storage.downloadFile(currentUserUid!, fileName).then((value) {
+                  print(value);
+                });
                 professionalServiceService.addServiceToProfessional(
                     DateTime.now().toString(),
                     selectedItem!,
                     _descriptionController.text.trim(),
-                    _priceController.text.trim());
+                    _priceController.text.trim(),
+                    fileName);
 
                 setState(() {
                   isFailure = false;
                 });
-                print(isFailure);
                 setState(() {
                   isCompleted = true;
                 });
@@ -73,6 +99,9 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 });
               }
             },
+            onStepTapped: (step) => setState(() {
+              currentStep = step;
+            }),
             onStepCancel: () {
               currentStep == 0
                   ? null
@@ -134,63 +163,51 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                       ],
                     );
             },
-          );
-  }
-
-  Future pickFile() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result == null) {
-      return;
-    }
-    final path = result.files.single.path!;
-    setState(() {
-      file = File(path);
-    });
-  }
-
-  Future pickImage() async {
-    print('aha');
-
-    try {
-      image =
-          (await ImagePicker().pickImage(source: ImageSource.gallery)) as File?;
-
-      if (image == null) {
-        return;
-      }
-
-      // final permanentImage = await saveImagePermanenetly(image!.path);
-
-      final imageTemporary = File(image!.path);
-      setState(() {
-        image = imageTemporary;
-      });
-    } on PlatformException catch (e) {
-      print('error in our pc');
+          ),
+        ),
+      );
     }
   }
 
-  Future<File> saveImagePermanenetly(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final name = basename(imagePath);
-    final image = File('${directory.path}/$name');
-    return File(imagePath).copy(image.path);
-  }
+  // Future pickFile() async {
+  //   final result = await FilePicker.platform.pickFiles();
+  //   if (result == null) {
+  //     return;
+  //   }
+  //   final path = result.files.single.path!;
+  //   setState(() {
+  //     file = File(path);
+  //   });
+  // }
 
-  Future uploadFile() async {
-    if (file == null) return;
-    final fileName = basename(file!.path);
-    final destination = 'images/professional/$currentUserUid/$fileName';
-    task = UploadFilesFirebase.uploadFile(destination, file!);
+  // Future pickImage() async {
+  //   print('aha');
+  //
+  //   try {
+  //     image =
+  //         (await ImagePicker().pickImage(source: ImageSource.gallery)) as File?;
+  //
+  //     if (image == null) {
+  //       return;
+  //     }
+  //
+  //     // final permanentImage = await saveImagePermanenetly(image!.path);
+  //
+  //     final imageTemporary = File(image!.path);
+  //     setState(() {
+  //       image = imageTemporary;
+  //     });
+  //   } on PlatformException catch (e) {
+  //     print('error in our pc');
+  //   }
+  // }
 
-    if (task == null) {
-      return;
-    }
-    final snapshot = await task!.whenComplete(() {});
-    final urlDownload = await snapshot.ref.getDownloadURL();
-
-    print('this is the download link  $urlDownload');
-  }
+  // Future<File> saveImagePermanenetly(String imagePath) async {
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   final name = basename(imagePath);
+  //   final image = File('${directory.path}/$name');
+  //   return File(imagePath).copy(image.path);
+  // }
 
   var list = categories;
   String? selectedItem = categories[0];
@@ -251,29 +268,59 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
             state: currentStep > 1 ? StepState.complete : StepState.indexed,
             isActive: currentStep >= 1,
             title: const Text('Step 2 : Choose Your Price And Description'),
-            content: Column(children: [
-              InputTextWidget(
-                isPassword: false,
-                icon: Icons.description,
-                inputHintText: 'Description Here !',
-                controllerUsedInInput: _descriptionController,
-              ),
-              const SizedBox(height: 12),
-              InputTextWidget(
-                isPassword: false,
-                icon: Icons.price_change,
-                inputHintText: 'Price Here !',
-                controllerUsedInInput: _priceController,
-              ),
-              const SizedBox(height: 12),
-            ])),
+            content: SingleChildScrollView(
+              child: Column(children: [
+                SingleChildScrollView(
+                  child: InputTextWidget(
+                    isPassword: false,
+                    icon: Icons.description,
+                    inputHintText: 'Description Here !',
+                    controllerUsedInInput: _descriptionController,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  child: InputTextWidget(
+                    isPassword: false,
+                    icon: Icons.price_change,
+                    inputHintText: 'Price Here !',
+                    controllerUsedInInput: _priceController,
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ]),
+            )),
         Step(
             state: currentStep > 2 ? StepState.complete : StepState.indexed,
             isActive: currentStep >= 2,
             title: const Text('Step 3 : Upload Your Images Here'),
             content: GestureDetector(
-              onTap: () {
-                pickFile();
+              onTap: () async {
+                // pickFile();
+                final results = await FilePicker.platform.pickFiles(
+                  allowMultiple: true,
+                );
+
+                if (results == null) {
+                  ScaffoldMessenger.of(context as BuildContext)
+                      .showSnackBar(const SnackBar(
+                    content: Text('noFile'),
+                  ));
+                  return;
+                }
+
+                final path = results.files.single.path;
+                var fileNamee = results.files.single.name;
+                print('this is the **** file Name');
+                print(fileNamee);
+
+                setState(() {
+                  fileName = fileNamee;
+                });
+
+                print(fileName);
+
+                storage.uploadFile(path!, fileName, currentUserUid!);
               },
               child: Container(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -294,8 +341,14 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                               fileName,
                             ),
                             GestureDetector(
-                              onTap: () {
-                                uploadFile();
+                              onTap: () async {
+                                // uploadFile(currentUserUid!).then((value) {
+                                //   print("htis is the vlaue");
+                                //   print(value);
+                                //   setState(() {
+                                //     finalNameImage = value;
+                                //   });
+                                // });
                               },
                               child: Container(
                                   decoration: const BoxDecoration(
@@ -310,31 +363,27 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                             )
                           ],
                         ),
-                        task != null ? buildUploadStatus(task!) : Container(),
-
                       ]),
                     ),
                   )),
             ))
       ];
-      Widget buildUploadStatus(UploadTask task)
-      {
-        StreamBuilder<TaskSnapshot>(
-          stream : task.snapshotEvents,
-          builder : (context , snapshot){
-            if(snapshot.hasData){
-              final snap = snapshot.data!;
-              final progress = snap.bytesTransferred / snap.totalBytes;
-              final percentage = (progress * 100).toStringAsFixed(2);
-              return Text(
-                '$percentage',
-                style : TextStyle(fontSize: 20 , fontWeight : FontWeight.bold)
-              );
-            }else{
-              return Container();
-            }
-          }
-        );
-        return Container();
-      }
+//
+// Widget buildUploadStatus(UploadTask task) {
+//   StreamBuilder<TaskSnapshot>(
+//       stream: task.snapshotEvents,
+//       builder: (context, snapshot) {
+//         if (snapshot.hasData) {
+//           final snap = snapshot.data!;
+//           final progress = snap.bytesTransferred / snap.totalBytes;
+//           final percentage = (progress * 100).toStringAsFixed(2);
+//           return Text('$percentage',
+//               style:
+//                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+//         } else {
+//           return Container();
+//         }
+//       });
+//   return Container();
+// }
 }

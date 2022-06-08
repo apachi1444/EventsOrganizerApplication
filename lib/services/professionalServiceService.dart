@@ -13,11 +13,12 @@ class ProfessionalServiceService {
       FirebaseFirestore.instance.collection('professionals');
 
   Future addServiceToProfessional(
-      String dateTime, String title, String description, String price) async {
+      String dateTime, String title, String description, String price,String image) async {
     return await professionalCollection
         .doc(professionalUid)
         .collection('services')
         .add({
+      'image' : image,
       'dateTime': dateTime,
       'title': title,
       'description': description,
@@ -61,6 +62,7 @@ class ProfessionalServiceService {
         .then((snapshot) => {print(snapshot.docs[0].reference.delete())}));
     return null;
   }
+
 
   // Stream<List<Service>> getAllServicesOfAllProfessionals(){
   //   professionalCollection.snapshots().map(

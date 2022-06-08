@@ -1,8 +1,12 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../Models/Storage.dart';
+import '../../../../../extensions/constants.dart';
 import '../../../../../services/authService.dart';
 import '../../../../../services/professionalServiceService.dart';
+import '../../../../../sharedPreferences/ProfessionalPreferences.dart';
 
 class ServiceDetailsBox extends StatelessWidget {
   const ServiceDetailsBox(
@@ -10,12 +14,15 @@ class ServiceDetailsBox extends StatelessWidget {
       required this.category,
       required this.date,
       required this.description,
-      required this.price})
+      required this.price,
+      required this.image})
       : super(key: key);
+  final String image;
   final String category;
   final String date;
   final String description;
   final String price;
+
   @override
   Widget build(BuildContext context) {
     String? uid = AuthService().getCurrentIdUser();
@@ -28,18 +35,37 @@ class ServiceDetailsBox extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(bottom: size.height * 0.02),
         decoration: BoxDecoration(
-            color: Colors.red, borderRadius: BorderRadius.circular(25)),
+            color: const Color(ConstantColors.KPinkColor),
+            borderRadius: BorderRadius.circular(25)),
 
         // this is for fixing the flex problem in the our container
 
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
+              FutureBuilder(
+                  future :Storage().listFiles(ProfessionalPreferences.getUid()),
+                  builder: (context , AsyncSnapshot<ListResult> snapshot){
+                    if(  snapshot.connectionState== ConnectionState.done &&
+                        snapshot.hasData){
+                      // return Expanded(
+                      //   child: ListView.builder(
+                      //     itemCount : 4,
+                      //     itemBuilder: (BuildContext context , int index){
+                      //       return Text("ahaha");
+                      //     },
+                      //   ),
+                      // );
+                      return Text("Yessine Jaoua");
+                    }
+                    return const Text("there is no data");
+    }
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(category ?? ''),
+                  Text(category ?? '', style: const TextStyle(color: Colors.white , fontSize : 20)),
                   Row(children: [
                     GestureDetector(
                         onTap: () {
@@ -48,19 +74,20 @@ class ServiceDetailsBox extends StatelessWidget {
                           _deleteService();
                         },
                         child: const Icon(Icons.delete_forever)),
-                    const Icon(Icons.update_disabled),
+                    // const Icon(Icons.update_disabled),
                   ]),
                 ],
               ),
-
+              const SizedBox(height : 10),
               Row(
                 children: const [
                   CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 14,
+                    radius: 16,
                     child: CircleAvatar(
-                      radius: 11,
-                      backgroundImage: AssetImage('assets/googleIcon.png'),
+                      radius: 14,
+                      backgroundImage:
+                          NetworkImage('https://picsum.photos/250?image=9'),
                     ),
                   ),
                   SizedBox(width: 7),
@@ -86,13 +113,19 @@ class ServiceDetailsBox extends StatelessWidget {
               const SizedBox(height: 10),
               Row(
                 children: [
+                  const Text('description :' ?? '' , style: TextStyle(color: Colors.white , fontSize : 16)),
+                  const SizedBox(width:7),
                   Text(description ?? ''),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
+                  const Text('price :' ?? '' , style: TextStyle(color: Colors.white , fontSize : 16)),
+                  const SizedBox(width:7),
                   Text(price ?? ''),
+                  const SizedBox(width:3),
+                  const Text( '\$'),
                 ],
               ),
 

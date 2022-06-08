@@ -74,19 +74,7 @@ class MySettingState extends State<MySetting> {
         title: const Center(
           child: Text('My Settings'),
         ),
-        leading: IconButton(
-          onPressed: () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyCheckingList(),
-                  ));
-            });
-          },
-          color: Colors.white,
-          icon: const Icon(Icons.arrow_back),
-        ),
+
         backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       // backgroundColor: Color.fromARGB(255, 198, 127, 121),

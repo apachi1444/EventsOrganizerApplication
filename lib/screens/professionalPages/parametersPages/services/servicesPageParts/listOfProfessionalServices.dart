@@ -40,10 +40,12 @@ class ListOfProfessionalServices extends StatelessWidget {
                       print(allDocs[index]);
                       String description = ourLastElement['description'];
                       String price = ourLastElement['price'];
-                      String category = ourLastElement['category'];
+                      String category = ourLastElement['title'];
                       String date = ourLastElement['dateTime'];
+                      String image = ourLastElement['image'];
                       return ServiceDetailsBox(
                         // uid : serviceUid,
+                        image:  image,
                         description: description,
                         price: price,
                         category: category,

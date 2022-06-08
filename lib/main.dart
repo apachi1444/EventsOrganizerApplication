@@ -9,6 +9,7 @@ import 'package:pfs/extensions/routes.dart';
 import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 import 'package:provider/provider.dart';
 
+import 'extensions/constants.dart';
 import 'extensions/utils.dart';
 
 void main() async {
@@ -41,8 +42,9 @@ class App extends StatelessWidget {
         navigatorKey: navigatorKey,
         title: 'Firebase Meetup',
         theme: ThemeData(
+          backgroundColor: const Color(ConstantColors.KPinkColor),
           buttonTheme: Theme.of(context).buttonTheme.copyWith(
-                highlightColor: Colors.deepPurple,
+                highlightColor: const Color(ConstantColors.KPinkColor),
               ),
           primarySwatch: Colors.deepPurple,
           textTheme: GoogleFonts.robotoTextTheme(

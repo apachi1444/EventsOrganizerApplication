@@ -30,9 +30,18 @@ class PlusButton extends StatelessWidget {
 }
 
 void _showTheAddServiceBottomModal(BuildContext context) {
-  showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc) {
-        return const AddServicePopUpModal();
-      });
+  // showModalBottomSheet(
+  //     isScrollControlled: true,
+  //     context: context,
+  //     builder: (BuildContext bc) {
+  //       return SingleChildScrollView(
+  //           child: Padding(
+  //             padding: MediaQuery.of(context).viewInsets,
+  //         child: const AddServicePopUpModal(),
+  //       ));
+  //     });
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const AddServicePopUpModal()),
+  );
 }
