@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccesOrFailure.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccessOrFailure.dart';
 import 'package:pfs/services/professionalServiceService.dart';
 
 import 'dart:io';
@@ -10,6 +10,8 @@ import '../../../../../extensions/constants.dart';
 import '../../../../../extensions/listOfCategories.dart';
 import '../../../../../services/authService.dart';
 import '../../../../authPages/inputTextWidget.dart';
+import 'package:intl/intl.dart';
+
 
 class AddServicePopUpModal extends StatefulWidget {
   const AddServicePopUpModal({Key? key}) : super(key: key);
@@ -73,8 +75,10 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                   });
                 } else {
                   storage.downloadFile(currentUserUid!, fileName).then((value) {
+                    final now = DateTime.now();
+                    String formatter = DateFormat('yMd').format(now);
                     professionalServiceService.addServiceToProfessional(
-                        DateTime.now().toString(),
+                        formatter,
                         selectedItem!,
                         _descriptionController.text.trim(),
                         _priceController.text.trim(),
@@ -252,7 +256,6 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
             title: const Text('Step 3 : Upload Your Images Here'),
             content: GestureDetector(
               onTap: () async {
-                // pickFile();
                 final results = await FilePicker.platform.pickFiles(
                   allowMultiple: true,
                 );
@@ -266,9 +269,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 }
 
                 final path = results.files.single.path;
-                var fileNamee = results.files.single.name;
-                print('this is the **** file Name');
-                print(fileNamee);
+
 
                 setState(() {
                   image = File(path!);
@@ -289,33 +290,9 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                         const Icon(Icons.image),
                         const Text('Upload your images here'),
                         const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Text(
-                              fileName,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                // uploadFile(currentUserUid!).then((value) {
-                                //   print("htis is the vlaue");
-                                //   print(value);
-                                //   setState(() {
-                                //     finalNameImage = value;
-                                //   });
-                                // });
-                              },
-                              child: Container(
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(ConstantColors.KPinkColor),
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(3.0),
-                                    child: Icon(Icons.confirmation_num,
-                                        color: Colors.white),
-                                  )),
-                            )
-                          ],
+                        Text(
+                          fileName,
+
                         ),
                       ]),
                     ),
