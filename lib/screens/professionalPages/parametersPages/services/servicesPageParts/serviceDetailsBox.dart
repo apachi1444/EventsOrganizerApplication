@@ -1,5 +1,4 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../Models/Storage.dart';
@@ -15,13 +14,15 @@ class ServiceDetailsBox extends StatelessWidget {
       required this.date,
       required this.description,
       required this.price,
-      required this.image})
+      required this.image,
+      required this.networkImage})
       : super(key: key);
   final String image;
   final String category;
   final String date;
   final String description;
   final String price;
+  final String networkImage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class ServiceDetailsBox extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     void _deleteService() {
       print('deleted button selected');
-      ProfessionalServiceService(professionalUid: uid!).deleteService(uid!);
+      ProfessionalServiceService(professionalUid: uid!).deleteService(uid);
     }
 
     return Container(
@@ -45,27 +46,20 @@ class ServiceDetailsBox extends StatelessWidget {
           child: Column(
             children: [
               FutureBuilder(
-                  future :Storage().listFiles(ProfessionalPreferences.getUid()),
-                  builder: (context , AsyncSnapshot<ListResult> snapshot){
-                    if(  snapshot.connectionState== ConnectionState.done &&
-                        snapshot.hasData){
-                      // return Expanded(
-                      //   child: ListView.builder(
-                      //     itemCount : 4,
-                      //     itemBuilder: (BuildContext context , int index){
-                      //       return Text("ahaha");
-                      //     },
-                      //   ),
-                      // );
-                      return Text("Yessine Jaoua");
+                  future: Storage().listFiles(ProfessionalPreferences.getUid()),
+                  builder: (context, AsyncSnapshot<ListResult> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done &&
+                        snapshot.hasData) {
+                      return const Text("Yessine Jaoua");
                     }
                     return const Text("there is no data");
-    }
-              ),
+                  }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(category ?? '', style: const TextStyle(color: Colors.white , fontSize : 20)),
+                  Text(category,
+                      style:
+                          const TextStyle(color: Colors.white, fontSize: 20)),
                   Row(children: [
                     GestureDetector(
                         onTap: () {
@@ -78,34 +72,33 @@ class ServiceDetailsBox extends StatelessWidget {
                   ]),
                 ],
               ),
-              const SizedBox(height : 10),
+              const SizedBox(height: 10),
               Row(
-                children: const [
+                children:  [
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 16,
                     child: CircleAvatar(
                       radius: 14,
-                      backgroundImage:
-                          NetworkImage('https://picsum.photos/250?image=9'),
+                      backgroundImage: NetworkImage(networkImage),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 14,
+                    radius: 16,
                     child: CircleAvatar(
-                      radius: 11,
-                      backgroundImage: AssetImage('assets/googleIcon.png'),
+                      radius: 14,
+                      backgroundImage: NetworkImage(networkImage),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   CircleAvatar(
                     backgroundColor: Colors.white,
-                    radius: 14,
+                    radius: 16,
                     child: CircleAvatar(
-                      radius: 11,
-                      backgroundImage: AssetImage('assets/googleIcon.png'),
+                      radius: 14,
+                      backgroundImage: NetworkImage(networkImage),
                     ),
                   ),
                 ],
@@ -113,19 +106,21 @@ class ServiceDetailsBox extends StatelessWidget {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  const Text('description :' ?? '' , style: TextStyle(color: Colors.white , fontSize : 16)),
-                  const SizedBox(width:7),
-                  Text(description ?? ''),
+                  const Text('description :',
+                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                  const SizedBox(width: 7),
+                  Text(description),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Text('price :' ?? '' , style: TextStyle(color: Colors.white , fontSize : 16)),
-                  const SizedBox(width:7),
-                  Text(price ?? ''),
-                  const SizedBox(width:3),
-                  const Text( '\$'),
+                  const Text('price :',
+                      style: TextStyle(color: Colors.white, fontSize: 16)),
+                  const SizedBox(width: 7),
+                  Text(price),
+                  const SizedBox(width: 3),
+                  const Text('\$'),
                 ],
               ),
 
@@ -139,7 +134,7 @@ class ServiceDetailsBox extends StatelessWidget {
                   Row(children: [
                     const Icon(Icons.date_range_outlined),
                     const SizedBox(width: 4),
-                    Text(date ?? '',
+                    Text(date,
                         style: const TextStyle(fontWeight: FontWeight.bold))
                   ]),
                 ],

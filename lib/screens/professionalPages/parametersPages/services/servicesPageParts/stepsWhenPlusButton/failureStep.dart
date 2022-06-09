@@ -20,15 +20,22 @@ class FailureStep extends StatelessWidget {
             left: MediaQuery.of(context).size.width * 0.3,
             right: MediaQuery.of(context).size.width * 0.3,
             child: FlatButton(
-              color: const Color(ConstantColors.KGreenColor),
+              color: const Color(ConstantColors.KPinkColor),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50)),
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text(
-                "Try Again".toUpperCase(),
-                style: TextStyle(color: Colors.white),
+              child: Row(
+                children: [
+                  const Icon(Icons.stop_screen_share_outlined,
+                      color: Colors.white),
+                  const SizedBox(width: 5),
+                  Text(
+                    "Try Again".toUpperCase(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ],
               ),
             ),
           )
