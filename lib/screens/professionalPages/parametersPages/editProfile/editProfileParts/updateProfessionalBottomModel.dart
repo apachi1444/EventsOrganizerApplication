@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/services/professionalDbService.dart';
 
 import '../../../../../extensions/constants.dart';
+import '../../../../../extensions/validators.dart';
 import '../../../../authPages/inputTextWidget.dart';
 
 class UpdateProfessionalBottomModel extends StatelessWidget {
@@ -36,18 +37,21 @@ class UpdateProfessionalBottomModel extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               InputTextWidget(
+                  validate: FirstNameValidator.validate,
                   icon: Icons.person,
                   controllerUsedInInput: _firstNameController,
                   inputHintText: 'update Your Name',
                   isPassword: false),
               const SizedBox(height: 15),
               InputTextWidget(
+                  validate: LastNameValidator.validate,
                   icon: Icons.person,
                   controllerUsedInInput: _lastNameController,
                   inputHintText: 'update Your Last Name',
                   isPassword: false),
               const SizedBox(height: 20),
               InputTextWidget(
+                validate: LocalisationValidator.validate,
                   icon: Icons.map_rounded,
                   controllerUsedInInput: _localisationController,
                   inputHintText: 'update Your Localisation',

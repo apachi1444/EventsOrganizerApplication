@@ -46,13 +46,9 @@ class AuthService {
   }
 
   Future signInWithEmailAndPassword(
-      String email, String password, BuildContext context) async {
+      String email, String password) async {
     Professional? currentProfessional;
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
+
     UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
     User? user = result.user;
@@ -68,7 +64,6 @@ class AuthService {
       String lastName = currentProfessional.last_name;
       String localisation = currentProfessional.localisation;
       int age = currentProfessional.age;
-      print('before doing the shared preferences');
       ProfessionalPreferences.addingProfessionalDataToSharedPreferences(
           email, age, firstName, lastName, localisation, user.uid);
     });
@@ -105,11 +100,12 @@ class AuthService {
       // create a new document for the user with that uid
       await ProfessionalDatabaseService(uid: user!.uid).updateProfessionalData(
           email, firstName, lastName, localisation, age);
-      return _useFromFirebaseUser(user);
+    _useFromFirebaseUser(user);
+    return 'Signed Up Successfully';
       // ignore: empty_catches
     } catch (e) {
       print(e.toString());
-      return null;
+      return e.toString();
     }
   }
 }

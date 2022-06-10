@@ -64,6 +64,7 @@ class EditProfileProfessionalPage extends StatelessWidget {
                             },
                             onSelected: (index) {
                               AuthService().signOut();
+                              Navigator.pushNamedAndRemoveUntil(context, '/authProfessional', (r) => false);
                             }),
                       )
                     ])),

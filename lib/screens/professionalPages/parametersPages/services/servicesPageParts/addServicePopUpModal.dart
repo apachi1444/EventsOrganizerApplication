@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
+import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccessOrFailure.dart';
 import 'package:pfs/services/professionalServiceService.dart';
 
@@ -232,6 +233,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
               child: Column(children: [
                 SingleChildScrollView(
                   child: InputTextWidget(
+                    validate: DescriptionValidator.validate,
                     isPassword: false,
                     icon: Icons.description,
                     inputHintText: 'Description Here !',
@@ -241,6 +243,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 const SizedBox(height: 12),
                 SingleChildScrollView(
                   child: InputTextWidget(
+                    validate : PriceValidator.validate,
                     isPassword: false,
                     icon: Icons.price_change,
                     inputHintText: 'Price Here !',

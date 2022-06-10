@@ -288,7 +288,8 @@ class _HomePageState extends State<HomePage>
   return SafeArea(
     child: ElevatedButton(
       onPressed:(){
-        AuthService().signOut();
+        _auth.signOut();
+        Navigator.pushNamedAndRemoveUntil(context, "/authProfessional", (r) => false);
       },
       child: Text("Log Out Here")
     ),

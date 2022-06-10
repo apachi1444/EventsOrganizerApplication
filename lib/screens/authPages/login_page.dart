@@ -202,6 +202,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/utils.dart';
+import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../extensions/constants.dart';
@@ -228,6 +229,21 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  Future doTheLogin() async {
+    try {
+      var aa = await _auth.signInWithEmailAndPassword(
+        _emailController.text.trim(),
+        _passwordController.text.trim(),
+      );
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/professional/switchMainPage', (r) => false);
+    } catch (e) {
+      setState(() {
+        error = e.toString();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     bool? isChecked = false;
@@ -241,36 +257,27 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Column(children: <Widget>[
                   const NavBarItemStartPages(),
-
                   const SizedBox(height: 30),
-
                   const Text('Welcome Abroad User',
                       style: TextStyle(
-                        // color : Color(0XFFFF006B),
                         fontSize: 30,
                       )),
-
                   const SizedBox(height: 20),
-
                   InputTextWidget(
+                      validate: EmailValidator.validate,
                       inputHintText: 'Enter Your Email Here',
                       controllerUsedInInput: _emailController,
                       icon: Icons.email,
                       isPassword: false),
-
                   const SizedBox(height: 20),
-
                   InputTextWidget(
+                    validate: PasswordValidator.validate,
                     inputHintText: 'Enter Your Password Here',
                     controllerUsedInInput: _passwordController,
                     icon: Icons.lock,
                     isPassword: true,
                   ),
-
                   const SizedBox(height: 20),
-
-                  // this part for the line of forget password and remember me !
-
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 0.0),
@@ -304,9 +311,7 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         ]),
                   ),
-
                   const SizedBox(height: 25),
-
                   Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Container(
@@ -319,13 +324,77 @@ class _LoginPageState extends State<LoginPage> {
                         child: GestureDetector(
                           onTap: () async {
                             final isValid = _formKey.currentState!.validate();
-                            if (!isValid) {
+                            if (isValid) {
+                              try {
+                                var doLogin = await doTheLogin();
+
+                                // if (doLogin != null) {
+                                // } else {
+                                //   showDialog(
+                                //       context: context,
+                                //       builder: (context) => AlertDialog(
+                                //             title: const Text(
+                                //                 'Error in the Login',
+                                //                 style: TextStyle(
+                                //                     color: Color(ConstantColors
+                                //                         .KPinkColor))),
+                                //             content: Text(error),
+                                //             actions: [
+                                //               TextButton(
+                                //                   onPressed: () =>
+                                //                       Navigator.pop(context),
+                                //                   child: const Text('Cancel')),
+                                //             ],
+                                //           ));
+                                // }
+                              } catch (e) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text('Error',
+                                                  style: TextStyle(
+                                                      color: Color(
+                                                          ConstantColors
+                                                              .KPinkColor))),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Icon(Icons.close,
+                                                    color: Color(ConstantColors
+                                                        .KPinkColor)),
+                                              ),
+                                            ],
+                                          ),
+                                          content: Text(error),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: const Text('Cancel')),
+                                          ],
+                                        ));
+                              }
+
+                              return;
+
+                              // Utils.showSnackBar(e.toString());
+                              // Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                            } else {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: const Text('This is the Error'),
+                                        title: const Text(
+                                            'There is An error in the login',
+                                            style: TextStyle(
+                                                color: Color(ConstantColors
+                                                    .KPinkColor))),
                                         content: const Text(
-                                            'Please check again your email and your password'),
+                                            'There was an error in the login please try again'),
                                         actions: [
                                           TextButton(
                                               onPressed: () =>
@@ -333,35 +402,6 @@ class _LoginPageState extends State<LoginPage> {
                                               child: const Text('Cancel')),
                                         ],
                                       ));
-                              log('this is not valid');
-                              return;
-                            }
-                            try {
-                              await AuthService().signInWithEmailAndPassword(
-                                  _emailController.text.trim(),
-                                  _passwordController.text.trim(),
-                                  context);
-                              navigatorKey.currentState!
-                                  .popUntil((route) => route.isFirst);
-                            } catch (e) {
-                              print(e);
-                              navigatorKey.currentState!
-                                  .popUntil((route) => route.isFirst);
-                              // showDialog(
-                              //     context: context,
-                              //     builder: (context) => AlertDialog(
-                              //           title: const Text(
-                              //               'There is An error in the server'),
-                              //           content: const Text(
-                              //               'There was an error in the login please try again'),
-                              //           actions: [
-                              //             TextButton(
-                              //                 onPressed: () =>
-                              //                     Navigator.pop(context),
-                              //                 child: const Text('Cancel')),
-                              //           ],
-                              //         ));
-                              Utils.showSnackBar(e.toString());
                             }
                           },
                           child: const Center(
@@ -373,15 +413,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       )),
-
-                  // this for the line indicating the OR Text with the lines next to the text
-
                   const SizedBox(height: 10),
-
                   const SignInUsingThirdApis(),
-
                   const SizedBox(height: 10),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
