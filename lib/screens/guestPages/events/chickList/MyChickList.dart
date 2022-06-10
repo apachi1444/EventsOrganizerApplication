@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:pfs/extensions/constants.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
 import 'package:pfs/screens/guestPages/events/chickList/addEvenet.dart';
+import 'package:pfs/screens/guestPages/events/event/event.dart';
 import 'package:pfs/screens/guestPages/events/event/todoList_page.dart';
 import 'package:pfs/screens/guestPages/events/guest/guestPage.dart';
 import 'package:pfs/sharedPreferences/GuestPreferences.dart';
@@ -43,7 +44,7 @@ class MyCheckListState extends State<MyCheckList> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Setting(),
+                    builder: (context) => const Event(),
                   ));
             });
           },
@@ -112,7 +113,7 @@ class MyCheckListState extends State<MyCheckList> {
                                     });
                                   },
                                   child: CheckingCard(
-                                      'Guest', Icons.account_balance),
+                                      'Guest', Icons.person_add_alt),
                                 ),
                                 TextButton(
                                   style: TextButton.styleFrom(
@@ -155,7 +156,7 @@ class MyCheckListState extends State<MyCheckList> {
                                   });
                                 },
                                 child:
-                                    CheckingCard('Budget', Icons.wallet_travel),
+                                    CheckingCard('Budget', Icons.monetization_on_outlined),
                               ),
                             ],
                           )
@@ -225,7 +226,7 @@ Padding CheckingCard(String title, IconData icon) {
     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
     child: Center(
       child: Container(
-        width: 120,
+        width: 100,
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 248, 244, 244),
           borderRadius: BorderRadius.only(
@@ -235,10 +236,10 @@ Padding CheckingCard(String title, IconData icon) {
               topRight: Radius.circular(20)),
           boxShadow: [
             BoxShadow(
-              blurRadius: 7.0,
+              blurRadius: 1.0,
               offset: Offset(
-                5,
-                5,
+                1,
+                1,
               ),
             ),
           ],
@@ -296,8 +297,8 @@ Padding MainCard(String title) {
           const SizedBox(height: 15),
           Row(
             children: [
-              CheckingCard('Guist', Icons.account_balance),
-              CheckingCard('To Do List', Icons.article),
+              CheckingCard('Guist', Icons.person_add_alt),
+              CheckingCard('To Do List', Icons.monetization_on_outlined),
               CheckingCard('Proffitionnel', Icons.wallet_travel),
             ],
           ),

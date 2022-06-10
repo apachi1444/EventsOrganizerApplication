@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/Models/Service.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
 import 'package:pfs/screens/guestPages/events/chickList/MyChickList.dart';
+import 'package:pfs/screens/guestPages/events/event/event.dart';
 import 'package:pfs/screens/guestPages/home/home_page_guest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
 import 'package:pfs/screens/guestPages/searchPage/search_page.dart';
@@ -26,7 +27,7 @@ class GuestSwitchMainPage extends StatefulWidget {
 }
 
 class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
-  int _index = 2;
+  int _index = 1;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -46,7 +47,7 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
 
   final screens = [
     const HomePageGuest(),
-    const MyCheckingList(),
+    const MyEvent(),
     SearchScreen(),
     const BudgetPage(),
     const ProfilePageGuest(),

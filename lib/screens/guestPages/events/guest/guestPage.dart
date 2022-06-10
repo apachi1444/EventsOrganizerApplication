@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/event/addTask.dart';
+import 'package:pfs/screens/guestPages/events/guest/addGuest.dart';
 
 import '../../../../extensions/constants.dart';
 import '../chickList/MyChickList.dart';
@@ -49,13 +50,13 @@ class _GuestState extends State<Guest> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          backgroundColor: Color.fromARGB(255, 241, 11, 88),
+          backgroundColor: const Color.fromARGB(255, 241, 11, 88),
           child: const Icon(Icons.add),
           onPressed: () {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const AddTask();
+                return const AddGuest();
               },
             );
           }
