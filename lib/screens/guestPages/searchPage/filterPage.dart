@@ -188,6 +188,8 @@ class _RectangleOfLocalisationFilterState
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       onSelected: (bool newValue) {
         Utils.toggleTheParameterOfSearchPreference(keyPreference, isSelected);
+        print(SearchFiltersPreferences.getDj());
+        print(Utils.displayValueOfFilterKey(keyPreference));
         setState(() {
           isSelected = !isSelected;
         });

@@ -52,6 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
           centerTitle: true,
           elevation: 0.5,
           title: const Text('This is the Search Page'),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
         ),
         body: Center(
           child: Column(

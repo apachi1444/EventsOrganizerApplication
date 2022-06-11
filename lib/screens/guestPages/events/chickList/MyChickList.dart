@@ -37,22 +37,7 @@ class MyCheckListState extends State<MyCheckList> {
         title: const Center(
           child: Text('My Checking List'),
         ),
-        leading: IconButton(
-          onPressed: () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Setting(),
-                  ));
-            });
-          },
-          color: Colors.black,
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
+
         backgroundColor: const Color.fromARGB(255, 255, 0, 107),
       ),
       // backgroundColor: Color.fromARGB(255, 198, 127, 121),

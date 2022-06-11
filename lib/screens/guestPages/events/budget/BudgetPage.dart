@@ -19,22 +19,6 @@ class BudgetPage extends StatelessWidget {
               title: const Center(
                 child: Text('My Budget'),
               ),
-              leading: IconButton(
-                onPressed: () {
-                  WidgetsBinding.instance?.addPostFrameCallback((_) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyCheckingList(),
-                        ));
-                  });
-                },
-                color: Colors.black,
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              ),
               backgroundColor: const Color.fromARGB(255, 255, 0, 107),
             ),
             // backgroundColor: Color.fromARGB(255, 198, 127, 121),
