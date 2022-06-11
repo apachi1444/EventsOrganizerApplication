@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/events/budget/addBudget.dart';
 
 import '../../../../extensions/constants.dart';
+import '../../../../services/budget_services.dart';
 import '../chickList/MyChickList.dart';
 
-class BudgetPage extends StatelessWidget {
+class BudgetPage extends StatefulWidget {
   const BudgetPage({Key? key}) : super(key: key);
+
+  @override
+  State<BudgetPage> createState() => _BudgetPageState();
+}
+
+class _BudgetPageState extends State<BudgetPage> {
+  TextEditingController todoTitleController = TextEditingController();
+  TextEditingController todoDescriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +37,11 @@ class BudgetPage extends StatelessWidget {
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
-                    return Text('Something went wrong');
+                    return const Text('Something went wrong');
                   }
 
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading");
+                    return const Text('Loading');
                   }
 
                   return Center(
@@ -47,11 +56,11 @@ class BudgetPage extends StatelessWidget {
                         children: [
                           //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
                           const SizedBox(height: 15),
-                          const Text("Today",
+                          const Text('Today',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30)),
                           MainCard(),
-                          const Text("Details",
+                          const Text('Details',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30)),
                           Expanded(
@@ -85,31 +94,120 @@ class BudgetPage extends StatelessWidget {
                                   topLeft: Radius.circular(50),
                                   topRight: Radius.circular(50),
                                 )),
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 255, 255, 255)),
-                              onPressed: () {
-                                WidgetsBinding.instance
-                                    ?.addPostFrameCallback((_) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const AddBudget(),
-                                      ));
-                                });
-                              },
-                              child: Container(
-                                width: 200,
-                                child: Row(
-                                  children: const [
-                                    Icon(Icons.add),
-                                    SizedBox(width: 15),
-                                    Text('Add Detail',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                        )),
-                                  ],
+                            child: SingleChildScrollView(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                    primary: const Color.fromARGB(
+                                        255, 255, 255, 255)),
+                                onPressed: () {
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 25, vertical: 20),
+                                      title: Row(children: [
+                                        const Text(
+                                          'Add New Detail',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        IconButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          icon: const Icon(Icons.cancel,
+                                              color: Colors.grey),
+                                        ),
+                                      ]),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 8),
+                                          TextFormField(
+                                            controller: todoTitleController,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              //height: 1.5,
+
+                                              //color: Color.fromARGB(255, 95, 18, 119),
+                                            ),
+                                            decoration: const InputDecoration(
+                                              hintText: 'Title',
+                                              hintStyle: TextStyle(
+                                                color: Color.fromARGB(
+                                                    179, 63, 60, 60),
+                                              ),
+                                              //border: UnderlineInputBorder(),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          TextFormField(
+                                            controller:
+                                                todoDescriptionController,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              // height: 1,
+                                              //color: Color.fromARGB(255, 216, 81, 81),
+                                            ),
+                                            decoration: const InputDecoration(
+                                              hintText: 'Prix',
+                                              hintStyle: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      179, 63, 60, 60)),
+//                border: UnderlineInputBorder(),
+                                            ),
+                                            maxLines: 1,
+                                          ),
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            final title =
+                                                todoTitleController.text;
+                                            final description =
+                                                todoDescriptionController.text;
+
+                                            BudgetServices add =
+                                                BudgetServices();
+                                            add.addBudget(
+                                                title: title,
+                                                prix: description);
+                                            // if (todoTitleController.text.isNotEmpty) {
+                                            //   print(todoTitleController.text);
+                                            print("user added");
+
+                                            Navigator.pop(context, 'add');
+                                            // }
+                                          },
+                                          child:
+                                              const Center(child: Text('add')),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: 200,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(Icons.add),
+                                      SizedBox(width: 15),
+                                      Center(
+                                        child: Text('Add Detail',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -199,7 +297,6 @@ class BudgetPage extends StatelessWidget {
       ),
     );
   }
-// SwitchSettingsTile
 }
 
 Padding CheckingCard(String title, IconData icon) {
@@ -224,27 +321,25 @@ Padding CheckingCard(String title, IconData icon) {
           ),
         ],
       ),
-      child: Container(
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
+      child: Column(
+        //mainAxisSize: MainAxisSize.min,
 
-          children: [
-            SizedBox(height: 15),
-            Icon(
-              icon,
-              size: 40,
-            ), //text=Icons.account_balance
-            Align(
-              alignment: Alignment.topRight,
-              child: ListTile(
-                title: Text(
-                  title,
-                ),
-                subtitle: Text('0/100'),
+        children: [
+          const SizedBox(height: 15),
+          Icon(
+            icon,
+            size: 40,
+          ), //text=Icons.account_balance
+          Align(
+            alignment: Alignment.topRight,
+            child: ListTile(
+              title: Text(
+                title,
               ),
+              subtitle: const Text('0/100'),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     ),
   );
@@ -255,18 +350,16 @@ Padding MainCard() {
     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 0),
-      child: Container(
-        child: Column(
-          children: [
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                CheckingCard("My current budget", Icons.account_balance),
-                CheckingCard("Total", Icons.account_balance),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              CheckingCard('My current budget', Icons.account_balance),
+              CheckingCard('Total', Icons.account_balance),
+            ],
+          ),
+        ],
       ),
     ),
   );
