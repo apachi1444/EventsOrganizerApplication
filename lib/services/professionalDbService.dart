@@ -56,7 +56,7 @@ class ProfessionalDatabaseService {
       email: doc['email'],
       first_name: doc['first_name'],
       last_name: doc['last_name'],
-      age: int.parse(doc['age'].toString()),
+      age:doc['age'],
       localisation: doc['localisation'],
     );
   }

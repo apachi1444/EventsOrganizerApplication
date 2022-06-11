@@ -79,11 +79,14 @@ class CustomCategoryFilter extends StatelessWidget {
       child: Wrap(spacing: 5, runSpacing: 3, children: const [
         RectangleOfLocalisationFilter(name: 'Dj', image: 'assets/djPhoto.jpg'),
         SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: 'Traiteur', image: 'assets/dollar.png'),
+        RectangleOfLocalisationFilter(
+            name: 'Traiteur', image: 'assets/traiteur.jpg'),
         SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: 'Neggafe', image: 'assets/dollar.png'),
+        RectangleOfLocalisationFilter(
+            name: 'Neggafe', image: 'assets/neggafa.jpg'),
         SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: 'Fiaaa', image: 'assets/dollar.png'),
+        RectangleOfLocalisationFilter(
+            name: 'Fiancee', image: 'assets/fiancee.jpg'),
       ]),
     );
     // return const ChoiceOfCategoryFilter(name: 'Dj');
@@ -99,12 +102,8 @@ class CustomPriceFilter extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Wrap(spacing: 5, runSpacing: 3, children: const [
         RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
-        SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
-        SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
-        SizedBox(width: 5),
-        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+        // SizedBox(width: 5),
+        // RectangleOfLocalisationFilter(name: '>200', image: 'assets/dollar.png'),
       ]),
     );
   }
@@ -167,10 +166,17 @@ class _RectangleOfLocalisationFilterState
   @override
   Widget build(BuildContext context) {
     return ChoiceChip(
-      avatar:
-          Image.asset(widget.image, height: 20, width: 20, fit: BoxFit.cover),
+      avatar: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(widget.image,
+                height: MediaQuery.of(context).size.height * 0.06,
+                width: MediaQuery.of(context).size.width * 0.17,
+                fit: BoxFit.cover)),
+      ),
       label: Text(widget.name),
-      labelPadding: const EdgeInsets.all(3),
+      labelPadding: const EdgeInsets.all(20),
       labelStyle: isSelected
           ? const TextStyle(
               color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)
@@ -256,10 +262,10 @@ class CustomLocalisationFilter extends StatelessWidget {
             name: 'Casablanca', image: 'assets/casablance.jpg'),
         SizedBox(width: 2),
         RectangleOfLocalisationFilter(
-            name: 'Agadir', image: 'assets/googleIcon.png'),
+            name: 'Agadir', image: 'assets/agadir.jpg'),
         SizedBox(width: 2),
         RectangleOfLocalisationFilter(
-            name: 'Marrakech', image: 'assets/googleIcon.png'),
+            name: 'Marrakech', image: 'assets/marrakech.jpg'),
         SizedBox(width: 8),
       ]),
     );

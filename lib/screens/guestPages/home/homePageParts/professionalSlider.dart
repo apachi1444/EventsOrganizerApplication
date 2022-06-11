@@ -2,39 +2,47 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages//home/homePageParts/professionalBoxInHomePage.dart';
+import 'package:pfs/services/guestService.dart';
 
 import 'categorySlider.dart';
 
 class ProfessionalSlider extends StatelessWidget {
-  const ProfessionalSlider({Key? key}) : super(key: key);
+  const ProfessionalSlider(
+      {Key? key, required this.guestUid, required this.professionalUid})
+      : super(key: key);
+  final String? guestUid;
+  final String? professionalUid;
 
   @override
   Widget build(BuildContext context) {
-    bool isCarousel = true;
-    return isCarousel
-        ? CarouselSlider(
-            options: CarouselOptions(
-                enlargeCenterPage: true,
-                enableInfiniteScroll: true,
-                autoPlay: false,
-                height: 265),
-            items: [
-              const ProfessionalBoxInHomePage(),
-              const ProfessionalBoxInHomePage(),
-              const ProfessionalBoxInHomePage(),
-
-              // this part for trying the chip component
-              Chip(
-                  label: const Text('This is the text inside the chip'),
-                  avatar:
-                      CircleAvatar(child: Image.asset('assets/googleIcon.png')),
-                  onDeleted: () {
-                    print('this is the delete part in the chip component');
-                  }),
-
-              // this part for trying the clipreact part
-            ],
-          )
-        : const CategorySlider();
+    int numberOfServices = 0;
+    return StreamBuilder<Object>(
+        stream: GuestService(guestUid: guestUid)
+            .getAllServicesOfParticularProfessional(professionalUid!),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.none) {
+            return const Text("this is an error");
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text("ahahah");
+          } else {
+            print("quills");
+            return CarouselSlider.builder(
+              options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  autoPlay: false,
+                  height: MediaQuery.of(context).size.height * 0.32),
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                // String description = snapshot.data[index].getDescription();
+                // String dateTime = snapshot.data[index].getDateTime();
+                // String image = snapshot.data[index].getImage();
+                // String price = snapshot.data[index].getPrice();
+                // String title = snapshot.data[index].getTitle();
+                return const ProfessionalBoxInHomePage();
+              },
+            );
+          }
+        });
   }
 }

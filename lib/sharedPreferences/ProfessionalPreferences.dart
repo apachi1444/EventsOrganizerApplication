@@ -38,10 +38,10 @@ class ProfessionalPreferences {
       await _sharedPreferences?.setString(_keyEmail, email);
   static String? getEmail() => _sharedPreferences?.getString(_keyEmail);
 
-  static Future setAge(int age) async =>
-      await _sharedPreferences?.setInt(_keyAge, age);
+  static Future setAge(String age) async =>
+      await _sharedPreferences?.setString(_keyAge, age);
 
-  static int? getAge() => _sharedPreferences?.getInt(_keyAge);
+  static String? getAge() => _sharedPreferences?.getString(_keyAge);
 
   static Future setLocalisation(String localisation) async =>
       await _sharedPreferences?.setString(_keyLocalisation, localisation);
@@ -49,7 +49,7 @@ class ProfessionalPreferences {
   static String? getLocalisation() =>
       _sharedPreferences?.getString(_keyLocalisation);
 
-  static void addingProfessionalDataToSharedPreferences(String email, int age,
+  static void addingProfessionalDataToSharedPreferences(String email, String age,
       String firstName, String lastName, String localisation, String uid) {
     ProfessionalPreferences.setEmail(email);
     ProfessionalPreferences.setAge(age);

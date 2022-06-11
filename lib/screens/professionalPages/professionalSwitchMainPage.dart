@@ -19,7 +19,7 @@ class ProfessionalSwitchMainPage extends StatefulWidget {
 
 class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
-  int _index = 1;
+  int _index = 0;
 
   void _navigateBottomBar(int index) {
     setState(() {

@@ -6,8 +6,10 @@ import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/expa
 import '../../../../../extensions/constants.dart';
 
 class TextDescriptionProfessionalDetailPage extends StatelessWidget {
-  const TextDescriptionProfessionalDetailPage({Key? key}) : super(key: key);
+  const TextDescriptionProfessionalDetailPage({Key? key, required this.description, required this.price}) : super(key: key);
 
+  final String description ;
+  final String price;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,21 +23,21 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               )),
           const SizedBox(height: 15),
-          const Text(
-              'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum last_name SingleTickerProviderStateMixin _lastNameController last_name last_namev last_namev hqhhqhqhdsfqskdfhkjsqdfhkjsqdhfkjsqdhfkj sjkdqfhqskjd fhjksqdhfjksldhf',
-              style: TextStyle(
+          Text(
+              description,
+              style: const TextStyle(
                   fontWeight: FontWeight.w100, color: Colors.blueGrey)),
 
           const SizedBox(height: 20),
           // this is for the price of the professionalDetail
 
           Row(
-            children: const [
-              Icon(Icons.monetization_on,
+            children:  [
+              const Icon(Icons.monetization_on,
                   color: Color(ConstantColors.KPinkColor), size: 25),
-              SizedBox(width: 10),
-              Text('200 £',
-                  style: TextStyle(
+              const SizedBox(width: 10),
+              Text('$price £',
+                  style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ))

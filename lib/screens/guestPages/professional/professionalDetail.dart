@@ -18,7 +18,7 @@ class ProfessionalDetail extends StatelessWidget {
             SizedBox(height: 36),
         // This container for the details of the professional that we gonna contact
             DesscriptionBoxProfessionalDetail(),
-            TextDescriptionProfessionalDetailPage(),
+            TextDescriptionProfessionalDetailPage(price: '', description: '',),
       ])),
     );
   }
