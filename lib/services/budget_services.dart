@@ -2,23 +2,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/Models/Budget.dart';
 
 class BudgetServices {
+  final budgets = FirebaseFirestore.instance.collection('budget');
   Future addBudget({required String title, required String prix}) async {
-    final taskCollection = FirebaseFirestore.instance.collection('budget').doc();
+    final budgetCollection = budgets.doc();
 
     final task = Budget(
-      id: taskCollection.id,
+      id: budgetCollection.id,
       title: title,
       prix: prix,
     );
 
     final json = task.toJson();
-    await taskCollection.set(json);
+    await budgetCollection.set(json);
   }
 
-// Stream<List<Task>> readTasks() {
-//   return FirebaseFirestore.instance
-//       .collection('tasks')
-//       .snapshots() //to get docs
-//       .map((doc) => Task.fromJson(doc.data()).toL);
-// }
+  Future<void> deleteGuest(String guestId) async {
+    await budgets.doc(guestId).delete();
+  }
+
+  Stream<List<Budget>> readguests() {
+    return FirebaseFirestore.instance.collection('budget').snapshots().map(
+        (snapshot) =>
+            snapshot.docs.map((doc) => (Budget.fromJson(doc.data()))).toList());
+  }
 }
