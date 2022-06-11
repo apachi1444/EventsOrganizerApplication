@@ -20,15 +20,19 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:  [
               const Text('Description',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   )),
-              Container(
-
-              )
+              Row(children:  [
+                const Icon(Icons.date_range_outlined),
+                const SizedBox(width: 6),
+                Text(dateTime,
+                    style: const TextStyle(fontWeight: FontWeight.bold))
+              ])
             ],
           ),
           const SizedBox(height: 15),
