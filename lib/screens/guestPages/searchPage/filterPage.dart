@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pfs/extensions/utils.dart';
 
 import '../../../extensions/constants.dart';
+import '../../../sharedPreferences/SearchFiltersPreferences.dart';
 
 var listOfPrices = [
   {'Price': 200},
@@ -83,7 +85,7 @@ class CustomCategoryFilter extends StatelessWidget {
             name: 'Traiteur', image: 'assets/traiteur.jpg'),
         SizedBox(width: 5),
         RectangleOfLocalisationFilter(
-            name: 'Neggafe', image: 'assets/neggafa.jpg'),
+            name: 'Neggafa', image: 'assets/neggafa.jpg'),
         SizedBox(width: 5),
         RectangleOfLocalisationFilter(
             name: 'Fiancee', image: 'assets/fiancee.jpg'),
@@ -101,7 +103,7 @@ class CustomPriceFilter extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(spacing: 5, runSpacing: 3, children: const [
-        RectangleOfLocalisationFilter(name: '<200', image: 'assets/dollar.png'),
+        RectangleOfLocalisationFilter(name: 'Under200', image: 'assets/dollar.png'),
         // SizedBox(width: 5),
         // RectangleOfLocalisationFilter(name: '>200', image: 'assets/dollar.png'),
       ]),
@@ -130,7 +132,7 @@ class RectangleOfPriceFilter extends StatelessWidget {
     //               color: Color(ConstantColors.KGreenColor), fontSize: 21))),
     // );
     return ChoiceChip(
-      label: const Text('<200'),
+      label: const Text('Under200'),
       labelPadding: const EdgeInsets.all(16),
       labelStyle: const TextStyle(
           color: Color(ConstantColors.KPinkColor),
@@ -162,9 +164,11 @@ class RectangleOfLocalisationFilter extends StatefulWidget {
 class _RectangleOfLocalisationFilterState
     extends State<RectangleOfLocalisationFilter> {
   bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
+    final String keyPreference = '_key'+widget.name;
+    print('this is the value of the key in the preference');
+    print(keyPreference);
     return ChoiceChip(
       avatar: Padding(
         padding: const EdgeInsets.all(4.0),
@@ -183,7 +187,7 @@ class _RectangleOfLocalisationFilterState
           : const TextStyle(
               color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold),
       onSelected: (bool newValue) {
-        print(newValue);
+        Utils.toggleTheParameterOfSearchPreference(keyPreference, isSelected);
         setState(() {
           isSelected = !isSelected;
         });
@@ -271,3 +275,4 @@ class CustomLocalisationFilter extends StatelessWidget {
     );
   }
 }
+

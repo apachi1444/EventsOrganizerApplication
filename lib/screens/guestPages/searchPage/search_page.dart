@@ -58,10 +58,11 @@ class _SearchScreenState extends State<SearchScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 25),
+                        horizontal: 12, vertical: 25),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.65,
                       child: TextField(
@@ -118,16 +119,51 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       iconSize: 20.0,
                     ),
+                  ),
+                  const SizedBox(width : 5),
+                  Ink(
+
+                    decoration: const ShapeDecoration(
+                      color: Color(ConstantColors.KPinkColor),
+                      shape: CircleBorder(),
+                    ),
+                    child: IconButton(
+
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FilterPage()),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                      iconSize: 20.0,
+                    ),
                   )
+
                 ],
               ),
-              Expanded(
-                  child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const BoxOfProfessionalService();
-                },
-              ))
+              // Expanded(
+              //     child: ListView.builder(
+              //   itemCount: 10,
+              //   itemBuilder: (context, index) {
+              //     return const BoxOfProfessionalService();
+              //   },
+              // ))
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.search , size :45),
+                  Text('Nothing Found Yet !' , style : TextStyle(
+                    fontSize: 32
+                  )),Text('.....' , style : TextStyle(
+                    fontSize: 32
+                  )),
+                ],
+              )
             ],
           ),
         ));

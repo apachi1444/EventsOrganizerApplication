@@ -31,7 +31,6 @@ class _ProfessionalSwitchMainPageState
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.list_outlined), label: 'Services'),
-    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.settings), label: 'Settings'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
@@ -39,7 +38,6 @@ class _ProfessionalSwitchMainPageState
   final screens = [
     const HomePageProfessional(),
     const ServicesPage(),
-    const Setting(),
     const Setting(),
     const EditProfileProfessionalPage(),
   ];

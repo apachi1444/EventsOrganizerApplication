@@ -29,7 +29,6 @@ class GuestPreferences {
   static void addingGuestDataToSharedPreferences(
       String localisation, String name, String? uid) async {
     _sharedPreferences?.setString(_keyLocalisation, localisation);
-    print("klsjdfklqjsdklfjqskldfjklqsdf");
     print(_sharedPreferences?.getString(_keyLocalisation));
 
     GuestPreferences.setUid(uid!);
