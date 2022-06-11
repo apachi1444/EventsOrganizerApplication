@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Budget {
+class GuestList {
   //late DateTime createdTime;
-  late String title;
+  late String name;
   late String id;
-  late String prix;
-  // late bool isDone;
+  bool isDone;
 
 //Constructor
-  Budget({
+  GuestList({
     //required this.createdTime ,
-    required this.title,
-    this.prix = '',
     this.id = '',
-    //this.isDone = false,
+    required this.name,
+    this.isDone = false,
   });
 
 //to save this data we need to convert it to a mapp
@@ -21,14 +19,14 @@ class Budget {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'title': title,
-      'prix': prix,
+      'name': name,
+      'isDone': isDone,
     };
   }
 
-  static Budget fromJson(Map<String, dynamic> json) => Budget(
+  static GuestList fromJson(Map<String, dynamic> json) => GuestList(
         id: json['id'],
-        title: json['title'],
-        prix: json['prix'],
+        name: json['name'],
+        isDone: json['isDone'],
       );
 }
