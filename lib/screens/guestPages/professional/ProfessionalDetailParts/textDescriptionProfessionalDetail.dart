@@ -6,10 +6,12 @@ import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/expa
 import '../../../../../extensions/constants.dart';
 
 class TextDescriptionProfessionalDetailPage extends StatelessWidget {
-  const TextDescriptionProfessionalDetailPage({Key? key, required this.description, required this.price}) : super(key: key);
+  const TextDescriptionProfessionalDetailPage({Key? key, required this.description, required this.price, required this.dateTime, required this.image}) : super(key: key);
 
   final String description ;
   final String price;
+  final String dateTime;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,11 +19,18 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Description',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              )),
+          Row(
+            children:  [
+              const Text('Description',
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  )),
+              Container(
+
+              )
+            ],
+          ),
           const SizedBox(height: 15),
           Text(
               description,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages//home/homePageParts/professionalBoxInHomePage.dart';
 import 'package:pfs/services/guestService.dart';
 
-import 'categorySlider.dart';
+import '../../../../extensions/utils.dart';
 
 class ProfessionalSlider extends StatelessWidget {
   const ProfessionalSlider(
@@ -15,17 +15,16 @@ class ProfessionalSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int numberOfServices = 0;
     return StreamBuilder<Object>(
         stream: GuestService(guestUid: guestUid)
             .getAllServicesOfParticularProfessional(professionalUid!),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
-            return const Text("this is an error");
+            return const Text('this is an error');
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("ahahah");
+            return const Text('ahahah');
           } else {
-            print("quills");
+            print('quills');
             return CarouselSlider.builder(
               options: CarouselOptions(
                   enlargeCenterPage: true,
@@ -34,15 +33,25 @@ class ProfessionalSlider extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.32),
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
-                // String description = snapshot.data[index].getDescription();
-                // String dateTime = snapshot.data[index].getDateTime();
-                // String image = snapshot.data[index].getImage();
-                // String price = snapshot.data[index].getPrice();
-                // String title = snapshot.data[index].getTitle();
-                return const ProfessionalBoxInHomePage();
+                String description = snapshot.data[index].getDescription();
+                String dateTime = snapshot.data[index].getDateTime();
+                String image = snapshot.data[index].getImage();
+                String price = snapshot.data[index].getPrice();
+                String title = snapshot.data[index].getTitle();
+                print("this is the title of the service");
+                print(title);
+                return ProfessionalBoxInHomePage(
+                  imageCategory: Utils.returnImageCategory(title),
+                  title: title,
+                  image: image,
+                  description: description,
+                  price: price,
+                  dateTime : dateTime
+                );
               },
             );
           }
         });
   }
+
 }

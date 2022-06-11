@@ -6,16 +6,18 @@ class Service {
   final String description;
   final String price;
   final String uidProfessional;
+  final String image;
 
   // final List<String> images;
 
   Service(
-      {required this.dateTime,
+      {required this.image,required this.dateTime,
       required this.title,
       required this.description,
       required this.price,required this.uidProfessional});
 
   static Service fromJson(Map<String, dynamic> json) => Service(
+        image: json['image'],
         dateTime: json['dateTime'],
         title: json['title'],
         description: json['description'],
@@ -40,6 +42,14 @@ class Service {
 
   String getTitle(){
     return title;
+  }
+
+  String getUidProfessional(){
+    return uidProfessional;
+  }
+
+  String getImage(){
+    return image;
   }
 
 }

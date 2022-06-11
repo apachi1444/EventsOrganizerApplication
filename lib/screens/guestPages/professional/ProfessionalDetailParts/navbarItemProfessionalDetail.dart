@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NavbarItemProfessionalDetail extends StatelessWidget {
-  const NavbarItemProfessionalDetail({Key? key}) : super(key: key);
+import '../../../../extensions/utils.dart';
 
+class NavbarItemProfessionalDetail extends StatelessWidget {
+  const NavbarItemProfessionalDetail({Key? key, required this.title}) : super(key: key);
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height * 0.23,
-        decoration: const BoxDecoration(
+        decoration:  BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.fill, image: AssetImage('assets/djPhoto.jpg')),
-          borderRadius: BorderRadius.only(
+              fit: BoxFit.fill, image: AssetImage(Utils.returnImageCategory(title))),
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(0),
               topLeft: Radius.circular(0),
               bottomRight: Radius.circular(35),
@@ -56,8 +58,8 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   radius: 20,
                   child: CircleAvatar(
                       radius: 17,
-                      child: Image.asset(
-                        'assets/googleIcon.png',
+                      backgroundImage: AssetImage(
+                        Utils.returnImageCategory(title),
                       ))),
               const SizedBox(width: 20),
               CircleAvatar(
@@ -65,8 +67,8 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   radius: 20,
                   child: CircleAvatar(
                       radius: 17,
-                      child: Image.asset(
-                        'assets/googleIcon.png',
+                      backgroundImage: AssetImage(
+                        Utils.returnImageCategory(title),
                       ))),
               const SizedBox(width: 20),
               CircleAvatar(
@@ -74,8 +76,8 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   radius: 20,
                   child: CircleAvatar(
                       radius: 17,
-                      child: Image.asset(
-                        'assets/googleIcon.png',
+                      backgroundImage: AssetImage(
+                        Utils.returnImageCategory(title),
                       )))
             ])
           ],

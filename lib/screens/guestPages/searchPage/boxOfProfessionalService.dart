@@ -35,28 +35,29 @@ class BoxOfProfessionalService extends StatelessWidget {
             ),
             isThreeLine: true,
             trailing: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                      const ProfessionalDetail()),
-                );
-              },
+              // onTap: () {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => ProfessionalDetail(
+              //             description: description,
+              //             price: price,
+              //             image: image,
+              //             dateTime: dateTime)),
+              //   );
+              // },
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
                   primary: const Color(ConstantColors.KPinkColor),
                   // Background color
-                  onPrimary: Colors
-                      .white, // Text Color (Foreground color)
+                  onPrimary: Colors.white, // Text Color (Foreground color)
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                        const ProfessionalDetail()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const ProfessionalDetail()),
+                  // );
                 },
 
                 icon: const Icon(
@@ -67,6 +68,7 @@ class BoxOfProfessionalService extends StatelessWidget {
               ),
             )),
       ),
-    );;
+    );
+    ;
   }
 }

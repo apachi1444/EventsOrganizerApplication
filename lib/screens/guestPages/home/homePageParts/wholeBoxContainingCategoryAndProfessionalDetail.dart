@@ -20,8 +20,7 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final guestService = GuestService(guestUid: userId);
-    List<Service> allServices = [];
-    var listOfProfessionals = [];
+
     return StreamBuilder(
         stream: guestService.getAllProfessionalsInOutDb(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -56,4 +55,6 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
           }
         });
   }
+
+
 }

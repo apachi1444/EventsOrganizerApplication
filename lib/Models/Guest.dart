@@ -10,6 +10,14 @@ class Guest {
       );
 
   Map<String, dynamic> toJson() => {'localisation': localisation, 'name': name};
+
+  String getName(){
+    return name;
+  }
+
+  String getLocalisation(){
+    return localisation;
+  }
 }
 
 class GuestData{

@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/constants.dart';
-
+import 'package:pfs/screens/guestPages/professional/professionalDetail.dart';
 
 class ProfessionalBoxInHomePage extends StatelessWidget {
-  const ProfessionalBoxInHomePage({Key? key}) : super(key: key);
+  const ProfessionalBoxInHomePage(
+      {Key? key,
+      required this.title,
+      required this.imageCategory,
+      required this.image,
+      required this.dateTime,
+      required this.price,
+      required this.description})
+      : super(key: key);
+  final String title;
+  final String imageCategory;
+  final String image;
+  final String dateTime;
+  final String price;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-        decoration:  BoxDecoration(
-            border: Border.all( color: const Color(ConstantColors.KPinkColor),
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color(ConstantColors.KPinkColor),
             ),
-
             borderRadius: BorderRadius.circular(20)),
 
         // this is for fixing the flex problem in the our container
@@ -24,17 +38,17 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 20,
                     child: CircleAvatar(
                       radius: 17,
-                      backgroundImage: AssetImage('assets/googleIcon.png'),
+                      backgroundImage: AssetImage(imageCategory),
                     ),
                   ),
-                  SizedBox(width: size.width * 0.05),
-                  const Text('Micheal Boston'),
-                  SizedBox(width: size.width * 0.195),
+                  SizedBox(width: size.width * 0.01),
+                  Text(title),
+                  SizedBox(width: size.width * 0.32),
                   const Icon(Icons.bookmark),
                   SizedBox(width: size.width * 0.02),
                   const Icon(Icons.call_end_sharp),
@@ -51,16 +65,23 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                   child: Stack(children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, '/guest/homePage/professionalDetail');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfessionalDetail(
+                                  title: title,
+                                    description: description,
+                                    price: price,
+                                    image: image,
+                                    dateTime: dateTime)));
                       },
                       child: Container(
                           constraints: const BoxConstraints.expand(height: 136),
-                          decoration: const BoxDecoration(
+                          decoration:  BoxDecoration(
                             color: Colors.transparent,
                             image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: AssetImage('assets/djPhoto.jpg'),
+                              image: NetworkImage(image),
                             ),
                           ),
                           alignment: Alignment.center,
@@ -99,11 +120,11 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // this is for the date
-                    Row(children: const [
-                      Icon(Icons.date_range_outlined),
-                      SizedBox(width: 6),
-                      Text('11 March',
-                          style: TextStyle(fontWeight: FontWeight.bold))
+                    Row(children:  [
+                      const Icon(Icons.date_range_outlined),
+                      const SizedBox(width: 6),
+                      Text(dateTime,
+                          style: const TextStyle(fontWeight: FontWeight.bold))
                     ]),
 
                     // this is for the rate
