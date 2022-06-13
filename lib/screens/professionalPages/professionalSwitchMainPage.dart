@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/professionalPages/home/homePage.dart';
 import 'package:pfs/screens/professionalPages/home_page_test_animation.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
@@ -18,7 +19,7 @@ class ProfessionalSwitchMainPage extends StatefulWidget {
 
 class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
-  int _index = 1;
+  int _index = 0;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -30,23 +31,19 @@ class _ProfessionalSwitchMainPageState
     const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.list_outlined), label: 'Services'),
-    const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.settings), label: 'Settings'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
   final screens = [
-    const HomePage(),
+    const HomePageProfessional(),
     const ServicesPage(),
-    const Setting(),
     const Setting(),
     const EditProfileProfessionalPage(),
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override
   Widget build(BuildContext context) {
-    // var mysnap = Provider.of<Service>(context, listen: false);
-    // print(mysnap);
     return Scaffold(
       bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(

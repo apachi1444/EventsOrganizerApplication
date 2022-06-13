@@ -7,12 +7,15 @@ class InputTextWidget extends StatefulWidget {
   final TextEditingController controllerUsedInInput;
   final IconData icon;
   final bool isPassword;
+  final String? Function(String?)? validate;
+
   const InputTextWidget(
       {Key? key,
       required this.inputHintText,
       required this.controllerUsedInInput,
       required this.icon,
-      required this.isPassword})
+      required this.isPassword,
+      required this.validate})
       : super(key: key);
 
   @override
@@ -38,46 +41,10 @@ class _InputTextWidgetState extends State<InputTextWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: TextFormField(
-
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter something';
-                  }
-                  if (widget.inputHintText == 'Enter Your Password Here') {
-                    if (value.length < 6) {
-                      return 'Must Be More than 6 characters';
-                    }
-                  }
-                  if (widget.inputHintText == 'Enter Your First Name Here') {
-                    if (value.length < 3) {
-                      return 'Must Be More than 3 characters';
-                    }
-                  }
-                  if (widget.inputHintText == 'Enter Your Last Name Here' ||
-                      widget.inputHintText == 'update Your Last Name') {
-                    if (value.length < 3) {
-                      return 'Must Be More than 3 characters';
-                    }
-                  }
-
-                  if (widget.inputHintText == 'Confirm Your Password Here') {
-                    if (value.length < 6) {
-                      return 'Must Be More than 6 characters';
-                    }
-                  }
-                  if (widget.inputHintText == 'Confirm Your Email Here') {
-                    !EmailValidator.validate(
-                            widget.controllerUsedInInput.text.trim())
-                        ? 'Please '
-                        : null;
-                  }
-
-                  return null;
-                },
+                keyboardType: TextInputType.emailAddress,
+                validator: widget.validate,
                 obscureText: widget.isPassword ? true : false,
                 controller: widget.controllerUsedInInput,
-                // validator: (val) =>
-                //     val != null ? 'Enter a valid email' : null,
                 style: const TextStyle(
                   fontSize: 15.0,
                   color: Colors.blueAccent,

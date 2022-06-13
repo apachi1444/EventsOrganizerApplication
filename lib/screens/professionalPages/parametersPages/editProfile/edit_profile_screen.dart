@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
 import 'package:pfs/screens/professionalPages/profile/profilePageProfTest.dart';
 import 'package:pfs/services/professionalDbService.dart';
 import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
@@ -75,10 +76,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   ];
                                 },
                                 onSelected: (index) {
-                                  Navigator.pushReplacement(
-                                      context ,MaterialPageRoute<void>(
-                                    builder: (BuildContext context) => const EditProfileScreen(),
-                                  ),);
+                                  Navigator.pop(
+                                    context,
+                                  );
                                 }),
                           )
                         ]))

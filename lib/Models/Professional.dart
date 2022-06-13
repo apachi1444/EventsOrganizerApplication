@@ -2,7 +2,7 @@ class Professional {
   final String uid;
   final String first_name;
   final String last_name;
-  final int age;
+  final String age;
   final String email;
   final String localisation;
 
@@ -21,7 +21,7 @@ class Professional {
           uid: json['uid'],
           first_name: json['first_name'],
           last_name: json['last_name'],
-          age: int.parse(json['age'].toString()),
+          age: json['age'],
           localisation: json['localisation'],
           email: json['email'],
         );

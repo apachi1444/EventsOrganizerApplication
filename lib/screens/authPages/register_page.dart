@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pfs/extensions/listOfCities.dart';
+import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/services/authService.dart';
 
 import 'inputTextWidget.dart';
@@ -45,16 +46,31 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future doTheSignUp() async {
     if (passConfirmed()) {
-      return _auth.signUp(
-          _emailController.text.trim(),
-          _passwordController.text.trim(),
-          _firstNameController.text.trim(),
-          _lastNameController.text.trim(),
-          _ageController.text.trim(),
-          selectedItem!);
+      try {
+        var signUp = await _auth.signUp(
+            _emailController.text.trim(),
+            _passwordController.text.trim(),
+            _firstNameController.text.trim(),
+            _lastNameController.text.trim(),
+            _ageController.text.trim(),
+            selectedItem!);
+        print("this is the result of the sign up method " + signUp);
+        if (signUp != 'Signed Up Successfully') {
+          setState(() {
+            error = signUp;
+          });
+          return false;
+        }
+      } catch (e) {
+        setState(() {
+          error = e.toString();
+        });
+      }
     } else {
-      print('check your password and confirm password');
-      return null;
+      setState(() {
+        error = "Password don't match";
+      });
+      return false;
     }
   }
 
@@ -90,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontWeight: FontWeight.bold,
                           )),
                       const SizedBox(height: 10),
-                      const Text('Regiser below with your details',
+                      const Text('Register below with your details',
                           style: TextStyle(
                             fontSize: 18,
                           )),
@@ -99,6 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       // this part for the email inputs
 
                       InputTextWidget(
+                          validate: EmailValidator.validate,
                           inputHintText: 'Enter Your Email Here',
                           controllerUsedInInput: _emailController,
                           icon: Icons.email,
@@ -110,6 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       // this part for the first name inputs
 
                       InputTextWidget(
+                          validate: FirstNameValidator.validate,
                           inputHintText: 'Enter Your First Name Here',
                           controllerUsedInInput: _firstNameController,
                           icon: Icons.supervised_user_circle_rounded,
@@ -121,6 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       // this part for the email inputs
 
                       InputTextWidget(
+                          validate: LastNameValidator.validate,
                           inputHintText: 'Enter Your LastName Here',
                           controllerUsedInInput: _lastNameController,
                           icon: Icons.supervised_user_circle_rounded,
@@ -132,6 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       // this part for the age inputs
 
                       InputTextWidget(
+                          validate: AgeValidator.validate,
                           inputHintText: 'Enter Your Age Here',
                           controllerUsedInInput: _ageController,
                           icon: Icons.numbers_outlined,
@@ -191,6 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 20),
 
                       InputTextWidget(
+                          validate: PasswordValidator.validate,
                           inputHintText: 'Enter Your Password Here',
                           controllerUsedInInput: _passwordController,
                           icon: Icons.lock,
@@ -199,6 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 15),
 
                       InputTextWidget(
+                          validate: PasswordValidator.validate,
                           inputHintText: 'Confirm Your Password Here',
                           controllerUsedInInput: _confirmPasswordController,
                           icon: Icons.lock,
@@ -218,30 +240,31 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           child: GestureDetector(
                             onTap: () async {
-                              if (_formKey.currentState!.validate()) {
-                                dynamic result = doTheSignUp();
-                                if (result == null) {
-                                  Fluttertoast.showToast(
-                                      msg: 'There was an error',
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                      fontSize: 25);
-                                  setState(() {
-                                    error =
-                                        'please supply a valid email and password';
-                                  });
-                                }
-                                Fluttertoast.showToast(
-                                    msg: 'Signed Up successfully',
-                                    backgroundColor: Colors.green,
-                                    textColor: Colors.white,
-                                    fontSize: 25);
-                                Navigator.pushReplacementNamed(
-                                    context, '/authProfessional');
+                              final isValid = _formKey.currentState!.validate();
+                              if (isValid) {
+
+                                  var result = await doTheSignUp();
+
+                                  if (result == false) {
+                                    Fluttertoast.showToast(
+                                        msg: error,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 25);
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg: 'Signed Up successfully',
+                                        backgroundColor: Colors.green,
+                                        textColor: Colors.white,
+                                        fontSize: 25);
+                                    Navigator.pushReplacementNamed(
+                                        context, '/authProfessional');
+                                  }
+
                               } else {
                                 Fluttertoast.showToast(
                                     msg:
-                                        'There Was An Error In The Registration',
+                                        'Please check your input fields before registration',
                                     backgroundColor: Colors.red,
                                     textColor: Colors.white,
                                     fontSize: 25);
@@ -259,8 +282,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(height: 10),
 
                       const SizedBox(height: 10),
-
-                      // not a member sign up here because
 
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -23,6 +23,7 @@ class Task {
       'id': id,
       'title': title,
       'description': description,
+      'isDone': isDone,
     };
   }
 
@@ -30,5 +31,6 @@ class Task {
         id: json['id'],
         title: json['title'],
         description: json['description'],
+        isDone: json['isDone'],
       );
 }

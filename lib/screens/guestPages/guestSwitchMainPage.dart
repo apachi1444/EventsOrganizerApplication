@@ -41,7 +41,7 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
         icon: Icon(Icons.list_outlined), label: 'CheckList'),
     const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
     const BottomNavigationBarItem(
-        icon: Icon(Icons.settings), label: 'Recommandation'),
+        icon: Icon(Icons.settings), label: 'Recommendation'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
 

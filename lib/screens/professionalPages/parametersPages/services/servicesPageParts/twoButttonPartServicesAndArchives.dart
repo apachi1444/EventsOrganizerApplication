@@ -9,9 +9,8 @@ class TwoButttonPartServicesAndArchives extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: const [
-        OneButtonServicePage(text: 'My Services', isClicked: false),
+        OneButtonServicePage(text: 'My Services', isClicked: true),
         SizedBox(width: 15),
-        OneButtonServicePage(text: "Archivés", isClicked: true),
       ],
     );
   }

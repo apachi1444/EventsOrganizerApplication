@@ -121,6 +121,10 @@ class GuestService {
   List<Service> searchByCityAndCategory(String city, String category) {
     return [];
   }
+  Future<void> deleteTask(String taskId) async {
+    await guestsCollection.doc(taskId).delete();
+  }
+
 }
 
 // Future<Guest> readOneGuest() async {

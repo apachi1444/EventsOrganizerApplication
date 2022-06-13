@@ -11,8 +11,8 @@ class CategorySlider extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: const [
-            ProfessionalBoxInHomePage(),
-            ProfessionalBoxInHomePage(),
+            // ProfessionalBoxInHomePage(),
+            // ProfessionalBoxInHomePage(),
             Text("This is the third element")
           ],
         ));

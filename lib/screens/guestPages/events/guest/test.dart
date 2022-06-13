@@ -1,7 +1,6 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/guestPages/events/event/addTask.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pfs/screens/guestPages/events/guest/addGuest.dart';
 import 'package:pfs/services/todolist_services.dart';
 import '../../../../extensions/constants.dart';
 import '../chickList/MyChickList.dart';
@@ -22,19 +21,17 @@ class _TodoListState extends State<TodoList> {
     final Stream<QuerySnapshot> tasksStream =
         FirebaseFirestore.instance.collection('tasks').snapshots();
 
-    bool isChecked = true;
+    bool isChecked = false;
 
     editTask() {}
 
     updateTodo() {}
 
-
     completeTask(value) {
       setState(() {
-        isChecked = value;
+        isChecked = value!;
       });
     }
-
 
     return Scaffold(
       appBar: AppBar(
@@ -57,17 +54,17 @@ class _TodoListState extends State<TodoList> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
+        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: tasksStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return const Text('Something went wrong');
+            return Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading");
+            return Text("Loading");
           }
 
           return ListView.builder(
@@ -75,7 +72,6 @@ class _TodoListState extends State<TodoList> {
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
                     snapshot.data!.docs[index];
-                bool isChecked = documentSnapshot['isDone'];
                 return Center(
                   child: SizedBox(
                     height: 100,
@@ -86,14 +82,7 @@ class _TodoListState extends State<TodoList> {
                         children: [
                           Checkbox(
                             value: isChecked,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                                TodoServices().completTask(documentSnapshot.id);
-                              });
-                            },
-                            activeColor: const Color(ConstantColors.KPinkColor),
-                            checkColor: Colors.white,
+                            onChanged: completeTask,
                           ),
                           Expanded(
                             child: ListTile(
@@ -128,55 +117,10 @@ class _TodoListState extends State<TodoList> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const AddTask();
+                return const AddGuest();
               },
             );
           }),
     );
   }
 }
-
-// class TaskCard extends StatefulWidget {
-//   const TaskCard({Key? key}) : super(key: key);
-
-//   @override
-//   State<TaskCard> createState() => _TaskCardState();
-// }
-
-// class _TaskCardState extends State<TaskCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: SizedBox(
-//         height: 100,
-//         child: Card(
-//           margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-//           child: Row(
-//             children: [
-//               Checkbox(
-//                 value: isChecked,
-//                 onChanged: completeTask,
-//                 activeColor: const Color(ConstantColors.KPinkColor),
-//                 checkColor: Colors.white,
-//               ),
-//               const Expanded(
-//                 child: ListTile(
-//                   title: Text('Two-line ListTile'),
-//                   subtitle: Text('Here is a second line'),
-//                 ),
-//               ),
-//               IconButton(
-//                 onPressed: editTask,
-//                 icon: const Icon(Icons.edit_outlined),
-//               ),
-//               IconButton(
-//                 onPressed: deleteTask,
-//                 icon: Icon(Icons.delete),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:pfs/screens/guestPages/professional/professionalDetail.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/failureStep.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
+import 'package:pfs/screens/professionalPages/professionalSwitchMainPage.dart';
 
 import '../logic/wrapper_class.dart';
 import '../screens/authPages/log_in_as_a_guest_page.dart';
@@ -26,7 +27,6 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/loginGuest': (context) => const LogInAsAGuestPage(),
   '/guest/profilePage': (context) => const ProfilePageGuest(),
   '/guest/homePage': (context) => const HomePageGuest(),
-  '/guest/homePage/professionalDetail': (context) => const ProfessionalDetail(),
   '/guest/eventPage': (context) => const ProfilePageGuest(),
   '/guest/eventPage/todoList': (context) => const TodoList(),
   '/guest/eventPage/guestPages': (context) => const ProfilePageGuest(),
@@ -38,6 +38,7 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
 // ------------------------------------ //
 // This is For the Professional Pages
   '/authProfessional': (context) => const AuthSwitchPage(),
+  '/professional/switchMainPage': (context) => const ProfessionalSwitchMainPage(),
   '/professional/profilePage': (context) => const ProfilePageProfessional(),
   '/professional/profilePage/editProfile': (context) =>
       const ProfilePageProfessional(),

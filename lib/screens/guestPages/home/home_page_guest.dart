@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/guestPages/home/homePageParts/wholeBoxContainingCategoryAndProfessionalDetail.dart';
 import 'package:pfs/services/guestService.dart';
+import 'package:pfs/sharedPreferences/GuestPreferences.dart';
 
 import '../../../Models/Guest.dart';
 import 'homePageParts/CategoryNameAndViewAllRow.dart';
@@ -18,26 +19,23 @@ class HomePageGuest extends StatefulWidget {
 }
 
 class _HomePageGuestState extends State<HomePageGuest> {
-  String finalName = '';
-
   @override
   Widget build(BuildContext context) {
-    var itemData = [
-      const Text('wa yassine wa ta7aaaaaaaaaaaaaaaaaaaaaaaaaaaan '),
-      const Text('ahah this is the first text '),
-    ];
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    print(userId);
+    print('this is the user id of the guest dude');
+    GuestService(guestUid: userId)
+        .getGuestFromDocumentSnapshot()
+        .then((value) {});
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Center(
               child: Column(children: <Widget>[
-            NavbarItemHomePage(
-              firstName: finalName,
+            const NavbarItemHomePage(
+              firstName: 'finalName',
             ),
             const SizedBox(height: 10),
-             WholeBoxContainingCategoryAndProfessionalDetail(userId : userId),
+            WholeBoxContainingCategoryAndProfessionalDetail(userId: userId),
             const SizedBox(height: 20),
             // ListView.builder(
             //   physics: const NeverScrollableScrollPhysics(),

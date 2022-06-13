@@ -8,6 +8,7 @@ import '../../../../Models/Professional.dart';
 import '../../../../services/guestService.dart';
 import '../../../../services/professionalDbService.dart';
 import '../../../professionalPages/parametersPages/services/servicesPageParts/noDataFound.dart';
+import '../../../professionalPages/parametersPages/services/servicesPageParts/serviceDetailsBox.dart';
 import 'CategoryNameAndViewAllRow.dart';
 
 class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
@@ -19,7 +20,7 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final guestService = GuestService(guestUid: userId);
-    List<Service> allServices = [];
+
     return StreamBuilder(
         stream: guestService.getAllProfessionalsInOutDb(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -33,43 +34,27 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
             } else {
               return ListView.builder(
                   shrinkWrap: true,
+                  physics: const ScrollPhysics(),
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
                     String city = snapshot.data[index].getLocalisation();
                     String firstName = snapshot.data[index].getFirstName();
                     String lastName = snapshot.data[index].getLastName();
                     String uid = snapshot.data[index].getUid();
-
-                    // return const ProfessionalSlider();
-                    return StreamBuilder(
-                        stream: guestService
-                            .getAllServicesOfParticularProfessional(uid),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting && snapshot.hasData) {
-                            return const CircularProgressIndicator();
-                          }
-                          else if (snapshot.connectionState == ConnectionState.none) {
-                            return const Text('there is no data for the moment in our stream');
-                          }
-                          else {
-                            print(snapshot.data.length);
-                            if (snapshot.data.length == 0) {
-                              return const NoDataFound();
-                            } else {
-                              return ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 4,
-                                  itemBuilder: (context, index) {
-                                    return Text('hh');
-                                  });
-                            }
-                          }
-                        });
+                    return Column(
+                      children:  [
+                        const SizedBox(height : 15),
+                        CategoryNameAndViewAllRow(firstName : firstName , lastName : lastName),
+                        const SizedBox(height : 15),
+                         ProfessionalSlider(guestUid : userId , professionalUid : uid),
+                        const SizedBox(height : 15),
+                      ],
+                    );
                   });
             }
           }
         });
   }
+
+
 }

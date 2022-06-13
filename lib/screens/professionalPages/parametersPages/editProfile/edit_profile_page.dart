@@ -64,6 +64,7 @@ class EditProfileProfessionalPage extends StatelessWidget {
                             },
                             onSelected: (index) {
                               AuthService().signOut();
+                              Navigator.pushNamedAndRemoveUntil(context, '/authProfessional', (r) => false);
                             }),
                       )
                     ])),
@@ -94,6 +95,7 @@ class EditProfileProfessionalPage extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               decoration: BoxDecoration(
+
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
                                   border: Border.all(

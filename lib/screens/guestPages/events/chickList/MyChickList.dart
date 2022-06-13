@@ -38,6 +38,7 @@ class MyCheckListState extends State<MyCheckList> {
         title: const Center(
           child: Text('My Checking List'),
         ),
+
         leading: IconButton(
           onPressed: () {
             WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -54,6 +55,9 @@ class MyCheckListState extends State<MyCheckList> {
             color: Colors.white,
           ),
         ),
+
+
+
         backgroundColor: const Color.fromARGB(255, 255, 0, 107),
       ),
       // backgroundColor: Color.fromARGB(255, 198, 127, 121),
@@ -61,113 +65,117 @@ class MyCheckListState extends State<MyCheckList> {
       body: Center(
         child: Container(
           decoration: const BoxDecoration(
-              // color: Color.fromARGB(255, 231, 178, 204),
-              borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(50),
-            topRight: Radius.circular(50),
-          )),
-
-          child: Column(
-            children: [
-              //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
-
-              // MainCard("My check List"),
-              //
-              // MainCard("My Plannning"),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 252, 252, 252),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20))),
-                  child: Container(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const Text('My check List',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20)),
-                          const SizedBox(height: 15),
-                          Center(
-                            child: Row(
-                              children: [
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      primary:
-                                          const Color.fromARGB(255, 0, 0, 0)),
-                                  onPressed: () {
-                                    WidgetsBinding.instance
-                                        ?.addPostFrameCallback((_) {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const Guest(),
-                                          ));
-                                    });
-                                  },
-                                  child: CheckingCard(
-                                      'Guest', Icons.person_add_alt),
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      primary:
-                                          const Color.fromARGB(255, 0, 0, 0)),
-                                  onPressed: () {
-                                    WidgetsBinding.instance
-                                        ?.addPostFrameCallback((_) {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const TodoList(),
-                                          ));
-                                    });
-                                  },
-                                  child:
-                                      CheckingCard('To Do List', Icons.article),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              CheckingCard(
-                                  'Proffitionnel', Icons.wallet_travel),
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                    primary:
-                                        const Color.fromARGB(255, 0, 0, 0)),
-                                onPressed: () {
-                                  WidgetsBinding.instance
-                                      ?.addPostFrameCallback((_) {
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const BudgetPage(),
-                                        ));
-                                  });
-                                },
-                                child:
-                                    CheckingCard('Budget', Icons.monetization_on_outlined),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+              image: DecorationImage(
+                image: NetworkImage('https://picsum.photos/250?image=9'),
               ),
-            ],
-          ),
+              //color: Color.fromARGB(255, 19, 203, 32),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(50),
+                topRight: Radius.circular(50),
+              )),
+
+          // child: Column(
+          //   children: [
+          //     //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
+          //
+          //     // MainCard("My check List"),
+          //     //
+          //     // MainCard("My Plannning"),
+          //     Padding(
+          //       padding:
+          //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          //       child: Container(
+          //         padding:
+          //             const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+          //         decoration: const BoxDecoration(
+          //           //  color: Color.fromARGB(255, 158, 70, 70),
+          //             borderRadius: BorderRadius.only(
+          //                 bottomLeft: Radius.circular(20),
+          //                 bottomRight: Radius.circular(20),
+          //                 topLeft: Radius.circular(20),
+          //                 topRight: Radius.circular(20))),
+          //         child: Container(
+          //           child: Center(
+          //             child: Column(
+          //               children: [
+          //                 const Text('My check List',
+          //                     style: TextStyle(
+          //                         fontWeight: FontWeight.bold, fontSize: 20)),
+          //                 const SizedBox(height: 15),
+          //                 Center(
+          //                   child: Row(
+          //                     children: [
+          //                       TextButton(
+          //                         style: TextButton.styleFrom(
+          //                             primary:
+          //                                 const Color.fromARGB(255, 0, 0, 0)),
+          //                         onPressed: () {
+          //                           WidgetsBinding.instance
+          //                               ?.addPostFrameCallback((_) {
+          //                             Navigator.pushReplacement(
+          //                                 context,
+          //                                 MaterialPageRoute(
+          //                                   builder: (context) =>
+          //                                       const GuestList(),
+          //                                 ));
+          //                           });
+          //                         },
+          //                         child: CheckingCard(
+          //                             'Guest', Icons.person_add_alt),
+          //                       ),
+          //                       TextButton(
+          //                         style: TextButton.styleFrom(
+          //                             primary:
+          //                                 const Color.fromARGB(255, 0, 0, 0)),
+          //                         onPressed: () {
+          //                           WidgetsBinding.instance
+          //                               ?.addPostFrameCallback((_) {
+          //                             Navigator.pushReplacement(
+          //                                 context,
+          //                                 MaterialPageRoute(
+          //                                   builder: (context) =>
+          //                                       const TodoList(),
+          //                                 ));
+          //                           });
+          //                         },
+          //                         child:
+          //                             CheckingCard('To Do List', Icons.article),
+          //                       ),
+          //                     ],
+          //                   ),
+          //                 ),
+          //                 Row(
+          //                   children: [
+          //                     CheckingCard(
+          //                         'Proffitionnel', Icons.wallet_travel),
+          //                     TextButton(
+          //                       style: TextButton.styleFrom(
+          //                           primary:
+          //                               const Color.fromARGB(255, 0, 0, 0)),
+          //                       onPressed: () {
+          //                         WidgetsBinding.instance
+          //                             ?.addPostFrameCallback((_) {
+          //                           Navigator.pushReplacement(
+          //                               context,
+          //                               MaterialPageRoute(
+          //                                 builder: (context) =>
+          //                                     const BudgetPage(),
+          //                               ));
+          //                         });
+          //                       },
+          //                       child:
+          //                           CheckingCard('Budget', Icons.monetization_on_outlined),
+          //                     ),
+          //                   ],
+          //                 )
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
 
           // child: Container(
           //    child : const Text("My checklist asmae ",style: TextStyle(fontSize: 18),),
