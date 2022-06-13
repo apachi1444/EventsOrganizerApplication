@@ -29,7 +29,7 @@ class _TodoListState extends State<TodoList> {
 
     completeTask(value) {
       setState(() {
-        isChecked = value!;
+        isChecked = value;
       });
     }
 
@@ -54,17 +54,17 @@ class _TodoListState extends State<TodoList> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: tasksStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return const Text("Loading");
           }
 
           return ListView.builder(

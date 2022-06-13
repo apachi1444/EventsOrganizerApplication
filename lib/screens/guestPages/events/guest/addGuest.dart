@@ -18,7 +18,7 @@ class _AddGuestState extends State<AddGuest> {
     const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
     title: Row(children: [
       const Text(
-        'Add New Task',
+        'Add New Guest',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 18,
