@@ -203,6 +203,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/extensions/validators.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/change_paswd.dart';
+import 'package:pfs/screens/professionalPages/profile/profilePage.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../extensions/constants.dart';
@@ -305,7 +307,13 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => change_pswd()),
+                              );
+                            },
                             child: Text('Forget Password?',
                                 style: TextStyle(color: Colors.grey[600])),
                           )
@@ -328,25 +336,25 @@ class _LoginPageState extends State<LoginPage> {
                               try {
                                 var doLogin = await doTheLogin();
 
-                                // if (doLogin != null) {
-                                // } else {
-                                //   showDialog(
-                                //       context: context,
-                                //       builder: (context) => AlertDialog(
-                                //             title: const Text(
-                                //                 'Error in the Login',
-                                //                 style: TextStyle(
-                                //                     color: Color(ConstantColors
-                                //                         .KPinkColor))),
-                                //             content: Text(error),
-                                //             actions: [
-                                //               TextButton(
-                                //                   onPressed: () =>
-                                //                       Navigator.pop(context),
-                                //                   child: const Text('Cancel')),
-                                //             ],
-                                //           ));
-                                // }
+                                if (doLogin != null) {
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: const Text(
+                                                'Error in the Login',
+                                                style: TextStyle(
+                                                    color: Color(ConstantColors
+                                                        .KPinkColor))),
+                                            content: Text(error),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                  child: const Text('Cancel')),
+                                            ],
+                                          ));
+                                }
                               } catch (e) {
                                 showDialog(
                                     context: context,
@@ -373,8 +381,20 @@ class _LoginPageState extends State<LoginPage> {
                                           content: Text(error),
                                           actions: [
                                             TextButton(
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
+                                                // onPressed: () => Navigator.of(
+                                                //         context)
+                                                //     .push(MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             contact_us())),
+                                                //ici la navigation vers la page contact us
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            contact_us()),
+                                                  );
+                                                },
                                                 child: const Text('Cancel')),
                                           ],
                                         ));

@@ -5,6 +5,7 @@ import 'package:pfs/screens/professionalPages/home_page_test_animation.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
+import 'package:pfs/screens/professionalPages/profile/profilePage.dart';
 import 'package:pfs/screens/sharedScreens/search/searchPage.dart';
 
 import '../../extensions/constants.dart';
@@ -19,7 +20,7 @@ class ProfessionalSwitchMainPage extends StatefulWidget {
 
 class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
-  int _index = 0;
+  int _index = 3;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -39,7 +40,7 @@ class _ProfessionalSwitchMainPageState
     const HomePageProfessional(),
     const ServicesPage(),
     const Setting(),
-    const EditProfileProfessionalPage(),
+    contact_us(),
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   @override
