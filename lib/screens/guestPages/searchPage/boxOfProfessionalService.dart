@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../extensions/constants.dart';
-import '../professional/professionalDetail.dart';
 
 class BoxOfProfessionalService extends StatelessWidget {
   const BoxOfProfessionalService({Key? key}) : super(key: key);
@@ -69,6 +68,6 @@ class BoxOfProfessionalService extends StatelessWidget {
             )),
       ),
     );
-    ;
+
   }
 }

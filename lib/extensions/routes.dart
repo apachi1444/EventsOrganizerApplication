@@ -27,7 +27,6 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/guest/profilePage': (context) => const ProfilePageGuest(),
   '/guest/homePage': (context) => const HomePageGuest(),
   '/guest/eventPage': (context) => const ProfilePageGuest(),
-  '/guest/eventPage/todoList': (context) => const TodoList(),
   '/guest/eventPage/guestPages': (context) => const ProfilePageGuest(),
   '/guest/eventPage/professionalsList': (context) => const ProfilePageGuest(),
   '/guest/eventPage/budgetPages': (context) => const BudgetPage(),

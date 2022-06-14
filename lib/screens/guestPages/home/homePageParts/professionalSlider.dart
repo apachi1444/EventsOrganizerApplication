@@ -28,7 +28,6 @@ class ProfessionalSlider extends StatelessWidget {
             if (snapshot.data.length == 0) {
               return const NoServicesFound();
             } else {
-              print('quills');
               return CarouselSlider.builder(
                 options: CarouselOptions(
                     enlargeCenterPage: true,
@@ -42,8 +41,6 @@ class ProfessionalSlider extends StatelessWidget {
                   String image = snapshot.data[index].getImage();
                   String price = snapshot.data[index].getPrice();
                   String title = snapshot.data[index].getTitle();
-                  print("this is the title of the service");
-                  print(title);
                   return ProfessionalBoxInHomePage(
                       imageCategory: Utils.returnImageCategory(title),
                       title: title,

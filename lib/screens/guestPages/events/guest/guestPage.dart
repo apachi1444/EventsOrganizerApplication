@@ -167,17 +167,11 @@ class _GuestListState extends State<GuestList> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
-          child: Text('Guest List'),
+          child: Text('My Guests'),
         ),
         leading: IconButton(
           onPressed: () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyCheckingList(),
-                  ));
-            });
+            Navigator.pop(context);
           },
           color: Colors.black,
           icon: const Icon(
@@ -185,17 +179,17 @@ class _GuestListState extends State<GuestList> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: guestsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return const Text('Loading');
           }
 
           return ListView.builder(
@@ -234,11 +228,10 @@ class _GuestListState extends State<GuestList> {
                           // ),
                           IconButton(
                             onPressed: () {
-                              GuestService().deleteGuest(documentSnapshot.id);
-                              print("suuuuuuuuuuuuuuuuuuuuuuuup");
+                              print(documentSnapshot.id);
+                              GuestListService().deleteGuest(documentSnapshot.id);
+                              print('suuuuuuuuuuuuuuuuuuuuuuuup');
                             },
-
-
                             icon: const Icon(Icons.delete),
                           ),
                         ],

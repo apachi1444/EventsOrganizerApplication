@@ -40,13 +40,7 @@ class _TodoListState extends State<TodoList> {
         ),
         leading: IconButton(
           onPressed: () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyCheckingList(),
-                  ));
-            });
+            Navigator.pop(context);
           },
           color: Colors.black,
           icon: const Icon(

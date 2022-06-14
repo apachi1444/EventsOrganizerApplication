@@ -5,36 +5,45 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/Models/Guest.dart';
 import 'package:pfs/services/professionalDbService.dart';
 
+import '../Models/Event.dart';
 import '../Models/Professional.dart';
 import '../Models/Service.dart';
 import '../sharedPreferences/GuestPreferences.dart';
 
 class GuestService {
   final String? guestUid;
- final bool isDone = false;
+  final bool isDone = false;
 
   final professionalCollection =
       FirebaseFirestore.instance.collection('professionals');
   final serviceCollection = FirebaseFirestore.instance.collection('services');
+  final eventsCollection = FirebaseFirestore.instance.collection('events');
 
-  GuestService({ this.guestUid, bool isDone = false,});
+  GuestService({
+    this.guestUid,
+    bool isDone = false,
+  });
 
-  final guestsCollection = FirebaseFirestore.instance.collection('guestsList');
+  final guestsCollection = FirebaseFirestore.instance.collection('guests');
+  final guestsCollectionOfEvents =
+      FirebaseFirestore.instance.collection('guestsList');
 
   String? getUidGuest() {
     return guestUid;
   }
 
-  Future addEventToGuestList(String title, String description) async {
-    return await guestsCollection
-        .doc(guestUid)
-        .collection('services')
-        .add({'title': title, 'description': description});
+  Future addEventToGuestList(String title, String dateTime) async {
+    final aa = guestsCollection.doc(guestUid).collection('events').doc();
+    print(aa.path);
+    return await guestsCollection.doc(guestUid).collection('events').add({
+      'title': title,
+      'dateTime': dateTime,
+      'uid': DateTime.now().toString()
+    });
   }
 
-  Stream<List<Service?>> getAllEventsOfOurGuest() {
-    return guestsCollection.snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => (Service.fromJson(doc.data()))).toList());
+  Stream getStreamOfEventsOfParticularGuest() {
+    return guestsCollection.doc(guestUid).collection('events').snapshots();
   }
 
   Future deleteEvent(String uid) async {
@@ -109,8 +118,13 @@ class GuestService {
   ];
 
   Stream<List<Service>> getAllServicesOfParticularProfessional(String uid) {
-    return professionalCollection.doc(uid).collection('services').snapshots().map((snapshot) =>
-        snapshot.docs.map((doc) => (Service.fromJson(doc.data()))).toList());
+    return professionalCollection
+        .doc(uid)
+        .collection('services')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => (Service.fromJson(doc.data())))
+            .toList());
   }
 
   Stream<List<Professional>> getAllProfessionalsInOutDb() {
@@ -119,43 +133,11 @@ class GuestService {
         .toList());
   }
 
-  List<Service> searchByCityAndCategory(String city, String category) {
-    return [];
-  }
   Future<void> deleteGuest(String taskId) async {
     await guestsCollection.doc(taskId).delete();
   }
+
   Future completTask(uid) async {
-    await guestsCollection.doc(uid).update({'isDone': true});
+    await guestsCollectionOfEvents.doc(uid).update({'isDone': true});
   }
-
 }
-
-// Future<Guest> readOneGuest() async {
-//   // the document snapshot will return only one value
-//   // but the async snapshot will get you a list of results
-//   return guestsCollection
-//       .doc(guestUid)
-//       .get()
-//       .then((documentSnapshot) => _guestFromSnapshot(documentSnapshot));
-// }
-
-// Future<<List<Professional>> listProfessionalsWithSameCity(
-//     String localisation) async  {
-//   // var aa = professionalCollection
-//   //     .where('localisation', isEqualTo: localisation)
-//   //     .snapshots()
-//   //     .map((snapshot) => snapshot.docs
-//   //         .map((professional) => Professional.fromJson(professional.data()))
-//   //         .toList());
-//   // print('trying to print the length of the list of all professionals');
-//   // QuerySnapshot querySnapshot = await professionalCollection
-//   //     .where('localisation', isEqualTo: localisation).get();
-//   //
-//   // var b = querySnapshot.docs.forEach((element) {
-//   //   element.data();
-//   //   print(element.data());
-//   // });
-//   //
-//   // return b;
-// }

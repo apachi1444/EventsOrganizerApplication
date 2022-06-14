@@ -37,17 +37,18 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
                   physics: const ScrollPhysics(),
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
-                    String city = snapshot.data[index].getLocalisation();
                     String firstName = snapshot.data[index].getFirstName();
                     String lastName = snapshot.data[index].getLastName();
                     String uid = snapshot.data[index].getUid();
                     return Column(
-                      children:  [
-                        const SizedBox(height : 15),
-                        CategoryNameAndViewAllRow(firstName : firstName , lastName : lastName),
-                        const SizedBox(height : 15),
-                         ProfessionalSlider(guestUid : userId , professionalUid : uid),
-                        const SizedBox(height : 15),
+                      children: [
+                        const SizedBox(height: 15),
+                        CategoryNameAndViewAllRow(
+                            firstName: firstName, lastName: lastName),
+                        const SizedBox(height: 15),
+                        ProfessionalSlider(
+                            guestUid: userId, professionalUid: uid),
+                        const SizedBox(height: 15),
                       ],
                     );
                   });
@@ -55,6 +56,4 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
           }
         });
   }
-
-
 }

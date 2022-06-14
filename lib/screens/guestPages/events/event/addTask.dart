@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pfs/services/eventsService.dart';
 import 'package:pfs/services/todolist_services.dart';
 
 class AddTask extends StatefulWidget {
@@ -74,10 +75,7 @@ class _AddTaskState extends State<AddTask> {
               final title = todoTitleController.text;
               final description = todoDescriptionController.text;
 
-              TodoServices add = TodoServices();
-              add.addTask(title: title, description: description);
-              // if (todoTitleController.text.isNotEmpty) {
-              //   print(todoTitleController.text);
+              TodoServices().addTask(title: title, description: description);
 
               Navigator.pop(context, 'add');
               // }

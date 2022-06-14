@@ -8,8 +8,8 @@ class AddEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todoDescriptionController = TextEditingController();
-    final todoTitleController = TextEditingController();
+    final eventDateController= TextEditingController();
+    final eventTitleController = TextEditingController();
     return
       AlertDialog(
         contentPadding:
@@ -34,7 +34,7 @@ class AddEvent extends StatelessWidget {
           children: [
             const SizedBox(height: 8),
             TextFormField(
-              controller: todoTitleController,
+              controller: eventTitleController,
               style: const TextStyle(
                 fontSize: 18,
                 //height: 1.5,
@@ -51,32 +51,28 @@ class AddEvent extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextFormField(
-              controller: todoDescriptionController,
+              controller: eventDateController,
               style: const TextStyle(
                 fontSize: 18,
                 height: 1.5,
                 //color: Color.fromARGB(255, 216, 81, 81),
               ),
               decoration: const InputDecoration(
-                hintText: 'Description',
+                hintText: 'Date Time',
                 hintStyle: TextStyle(color: Color.fromARGB(179, 63, 60, 60)),
 //                border: UnderlineInputBorder(),
               ),
-              maxLines: 2,
             ),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () {
-              final title = todoTitleController.text;
-              final description = todoDescriptionController.text;
+              final title = eventTitleController.text;
+              final dateTime = eventDateController.text;
 
-              GuestService(guestUid: uid).addEventToGuestList(title, description);
-              TodoServices add = TodoServices();
-              add.addTask(title: title, description: description);
-
-              Navigator.pop(context, 'add');
+              GuestService(guestUid: uid).addEventToGuestList(title, dateTime);
+              Navigator.pop(context);
             },
             child: const Center(child: Text('add')),
           ),

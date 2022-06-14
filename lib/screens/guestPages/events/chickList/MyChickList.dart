@@ -3,17 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pfs/extensions/constants.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
-import 'package:pfs/screens/guestPages/events/chickList/addEvenet.dart';
-import 'package:pfs/screens/guestPages/events/event/event.dart';
 import 'package:pfs/screens/guestPages/events/event/todoList_page.dart';
 import 'package:pfs/screens/guestPages/events/guest/guestPage.dart';
-import 'package:pfs/sharedPreferences/GuestPreferences.dart';
 
-import '../../../professionalPages/parametersPages/settings/settings_page.dart';
 
 class MyCheckingList extends StatelessWidget {
-  const MyCheckingList({Key? key}) : super(key: key);
-
+  const MyCheckingList({Key? key, required this.eventUid}) : super(key: key);
+  final String eventUid;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +19,14 @@ class MyCheckingList extends StatelessWidget {
         ),
         backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
-      body: const MyCheckList(),
+      body:  MyCheckList(eventUid: eventUid),
     );
   }
 }
 
 class MyCheckList extends StatefulWidget {
-  const MyCheckList({Key? key}) : super(key: key);
-
+  const MyCheckList({Key? key, required this.eventUid}) : super(key: key);
+  final String eventUid;
   @override
   State<MyCheckList> createState() => MyCheckListState();
 }
@@ -38,7 +34,6 @@ class MyCheckList extends StatefulWidget {
 class MyCheckListState extends State<MyCheckList> {
   @override
   Widget build(BuildContext context) {
-    String? uid = GuestPreferences.getUid();
     return Center(
       child: Container(
         decoration: const BoxDecoration(
@@ -67,10 +62,10 @@ class MyCheckListState extends State<MyCheckList> {
               style: TextButton.styleFrom(
                   primary: const Color.fromARGB(255, 0, 0, 0)),
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const TodoList(),
+                      builder: (context) =>   TodoList(eventUid:widget.eventUid ),
                     ));
               },
               child: CheckingCard('To Do List', Icons.article),
@@ -217,17 +212,6 @@ class MyCheckListState extends State<MyCheckList> {
 // SwitchSettingsTile
 }
 
-void _showTheAddingEventAlertModel(BuildContext context) {
-  String? uid = GuestPreferences.getUid();
-
-  showDialog(
-      context: context,
-      builder: (BuildContext bc) {
-        print('this is the uid of the guest ');
-        print(uid);
-        return AddEvent(uid: uid);
-      });
-}
 
 Padding CheckingCard(String title, IconData icon) {
   return Padding(

@@ -7,7 +7,9 @@ import '../../../../extensions/constants.dart';
 import '../chickList/MyChickList.dart';
 
 class TodoList extends StatefulWidget {
-  const TodoList({Key? key}) : super(key: key);
+  final String? eventUid;
+
+  const TodoList({Key? key, required this.eventUid}) : super(key: key);
 
   @override
   State<TodoList> createState() => _TodoListState();
@@ -19,22 +21,9 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.eventUid);
     final Stream<QuerySnapshot> tasksStream =
         FirebaseFirestore.instance.collection('tasks').snapshots();
-
-    bool isChecked = true;
-
-    editTask() {}
-
-    updateTodo() {}
-
-
-    completeTask(value) {
-      setState(() {
-        isChecked = value;
-      });
-    }
-
 
     return Scaffold(
       appBar: AppBar(
@@ -43,13 +32,7 @@ class _TodoListState extends State<TodoList> {
         ),
         leading: IconButton(
           onPressed: () {
-            WidgetsBinding.instance?.addPostFrameCallback((_) {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MyCheckingList(),
-                  ));
-            });
+            Navigator.pop(context);
           },
           color: Colors.black,
           icon: const Icon(
