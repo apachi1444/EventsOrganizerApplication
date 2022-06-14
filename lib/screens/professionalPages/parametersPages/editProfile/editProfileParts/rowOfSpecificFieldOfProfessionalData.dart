@@ -35,7 +35,7 @@ class _RowOfSpecificFieldOfProfessionalDataState
               style: const TextStyle(color: Color(ConstantColors.KPinkColor))),
         ],
       ),
-      Text(widget.inputText, style: TextStyle())
+      Text(widget.inputText, style: const TextStyle())
     ]);
   }
 }

@@ -12,7 +12,6 @@ class AllRowsOfFieldsProfessionalData extends StatelessWidget {
     ProfessionalPreferences.getLastName().toString(),
     ProfessionalPreferences.getEmail().toString(),
     ProfessionalPreferences.getLocalisation().toString(),
-    'Gender',
   ];
   @override
   Widget build(BuildContext context) {
