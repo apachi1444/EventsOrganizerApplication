@@ -22,17 +22,19 @@ class _TodoListState extends State<TodoList> {
     final Stream<QuerySnapshot> tasksStream =
         FirebaseFirestore.instance.collection('tasks').snapshots();
 
-    //bool isChecked = true;
+    bool isChecked = true;
 
     editTask() {}
 
     updateTodo() {}
 
-    // completeTask(value) {
-    //   setState(() {
-    //     isChecked = value!;
-    //   });
-    // }
+
+    completeTask(value) {
+      setState(() {
+        isChecked = value;
+      });
+    }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -55,17 +57,17 @@ class _TodoListState extends State<TodoList> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: tasksStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return const Text("Loading");
           }
 
           return ListView.builder(

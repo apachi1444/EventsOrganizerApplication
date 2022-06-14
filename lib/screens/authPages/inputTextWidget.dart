@@ -41,6 +41,7 @@ class _InputTextWidgetState extends State<InputTextWidget> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
                 validator: widget.validate,
                 obscureText: widget.isPassword ? true : false,
                 controller: widget.controllerUsedInInput,

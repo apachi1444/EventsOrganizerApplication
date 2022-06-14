@@ -11,14 +11,15 @@ import '../sharedPreferences/GuestPreferences.dart';
 
 class GuestService {
   final String? guestUid;
+ final bool isDone = false;
 
   final professionalCollection =
       FirebaseFirestore.instance.collection('professionals');
   final serviceCollection = FirebaseFirestore.instance.collection('services');
 
-  GuestService({required this.guestUid});
+  GuestService({ this.guestUid, bool isDone = false,});
 
-  final guestsCollection = FirebaseFirestore.instance.collection('guests');
+  final guestsCollection = FirebaseFirestore.instance.collection('guestsList');
 
   String? getUidGuest() {
     return guestUid;
@@ -121,6 +122,13 @@ class GuestService {
   List<Service> searchByCityAndCategory(String city, String category) {
     return [];
   }
+  Future<void> deleteGuest(String taskId) async {
+    await guestsCollection.doc(taskId).delete();
+  }
+  Future completTask(uid) async {
+    await guestsCollection.doc(uid).update({'isDone': true});
+  }
+
 }
 
 // Future<Guest> readOneGuest() async {

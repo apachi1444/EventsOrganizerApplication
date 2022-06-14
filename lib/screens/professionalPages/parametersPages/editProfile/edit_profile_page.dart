@@ -75,34 +75,42 @@ class EditProfileProfessionalPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const CircleAvatar(
-                      radius: 45,
-                      backgroundImage: AssetImage('assets/googleIcon.png'),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return const EditProfileScreen(key: null);
-                        }));
-                      },
-                      child: Container(
-                          width: 100,
-                          height: 35,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: const Color(ConstantColors.KPinkColor),
-                              )),
-                          child: const Center(
-                              child: Text('Edit',
-                                  style: TextStyle(
-                                    fontSize: 17,
-                                    color: Color(ConstantColors.KPinkColor),
-                                    fontWeight: FontWeight.bold,
-                                  )))),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const CircleAvatar(
+                          radius: 45,
+                          backgroundImage: AssetImage('assets/googleIcon.png'),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return const EditProfileScreen(key: null);
+                            }));
+                          },
+                          child: Container(
+                              width: 100,
+                              height: 35,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    color:
+                                        const Color(ConstantColors.KPinkColor),
+                                  )),
+                              child: const Center(
+                                  child: Text('Edit',
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        color: Color(ConstantColors.KPinkColor),
+                                        fontWeight: FontWeight.bold,
+                                      )))),
+                        )
+                      ],
                     )
                   ],
                 ),

@@ -1,3 +1,4 @@
+// @dart=2.9
 // new
 
 // new
@@ -17,13 +18,13 @@ void main() async {
   await Firebase.initializeApp();
   // here to initialise the shared preferences in the local storage
   await ProfessionalPreferences.init();
-  runApp(const App());
+  runApp(App());
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  //const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

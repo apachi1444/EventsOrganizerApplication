@@ -14,6 +14,7 @@ class _AddGuestState extends State<AddGuest> {
 
   @override
   Widget build(BuildContext context) => AlertDialog(
+
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
         title: Row(children: [
@@ -22,6 +23,7 @@ class _AddGuestState extends State<AddGuest> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
+
             ),
           ),
           const Spacer(),
