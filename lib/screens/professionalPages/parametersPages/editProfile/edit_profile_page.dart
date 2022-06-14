@@ -14,7 +14,6 @@ import 'editProfileParts/wholeContainerOfUpdatingDataProfessional.dart';
 class EditProfileProfessionalPage extends StatelessWidget {
   const EditProfileProfessionalPage({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
@@ -31,48 +30,50 @@ class EditProfileProfessionalPage extends StatelessWidget {
     //     ]),
     //   )),
     // );
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: ListView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          children: [
-            Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                decoration: const BoxDecoration(
-                    color: Color(ConstantColors.KPinkColor),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/avatar.jpg'))),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox.shrink(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 15),
-                        child: PopupMenuButton(
-                            icon: const Icon(Icons.logout,
-                                color: Colors.white, size: 30),
-                            itemBuilder: (_) {
-                              return <PopupMenuItem<String>>[
-                                const PopupMenuItem(
-                                    child: Text('Logout'), value: 'logout')
-                              ];
-                            },
-                            onSelected: (index) {
-                              AuthService().signOut();
-                              Navigator.pushNamedAndRemoveUntil(context, '/authProfessional', (r) => false);
-                            }),
-                      )
-                    ])),
-            Container(
-                transform: Matrix4.translationValues(0.0, -40.0, 0.0),
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
+      children: [
+        Container(
+            height: MediaQuery.of(context).size.height * 0.2,
+            decoration: const BoxDecoration(
+                color: Color(ConstantColors.KPinkColor),
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: AssetImage('assets/avatar.jpg'))),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox.shrink(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    child: PopupMenuButton(
+                        icon: const Icon(Icons.logout,
+                            color: Colors.white, size: 30),
+                        itemBuilder: (_) {
+                          return <PopupMenuItem<String>>[
+                            const PopupMenuItem(
+                                child: Text('Logout'), value: 'logout')
+                          ];
+                        },
+                        onSelected: (index) {
+                          AuthService().signOut();
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/authProfessional', (r) => false);
+                        }),
+                  )
+                ])),
+        Container(
+            transform: Matrix4.translationValues(0.0, -40.0, 0.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,7 +96,6 @@ class EditProfileProfessionalPage extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
                               decoration: BoxDecoration(
-
                                   borderRadius: BorderRadius.circular(20),
                                   color: Colors.white,
                                   border: Border.all(
@@ -111,13 +111,15 @@ class EditProfileProfessionalPage extends StatelessWidget {
                                       )))),
                         )
                       ],
-                    ),
-                    const SizedBox(height: 10),
+                    )
                   ],
-                )),
-            AllRowsOfFieldsProfessionalData()
-          ],
-        ));
+                ),
+                const SizedBox(height: 10),
+              ],
+            )),
+        AllRowsOfFieldsProfessionalData()
+      ],
+    );
   }
 }
 

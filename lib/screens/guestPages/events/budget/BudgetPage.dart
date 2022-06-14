@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/guestPages/events/budget/addBudget.dart';
-
 import '../../../../extensions/constants.dart';
 import '../../../../services/budget_services.dart';
 import '../chickList/MyChickList.dart';
@@ -29,6 +27,22 @@ class _BudgetPageState extends State<BudgetPage> {
                 child: Text('My Budget'),
               ),
               backgroundColor: const Color.fromARGB(255, 255, 0, 107),
+              leading: IconButton(
+                onPressed: () {
+                  WidgetsBinding.instance?.addPostFrameCallback((_) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyCheckList(),
+                        ));
+                  });
+                },
+                color: Colors.black,
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
             ),
             // backgroundColor: Color.fromARGB(255, 198, 127, 121),
 
@@ -70,9 +84,9 @@ class _BudgetPageState extends State<BudgetPage> {
                                 final DocumentSnapshot documentSnapshot =
                                     snapshot.data!.docs[index];
                                 return Padding(
-                                  padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.all(5.0),
                                   child: detailsCard(documentSnapshot['title'],
-                                      documentSnapshot['prix'], Icons.delete),
+                                      documentSnapshot['prix'], Icons.delete,documentSnapshot),
                                 );
                               },
                             ),
@@ -123,15 +137,15 @@ class _BudgetPageState extends State<BudgetPage> {
                                               color: Colors.grey),
                                         ),
                                       ]),
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment:
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 8),
-                                          TextFormField(
-                                            controller: todoTitleController,
-                                            style: const TextStyle(
+                                            children: [
+                                              const SizedBox(height: 8),
+                                              TextFormField(
+                                              controller: todoTitleController,
+                                              style: const TextStyle(
                                               fontSize: 18,
                                               //height: 1.5,
 
@@ -268,7 +282,7 @@ class _BudgetPageState extends State<BudgetPage> {
                 })));
   }
 
-  Padding detailsCard(String title, String Budget, IconData icon) {
+  Padding detailsCard(String title, String Budget, IconData icon,DocumentSnapshot fct) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       child: Container(
@@ -292,7 +306,11 @@ class _BudgetPageState extends State<BudgetPage> {
               color: Color(0x34000000),
             ),
           ),
-          Icon(icon, color: const Color(ConstantColors.KPinkColor), size: 30),
+              IconButton(onPressed:() {
+
+                  BudgetServices().deleteBudget(fct.id);
+              },
+                  icon: Icon(icon, color: const Color(ConstantColors.KPinkColor), size: 30))
         ]),
       ),
     );

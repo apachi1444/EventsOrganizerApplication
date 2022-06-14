@@ -133,6 +133,7 @@ import 'package:pfs/services/todolist_services.dart';
 
 import '../../../../extensions/constants.dart';
 import '../../../../services/guestListServices.dart';
+import '../../../../services/guestService.dart';
 import '../chickList/MyChickList.dart';
 
 class GuestList extends StatefulWidget {
@@ -216,7 +217,7 @@ class _GuestListState extends State<GuestList> {
                             onChanged: (bool? newValue) {
                               setState(() {
                                 isChecked = newValue!;
-                                TodoServices().completTask(documentSnapshot.id);
+                                GuestService().completTask(documentSnapshot.id);
                               });
                             },
                             activeColor: const Color(ConstantColors.KPinkColor),
@@ -227,13 +228,17 @@ class _GuestListState extends State<GuestList> {
                               title: Text(documentSnapshot['name']),
                             ),
                           ),
+                          // IconButton(
+                          //   onPressed: editTask,
+                          //   icon: const Icon(Icons.edit_outlined),
+                          // ),
                           IconButton(
-                            onPressed: editTask,
-                            icon: const Icon(Icons.edit_outlined),
-                          ),
-                          IconButton(
-                            onPressed: () =>
-                                TodoServices().deleteTask(documentSnapshot.id),
+                            onPressed: () {
+                              GuestService().deleteGuest(documentSnapshot.id);
+                              print("suuuuuuuuuuuuuuuuuuuuuuuup");
+                            },
+
+
                             icon: const Icon(Icons.delete),
                           ),
                         ],

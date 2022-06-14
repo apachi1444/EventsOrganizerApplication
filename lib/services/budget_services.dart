@@ -16,7 +16,7 @@ class BudgetServices {
     await budgetCollection.set(json);
   }
 
-  Future<void> deleteGuest(String guestId) async {
+  Future<void> deleteBudget(String guestId) async {
     await budgets.doc(guestId).delete();
   }
 
