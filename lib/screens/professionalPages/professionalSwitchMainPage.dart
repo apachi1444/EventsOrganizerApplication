@@ -20,29 +20,35 @@ class ProfessionalSwitchMainPage extends StatefulWidget {
 
 class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
-  int _index = 3;
+  int _index = 2;
 
-  void _navigateBottomBar(int index) {
+
+
+  void _navigateBottomBar(int index ) {
     setState(() {
       _index = index;
     });
   }
 
+
   final items = <BottomNavigationBarItem>[
-    const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.list_outlined), label: 'Services'),
     const BottomNavigationBarItem(
         icon: Icon(Icons.settings), label: 'Settings'),
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
+
+  final Widget currentWidget = contact_us();
+
+
   final screens = [
-    const HomePageProfessional(),
     const ServicesPage(),
     const Setting(),
     contact_us(),
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +62,9 @@ class _ProfessionalSwitchMainPageState
             backgroundColor:
                 const Color(ConstantColors.KGreyColor).withOpacity(0.9),
             fixedColor: const Color(ConstantColors.KPinkColor),
-            onTap: _navigateBottomBar,
+            onTap:(int index){
+              _navigateBottomBar( index);
+            },
             currentIndex: _index,
             type: BottomNavigationBarType.fixed,
             items: items,
@@ -64,4 +72,6 @@ class _ProfessionalSwitchMainPageState
       body: screens[_index],
     );
   }
+
+
 }

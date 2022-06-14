@@ -31,8 +31,14 @@ class _ServicesPageState extends State<ServicesPage> {
     String? lastName = ProfessionalPreferences.getLastName();
     return SafeArea(
         child: Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text('My Services'),
+        ),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
+      ),
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35.0),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 35.0),
           child: Column(
             children: [
               NavBarItem(lastName: lastName!, name: firstName!),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/frgot_pwrd.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 
@@ -74,33 +75,29 @@ class maCase2 extends StatelessWidget {
                 offset: Offset(4, 8), // Shadow position
               ),
             ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.edit,
-              color: Colors.black,
-              size: 50,
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 255, 255, 255),
-                ),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => EditProfileProfessionalPage()),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.edit,
+                color: Colors.black,
+                size: 35,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => EditProfileProfessionalPage()),
-                );
-              },
-              child: Text(
-                'Edit Profil',
+              SizedBox(height: 10),
+              Text(
+                'Edit Profile',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }
@@ -123,32 +120,28 @@ class maCase3 extends StatelessWidget {
                 offset: Offset(4, 8), // Shadow position
               ),
             ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.settings,
-              color: Colors.black,
-              size: 50,
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 255, 255, 255),
-                ),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Setting()),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.settings,
+                color: Colors.black,
+                size: 35,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Setting()),
-                );
-              },
-              child: Text(
+              SizedBox(height: 10),
+              Text(
                 'Settings',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }
@@ -171,32 +164,29 @@ class maCase4 extends StatelessWidget {
                 offset: Offset(4, 8), // Shadow position
               ),
             ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.design_services,
-              color: Colors.black,
-              size: 50,
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 255, 255, 255),
-                ),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ServicesPage()),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.design_services,
+                color: Colors.black,
+                size: 35,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ServicesPage()),
-                );
-              },
-              child: Text(
-                'My Service',
+              SizedBox(height: 10),
+              Text(
+                'Services',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }
@@ -219,38 +209,28 @@ class maCase5 extends StatelessWidget {
                 offset: Offset(4, 8), // Shadow position
               ),
             ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.lock,
-              color: Colors.black,
-              size: 50,
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  Color.fromARGB(255, 255, 255, 255),
-                ),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => forgot_pswd()),
+            );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.lock,
+                color: Colors.black,
+                size: 35,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => test()),
-                );
-              },
-              child: Row(
-                children: [
-                  Center(
-                    child: Text(
-                      'Forgot Password',
-                      style: TextStyle(color: Colors.black, fontSize: 11),
-                    ),
-                  ),
-                ],
+              SizedBox(height: 10),
+              Text(
+                'Forget Password',
+                style: TextStyle(color: Colors.black, fontSize: 12),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }
@@ -351,6 +331,11 @@ class contact_us extends StatelessWidget {
                 width: double.infinity,
                 height: 200.5,
                 decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: NetworkImage(
+                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                      fit: BoxFit.cover,
+                    ),
                     color: Color.fromARGB(255, 253, 244, 250),
                     border: Border.all(color: Colors.white),
                     borderRadius: BorderRadius.only(
@@ -372,23 +357,9 @@ class contact_us extends StatelessWidget {
               ),
               SizedBox(height: 5),
               // @TEXT
-              Text(
-                "@username",
-                style: TextStyle(fontSize: 20),
-              ),
 
               SizedBox(height: 8),
 
-              // text descriptif
-
-              Text(
-                "A little Description headd , delete or modify",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 237, 12, 121),
-                ),
-                textAlign: TextAlign.center,
-              ),
               //blocks
               SizedBox(height: 20),
 
@@ -425,9 +396,9 @@ class contact_us extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Row(children: [
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                           Icon(Icons.warning, color: Colors.white),
                           TextButton(
                             style: ButtonStyle(
@@ -448,7 +419,7 @@ class contact_us extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                           ),
-                        ]))),
+                        ])),
               ),
             ],
           ))),

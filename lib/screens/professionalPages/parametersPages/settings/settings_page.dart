@@ -29,7 +29,6 @@ class MySettingState extends State<MySetting> {
   bool valNotify12 = true;
   bool valNotify22 = false;
   bool valNotify32 = false;
-  int _currentIndex = 0;
 
   onChangeFunction1(bool newVAlue1) {
     setState(() {
@@ -74,7 +73,6 @@ class MySettingState extends State<MySetting> {
         title: const Center(
           child: Text('My Settings'),
         ),
-
         backgroundColor: const Color(ConstantColors.KPinkColor),
       ),
       // backgroundColor: Color.fromARGB(255, 198, 127, 121),
@@ -98,56 +96,13 @@ class MySettingState extends State<MySetting> {
                     ),
                     const Text(
                       'Privacy Settings',
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                    ),
-                    const Icon(Icons.arrow_downward),
-                  ],
-                ),
-                const Divider(
-                  height: 20,
-                  thickness: 1.5,
-                  color: Colors.black,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-                buildNotificationOption(
-                    "Show Profile To Others", valNotify1, onChangeFunction1),
-                buildNotificationOption(
-                    "Allow Recommendations", valNotify2, onChangeFunction2),
-                buildNotificationOption(
-                    "Show Profile To others", valNotify3, onChangeFunction3),
-                const SizedBox(
-                  height: 40,
-                ),
-
-// others Settings
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.add_moderator,
-                      color: Colors.black,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    const Text(
-                      'Others Settings',
                       style:
                           TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.35,
                     ),
-                    const Icon(Icons.arrow_downward),
+                    const Icon(Icons.arrow_circle_right_rounded),
                   ],
                 ),
                 const Divider(
@@ -155,15 +110,17 @@ class MySettingState extends State<MySetting> {
                   thickness: 1.5,
                   color: Colors.black,
                 ),
-                buildNotificationOption(
-                    "Show Profile To Others", valNotify12, onChangeFunction12),
-                buildNotificationOption(
-                    "Allow Recommendations", valNotify22, onChangeFunction22),
-                buildNotificationOption(
-                    "Show Profile To others", valNotify32, onChangeFunction32),
-
                 const SizedBox(
-                  height: 20,
+                  height: 10,
+                ),
+                buildNotificationOption(
+                    'Show Profile To Others', valNotify1, onChangeFunction1),
+                buildNotificationOption(
+                    'Allow Recommendations', valNotify2, onChangeFunction2),
+                buildNotificationOption(
+                    'Show Profile To others', valNotify3, onChangeFunction3),
+                const SizedBox(
+                  height: 40,
                 ),
               ],
             )
