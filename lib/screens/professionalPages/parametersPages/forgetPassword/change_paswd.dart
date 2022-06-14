@@ -1,29 +1,27 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:pfs/screens/professionalPages/professionalSwitchMainPage.dart';
 
+import '../../../../extensions/constants.dart';
 import '../profilePage.dart';
 
-class change_pswd extends StatelessWidget {
+class ChangeNewPassword extends StatelessWidget {
+  const ChangeNewPassword({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        appBar: AppBar(
+          title: const Center(
+            child: Text('Enter Your New Password'),
+          ),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
+        ),
         body: SingleChildScrollView(
           child: SafeArea(
               child: Center(
                   child: Column(children: [
-            //forgot text
-            Padding(
-              padding: EdgeInsets.only(left: 90),
-              child: Text(
-                "Forgot Password",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
             SizedBox(height: 25),
             //first container
             Container(
@@ -154,7 +152,9 @@ class change_pswd extends StatelessWidget {
                           child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 44.0),
-                              child: Row(children: [
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
                                 Icon(Icons.save, color: Colors.white),
                                 TextButton(
                                   style: ButtonStyle(
@@ -164,10 +164,12 @@ class change_pswd extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.push(
+                                    Navigator. pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => contact_us()),
+                                        builder: (BuildContext context) => ProfessionalSwitchMainPage(),
+                                      ),
+                                          (route) => false,
                                     );
                                   },
                                   child: Text(

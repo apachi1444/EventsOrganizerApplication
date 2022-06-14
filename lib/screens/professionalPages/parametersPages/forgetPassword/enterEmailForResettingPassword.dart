@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/verify.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/verifyCodeSent.dart';
 
 import '../../../../extensions/constants.dart';
 
@@ -34,8 +34,8 @@ class EnterEmailForResettingPassword extends StatelessWidget {
                     topLeft: Radius.circular(30.0),
                   )),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //circle container
                   Container(
                       width: 250,
                       height: 250,
@@ -51,6 +51,7 @@ class EnterEmailForResettingPassword extends StatelessWidget {
                             ),
                           ]),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
                             Icons.question_mark_rounded,
@@ -104,12 +105,11 @@ class EnterEmailForResettingPassword extends StatelessWidget {
                                 ),
                                 hintText: 'Enter Your Email',
                               ))))),
-                  SizedBox(height: 15),
-                  //send buttuns
+                  SizedBox(height: 30),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Container(
-                        width: 200,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         padding: EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 237, 12, 121),
@@ -125,30 +125,32 @@ class EnterEmailForResettingPassword extends StatelessWidget {
                         child: Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 24.0),
-                            child: Row(children: [
-                              Icon(Icons.send, color: Colors.white),
-                              TextButton(
-                                style: ButtonStyle(
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Color.fromARGB(255, 255, 255, 255),
+                            child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.send, color: Colors.white),
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                        Color.fromARGB(255, 255, 255, 255),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => verifyCodeSent()),
+                                      );
+                                    },
+                                    child: Text(
+                                      'Send Email',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
                                   ),
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => verify()),
-                                  );
-                                },
-                                child: Text(
-                                  'Send Email',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ]))),
+                                ]))),
                   ),
                 ],
               ))

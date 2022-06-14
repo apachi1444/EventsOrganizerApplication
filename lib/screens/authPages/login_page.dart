@@ -311,7 +311,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => change_pswd()),
+                                    builder: (context) => const ChangeNewPassword()),
                               );
                             },
                             child: Text('Forget Password?',

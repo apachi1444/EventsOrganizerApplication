@@ -219,7 +219,7 @@ class maCase6 extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => change_pswd()),
+                  MaterialPageRoute(builder: (context) => ChangeNewPassword()),
                 );
               },
               child: Text(
@@ -358,7 +358,7 @@ class contact_us extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => change_pswd()),
+                                    builder: (context) => ChangeNewPassword()),
                               );
                             },
                             child: Text(

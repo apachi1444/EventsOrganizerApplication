@@ -13,7 +13,6 @@ import '../screens/guestPages/profilePage/profilePageGuest.dart';
 import '../screens/guestPages/searchPage/search_page.dart';
 import '../screens/professionalPages/parametersPages/services/servicesPage.dart';
 import '../screens/professionalPages/parametersPages/settings/settings_page.dart';
-import '../screens/professionalPages/parametersPages/profilePageProfTest.dart';
 import '../screens/sharedScreens/search/searchPage.dart';
 import '../switch_between_pages/signup_login_toggle.dart';
 
@@ -39,16 +38,6 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
 // This is For the Professional Pages
   '/authProfessional': (context) => const AuthSwitchPage(),
   '/professional/switchMainPage': (context) => const ProfessionalSwitchMainPage(),
-  '/professional/profilePage': (context) => const ProfilePageProfessional(),
-  '/professional/profilePage/editProfile': (context) =>
-      const ProfilePageProfessional(),
-  '/professional/profilePage/settings': (context) => const Setting(),
-  '/professional/profilePage/forgetPassword/firstPage': (context) =>
-      const Setting(),
-  '/professional/profilePage/forgetPassword/secondPage': (context) =>
-      const ProfilePageProfessional(),
-  '/professional/profilePage/forgetPassword/thirdPage': (context) =>
-      const ProfilePageProfessional(),
   '/professional/profilePage/services': (context) => const ServicesPage(),
   '/professional/profilePage/editProfile/updatedSuccessfully': (context) =>
       const SuccesStep(),
