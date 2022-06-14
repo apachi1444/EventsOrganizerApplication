@@ -5,7 +5,7 @@ import 'package:pfs/screens/professionalPages/home_page_test_animation.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
-import 'package:pfs/screens/professionalPages/profile/profilePage.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/profilePage.dart';
 import 'package:pfs/screens/sharedScreens/search/searchPage.dart';
 
 import '../../extensions/constants.dart';
@@ -22,14 +22,11 @@ class _ProfessionalSwitchMainPageState
     extends State<ProfessionalSwitchMainPage> {
   int _index = 2;
 
-
-
-  void _navigateBottomBar(int index ) {
+  void _navigateBottomBar(int index) {
     setState(() {
       _index = index;
     });
   }
-
 
   final items = <BottomNavigationBarItem>[
     const BottomNavigationBarItem(
@@ -39,15 +36,11 @@ class _ProfessionalSwitchMainPageState
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
 
-  final Widget currentWidget = contact_us();
-
-
   final screens = [
     const ServicesPage(),
     const Setting(),
     contact_us(),
   ];
-  final navigationKey = GlobalKey<CurvedNavigationBarState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +55,8 @@ class _ProfessionalSwitchMainPageState
             backgroundColor:
                 const Color(ConstantColors.KGreyColor).withOpacity(0.9),
             fixedColor: const Color(ConstantColors.KPinkColor),
-            onTap:(int index){
-              _navigateBottomBar( index);
+            onTap: (int index) {
+              _navigateBottomBar(index);
             },
             currentIndex: _index,
             type: BottomNavigationBarType.fixed,
@@ -72,6 +65,4 @@ class _ProfessionalSwitchMainPageState
       body: screens[_index],
     );
   }
-
-
 }

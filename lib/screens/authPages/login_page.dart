@@ -204,7 +204,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/change_paswd.dart';
-import 'package:pfs/screens/professionalPages/profile/profilePage.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/profilePage.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../extensions/constants.dart';

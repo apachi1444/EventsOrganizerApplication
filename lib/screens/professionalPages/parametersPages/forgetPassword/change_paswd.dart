@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../professionalPages/profile/profilePage.dart';
+import '../profilePage.dart';
 
 class change_pswd extends StatelessWidget {
   @override

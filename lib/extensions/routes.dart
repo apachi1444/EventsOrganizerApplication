@@ -13,7 +13,7 @@ import '../screens/guestPages/profilePage/profilePageGuest.dart';
 import '../screens/guestPages/searchPage/search_page.dart';
 import '../screens/professionalPages/parametersPages/services/servicesPage.dart';
 import '../screens/professionalPages/parametersPages/settings/settings_page.dart';
-import '../screens/professionalPages/profile/profilePageProfTest.dart';
+import '../screens/professionalPages/parametersPages/profilePageProfTest.dart';
 import '../screens/sharedScreens/search/searchPage.dart';
 import '../switch_between_pages/signup_login_toggle.dart';
 

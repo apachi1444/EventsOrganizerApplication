@@ -45,15 +45,15 @@ class ServiceDetailsBox extends StatelessWidget {
           padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
-              FutureBuilder(
-                  future: Storage().listFiles(ProfessionalPreferences.getUid()),
-                  builder: (context, AsyncSnapshot<ListResult> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done &&
-                        snapshot.hasData) {
-                      return const Text("Yessine Jaoua");
-                    }
-                    return const Text("there is no data");
-                  }),
+              // FutureBuilder(
+              //     future: Storage().listFiles(ProfessionalPreferences.getUid()),
+              //     builder: (context, AsyncSnapshot<ListResult> snapshot) {
+              //       if (snapshot.connectionState == ConnectionState.done &&
+              //           snapshot.hasData) {
+              //         return const Text("Yessine Jaoua");
+              //       }
+              //       return const Text("there is no data");
+              //     }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

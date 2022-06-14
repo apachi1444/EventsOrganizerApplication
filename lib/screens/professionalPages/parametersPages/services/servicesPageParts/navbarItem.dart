@@ -17,8 +17,8 @@ class NavBarItem extends StatelessWidget {
               backgroundColor: Color(ConstantColors.KPinkColor),
               radius: 27,
               child: CircleAvatar(
-                radius: 22,
-                backgroundImage: AssetImage('assets/googleIcon.png'),
+                radius: 25,
+                backgroundImage: AssetImage('assets/avatar.jpg'),
               )),
           const SizedBox(width: 15),
           Column(

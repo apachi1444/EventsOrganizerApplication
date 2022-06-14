@@ -6,58 +6,9 @@ import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/frg
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 
-import '../parametersPages/forgetPassword/change_paswd.dart';
-import '../parametersPages/forgetPassword/test.dart';
+import 'forgetPassword/change_paswd.dart';
+import 'forgetPassword/enterEmailForResettingPassword.dart';
 
-///////////////////////////////////////////////////:Mes  6 CASEs//////////////////////////////////////:
-//////ma case 1
-// class maCase1 extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         width: 110,
-//         height: 110,
-//         decoration: BoxDecoration(
-//             color: Color.fromARGB(255, 253, 244, 250),
-//             border: Border.all(color: Colors.white),
-//             borderRadius: BorderRadius.circular(12),
-//             boxShadow: [
-//               BoxShadow(
-//                 color: Color.fromARGB(255, 195, 194, 194),
-//                 blurRadius: 4,
-//                 offset: Offset(4, 8), // Shadow position
-//               ),
-//             ]),
-//         child: Column(
-//           children: [
-//             Icon(
-//               Icons.recommend,
-//               color: Colors.black,
-//               size: 50,
-//             ),
-//             TextButton(
-//               style: ButtonStyle(
-//                 foregroundColor: MaterialStateProperty.all<Color>(
-//                   Color.fromARGB(255, 255, 255, 255),
-//                 ),
-//               ),
-//               onPressed: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => change_pswd()),
-//                 );
-//               },
-//               child: Text(
-//                 'recommandation',
-//                 style: TextStyle(color: Colors.black, fontSize: 12),
-//               ),
-//             ),
-//           ],
-//         ));
-//   }
-// }
-
-////////////case2
 class maCase2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -168,8 +119,7 @@ class maCase4 extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => ServicesPage()),
+              MaterialPageRoute(builder: (context) => ServicesPage()),
             );
           },
           child: Column(
@@ -213,7 +163,7 @@ class maCase5 extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => forgot_pswd()),
+              MaterialPageRoute(builder: (context) => EnterEmailForResettingPassword()),
             );
           },
           child: Column(
@@ -314,7 +264,6 @@ class myRow2 extends StatelessWidget {
   }
 }
 
-/////////////////////////////////////////////////////////my main class/////////////////////////////////////////////::
 class contact_us extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -332,8 +281,7 @@ class contact_us extends StatelessWidget {
                 height: 200.5,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
-                      image: NetworkImage(
-                          'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                      image: AssetImage('assets/avatar.jpg'),
                       fit: BoxFit.cover,
                     ),
                     color: Color.fromARGB(255, 253, 244, 250),
@@ -347,14 +295,14 @@ class contact_us extends StatelessWidget {
               SizedBox(height: 30),
               //nAME OF THE CLIENT
 
-              Text(
-                "Micheal Boston",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                  color: Color.fromARGB(255, 237, 12, 121),
-                ),
-              ),
+              // Text(
+              //   "Micheal Boston",
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 30,
+              //     color: Color.fromARGB(255, 237, 12, 121),
+              //   ),
+              // ),
               SizedBox(height: 5),
               // @TEXT
 
@@ -374,7 +322,7 @@ class contact_us extends StatelessWidget {
               // text descriptif
               SizedBox(height: 27),
               Text(
-                "Have Any Problem ?",
+                'Have Any Problem ?',
                 style: TextStyle(fontSize: 20),
               ),
 

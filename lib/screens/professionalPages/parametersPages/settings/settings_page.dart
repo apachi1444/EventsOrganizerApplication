@@ -9,8 +9,14 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MySetting(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text('My Settings'),
+        ),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
+      ),
+      body: const MySetting(),
     );
   }
 }
@@ -68,65 +74,56 @@ class MySettingState extends State<MySetting> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('My Settings'),
-        ),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
+    return Container(
+      padding: const EdgeInsets.all(10),
+      child: ListView(
+        children: [
+          const SizedBox(
+            height: 40,
+          ),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.add_moderator,
+                        color: Colors.black,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Privacy Settings',
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  const Icon(Icons.arrow_circle_right_rounded),
+                ],
+              ),
+              const Divider(
+                height: 20,
+                thickness: 1.5,
+                color: Colors.black,
+              ),
+              buildNotificationOption(
+                  'Show Profile To Others', valNotify1, onChangeFunction1),
+              buildNotificationOption(
+                  'Allow Recommendations', valNotify2, onChangeFunction2),
+              buildNotificationOption(
+                  'Show Profile To others', valNotify3, onChangeFunction3),
+              const SizedBox(
+                height: 40,
+              ),
+            ],
+          )
+        ],
       ),
-      // backgroundColor: Color.fromARGB(255, 198, 127, 121),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 40,
-            ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.add_moderator,
-                      color: Colors.black,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    const Text(
-                      'Privacy Settings',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.35,
-                    ),
-                    const Icon(Icons.arrow_circle_right_rounded),
-                  ],
-                ),
-                const Divider(
-                  height: 20,
-                  thickness: 1.5,
-                  color: Colors.black,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                buildNotificationOption(
-                    'Show Profile To Others', valNotify1, onChangeFunction1),
-                buildNotificationOption(
-                    'Allow Recommendations', valNotify2, onChangeFunction2),
-                buildNotificationOption(
-                    'Show Profile To others', valNotify3, onChangeFunction3),
-                const SizedBox(
-                  height: 40,
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
+
       // SafeArea
     );
   }
