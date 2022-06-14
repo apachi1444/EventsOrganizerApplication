@@ -75,7 +75,7 @@ class MySettingState extends State<MySetting> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal : 25 , vertical : 15),
       child: ListView(
         children: [
           const SizedBox(

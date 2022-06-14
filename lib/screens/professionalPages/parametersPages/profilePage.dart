@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_page.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/frgot_pwrd.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/frgot_pwrd_not_used.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPage.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
 
+import '../../../services/authService.dart';
+import 'contactUs/contactUs.dart';
 import 'forgetPassword/change_paswd.dart';
 import 'forgetPassword/enterEmailForResettingPassword.dart';
 
@@ -264,7 +266,9 @@ class myRow2 extends StatelessWidget {
   }
 }
 
-class contact_us extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -276,12 +280,11 @@ class contact_us extends StatelessWidget {
             children: [
               //photo container
               Container(
-                padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
                 width: double.infinity,
-                height: 200.5,
+                height: MediaQuery.of(context).size.height * 0.25,
                 decoration: BoxDecoration(
                     image: const DecorationImage(
-                      image: AssetImage('assets/avatar.jpg'),
+                      image: NetworkImage('https://therichpost.com/wp-content/uploads/2021/03/avatar2.png'),
                       fit: BoxFit.cover,
                     ),
                     color: Color.fromARGB(255, 253, 244, 250),
@@ -290,6 +293,29 @@ class contact_us extends StatelessWidget {
                       bottomRight: Radius.circular(30.0),
                       bottomLeft: Radius.circular(30.0),
                     )),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 2, vertical: 2),
+                          child: PopupMenuButton(
+                              icon: const Icon(Icons.logout,
+                                  color: Colors.white, size: 30),
+                              itemBuilder: (_) {
+                                return <PopupMenuItem<String>>[
+                                  const PopupMenuItem(
+                                      child: Text('Logout'), value: 'logout')
+                                ];
+                              },
+                              onSelected: (index) {
+                                AuthService().signOut();
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/authProfessional', (r) => false);
+                              }),
+                        )
+                      ])
               ),
 
               SizedBox(height: 30),
@@ -358,7 +384,7 @@ class contact_us extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ChangeNewPassword()),
+                                    builder: (context) => ContactUs()),
                               );
                             },
                             child: Text(

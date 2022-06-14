@@ -311,7 +311,8 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const ChangeNewPassword()),
+                                    builder: (context) =>
+                                        const ChangeNewPassword()),
                               );
                             },
                             child: Text('Forget Password?',
@@ -387,14 +388,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 //         builder: (context) =>
                                                 //             contact_us())),
                                                 //ici la navigation vers la page contact us
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            contact_us()),
-                                                  );
-                                                },
+                                                onPressed: () {},
                                                 child: const Text('Cancel')),
                                           ],
                                         ));

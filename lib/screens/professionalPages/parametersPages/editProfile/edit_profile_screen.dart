@@ -104,7 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             radius: 45,
                             backgroundColor: Colors.black54,
                             backgroundImage:
-                                AssetImage('assets/googleIcon.png'),
+                                NetworkImage('https://therichpost.com/wp-content/uploads/2021/03/avatar2.png'),
                           )
                         ],
                       ),

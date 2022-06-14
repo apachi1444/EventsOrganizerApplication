@@ -34,7 +34,7 @@ class _OneButtonServicePageState extends State<OneButtonServicePage> {
                     offset: Offset(0, 2))
               ],
               color: widget.isClicked
-                  ? const Color(ConstantColors.KPinkColor)
+                  ? const Color(ConstantColors.KGreyColor)
                   : const Color(ConstantColors.KGreyColor),
             ),
             child: Center(
@@ -42,7 +42,7 @@ class _OneButtonServicePageState extends State<OneButtonServicePage> {
                 padding: const EdgeInsets.all(17.0),
                 child: Text(widget.text,
                     style: TextStyle(
-                        color: widget.isClicked ? Colors.white : Colors.black)),
+                        color: widget.isClicked ? Colors.black : Colors.black)),
               ),
             )),
       ),

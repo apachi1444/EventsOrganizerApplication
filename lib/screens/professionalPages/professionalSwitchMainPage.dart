@@ -39,7 +39,7 @@ class _ProfessionalSwitchMainPageState
   final screens = [
     const ServicesPage(),
     const Setting(),
-    contact_us(),
+    const ProfilePage(),
   ];
 
   @override
