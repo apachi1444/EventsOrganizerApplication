@@ -31,6 +31,10 @@ class Utils {
         {
           return 'assets/djPhoto.jpg';
         }
+      case 'Photographer':
+        {
+          return 'assets/photographer.jpg';
+        }
       default:
         return '/assets/googleIcon.png';
     }

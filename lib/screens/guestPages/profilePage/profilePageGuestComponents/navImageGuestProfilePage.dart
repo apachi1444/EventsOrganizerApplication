@@ -22,20 +22,20 @@ class NavImageGuestProfilePage extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Material(
-                  borderRadius: BorderRadius.circular(50),
-                  child: InkWell(
-                    splashColor: Colors.red, // Splash color
-                    onTap: () {
-                      // Navigator.pop(context);
-                    },
-                    child: const SizedBox(
-                        width: 34,
-                        height: 34,
-                        child: Icon(Icons.arrow_left_outlined)),
-                  ),
-                ),
+              children: const <Widget>[
+                // Material(
+                //   borderRadius: BorderRadius.circular(50),
+                //   child: InkWell(
+                //     splashColor: Colors.red, // Splash color
+                //     onTap: () {
+                //       // Navigator.pop(context);
+                //     },
+                //     child: const SizedBox(
+                //         width: 34,
+                //         height: 34,
+                //         child: Icon(Icons.arrow_left_outlined)),
+                //   ),
+                // ),
               ],
             ),
           ],

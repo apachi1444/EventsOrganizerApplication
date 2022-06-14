@@ -21,17 +21,16 @@ class NavbarItemHomePage extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(25),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const CircleAvatar(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const <Widget>[
+            CircleAvatar(
               backgroundColor: Colors.white,
               radius: 20.0,
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/googleIcon.png'),
-                radius: 17.0,
+                backgroundImage: AssetImage('assets/avatar.jpg'),
+                radius: 18.0,
               ),
             ),
-            Text('Welcome $firstName!'),
             // Material(
             //   borderRadius: BorderRadius.circular(50),
             //   child: InkWell(

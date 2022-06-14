@@ -101,10 +101,10 @@ class _TodoListState extends State<TodoList> {
                               subtitle: Text(documentSnapshot['description']),
                             ),
                           ),
-                          IconButton(
-                            onPressed: editTask,
-                            icon: const Icon(Icons.edit_outlined),
-                          ),
+                          // IconButton(
+                          //   onPressed: editTask,
+                          //   icon: const Icon(Icons.edit_outlined),
+                          // ),
                           IconButton(
                             onPressed: () =>
                                 TodoServices().deleteTask(documentSnapshot.id),

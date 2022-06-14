@@ -22,10 +22,7 @@ class _HomePageGuestState extends State<HomePageGuest> {
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
-    print('this is the user id of the guest dude');
-    GuestService(guestUid: userId)
-        .getGuestFromDocumentSnapshot()
-        .then((value) {});
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(

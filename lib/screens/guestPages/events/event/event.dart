@@ -18,8 +18,14 @@ class MyEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Event(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text('My Events'),
+        ),
+        backgroundColor: const Color(ConstantColors.KPinkColor),
+      ),
+      body: const Event(),
     );
   }
 }
@@ -34,35 +40,20 @@ class Event extends StatefulWidget {
 class EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
-    String? uid = GuestPreferences.getUid();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('My Event'),
-        ),
-
-        backgroundColor: const Color.fromARGB(255, 255, 0, 107),
-      ),
-      // backgroundColor: Color.fromARGB(255, 198, 127, 121),
-
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            // color: Color.fromARGB(255, 231, 178, 204),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50),
-                topRight: Radius.circular(50),
-              )),
-
-          child: Column(
-            children: [
-
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Container(
+    return SingleChildScrollView(
+      child: Container(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
+        )),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Container(
                   padding:
-                  const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
                   decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 252, 252, 252),
                       borderRadius: BorderRadius.only(
@@ -70,173 +61,128 @@ class EventState extends State<Event> {
                           bottomRight: Radius.circular(20),
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20))),
-                  child: Container(
-                     // <-- wrap this around
-                      child: Column(
-                        children: <Widget>[
-                          const Text('My Events',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20)),
-                          const SizedBox(height: 15),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                          TextButton(
-                            style: TextButton.styleFrom(
-                                primary:
-                                const Color.fromARGB(255, 0, 0, 0)),
-                            onPressed: () {
-                              WidgetsBinding.instance
-                                  ?.addPostFrameCallback((_) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MyCheckingList(),
-                                    ));
-                              });
-                            },
-                            child: CheckingCard(
-                                'my event', Icons.event),
-                          ),
-                        ],
+                  child: Column(
+                    children: <Widget>[
+
+                      const SizedBox(height: 15),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
                       ),
-                    )
-
-                  ),
-                ),
-
-            ],
-          ),
-
-
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 0, 0, 0)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyCheckingList(),
+                              ));
+                        },
+                        child: CheckingCard('my event', Icons.event),
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(Icons.add),
+                            SizedBox(width: 15),
+                            Center(
+                              child: Text('Add Detail',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  )),
+            ),
+          ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-
-          _showTheAddingEventAlertModel(context);
-        },
-        icon: const Icon(Icons.add),
-        label: const Text('Add Event'),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 // SwitchSettingsTile
@@ -261,36 +207,37 @@ Padding CheckingCard(String title, IconData icon) {
       child: Container(
         //width: 120,
         height: 60,
-        decoration:  BoxDecoration(
+        decoration: BoxDecoration(
           border: Border.all(
             color: const Color(ConstantColors.KPinkColor),
           ),
           color: const Color.fromARGB(255, 248, 244, 244),
           borderRadius: const BorderRadius.only(
-
               bottomLeft: Radius.circular(10),
               bottomRight: Radius.circular(10),
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10)),
-
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            const SizedBox(width: 10,),
+            const SizedBox(
+              width: 10,
+            ),
             Icon(
               icon,
               size: 40,
             ),
-            const SizedBox(width: 10,),
-
-            Text(title,textAlign: TextAlign.center,),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
-
       ),
     ),
   );
 }
-
-

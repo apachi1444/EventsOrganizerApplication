@@ -29,13 +29,7 @@ class _BudgetPageState extends State<BudgetPage> {
               backgroundColor: const Color.fromARGB(255, 255, 0, 107),
               leading: IconButton(
                 onPressed: () {
-                  WidgetsBinding.instance?.addPostFrameCallback((_) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MyCheckList(),
-                        ));
-                  });
+                  Navigator.pop(context);
                 },
                 color: Colors.black,
                 icon: const Icon(

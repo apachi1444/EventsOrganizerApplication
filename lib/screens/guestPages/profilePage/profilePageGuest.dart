@@ -16,13 +16,13 @@ class ProfilePageGuest extends StatelessWidget {
       children: const [
         NavImageGuestProfilePage(),
         SizedBox(height: 15),
-        Text(
-          'Micheal Boston',
-          style: TextStyle(
-              color: Color(ConstantColors.KPinkColor),
-              fontWeight: FontWeight.bold,
-              fontSize: 22),
-        ),
+        // Text(
+        //   'Micheal Boston',
+        //   style: TextStyle(
+        //       color: Color(ConstantColors.KPinkColor),
+        //       fontWeight: FontWeight.bold,
+        //       fontSize: 22),
+        // ),
         SizedBox(height: 15),
         SizedBox(height: 15),
         ButtonParameterProfilePageGuest(

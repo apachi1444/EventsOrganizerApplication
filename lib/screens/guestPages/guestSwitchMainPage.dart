@@ -40,8 +40,7 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
     const BottomNavigationBarItem(
         icon: Icon(Icons.list_outlined), label: 'CheckList'),
     const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.settings), label: 'Recommendation'),
+
     const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
   ];
 
@@ -49,7 +48,6 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
     const HomePageGuest(),
     const MyEvent(),
     SearchScreen(),
-    const BudgetPage(),
     const ProfilePageGuest(),
   ];
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
