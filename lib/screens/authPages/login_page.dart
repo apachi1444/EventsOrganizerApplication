@@ -204,6 +204,7 @@ import 'package:flutter/material.dart';
 import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/change_paswd.dart';
+import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/enterEmailForResettingPassword.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/profilePage.dart';
 import 'package:pfs/services/authService.dart';
 
@@ -282,37 +283,17 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 0.0),
+                        horizontal: 40.0, vertical: 0.0),
                     child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Row(
-                            children: [
-                              Checkbox(
-                                  activeColor:
-                                      const Color(ConstantColors.KPinkColor),
-                                  checkColor:
-                                      const Color(ConstantColors.KPinkColor),
-                                  hoverColor:
-                                      const Color(ConstantColors.KPinkColor),
-                                  focusColor:
-                                      const Color(ConstantColors.KPinkColor),
-                                  value: isChecked,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      isChecked = value;
-                                    });
-                                  }),
-                              const Text('Remember Me '),
-                            ],
-                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ChangeNewPassword()),
+                                        const EnterEmailForResettingPassword()),
                               );
                             },
                             child: Text('Forget Password?',

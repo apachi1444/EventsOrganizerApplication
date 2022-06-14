@@ -26,7 +26,7 @@ class WelcomePageOne extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Container(
             child: const Text(
-              'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+              'An Application For Organizing Events',
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'roboto',

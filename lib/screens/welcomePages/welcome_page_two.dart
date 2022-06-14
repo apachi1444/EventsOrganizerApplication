@@ -26,7 +26,7 @@ class WelcomePageTwo extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 35),
           child: Container(
             child: const Text(
-              'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
+              'Make Your Life Easier With Us',
               style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'roboto',

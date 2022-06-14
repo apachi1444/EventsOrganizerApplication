@@ -16,24 +16,7 @@ class GetStartedPage extends StatelessWidget {
           child: Column(children: <Widget>[
             const NavBarItemStartPages(),
            const SizedBox(height: 30),
-           const Text('Who Are We',
-            style: TextStyle(
-              color: Color(0XFFFF006B),
-              fontSize: 40,
-            )),
-           const SizedBox(height: 20),
-           Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 35),
-          child: Container(
-            child: const Text(
-              'Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet lorem ipsum dolor sit amet',
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'roboto',
-              ),
-            ),
-          ),
-        ),
+
         const SizedBox(height: 90),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

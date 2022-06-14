@@ -7,12 +7,17 @@ import 'package:pfs/screens/professionalPages/professionalSwitchMainPage.dart';
 import '../../../../extensions/constants.dart';
 import '../profilePage.dart';
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
   const ContactUs({Key? key}) : super(key: key);
 
   @override
+  State<ContactUs> createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
+    final  _responseController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    final _responseController = TextEditingController();
 
     return Scaffold(
         appBar: AppBar(
@@ -100,7 +105,6 @@ class ContactUs extends StatelessWidget {
                                     minLines: 2,
                                     maxLines: 5,
                                     controller: _responseController,
-                                    keyboardType: TextInputType.text,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
@@ -154,7 +158,16 @@ class ContactUs extends StatelessWidget {
                                               backgroundColor: Colors.red,
                                               textColor: Colors.white,
                                               fontSize: 25);
-                                        } else {
+                                        }
+                                        else if (response.length < 6) {
+                                          Fluttertoast.showToast(
+                                              msg:
+                                              'Message Should have minimum 6 characters!',
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.white,
+                                              fontSize: 25);
+                                        }
+                                        else {
                                           Fluttertoast.showToast(
                                               msg: 'Sent successfully',
                                               backgroundColor: Colors.green,
