@@ -50,7 +50,7 @@ class _TodoListState extends State<TodoList> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("Loading");
+            return  const CircularProgressIndicator();
           }
 
           return ListView.builder(
@@ -111,7 +111,7 @@ class _TodoListState extends State<TodoList> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const AddTask();
+                return  AddTask(eventUid : widget.eventUid);
               },
             );
           }),

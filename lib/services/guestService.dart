@@ -33,13 +33,18 @@ class GuestService {
   }
 
   Future addEventToGuestList(String title, String dateTime) async {
-    final aa = guestsCollection.doc(guestUid).collection('events').doc();
+    final aa = guestsCollection.doc(guestUid).collection('events');
     print(aa.path);
-    return await guestsCollection.doc(guestUid).collection('events').add({
+    guestsCollection.doc(guestUid).collection('events').add({
       'title': title,
       'dateTime': dateTime,
       'uid': DateTime.now().toString()
-    });
+      // here i did the then method to get the uid of the current doc
+    }).then((element) => guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(element.id)
+        .update({'uid': element.id}));
   }
 
   Stream getStreamOfEventsOfParticularGuest() {

@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../../../extensions/constants.dart';
 import '../../../../services/budget_services.dart';
+import '../../../../services/eventsService.dart';
 import '../chickList/MyChickList.dart';
 
 class BudgetPage extends StatefulWidget {
-  const BudgetPage({Key? key}) : super(key: key);
+  const BudgetPage({Key? key, this.eventUid}) : super(key: key);
+  final String? eventUid;
 
   @override
   State<BudgetPage> createState() => _BudgetPageState();
@@ -79,18 +81,16 @@ class _BudgetPageState extends State<BudgetPage> {
                                     snapshot.data!.docs[index];
                                 return Padding(
                                   padding: const EdgeInsets.all(5.0),
-                                  child: detailsCard(documentSnapshot['title'],
-                                      documentSnapshot['prix'], Icons.delete,documentSnapshot),
+                                  child: detailsCard(
+                                      documentSnapshot['title'],
+                                      documentSnapshot['prix'],
+                                      Icons.delete,
+                                      documentSnapshot),
                                 );
                               },
                             ),
                           ),
 
-                          // detailsCard("traiteur", '10000 DH', Icons.delete),
-                          // detailsCard("salle", "10000 DH", Icons.delete),
-                          // detailsCard("Nagafa", "10000 DH", Icons.delete),
-                          // detailsCard("Robe", "10000 DH", Icons.delete),
-                          // detailsCard("traiteur", "10000 DH", Icons.delete),
                           const SizedBox(height: 15),
 
                           Container(
@@ -131,15 +131,15 @@ class _BudgetPageState extends State<BudgetPage> {
                                               color: Colors.grey),
                                         ),
                                       ]),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(height: 8),
-                                              TextFormField(
-                                              controller: todoTitleController,
-                                              style: const TextStyle(
+                                        children: [
+                                          const SizedBox(height: 8),
+                                          TextFormField(
+                                            controller: todoTitleController,
+                                            style: const TextStyle(
                                               fontSize: 18,
                                               //height: 1.5,
 
@@ -181,18 +181,14 @@ class _BudgetPageState extends State<BudgetPage> {
                                                 todoTitleController.text;
                                             final description =
                                                 todoDescriptionController.text;
-
+                                            EventsService(eventUid: widget.eventUid).addBudgetToEventBudget(title, description);
                                             BudgetServices add =
                                                 BudgetServices();
                                             add.addBudget(
                                                 title: title,
                                                 prix: description);
-                                            // if (todoTitleController.text.isNotEmpty) {
-                                            //   print(todoTitleController.text);
-                                            print("user added");
 
                                             Navigator.pop(context, 'add');
-                                            // }
                                           },
                                           child:
                                               const Center(child: Text('add')),
@@ -276,7 +272,8 @@ class _BudgetPageState extends State<BudgetPage> {
                 })));
   }
 
-  Padding detailsCard(String title, String Budget, IconData icon,DocumentSnapshot fct) {
+  Padding detailsCard(
+      String title, String Budget, IconData icon, DocumentSnapshot fct) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       child: Container(
@@ -300,11 +297,12 @@ class _BudgetPageState extends State<BudgetPage> {
               color: Color(0x34000000),
             ),
           ),
-              IconButton(onPressed:() {
-
-                  BudgetServices().deleteBudget(fct.id);
+          IconButton(
+              onPressed: () {
+                BudgetServices().deleteBudget(fct.id);
               },
-                  icon: Icon(icon, color: const Color(ConstantColors.KPinkColor), size: 30))
+              icon: Icon(icon,
+                  color: const Color(ConstantColors.KPinkColor), size: 30))
         ]),
       ),
     );

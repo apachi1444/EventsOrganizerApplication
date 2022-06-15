@@ -137,8 +137,8 @@ import '../../../../services/guestService.dart';
 import '../chickList/MyChickList.dart';
 
 class GuestList extends StatefulWidget {
-  const GuestList({Key? key}) : super(key: key);
-
+  const GuestList({Key? key, this.eventUid}) : super(key: key);
+  final String? eventUid;
   @override
   State<GuestList> createState() => _GuestListState();
 }
@@ -230,7 +230,6 @@ class _GuestListState extends State<GuestList> {
                             onPressed: () {
                               print(documentSnapshot.id);
                               GuestListService().deleteGuest(documentSnapshot.id);
-                              print('suuuuuuuuuuuuuuuuuuuuuuuup');
                             },
                             icon: const Icon(Icons.delete),
                           ),
@@ -252,7 +251,7 @@ class _GuestListState extends State<GuestList> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return const AddGuest();
+                return  AddGuest(eventUid : widget.eventUid);
               },
             );
           }),

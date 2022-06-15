@@ -3,8 +3,8 @@ import 'package:pfs/services/eventsService.dart';
 import 'package:pfs/services/todolist_services.dart';
 
 class AddTask extends StatefulWidget {
-  const AddTask({Key? key}) : super(key: key);
-
+  const AddTask({Key? key, this.eventUid}) : super(key: key);
+  final String? eventUid;
   @override
   State<AddTask> createState() => _AddTaskState();
 }
@@ -74,9 +74,10 @@ class _AddTaskState extends State<AddTask> {
             onPressed: () {
               final title = todoTitleController.text;
               final description = todoDescriptionController.text;
-
+              EventsService(eventUid : widget.eventUid).addTaskToEventToDoList(title, description);
               TodoServices().addTask(title: title, description: description);
-
+              print('this is the uid of the event selected');
+              print(widget.eventUid);
               Navigator.pop(context, 'add');
               // }
             },

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/services/guestListServices.dart';
 
-class AddGuest extends StatefulWidget {
-  const AddGuest({Key? key}) : super(key: key);
+import '../../../../services/eventsService.dart';
 
+class AddGuest extends StatefulWidget {
+  const AddGuest({Key? key, this.eventUid}) : super(key: key);
+  final String? eventUid;
   @override
   State<AddGuest> createState() => _AddGuestState();
 }
@@ -74,15 +76,11 @@ class _AddGuestState extends State<AddGuest> {
           TextButton(
             onPressed: () {
               final name = guestNameController.text;
-              //final description = todoDescriptionController.text;
               const isDone = true;
-
+              EventsService(eventUid: widget.eventUid).addGuestToEventGuestList(name);
               GuestListService().addGuest(name: name, isDone: isDone);
-              // if (todoTitleController.text.isNotEmpty) {
-              //   print(todoTitleController.text);
 
               Navigator.pop(context, 'add');
-              // }
             },
             child: const Center(child: Text('add')),
           ),

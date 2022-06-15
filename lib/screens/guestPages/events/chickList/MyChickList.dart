@@ -53,7 +53,7 @@ class MyCheckListState extends State<MyCheckList> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const GuestList(),
+                      builder: (context) =>  GuestList(eventUid : widget.eventUid),
                     ));
               },
               child: CheckingCard('Guest', Icons.person_add_alt),
@@ -78,7 +78,7 @@ class MyCheckListState extends State<MyCheckList> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const BudgetPage(),
+                      builder: (context) =>  BudgetPage(eventUid:widget.eventUid),
                     ));
               },
               child: CheckingCard('Budget', Icons.monetization_on_outlined),
