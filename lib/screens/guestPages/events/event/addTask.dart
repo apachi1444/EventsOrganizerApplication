@@ -75,9 +75,9 @@ class _AddTaskState extends State<AddTask> {
               final title = todoTitleController.text;
               final description = todoDescriptionController.text;
               EventsService(eventUid : widget.eventUid).addTaskToEventToDoList(title, description);
-              TodoServices().addTask(title: title, description: description);
-              print('this is the uid of the event selected');
-              print(widget.eventUid);
+              // TodoServices().addTask(title: title, description: description);
+              // print('this is the uid of the event selected');
+              // print(widget.eventUid);
               Navigator.pop(context, 'add');
               // }
             },

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../Models/Service.dart';
+import '../screens/guestPages/events/event/event.dart';
 
 class EventsService {
   String? eventUid;
@@ -23,14 +24,79 @@ class EventsService {
         .add({'title': title});
   }
 
+  Future<void> deleteSpecificGuestFromEventGuests(String guestEventUid) async {
+    await guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('guestsList')
+        .doc(guestEventUid)
+        .delete();
+  }
+
+  // --------------------------------- //
+  // this part for the tasks //
+
   Future addTaskToEventToDoList(String title, String description) async {
-    return await guestsCollection
+    guestsCollection
         .doc(guestUid)
         .collection('events')
         .doc(eventUid)
         .collection('todoList')
-        .add({'title': title, 'description': description});
+        .add({
+      'isDone': false,
+      'title': title,
+      'description': description,
+      'uid': DateTime.now().toString()
+    }).then((element) => guestsCollection
+            .doc(guestUid)
+            .collection('events')
+            .doc(eventUid)
+            .collection('todoList')
+            .doc(element.id)
+            .update({'uid': element.id}));
   }
+
+  Future<void> deleteSpecificTaskFromEventTasks(String taskUid) async {
+    await guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('todoList')
+        .doc(taskUid)
+        .delete();
+  }
+
+  Stream<QuerySnapshot> tasksStream() {
+    return guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('todoList')
+        .snapshots();
+  }
+
+  Future finishedOrNotTask(String taskUid , bool isChecked) async {
+    // var snapshot = await guestsCollection
+    //     .doc(guestUid)
+    //     .collection('events')
+    //     .doc(eventUid)
+    //     .collection('todoList')
+    //     .doc(taskUid)
+    //     .get();
+    // var currentIsDoneValue = snapshot.data()!['isDone'];
+    // print(currentIsDoneValue);
+    guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('todoList')
+        .doc(taskUid)
+        .update({'isDone': isChecked ? true : false});
+  }
+
+  // --------------------------------- //
+  // this part for the tasks //
 
   Future addBudgetToEventBudget(String title, String price) async {
     return await guestsCollection
@@ -39,6 +105,16 @@ class EventsService {
         .doc(eventUid)
         .collection('budget')
         .add({'title': title});
+  }
+
+  Future<void> deleteSpecificBudgetFromEventBudget(String budgetUid) async {
+    await guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .doc(budgetUid)
+        .delete();
   }
 
 // Future addProfessionalServiceToEvent(Service service) async{

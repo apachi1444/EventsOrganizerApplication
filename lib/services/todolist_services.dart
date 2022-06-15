@@ -32,9 +32,5 @@ class TodoServices {
     await tasks.doc(uid).update({'isDone': true});
   }
 
-  Stream<List<Task>> readTasks() {
-    return FirebaseFirestore.instance.collection('tasks').snapshots().map(
-        (snapshot) =>
-            snapshot.docs.map((doc) => (Task.fromJson(doc.data()))).toList());
-  }
+
 }

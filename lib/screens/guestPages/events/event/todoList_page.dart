@@ -4,6 +4,7 @@ import 'package:pfs/screens/guestPages/events/event/addTask.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/services/todolist_services.dart';
 import '../../../../extensions/constants.dart';
+import '../../../../services/eventsService.dart';
 import '../chickList/MyChickList.dart';
 
 class TodoList extends StatefulWidget {
@@ -21,9 +22,9 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
+    final _eventsService = EventsService(eventUid: widget.eventUid);
     print(widget.eventUid);
-    final Stream<QuerySnapshot> tasksStream =
-        FirebaseFirestore.instance.collection('tasks').snapshots();
+    final tasksStream = _eventsService.tasksStream();
 
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +51,7 @@ class _TodoListState extends State<TodoList> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return  const CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
 
           return ListView.builder(
@@ -59,6 +60,9 @@ class _TodoListState extends State<TodoList> {
                 final DocumentSnapshot documentSnapshot =
                     snapshot.data!.docs[index];
                 bool isChecked = documentSnapshot['isDone'];
+                print("this is the value of is Checked");
+                print(isChecked);
+                String taskUid = documentSnapshot['uid'];
                 return Center(
                   child: SizedBox(
                     height: 100,
@@ -72,7 +76,7 @@ class _TodoListState extends State<TodoList> {
                             onChanged: (bool? newValue) {
                               setState(() {
                                 isChecked = newValue!;
-                                TodoServices().completTask(documentSnapshot.id);
+                                _eventsService.finishedOrNotTask(taskUid , newValue);
                               });
                             },
                             activeColor: const Color(ConstantColors.KPinkColor),
@@ -90,7 +94,8 @@ class _TodoListState extends State<TodoList> {
                           // ),
                           IconButton(
                             onPressed: () =>
-                                TodoServices().deleteTask(documentSnapshot.id),
+                                _eventsService.deleteSpecificTaskFromEventTasks(
+                                    documentSnapshot['uid']),
                             icon: const Icon(Icons.delete),
                           ),
                         ],
@@ -111,7 +116,7 @@ class _TodoListState extends State<TodoList> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return  AddTask(eventUid : widget.eventUid);
+                return AddTask(eventUid: widget.eventUid);
               },
             );
           }),
