@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/Models/Service.dart';
+import 'package:pfs/extensions/listOfCategories.dart';
+import 'package:pfs/screens/guestPages/home/homePageParts/noDataFoundForThatCategory.dart';
 import 'package:pfs/screens/guestPages/home/homePageParts/professionalBoxInHomePage.dart';
 import 'package:pfs/screens/guestPages/home/homePageParts/professionalSlider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/Professional.dart';
+import '../../../../services/authService.dart';
 import '../../../../services/guestService.dart';
 import '../../../../services/professionalDbService.dart';
 import '../../../professionalPages/parametersPages/services/servicesPageParts/noDataFound.dart';
@@ -12,11 +15,11 @@ import '../../../professionalPages/parametersPages/services/servicesPageParts/se
 import 'CategoryNameAndViewAllRow.dart';
 
 class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
-  const WholeBoxContainingCategoryAndProfessionalDetail(
-      {Key? key, required this.userId})
+   WholeBoxContainingCategoryAndProfessionalDetail(
+      {Key? key, required this.category})
       : super(key: key);
-  final String? userId;
-
+  final String? category;
+  final String? userId = AuthService().getCurrentIdUser();
   @override
   Widget build(BuildContext context) {
     final guestService = GuestService(guestUid: userId);
@@ -30,7 +33,7 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
             return const CircularProgressIndicator();
           } else {
             if (snapshot.data.length == 0) {
-              return const NoDataFound();
+              return Container();
             } else {
               return ListView.builder(
                   shrinkWrap: true,
@@ -43,10 +46,7 @@ class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
                     return Column(
                       children: [
                         const SizedBox(height: 15),
-                        CategoryNameAndViewAllRow(
-                            firstName: firstName, lastName: lastName),
-                        const SizedBox(height: 15),
-                        ProfessionalSlider(
+                        ProfessionalSlider(category : category,
                             guestUid: userId, professionalUid: uid),
                         const SizedBox(height: 15),
                       ],

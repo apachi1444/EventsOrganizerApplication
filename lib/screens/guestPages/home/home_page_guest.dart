@@ -10,6 +10,7 @@ import 'homePageParts/CategoryNameAndViewAllRow.dart';
 import 'homePageParts/RowFilterSearchHomePage.dart';
 import 'homePageParts/navbarItemHomePage.dart';
 import 'homePageParts/professionalSlider.dart';
+import 'homePageParts/showAllListOfCategories.dart';
 
 class HomePageGuest extends StatefulWidget {
   const HomePageGuest({Key? key}) : super(key: key);
@@ -32,7 +33,8 @@ class _HomePageGuestState extends State<HomePageGuest> {
               firstName: 'finalName',
             ),
             const SizedBox(height: 10),
-            WholeBoxContainingCategoryAndProfessionalDetail(userId: userId),
+             ShowAllListOfCategories(),
+            // WholeBoxContainingCategoryAndProfessionalDetail(userId: userId),
             const SizedBox(height: 20),
             // ListView.builder(
             //   physics: const NeverScrollableScrollPhysics(),

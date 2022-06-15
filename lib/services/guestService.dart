@@ -137,12 +137,4 @@ class GuestService {
         .map((doc) => (Professional.fromJson(doc.data())))
         .toList());
   }
-
-  Future<void> deleteGuest(String taskId) async {
-    await guestsCollection.doc(taskId).delete();
-  }
-
-  Future completTask(uid) async {
-    await guestsCollectionOfEvents.doc(uid).update({'isDone': true});
-  }
 }

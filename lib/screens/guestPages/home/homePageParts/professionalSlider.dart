@@ -9,10 +9,14 @@ import '../../../../extensions/utils.dart';
 
 class ProfessionalSlider extends StatelessWidget {
   const ProfessionalSlider(
-      {Key? key, required this.guestUid, required this.professionalUid})
+      {Key? key,
+      required this.guestUid,
+      required this.professionalUid,
+      required this.category})
       : super(key: key);
   final String? guestUid;
   final String? professionalUid;
+  final String? category;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class ProfessionalSlider extends StatelessWidget {
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else {
+            print('this is the category choose ' + category!);
             if (snapshot.data.length == 0) {
               return const NoServicesFound();
             } else {
@@ -41,13 +46,18 @@ class ProfessionalSlider extends StatelessWidget {
                   String image = snapshot.data[index].getImage();
                   String price = snapshot.data[index].getPrice();
                   String title = snapshot.data[index].getTitle();
-                  return ProfessionalBoxInHomePage(
-                      imageCategory: Utils.returnImageCategory(title),
-                      title: title,
-                      image: image,
-                      description: description,
-                      price: price,
-                      dateTime: dateTime);
+                  print("klsjdf");
+                  print(title);
+                  if (title == category) {
+                    return ProfessionalBoxInHomePage(
+                        imageCategory: Utils.returnImageCategory(title),
+                        title: title,
+                        image: image,
+                        description: description,
+                        price: price,
+                        dateTime: dateTime);
+                  }
+                  return Container();
                 },
               );
             }

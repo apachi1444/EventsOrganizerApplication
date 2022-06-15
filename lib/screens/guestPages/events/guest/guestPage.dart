@@ -132,6 +132,7 @@ import 'package:pfs/screens/guestPages/events/guest/addGuest.dart';
 import 'package:pfs/services/todolist_services.dart';
 
 import '../../../../extensions/constants.dart';
+import '../../../../services/eventsService.dart';
 import '../../../../services/guestListServices.dart';
 import '../../../../services/guestService.dart';
 import '../chickList/MyChickList.dart';
@@ -139,6 +140,7 @@ import '../chickList/MyChickList.dart';
 class GuestList extends StatefulWidget {
   const GuestList({Key? key, this.eventUid}) : super(key: key);
   final String? eventUid;
+
   @override
   State<GuestList> createState() => _GuestListState();
 }
@@ -146,23 +148,10 @@ class GuestList extends StatefulWidget {
 class _GuestListState extends State<GuestList> {
   //bool isDone = false; // just for now
   //TextEditingController todoTitleController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> guestsStream =
-        FirebaseFirestore.instance.collection('guestsList').snapshots();
-
-    //bool isChecked = true;
-
-    editTask() {}
-
-    updateTodo() {}
-
-    // completeTask(value) {
-    //   setState(() {
-    //     isChecked = value!;
-    //   });
-    // }
+    final _eventsService = EventsService(eventUid: widget.eventUid);
+    final guestsStream = _eventsService.guestsStream();
 
     return Scaffold(
       appBar: AppBar(
@@ -197,7 +186,7 @@ class _GuestListState extends State<GuestList> {
               itemBuilder: (context, index) {
                 final DocumentSnapshot documentSnapshot =
                     snapshot.data!.docs[index];
-                bool isChecked = documentSnapshot['isDone'];
+
                 return Center(
                   child: SizedBox(
                     height: 100,
@@ -205,31 +194,19 @@ class _GuestListState extends State<GuestList> {
                       margin: const EdgeInsets.symmetric(
                           horizontal: 40, vertical: 10),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Checkbox(
-                            value: documentSnapshot['isDone'],
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                                GuestService().completTask(documentSnapshot.id);
-                              });
-                            },
-                            activeColor: const Color(ConstantColors.KPinkColor),
-                            checkColor: Colors.white,
-                          ),
+                          const SizedBox(width: 10),
+                          const Icon(Icons.person_outline_sharp),
                           Expanded(
                             child: ListTile(
-                              title: Text(documentSnapshot['name']),
+                              title: Text(documentSnapshot['title']),
                             ),
                           ),
-                          // IconButton(
-                          //   onPressed: editTask,
-                          //   icon: const Icon(Icons.edit_outlined),
-                          // ),
                           IconButton(
                             onPressed: () {
-                              print(documentSnapshot.id);
-                              GuestListService().deleteGuest(documentSnapshot.id);
+                              final uid = documentSnapshot['uid'];
+                              _eventsService.deleteSpecificGuestFromEventGuests(uid);
                             },
                             icon: const Icon(Icons.delete),
                           ),
@@ -251,7 +228,7 @@ class _GuestListState extends State<GuestList> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return  AddGuest(eventUid : widget.eventUid);
+                return AddGuest(eventUid: widget.eventUid);
               },
             );
           }),

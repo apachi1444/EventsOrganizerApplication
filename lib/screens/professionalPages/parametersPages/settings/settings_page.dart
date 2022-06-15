@@ -9,14 +9,16 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('My Settings'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text('My Settings'),
+          ),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
         ),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
+        body: const MySetting(),
       ),
-      body: const MySetting(),
     );
   }
 }

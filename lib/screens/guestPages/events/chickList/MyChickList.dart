@@ -12,14 +12,16 @@ class MyCheckingList extends StatelessWidget {
   final String eventUid;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('My Event'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text('My Event'),
+          ),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
         ),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
+        body:  MyCheckList(eventUid: eventUid),
       ),
-      body:  MyCheckList(eventUid: eventUid),
     );
   }
 }
@@ -75,7 +77,7 @@ class MyCheckListState extends State<MyCheckList> {
               style: TextButton.styleFrom(
                   primary: const Color.fromARGB(255, 0, 0, 0)),
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>  BudgetPage(eventUid:widget.eventUid),

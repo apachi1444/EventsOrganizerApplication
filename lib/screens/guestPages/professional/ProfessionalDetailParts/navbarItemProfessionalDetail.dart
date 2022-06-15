@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import '../../../../extensions/utils.dart';
 
 class NavbarItemProfessionalDetail extends StatelessWidget {
-  const NavbarItemProfessionalDetail({Key? key, required this.title}) : super(key: key);
+  const NavbarItemProfessionalDetail({Key? key, required this.title, required this.image}) : super(key: key);
   final String title;
+  final String image;
   @override
   Widget build(BuildContext context) {
     return Container(
         height: MediaQuery.of(context).size.height * 0.23,
         decoration:  BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.fill, image: AssetImage(Utils.returnImageCategory(title))),
+              fit: BoxFit.fill, image: AssetImage(image)),
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(0),
               topLeft: Radius.circular(0),
@@ -68,7 +69,7 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   child: CircleAvatar(
                       radius: 17,
                       backgroundImage: AssetImage(
-                        Utils.returnImageCategory(title),
+                        image,
                       ))),
               const SizedBox(width: 20),
               CircleAvatar(
@@ -77,7 +78,7 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   child: CircleAvatar(
                       radius: 17,
                       backgroundImage: AssetImage(
-                        Utils.returnImageCategory(title),
+                        image,
                       )))
             ])
           ],

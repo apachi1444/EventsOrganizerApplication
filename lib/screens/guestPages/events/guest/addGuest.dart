@@ -76,11 +76,8 @@ class _AddGuestState extends State<AddGuest> {
           TextButton(
             onPressed: () {
               final name = guestNameController.text;
-              const isDone = true;
               EventsService(eventUid: widget.eventUid).addGuestToEventGuestList(name);
-              GuestListService().addGuest(name: name, isDone: isDone);
-
-              Navigator.pop(context, 'add');
+              Navigator.pop(context);
             },
             child: const Center(child: Text('add')),
           ),
