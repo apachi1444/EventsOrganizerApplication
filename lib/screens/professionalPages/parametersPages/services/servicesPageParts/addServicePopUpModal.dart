@@ -262,7 +262,8 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 final results = await FilePicker.platform.pickFiles(
                   allowMultiple: true,
                 );
-
+                print("this is the result of results");
+                print(results);
                 if (results == null) {
                   ScaffoldMessenger.of(context as BuildContext)
                       .showSnackBar(const SnackBar(

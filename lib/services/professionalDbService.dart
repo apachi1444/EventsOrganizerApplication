@@ -15,12 +15,15 @@ class ProfessionalDatabaseService {
       String localisation, String age) async {
     // is gonna refer to that document with that id if not exists he will create that user with these infos
     return await professionalCollection.doc(uid).set({
-      'uid' :uid,
+      'uid': uid,
       'email': email,
       'age': age,
       'first_name': firstName,
       'last_name': lastName,
-      'localisation': localisation
+      'localisation': localisation,
+      'allowRecommendation': false,
+      'showProfile': false,
+      'allowComments': false,
     });
   }
 
@@ -52,11 +55,11 @@ class ProfessionalDatabaseService {
     final doc = documentSnapshot.data() as Map<String, dynamic>;
     print(doc);
     return Professional(
-      uid : doc['uid'],
+      uid: doc['uid'],
       email: doc['email'],
       first_name: doc['first_name'],
       last_name: doc['last_name'],
-      age:doc['age'],
+      age: doc['age'],
       localisation: doc['localisation'],
     );
   }

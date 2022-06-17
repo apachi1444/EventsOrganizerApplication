@@ -250,191 +250,203 @@ class _LoginPageState extends State<LoginPage> {
     bool? isChecked = false;
     return loading
         ? const LoadingScreen()
-        : Scaffold(
-            backgroundColor: const Color(0XFFFFFFF8),
-            body: SingleChildScrollView(
-              child: Center(
-                  child: Form(
-                key: _formKey,
-                child: Column(children: <Widget>[
-                  const NavBarItemStartPages(),
-                  const SizedBox(height: 30),
-                  const Text('Welcome Abroad User',
-                      style: TextStyle(
-                        fontSize: 30,
-                      )),
-                  const SizedBox(height: 20),
-                  InputTextWidget(
-                      validate: EmailValidator.validate,
-                      inputHintText: 'Enter Your Email Here',
-                      controllerUsedInInput: _emailController,
-                      icon: Icons.email,
-                      isPassword: false),
-                  const SizedBox(height: 20),
-                  InputTextWidget(
-                    validate: PasswordValidator.validate,
-                    inputHintText: 'Enter Your Password Here',
-                    controllerUsedInInput: _passwordController,
-                    icon: Icons.lock,
-                    isPassword: true,
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40.0, vertical: 0.0),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const EnterEmailForResettingPassword()),
-                              );
-                            },
-                            child: Text('Forget Password?',
-                                style: TextStyle(color: Colors.grey[600])),
-                          )
-                        ]),
-                  ),
-                  const SizedBox(height: 25),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: const Color(0XFFFF006B),
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: GestureDetector(
-                          onTap: () async {
-                            final isValid = _formKey.currentState!.validate();
-                            if (isValid) {
-                              try {
-                                var doLogin = await doTheLogin();
-                                print('this is the value of the do login ');
-                                print(doLogin);
-                                if (doLogin != null) {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      '/professional/switchMainPage',
-                                      (r) => false);
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                            title: const Text(
-                                                'Error in the Login',
-                                                style: TextStyle(
-                                                    color: Color(ConstantColors
-                                                        .KPinkColor))),
-                                            content: Text(error),
-                                            actions: [
-                                              TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(context),
-                                                  child: const Text('Cancel')),
-                                            ],
-                                          ));
-                                }
-                              } catch (e) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                          title: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              const Text('Error',
+        : Theme(
+            data: ThemeData(
+                primarySwatch: Colors.orange,
+                colorScheme: const ColorScheme.light(
+                  primary: Color(ConstantColors.KPinkColor),
+                )),
+            child: Scaffold(
+              backgroundColor: const Color(0XFFFFFFF8),
+              body: SingleChildScrollView(
+                child: Center(
+                    child: Form(
+                  key: _formKey,
+                  child: Column(children: <Widget>[
+                    const NavBarItemStartPages(),
+                    const SizedBox(height: 30),
+                    const Text('Welcome Abroad User',
+                        style: TextStyle(
+                          fontSize: 30,
+                        )),
+                    const SizedBox(height: 20),
+                    InputTextWidget(
+                        validate: EmailValidator.validate,
+                        inputHintText: 'Enter Your Email Here',
+                        controllerUsedInInput: _emailController,
+                        icon: Icons.email,
+                        isPassword: false),
+                    const SizedBox(height: 20),
+                    InputTextWidget(
+                      validate: PasswordValidator.validate,
+                      inputHintText: 'Enter Your Password Here',
+                      controllerUsedInInput: _passwordController,
+                      icon: Icons.lock,
+                      isPassword: true,
+                    ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0, vertical: 0.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EnterEmailForResettingPassword()),
+                                );
+                              },
+                              child: Text('Forget Password?',
+                                  style: TextStyle(color: Colors.grey[600])),
+                            )
+                          ]),
+                    ),
+                    const SizedBox(height: 25),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: const Color(0XFFFF006B),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: GestureDetector(
+                            onTap: () async {
+                              final isValid = _formKey.currentState!.validate();
+                              if (isValid) {
+                                try {
+                                  var doLogin = await doTheLogin();
+                                  print('this is the value of the do login ');
+                                  print(doLogin);
+                                  if (doLogin != null) {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        '/professional/switchMainPage',
+                                        (r) => false);
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              title: const Text(
+                                                  'Error in the Login',
                                                   style: TextStyle(
                                                       color: Color(
                                                           ConstantColors
                                                               .KPinkColor))),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                child: const Icon(Icons.close,
-                                                    color: Color(ConstantColors
-                                                        .KPinkColor)),
-                                              ),
+                                              content: Text(error),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child:
+                                                        const Text('Cancel')),
+                                              ],
+                                            ));
+                                  }
+                                } catch (e) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text('Error',
+                                                    style: TextStyle(
+                                                        color: Color(
+                                                            ConstantColors
+                                                                .KPinkColor))),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Icon(Icons.close,
+                                                      color: Color(
+                                                          ConstantColors
+                                                              .KPinkColor)),
+                                                ),
+                                              ],
+                                            ),
+                                            content: Text(error),
+                                            actions: [
+                                              TextButton(
+                                                  // onPressed: () => Navigator.of(
+                                                  //         context)
+                                                  //     .push(MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             contact_us())),
+                                                  //ici la navigation vers la page contact us
+                                                  onPressed: () {},
+                                                  child: const Text('Cancel')),
                                             ],
-                                          ),
-                                          content: Text(error),
+                                          ));
+                                }
+
+                                return;
+
+                                // Utils.showSnackBar(e.toString());
+                                // Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          title: const Text(
+                                              'There is An error in the login',
+                                              style: TextStyle(
+                                                  color: Color(ConstantColors
+                                                      .KPinkColor))),
+                                          content: const Text(
+                                              'There was an error in the login please try again'),
                                           actions: [
                                             TextButton(
-                                                // onPressed: () => Navigator.of(
-                                                //         context)
-                                                //     .push(MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             contact_us())),
-                                                //ici la navigation vers la page contact us
-                                                onPressed: () {},
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
                                                 child: const Text('Cancel')),
                                           ],
                                         ));
                               }
-
-                              return;
-
-                              // Utils.showSnackBar(e.toString());
-                              // Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: const Text(
-                                            'There is An error in the login',
-                                            style: TextStyle(
-                                                color: Color(ConstantColors
-                                                    .KPinkColor))),
-                                        content: const Text(
-                                            'There was an error in the login please try again'),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context),
-                                              child: const Text('Cancel')),
-                                        ],
-                                      ));
-                            }
-                          },
-                          child: const Center(
-                            child: Text('Sign In',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17)),
+                            },
+                            child: const Center(
+                              child: Text('Sign In',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17)),
+                            ),
                           ),
-                        ),
-                      )),
-                  const SizedBox(height: 10),
-                  const SignInUsingThirdApis(),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal : 20.0 , vertical : 9),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Don't Have An Account !  "),
-                        GestureDetector(
-                          onTap: () {
-                            widget.toggleView();
-                          },
-                          child: const Text('Sign Up Here',
-                              style: TextStyle(
-                                color: Color(0XFFFF006B),
-                                fontWeight: FontWeight.bold,
-                              )),
-                        )
-                      ],
-                    ),
-                  )
-                ]),
-              )),
+                        )),
+                    const SizedBox(height: 10),
+                    const SignInUsingThirdApis(),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 9),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don't Have An Account !  "),
+                          GestureDetector(
+                            onTap: () {
+                              widget.toggleView();
+                            },
+                            child: const Text('Sign Up Here',
+                                style: TextStyle(
+                                  color: Color(0XFFFF006B),
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
+                )),
+              ),
             ),
           );
   }

@@ -18,15 +18,19 @@ class Storage {
   }
 
   Future<ListResult> listFiles(String? currentProfessional) async {
-    ListResult results = await storage.ref('images/professionals/$currentProfessional)').listAll();
-    results.items.forEach((Reference ref) {
-      print("found file " + "$ref");
-    });
+    ListResult results = await storage
+        .ref('images/professionals/$currentProfessional)')
+        .listAll();
+    for (var ref in results.items) {
+      print('found file ' '$ref');
+    }
     return results;
   }
-Future<String> downloadFile(String professionalId , String imageName) async {
-  String downloadUrl = await storage.ref('images/professionals/$professionalId/$imageName').getDownloadURL();
-  return downloadUrl;
-  }
 
+  Future<String> downloadFile(String professionalId, String imageName) async {
+    String downloadUrl = await storage
+        .ref('images/professionals/$professionalId/$imageName')
+        .getDownloadURL();
+    return downloadUrl;
+  }
 }

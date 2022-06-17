@@ -60,8 +60,6 @@ class _TodoListState extends State<TodoList> {
                 final DocumentSnapshot documentSnapshot =
                     snapshot.data!.docs[index];
                 bool isChecked = documentSnapshot['isDone'];
-                print("this is the value of is Checked");
-                print(isChecked);
                 String taskUid = documentSnapshot['uid'];
                 return Center(
                   child: SizedBox(
