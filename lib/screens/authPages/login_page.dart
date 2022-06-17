@@ -234,12 +234,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Future doTheLogin() async {
     try {
-      var aa = await _auth.signInWithEmailAndPassword(
+      return await _auth.signInWithEmailAndPassword(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/professional/switchMainPage', (r) => false);
     } catch (e) {
       setState(() {
         error = e.toString();
@@ -317,8 +315,13 @@ class _LoginPageState extends State<LoginPage> {
                             if (isValid) {
                               try {
                                 var doLogin = await doTheLogin();
-
+                                print('this is the value of the do login ');
+                                print(doLogin);
                                 if (doLogin != null) {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/professional/switchMainPage',
+                                      (r) => false);
                                 } else {
                                   showDialog(
                                       context: context,
@@ -411,21 +414,24 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 10),
                   const SignInUsingThirdApis(),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Don't Have An Account !  "),
-                      GestureDetector(
-                        onTap: () {
-                          widget.toggleView();
-                        },
-                        child: const Text('Sign Up Here',
-                            style: TextStyle(
-                              color: Color(0XFFFF006B),
-                              fontWeight: FontWeight.bold,
-                            )),
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal : 20.0 , vertical : 9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't Have An Account !  "),
+                        GestureDetector(
+                          onTap: () {
+                            widget.toggleView();
+                          },
+                          child: const Text('Sign Up Here',
+                              style: TextStyle(
+                                color: Color(0XFFFF006B),
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
+                    ),
                   )
                 ]),
               )),
