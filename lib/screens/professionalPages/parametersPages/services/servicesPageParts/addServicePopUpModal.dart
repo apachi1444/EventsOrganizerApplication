@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:pfs/extensions/validators.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/chooseSuccessOrFailure.dart';
@@ -12,7 +13,6 @@ import '../../../../../extensions/listOfCategories.dart';
 import '../../../../../services/authService.dart';
 import '../../../../authPages/inputTextWidget.dart';
 import 'package:intl/intl.dart';
-
 
 class AddServicePopUpModal extends StatefulWidget {
   const AddServicePopUpModal({Key? key}) : super(key: key);
@@ -31,14 +31,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
   late bool isFailure;
   String? currentUserUid = AuthService().getCurrentIdUser();
 
-  late Storage storage;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    storage = Storage();
-  }
+  Storage storage = Storage();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +68,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                     isFailure = true;
                   });
                 } else {
-                  storage.downloadFile(currentUserUid!, fileName).then((value) {
+                  storage.downloadFile(currentUserUid!, fileName , image!).then((value) {
                     final now = DateTime.now();
                     String formatter = DateFormat('yMd').format(now);
                     professionalServiceService.addServiceToProfessional(
@@ -84,6 +77,8 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                         _descriptionController.text.trim(),
                         _priceController.text.trim(),
                         value);
+                  }).catchError((onError) {
+                    print(onError.message);
                   });
 
                   setState(() {
@@ -169,7 +164,6 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
     }
   }
 
-
   var list = categories;
   String? selectedItem = categories[0];
 
@@ -243,7 +237,7 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                 const SizedBox(height: 12),
                 SingleChildScrollView(
                   child: InputTextWidget(
-                    validate : PriceValidator.validate,
+                    validate: PriceValidator.validate,
                     isPassword: false,
                     icon: Icons.price_change,
                     inputHintText: 'Price Here !',
@@ -259,11 +253,8 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
             title: const Text('Step 3 : Upload Your Images Here'),
             content: GestureDetector(
               onTap: () async {
-                final results = await FilePicker.platform.pickFiles(
-                  allowMultiple: true,
-                );
-                print("this is the result of results");
-                print(results);
+                final results =
+                    await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (results == null) {
                   ScaffoldMessenger.of(context as BuildContext)
                       .showSnackBar(const SnackBar(
@@ -272,14 +263,12 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                   return;
                 }
 
-                final path = results.files.single.path;
-
+                final path = results.path;
 
                 setState(() {
-                  image = File(path!);
+                  image = File(path);
                 });
-
-                storage.uploadFile(path!, fileName, currentUserUid!);
+                storage.uploadFile(path, fileName, currentUserUid!);
               },
               child: Container(
                   margin: const EdgeInsets.only(bottom: 12),
@@ -296,12 +285,10 @@ class _AddServicePopUpModalState extends State<AddServicePopUpModal> {
                         const SizedBox(height: 12),
                         Text(
                           fileName,
-
                         ),
                       ]),
                     ),
                   )),
             ))
       ];
-
 }

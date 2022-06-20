@@ -27,10 +27,15 @@ class Storage {
     return results;
   }
 
-  Future<String> downloadFile(String professionalId, String imageName) async {
-    String downloadUrl = await storage
-        .ref('images/professionals/$professionalId/$imageName')
-        .getDownloadURL();
+  Future<String> downloadFile(
+      String professionalId, String imageName, File image) async {
+    Reference ref = FirebaseStorage.instance
+        .ref()
+        .child('images/professionals/$professionalId/$imageName');
+
+    UploadTask uploadTask = ref.putFile(image);
+
+    var downloadUrl = await (await uploadTask).ref.getDownloadURL();
     return downloadUrl;
   }
 }

@@ -24,9 +24,6 @@ class ServicesPage extends StatefulWidget {
 class _ServicesPageState extends State<ServicesPage> {
   @override
   Widget build(BuildContext context) {
-    var fileFirebase =
-        GetFileFirebase(uidProfessional: ProfessionalPreferences.getUid());
-    String? user = AuthService().getCurrentIdUser();
     String? firstName = ProfessionalPreferences.getFirstName();
     String? lastName = ProfessionalPreferences.getLastName();
     return SafeArea(
