@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/listOfCategories.dart';
 
+import '../../../extensions/constants.dart';
 import '../../../services/authService.dart';
 import '../../../services/guestService.dart';
 import '../events/event/noDataFoundForEvents.dart';
@@ -22,7 +23,6 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
                 'there is waiting data for the moment in our stream');
           } else {
             var allDocs = snapshot.data.docs;
-            allDocs.map((e) => print(e));
             if (snapshot.data.docs.length == 0) {
               return const NoDataFoundForEvents();
             } else {
@@ -71,10 +71,43 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
                 //     return Text('this is inside the view builder $index');
                 //   },
                 // )
-                content: Column(children: const [
-                  Text('this is inside the view builder'),
-                  Text('this is inside the view builder'),
-                ]),
+                content: Container(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: ListView.builder(
+                    itemCount: allDocs.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Card(
+                            color: const Color(ConstantColors.KGreyColor),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const CircleAvatar(
+                                      backgroundColor: Colors.white,
+                                      radius: 20,
+                                      child: CircleAvatar(
+                                        radius: 17,
+                                        backgroundImage:
+                                            AssetImage("assets/eventImage.jpg"),
+                                      ),
+                                    ),
+                                    // SizedBox(width: size.width * 0.01),
+                                    Text('lsdkjf'),
+                                    // SizedBox(width: size.width * 0.32),
+                                    GestureDetector(
+                                        child: const Icon(Icons.add_box_sharp),
+                                        onTap: () {}),
+                                  ]),
+                            )),
+                      );
+                    },
+                  ),
+                ),
               );
             }
           }

@@ -185,6 +185,36 @@ class EventsService {
     //     .add();
   }
 
+  Future<void> deleteSpecificProfessionalFromEventBudget(String budgetUid) async {
+    await guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .doc(budgetUid)
+        .delete();
+  }
+
+  Stream<QuerySnapshot> professionalStream() {
+    return guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .snapshots();
+  }
+
+  Future<int> getLengthOfProfessionalInEvent() {
+    return guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .snapshots()
+        .length;
+  }
+
+
 // --------------------------------- //
 // this part for the professionals //
 
