@@ -2,13 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../Models/Service.dart';
-import '../screens/guestPages/events/event/event.dart';
 
 class EventsService {
   String? eventUid;
   String? guestUid = AuthService().getCurrentIdUser();
 
-  EventsService({required this.eventUid}) {}
+  EventsService({required this.eventUid});
 
   final guestsCollection = FirebaseFirestore.instance.collection('guests');
   final guestsCollectionOfParticularEvent =
@@ -108,6 +107,16 @@ class EventsService {
         .update({'isDone': isChecked ? true : false});
   }
 
+  Future<int> getLengthOfTasksInEvent() {
+    return guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .snapshots()
+        .length;
+  }
+
   // --------------------------------- //
   // this part for the tasks //
 
@@ -149,6 +158,16 @@ class EventsService {
         .doc(eventUid)
         .collection('budget')
         .snapshots();
+  }
+
+  Future<int> getLengthOfBudgetInEvent() {
+    return guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('budget')
+        .snapshots()
+        .length;
   }
 
 // --------------------------------- //

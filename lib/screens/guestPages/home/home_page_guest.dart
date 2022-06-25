@@ -22,7 +22,6 @@ class HomePageGuest extends StatefulWidget {
 class _HomePageGuestState extends State<HomePageGuest> {
   @override
   Widget build(BuildContext context) {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
 
     return SafeArea(
       child: Scaffold(

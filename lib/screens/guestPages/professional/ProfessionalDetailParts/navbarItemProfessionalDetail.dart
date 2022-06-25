@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../extensions/utils.dart';
@@ -13,7 +12,7 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.23,
         decoration:  BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.fill, image: AssetImage(image)),
+              fit: BoxFit.fill, image: NetworkImage(image)),
           borderRadius: const BorderRadius.only(
               topRight: Radius.circular(0),
               topLeft: Radius.circular(0),
@@ -59,8 +58,8 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   radius: 20,
                   child: CircleAvatar(
                       radius: 17,
-                      backgroundImage: AssetImage(
-                        Utils.returnImageCategory(title),
+                      backgroundImage: NetworkImage(
+                        image,
                       ))),
               const SizedBox(width: 20),
               CircleAvatar(
@@ -68,7 +67,7 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   radius: 20,
                   child: CircleAvatar(
                       radius: 17,
-                      backgroundImage: AssetImage(
+                      backgroundImage: NetworkImage(
                         image,
                       ))),
               const SizedBox(width: 20),
@@ -78,7 +77,7 @@ class NavbarItemProfessionalDetail extends StatelessWidget {
                   child: CircleAvatar(
                       radius: 17,
                       backgroundImage: AssetImage(
-                        image,
+                        Utils.returnImageCategory(image),
                       )))
             ])
           ],

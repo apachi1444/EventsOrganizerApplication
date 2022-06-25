@@ -24,14 +24,14 @@ class ProfessionalDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("this is the image");
+    print(image);
     return SafeArea(
       child: Scaffold(
           body: Column(children:  [
         // this container for the list of images that are on the top of the page
          NavbarItemProfessionalDetail(image : image ,title : title),
         const SizedBox(height: 36),
-        // This container for the details of the professional that we gonna contact
-        //DesscriptionBoxProfessionalDetail(),
         TextDescriptionProfessionalDetailPage(
           price: price ,
           description: description,

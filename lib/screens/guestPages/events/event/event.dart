@@ -22,14 +22,17 @@ class MyEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text('My Events'),
+    return SafeArea(
+      child: Scaffold(
+        
+        appBar: AppBar(
+          title: const Center(
+            child: Text('My Events'),
+          ),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
         ),
-        backgroundColor: const Color(ConstantColors.KPinkColor),
+        body: const Event(),
       ),
-      body: const Event(),
     );
   }
 }
@@ -46,6 +49,7 @@ String? uid = AuthService().getCurrentIdUser();
 class EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         const ListOfEventsOfGuest(),

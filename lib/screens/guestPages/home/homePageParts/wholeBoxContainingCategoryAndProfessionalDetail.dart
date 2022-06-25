@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:pfs/Models/Service.dart';
 import 'package:pfs/extensions/listOfCategories.dart';
@@ -15,45 +17,45 @@ import '../../../professionalPages/parametersPages/services/servicesPageParts/se
 import 'CategoryNameAndViewAllRow.dart';
 
 class WholeBoxContainingCategoryAndProfessionalDetail extends StatelessWidget {
-   WholeBoxContainingCategoryAndProfessionalDetail(
+  WholeBoxContainingCategoryAndProfessionalDetail(
       {Key? key, required this.category})
       : super(key: key);
   final String? category;
-  final String? userId = AuthService().getCurrentIdUser();
+  final String? guestUid = AuthService().getCurrentIdUser();
+
   @override
   Widget build(BuildContext context) {
-    final guestService = GuestService(guestUid: userId);
+    final guestService = GuestService(guestUid: guestUid);
+    
 
-    return StreamBuilder(
-        stream: guestService.getAllProfessionalsInOutDb(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.none) {
-            return const Text('there is no data for the moment in our stream');
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else {
-            if (snapshot.data.length == 0) {
-              return Container();
-            } else {
-              return ListView.builder(
-                  shrinkWrap: true,
-                  physics: const ScrollPhysics(),
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    String firstName = snapshot.data[index].getFirstName();
-                    String lastName = snapshot.data[index].getLastName();
-                    String uid = snapshot.data[index].getUid();
-                    return Column(
-                      children: [
-                        const SizedBox(height: 15),
-                        ProfessionalSlider(category : category,
-                            guestUid: userId, professionalUid: uid),
-                        const SizedBox(height: 15),
-                      ],
-                    );
-                  });
-            }
-          }
-        });
+//     return StreamBuilder(
+//       stream : guestService.getAllProfessionalsInOutDb(),
+//       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+//           return       ListView.builder(
+//               shrinkWrap: true,
+//               physics: const ScrollPhysics(),
+//               itemCount: listProfessionals.length,
+//               itemBuilder: (context, index) {
+//                 String firstName = listProfessionals[index].getFirstName();
+//                 String lastName = listProfessionals[index].getLastName();
+//                 String uid = listProfessionals[index].getUid();
+//                 return StreamBuilder(
+//                     stream: guestService.getAllServicesOfParticularProfessional(uid),
+//                     builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+//                       if (snapshot.connectionState == ConnectionState.waiting) {
+//                         return const Text('still waiting');
+//                       } else {
+//                         return ProfessionalSlider(guestUid: guestUid, category: category);
+//                       }
+//                     });
+//               })
+//       },
+// ,
+//     );
+
+    return ProfessionalSlider(
+      guestUid: guestUid,
+      category: category,
+    );
   }
 }

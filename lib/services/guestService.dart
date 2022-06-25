@@ -132,6 +132,19 @@ class GuestService {
             .toList());
   }
 
+  Stream<List<Service>>
+      getServicesOfParticularProfessionalWithParticularCategory(
+          String uid, String category) {
+    return professionalCollection
+        .doc(uid)
+        .collection('services')
+        .where('title', isEqualTo: category)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => (Service.fromJson(doc.data())))
+            .toList());
+  }
+
   Stream<List<Professional>> getAllProfessionalsInOutDb() {
     return professionalCollection.snapshots().map((snapshot) => snapshot.docs
         .map((doc) => (Professional.fromJson(doc.data())))

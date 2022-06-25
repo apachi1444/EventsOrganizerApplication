@@ -1,15 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:pfs/extensions/constants.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
 import 'package:pfs/screens/guestPages/events/event/todoList_page.dart';
 import 'package:pfs/screens/guestPages/events/guest/guestPage.dart';
 
+import '../../../../services/eventsService.dart';
 
 class MyCheckingList extends StatelessWidget {
   const MyCheckingList({Key? key, required this.eventUid}) : super(key: key);
   final String eventUid;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +20,7 @@ class MyCheckingList extends StatelessWidget {
           ),
           backgroundColor: const Color(ConstantColors.KPinkColor),
         ),
-        body:  MyCheckList(eventUid: eventUid),
+        body: MyCheckList(eventUid: eventUid),
       ),
     );
   }
@@ -29,6 +29,7 @@ class MyCheckingList extends StatelessWidget {
 class MyCheckList extends StatefulWidget {
   const MyCheckList({Key? key, required this.eventUid}) : super(key: key);
   final String eventUid;
+
   @override
   State<MyCheckList> createState() => MyCheckListState();
 }
@@ -36,6 +37,10 @@ class MyCheckList extends StatefulWidget {
 class MyCheckListState extends State<MyCheckList> {
   @override
   Widget build(BuildContext context) {
+    int tasksLength = 0;
+    EventsService(eventUid: widget.eventUid)
+        .getLengthOfTasksInEvent()
+        .then((value) => tasksLength = value);
     return Center(
       child: Container(
         decoration: const BoxDecoration(
@@ -55,7 +60,8 @@ class MyCheckListState extends State<MyCheckList> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>  GuestList(eventUid : widget.eventUid),
+                      builder: (context) =>
+                          GuestList(eventUid: widget.eventUid),
                     ));
               },
               child: CheckingCard('Guest', Icons.person_add_alt),
@@ -64,10 +70,11 @@ class MyCheckListState extends State<MyCheckList> {
               style: TextButton.styleFrom(
                   primary: const Color.fromARGB(255, 0, 0, 0)),
               onPressed: () {
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>   TodoList(eventUid:widget.eventUid ),
+                      builder: (context) => TodoList(eventUid: widget.eventUid),
                     ));
               },
               child: CheckingCard('To Do List', Icons.article),
@@ -77,10 +84,12 @@ class MyCheckListState extends State<MyCheckList> {
               style: TextButton.styleFrom(
                   primary: const Color.fromARGB(255, 0, 0, 0)),
               onPressed: () {
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>  BudgetPage(eventUid:widget.eventUid),
+                      builder: (context) =>
+                          BudgetPage(eventUid: widget.eventUid),
                     ));
               },
               child: CheckingCard('Budget', Icons.monetization_on_outlined),
@@ -214,8 +223,7 @@ class MyCheckListState extends State<MyCheckList> {
 // SwitchSettingsTile
 }
 
-
-Padding CheckingCard(String title, IconData icon) {
+Padding checkingCard(String title, IconData icon) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 1),
     child: Center(
