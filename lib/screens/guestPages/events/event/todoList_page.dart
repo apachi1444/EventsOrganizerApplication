@@ -6,6 +6,7 @@ import 'package:pfs/services/todolist_services.dart';
 import '../../../../extensions/constants.dart';
 import '../../../../services/eventsService.dart';
 import '../chickList/MyChickList.dart';
+import 'noDataFoundForEvents.dart';
 
 class TodoList extends StatefulWidget {
   final String? eventUid;
@@ -52,56 +53,63 @@ class _TodoListState extends State<TodoList> {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
+          } else {
+            if (snapshot.data?.docs.length != 0) {
+              return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final DocumentSnapshot documentSnapshot =
+                    snapshot.data!.docs[index];
+                    bool isChecked = documentSnapshot['isDone'];
+                    String taskUid = documentSnapshot['uid'];
+                    return Center(
+                      child: SizedBox(
+                        height: 100,
+                        child: Card(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 10),
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: (bool? newValue) {
+                                  setState(() {
+                                    isChecked = newValue!;
+                                    _eventsService.finishedOrNotTask(
+                                        taskUid, newValue);
+                                  });
+                                },
+                                activeColor: const Color(ConstantColors.KPinkColor),
+                                checkColor: Colors.white,
+                              ),
+                              Expanded(
+                                child: ListTile(
+                                  title: Text(documentSnapshot['title']),
+                                  subtitle: Text(documentSnapshot['description']),
+                                ),
+                              ),
+                              // IconButton(
+                              //   onPressed: editTask,
+                              //   icon: const Icon(Icons.edit_outlined),
+                              // ),
+                              IconButton(
+                                onPressed: () =>
+                                    _eventsService.deleteSpecificTaskFromEventTasks(
+                                        documentSnapshot['uid']),
+                                icon: const Icon(Icons.delete),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+
+            } else {
+              return const NoDataFoundForEvents(content: 'ToDoTasks',);
+            }
           }
 
-          return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
-              itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                    snapshot.data!.docs[index];
-                bool isChecked = documentSnapshot['isDone'];
-                String taskUid = documentSnapshot['uid'];
-                return Center(
-                  child: SizedBox(
-                    height: 100,
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 10),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            value: isChecked,
-                            onChanged: (bool? newValue) {
-                              setState(() {
-                                isChecked = newValue!;
-                                _eventsService.finishedOrNotTask(taskUid , newValue);
-                              });
-                            },
-                            activeColor: const Color(ConstantColors.KPinkColor),
-                            checkColor: Colors.white,
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              title: Text(documentSnapshot['title']),
-                              subtitle: Text(documentSnapshot['description']),
-                            ),
-                          ),
-                          // IconButton(
-                          //   onPressed: editTask,
-                          //   icon: const Icon(Icons.edit_outlined),
-                          // ),
-                          IconButton(
-                            onPressed: () =>
-                                _eventsService.deleteSpecificTaskFromEventTasks(
-                                    documentSnapshot['uid']),
-                            icon: const Icon(Icons.delete),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              });
         },
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pfs/extensions/constants.dart';
 import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
@@ -15,14 +16,13 @@ class MyCheckingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Center(
-            child: Text('My Event'),
+          appBar: AppBar(
+            title: const Center(
+              child: Text('My Event'),
+            ),
+            backgroundColor: const Color(ConstantColors.KPinkColor),
           ),
-          backgroundColor: const Color(ConstantColors.KPinkColor),
-        ),
-        body: MyCheckList(eventUid: eventUid),
-      ),
+          body: MyCheckList(eventUid: eventUid)),
     );
   }
 }
@@ -38,200 +38,193 @@ class MyCheckList extends StatefulWidget {
 class MyCheckListState extends State<MyCheckList> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: EventsService(eventUid: widget.eventUid)
-          .getLengthOfAllElementsInEvent(),
-      builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
-        return Center(
-          child: Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-              topRight: Radius.circular(50),
-            )),
+    return Center(
+      child: Container(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(50),
+          topRight: Radius.circular(50),
+        )),
 
-            child: GridView(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 10),
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                      primary: const Color.fromARGB(255, 0, 0, 0)),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              GuestList(eventUid: widget.eventUid),
-                        ));
-                  },
-                  child: CheckingCard('Guest', Icons.person_add_alt),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      primary: const Color.fromARGB(255, 0, 0, 0)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TodoList(eventUid: widget.eventUid),
-                        ));
-                  },
-                  child: CheckingCard('To Do List', Icons.article),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      primary: const Color.fromARGB(255, 0, 0, 0)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ListProfessionalsEventPage(eventUid: widget.eventUid),
-                        ));
-                  },
-                  child: CheckingCard('Professionals', Icons.wallet_travel),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      primary: const Color.fromARGB(255, 0, 0, 0)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              BudgetPage(eventUid: widget.eventUid),
-                        ));
-                  },
-                  child: CheckingCard('Budget', Icons.monetization_on_outlined),
-                ),
-              ],
+        child: GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, mainAxisSpacing: 10),
+          children: [
+            TextButton(
+              style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 0, 0, 0)),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          GuestList(eventUid: widget.eventUid),
+                    ));
+              },
+              child: CheckingCard('Guest', Icons.person_add_alt),
             ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 0, 0, 0)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TodoList(eventUid: widget.eventUid),
+                    ));
+              },
+              child: CheckingCard('To Do List', Icons.article),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 0, 0, 0)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ListProfessionalsEventPage(eventUid: widget.eventUid),
+                    ));
+              },
+              child: CheckingCard('Professionals', Icons.wallet_travel),
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 0, 0, 0)),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          BudgetPage(eventUid: widget.eventUid),
+                    ));
+              },
+              child: CheckingCard('Budget', Icons.monetization_on_outlined),
+            ),
+          ],
+        ),
 
-            // child: Column(
-            //   children: [
-            //     //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
-            //
-            //     // MainCard("My check List"),
-            //     //
-            //     // MainCard("My Plannning"),
-            //     Padding(
-            //       padding:
-            //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            //       child: Container(
-            //         padding:
-            //             const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
-            //         decoration: const BoxDecoration(
-            //           //  color: Color.fromARGB(255, 158, 70, 70),
-            //             borderRadius: BorderRadius.only(
-            //                 bottomLeft: Radius.circular(20),
-            //                 bottomRight: Radius.circular(20),
-            //                 topLeft: Radius.circular(20),
-            //                 topRight: Radius.circular(20))),
-            //         child: Container(
-            //           child: Center(
-            //             child: Column(
-            //               children: [
-            //                 const Text('My check List',
-            //                     style: TextStyle(
-            //                         fontWeight: FontWeight.bold, fontSize: 20)),
-            //                 const SizedBox(height: 15),
-            //                 Center(
-            //                   child: Row(
-            //                     children: [
-            //                       TextButton(
-            //                         style: TextButton.styleFrom(
-            //                             primary:
-            //                                 const Color.fromARGB(255, 0, 0, 0)),
-            //                         onPressed: () {
-            //                           WidgetsBinding.instance
-            //                               ?.addPostFrameCallback((_) {
-            //                             Navigator.pushReplacement(
-            //                                 context,
-            //                                 MaterialPageRoute(
-            //                                   builder: (context) =>
-            //                                       const GuestList(),
-            //                                 ));
-            //                           });
-            //                         },
-            //                         child: CheckingCard(
-            //                             'Guest', Icons.person_add_alt),
-            //                       ),
-            //                       TextButton(
-            //                         style: TextButton.styleFrom(
-            //                             primary:
-            //                                 const Color.fromARGB(255, 0, 0, 0)),
-            //                         onPressed: () {
-            //                           WidgetsBinding.instance
-            //                               ?.addPostFrameCallback((_) {
-            //                             Navigator.pushReplacement(
-            //                                 context,
-            //                                 MaterialPageRoute(
-            //                                   builder: (context) =>
-            //                                       const TodoList(),
-            //                                 ));
-            //                           });
-            //                         },
-            //                         child:
-            //                             CheckingCard('To Do List', Icons.article),
-            //                       ),
-            //                     ],
-            //                   ),
-            //                 ),
-            //                 Row(
-            //                   children: [
-            //                     CheckingCard(
-            //                         'Proffitionnel', Icons.wallet_travel),
-            //                     TextButton(
-            //                       style: TextButton.styleFrom(
-            //                           primary:
-            //                               const Color.fromARGB(255, 0, 0, 0)),
-            //                       onPressed: () {
-            //                         WidgetsBinding.instance
-            //                             ?.addPostFrameCallback((_) {
-            //                           Navigator.pushReplacement(
-            //                               context,
-            //                               MaterialPageRoute(
-            //                                 builder: (context) =>
-            //                                     const BudgetPage(),
-            //                               ));
-            //                         });
-            //                       },
-            //                       child:
-            //                           CheckingCard('Budget', Icons.monetization_on_outlined),
-            //                     ),
-            //                   ],
-            //                 )
-            //               ],
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            //
-            // child: Container(
-            //    child : const Text("My checklist asmae ",style: TextStyle(fontSize: 18),),
-            //
-            //
-            //
-            //   decoration: BoxDecoration(
-            //
-            //     border: Border.all(
-            //         color: const Color(0xFF000000),
-            //         width: 2.0,
-            //         style: BorderStyle.values.first,), //Border.all
-            //     /* The BorderRadius widget  is here */
-            //     borderRadius: const BorderRadius.all(
-            //       Radius.circular(20),
-            //     ), //BorderRadius.all
-            //   ), //BoxDecoration
-            // ),
-          ),
-        );
-      },
+        // child: Column(
+        //   children: [
+        //     //GridView(gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,crossAxisSpacing: 10),
+        //
+        //     // MainCard("My check List"),
+        //     //
+        //     // MainCard("My Plannning"),
+        //     Padding(
+        //       padding:
+        //           const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        //       child: Container(
+        //         padding:
+        //             const EdgeInsets.symmetric(vertical: 30, horizontal: 0),
+        //         decoration: const BoxDecoration(
+        //           //  color: Color.fromARGB(255, 158, 70, 70),
+        //             borderRadius: BorderRadius.only(
+        //                 bottomLeft: Radius.circular(20),
+        //                 bottomRight: Radius.circular(20),
+        //                 topLeft: Radius.circular(20),
+        //                 topRight: Radius.circular(20))),
+        //         child: Container(
+        //           child: Center(
+        //             child: Column(
+        //               children: [
+        //                 const Text('My check List',
+        //                     style: TextStyle(
+        //                         fontWeight: FontWeight.bold, fontSize: 20)),
+        //                 const SizedBox(height: 15),
+        //                 Center(
+        //                   child: Row(
+        //                     children: [
+        //                       TextButton(
+        //                         style: TextButton.styleFrom(
+        //                             primary:
+        //                                 const Color.fromARGB(255, 0, 0, 0)),
+        //                         onPressed: () {
+        //                           WidgetsBinding.instance
+        //                               ?.addPostFrameCallback((_) {
+        //                             Navigator.pushReplacement(
+        //                                 context,
+        //                                 MaterialPageRoute(
+        //                                   builder: (context) =>
+        //                                       const GuestList(),
+        //                                 ));
+        //                           });
+        //                         },
+        //                         child: CheckingCard(
+        //                             'Guest', Icons.person_add_alt),
+        //                       ),
+        //                       TextButton(
+        //                         style: TextButton.styleFrom(
+        //                             primary:
+        //                                 const Color.fromARGB(255, 0, 0, 0)),
+        //                         onPressed: () {
+        //                           WidgetsBinding.instance
+        //                               ?.addPostFrameCallback((_) {
+        //                             Navigator.pushReplacement(
+        //                                 context,
+        //                                 MaterialPageRoute(
+        //                                   builder: (context) =>
+        //                                       const TodoList(),
+        //                                 ));
+        //                           });
+        //                         },
+        //                         child:
+        //                             CheckingCard('To Do List', Icons.article),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //                 Row(
+        //                   children: [
+        //                     CheckingCard(
+        //                         'Proffitionnel', Icons.wallet_travel),
+        //                     TextButton(
+        //                       style: TextButton.styleFrom(
+        //                           primary:
+        //                               const Color.fromARGB(255, 0, 0, 0)),
+        //                       onPressed: () {
+        //                         WidgetsBinding.instance
+        //                             ?.addPostFrameCallback((_) {
+        //                           Navigator.pushReplacement(
+        //                               context,
+        //                               MaterialPageRoute(
+        //                                 builder: (context) =>
+        //                                     const BudgetPage(),
+        //                               ));
+        //                         });
+        //                       },
+        //                       child:
+        //                           CheckingCard('Budget', Icons.monetization_on_outlined),
+        //                     ),
+        //                   ],
+        //                 )
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        //
+        // child: Container(
+        //    child : const Text("My checklist asmae ",style: TextStyle(fontSize: 18),),
+        //
+        //
+        //
+        //   decoration: BoxDecoration(
+        //
+        //     border: Border.all(
+        //         color: const Color(0xFF000000),
+        //         width: 2.0,
+        //         style: BorderStyle.values.first,), //Border.all
+        //     /* The BorderRadius widget  is here */
+        //     borderRadius: const BorderRadius.all(
+        //       Radius.circular(20),
+        //     ), //BorderRadius.all
+        //   ), //BoxDecoration
+        // ),
+      ),
     );
   }
 // SwitchSettingsTile
@@ -277,7 +270,7 @@ Padding checkingCard(String title, IconData icon) {
                   title,
                   style: const TextStyle(fontSize: 18),
                 ),
-                subtitle: const Text('0/100'),
+                // subtitle: const Text('0/100'),
               ),
             ),
           ],

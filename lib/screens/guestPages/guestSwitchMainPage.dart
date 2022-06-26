@@ -43,10 +43,6 @@ class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return StreamProvider<List<Service>>.value(
-    //   initialData: const [],
-    //   value:
-    //       GuestService(guestUid: '').listProfessionalsWithSameCity('Marrakech'),
       return  Scaffold(
         bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(

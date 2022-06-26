@@ -24,7 +24,6 @@ class MyEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        
         appBar: AppBar(
           title: const Center(
             child: Text('My Events'),
@@ -49,11 +48,10 @@ String? uid = AuthService().getCurrentIdUser();
 class EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         const ListOfEventsOfGuest(),
-        const SizedBox(height : 15),
+        const SizedBox(height: 15),
         FloatingActionButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
@@ -63,7 +61,7 @@ class EventState extends State<Event> {
             onPressed: () {
               _showTheAddingEventAlertModel(context);
             }),
-        const SizedBox(height : 15)
+        const SizedBox(height: 15)
       ],
     );
   }

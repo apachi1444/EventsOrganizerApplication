@@ -40,7 +40,7 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
           } else {
             var allDocs = snapshot.data.docs;
             if (snapshot.data.docs.length == 0) {
-              return const NoDataFoundForEvents();
+              return  const NoDataFoundForEvents(content: 'Events',);
             } else {
               return AlertDialog(
                 contentPadding:

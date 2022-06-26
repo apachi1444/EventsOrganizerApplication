@@ -252,13 +252,33 @@ class EventsService {
         "this is the length of professionals " + lengthProfessional.toString());
 
     Future<QuerySnapshot> allProfessionals = professionalFutureList();
-    print("this is the future of all professionals " + allProfessionals.toString());
+    print("this is the future of all professionals " +
+        allProfessionals.toString());
 
     List<int> allLengths = [];
     allLengths.add(lengthProfessional);
     allLengths.add(lengthTasks);
 
     return allLengths;
+  }
+
+  List<Stream<QuerySnapshot>> streamAllServices() {
+    List<Stream<QuerySnapshot>> list = [];
+    var streamA = guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('professionals')
+        .snapshots();
+    var streamB = guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('guests')
+        .snapshots();
+    list.add(streamA);
+    list.add(streamB);
+    return list;
   }
 
 // this part for all lengths of services //
