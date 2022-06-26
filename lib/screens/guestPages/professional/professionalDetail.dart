@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'ProfessionalDetailParts/descriptionBoxProfessionalDetail.dart';
@@ -10,7 +9,11 @@ class ProfessionalDetail extends StatelessWidget {
       {Key? key,
       required this.description,
       required this.price,
-      required this.image, required this.dateTime, required this.title})
+      required this.image,
+      required this.dateTime,
+      required this.title,
+      required this.firstNameProfessional,
+      required this.lastNameProfessional, required this.imageCategory})
       : super(key: key);
   final String description;
 
@@ -22,21 +25,37 @@ class ProfessionalDetail extends StatelessWidget {
 
   final String title;
 
+  final String firstNameProfessional;
+
+  final String lastNameProfessional;
+
+  final String imageCategory;
+
   @override
   Widget build(BuildContext context) {
-    print("this is the image");
-    print(image);
     return SafeArea(
       child: Scaffold(
-          body: Column(children:  [
+          body: Column(children: [
         // this container for the list of images that are on the top of the page
-         NavbarItemProfessionalDetail(image : image ,title : title),
+        NavbarItemProfessionalDetail(
+          image: image,
+          title: title,
+          price: price,
+          description: description,
+          lastNameProfessional: lastNameProfessional,
+          imageCategory: imageCategory,
+          firstNameProfessional: firstNameProfessional,
+        ),
         const SizedBox(height: 36),
         TextDescriptionProfessionalDetailPage(
-          price: price ,
-          description: description,
           image: image,
-          dateTime : dateTime
+          title: title,
+          price: price,
+          description: description,
+          lastNameProfessional: lastNameProfessional,
+          imageCategory: imageCategory,
+          firstNameProfessional: firstNameProfessional,
+          dateTime: dateTime,
         ),
       ])),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pfs/screens/guestPages/guestSwitchMainPage.dart';
 import 'package:pfs/screens/guestPages/professional/professionalDetail.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/failureStep.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/services/servicesPageParts/stepsWhenPlusButton/succesStep.dart';
@@ -31,6 +32,7 @@ Map<String, Widget Function(BuildContext context)> routesApplication = {
   '/guest/eventPage/professionalsList': (context) => const ProfilePageGuest(),
   '/guest/eventPage/budgetPages': (context) => const BudgetPage(),
   '/guest/searchPage': (context) =>  SearchScreen(),
+  '/guest/guestSwitchMainPage': (context) =>  const GuestSwitchMainPage(),
 // ------------------------------------ //
 
 // ------------------------------------ //

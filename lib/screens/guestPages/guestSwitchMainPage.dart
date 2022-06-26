@@ -1,22 +1,11 @@
-import 'dart:developer';
-
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/Models/Service.dart';
-import 'package:pfs/screens/guestPages/events/budget/BudgetPage.dart';
-import 'package:pfs/screens/guestPages/events/chickList/MyChickList.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:pfs/screens/guestPages/events/event/event.dart';
 import 'package:pfs/screens/guestPages/home/home_page_guest.dart';
 import 'package:pfs/screens/guestPages/profilePage/profilePageGuest.dart';
 import 'package:pfs/screens/guestPages/searchPage/search_page.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/settings/settings_page.dart';
-import 'package:pfs/sharedPreferences/GuestPreferences.dart';
-import 'package:provider/provider.dart';
 
 import '../../extensions/constants.dart';
-import '../../services/guestService.dart';
-import '../sharedScreens/search/searchPage.dart';
-import 'events/chickList/MyChickList.dart';
 import 'home/home_page_guest.dart';
 
 class GuestSwitchMainPage extends StatefulWidget {
@@ -27,7 +16,7 @@ class GuestSwitchMainPage extends StatefulWidget {
 }
 
 class _GuestSwitchMainPageState extends State<GuestSwitchMainPage> {
-  int _index = 1;
+  int _index = 0;
 
   void _navigateBottomBar(int index) {
     setState(() {

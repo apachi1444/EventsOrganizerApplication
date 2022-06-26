@@ -49,7 +49,7 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                     radius: 20,
                     child: CircleAvatar(
                       radius: 17,
-                      backgroundImage: AssetImage("assets/avatar.jpg"),
+                      backgroundImage: AssetImage('assets/avatar.jpg'),
                     ),
                   ),
                   // SizedBox(width: size.width * 0.01),
@@ -61,7 +61,14 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return const DialogShowingListEventsAvailable();
+                            return DialogShowingListEventsAvailable(
+                              professionalFirstName: firstNameProfessional,
+                              description: description,
+                              price: price,
+                              title: title,
+                              imageCategory: imageCategory,
+                              professionalLastName: lastNameProfessional,
+                            );
                           },
                         );
                       }),
@@ -82,11 +89,17 @@ class ProfessionalBoxInHomePage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => ProfessionalDetail(
-                                    title: title,
-                                    description: description,
-                                    price: price,
-                                    image: image,
-                                    dateTime: dateTime)));
+                                      title: title,
+                                      description: description,
+                                      price: price,
+                                      image: image,
+                                      imageCategory: imageCategory,
+                                      dateTime: dateTime,
+                                      lastNameProfessional:
+                                          lastNameProfessional,
+                                      firstNameProfessional:
+                                          firstNameProfessional,
+                                    )));
                       },
                       child: Container(
                           constraints: const BoxConstraints.expand(height: 136),

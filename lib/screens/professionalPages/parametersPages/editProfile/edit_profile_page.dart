@@ -1,36 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/editProfile/editProfileParts/buttonUpdate.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/editProfile/edit_profile_screen.dart';
 import 'package:pfs/services/settingsServices.dart';
-import 'package:pfs/sharedPreferences/ProfessionalPreferences.dart';
 
 import '../../../../extensions/constants.dart';
 import '../../../../services/authService.dart';
 import 'editProfileParts/allRowsOfFieldsProfessionalData.dart';
-import 'editProfileParts/imageAboveTheContainer.dart';
-import 'editProfileParts/wholeContainerOfUpdatingDataProfessional.dart';
 
 class EditProfileProfessionalPage extends StatelessWidget {
   const EditProfileProfessionalPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userId = FirebaseAuth.instance.currentUser?.uid;
-    print(userId);
-    // return SafeArea(
-    //   child: Scaffold(
-    //       body: SingleChildScrollsView(
-    //     child: Column(children: [
-    //       const ImageAboveTheContainer(),
-    //       const WholeContainerOfUpdatingDataProfessional(),
-    //       AllRowsOfFieldsProfessionalData(),
-    //       const SizedBox(height: 15),
-    //       const ButtonUpdate(text: 'Update', logo: Icons.update),
-    //     ]),
-    //   )),
-    // );
     final _uid = AuthService().getCurrentIdUser();
     return Scaffold(
       body: StreamBuilder(

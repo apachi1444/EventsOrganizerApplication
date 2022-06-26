@@ -162,7 +162,8 @@ class _BudgetPageState extends State<BudgetPage> {
                                   actions: [
                                     TextButton(
                                       onPressed: () {
-                                        final title = budgetTitleController.text;
+                                        final title =
+                                            budgetTitleController.text;
                                         final description =
                                             budgetDescriptionController.text;
                                         EventsService(eventUid: widget.eventUid)
@@ -267,22 +268,22 @@ Padding CheckingCard(String title, IconData icon) {
       ),
       child: Column(
         //mainAxisSize: MainAxisSize.min,
-
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 15),
           Icon(
             icon,
             size: 40,
-          ), //text=Icons.account_balance
-          Align(
-            alignment: Alignment.topRight,
-            child: ListTile(
-              title: Text(
-                title,
-              ),
-              subtitle: const Text('0/100'),
-            ),
+            color: const Color(ConstantColors.KPinkColor),
           ),
+          const SizedBox(height : 15),
+          Text(title , style : const TextStyle(
+            fontSize:  16, color: Color(ConstantColors.KPinkColor)
+          )),
+          const SizedBox(height : 13),
+          const Text('0/100' , style: TextStyle(
+            fontSize: 20
+          ),),
         ],
       ),
     ),

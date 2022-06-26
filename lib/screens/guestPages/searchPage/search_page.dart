@@ -47,126 +47,128 @@ class _SearchScreenState extends State<SearchScreen> {
       });
     }
 
-    return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0.5,
-          title: const Text('This is the Search Page'),
-          backgroundColor: const Color(ConstantColors.KPinkColor),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 25),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.65,
-                      child: TextField(
-                        onChanged: searchPost,
-                        controller: searchController,
-                        autofocus: false,
-                        style: const TextStyle(
-                            fontSize: 15.0, color: Colors.black),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Search By Category',
-                          filled: true,
-                          fillColor: const Color(0XFFF8F4F4),
-                          prefixIcon: const Icon(Icons.search),
-                          suffixIcon: IconButton(
-                            icon: const Icon(
-                              Icons.clear,
-                              color: Colors.black,
+    return SafeArea(
+      child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            elevation: 0.5,
+            title: const Text('This is the Search Page'),
+            backgroundColor: const Color(ConstantColors.KPinkColor),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 25),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        child: TextField(
+                          onChanged: searchPost,
+                          controller: searchController,
+                          autofocus: false,
+                          style: const TextStyle(
+                              fontSize: 15.0, color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Search By Category',
+                            filled: true,
+                            fillColor: const Color(0XFFF8F4F4),
+                            prefixIcon: const Icon(Icons.search),
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.clear,
+                                color: Colors.black,
+                              ),
+                              onPressed: () {
+                                searchController.clear();
+                              },
                             ),
-                            onPressed: () {
-                              searchController.clear();
-                            },
-                          ),
-                          contentPadding: const EdgeInsets.only(
-                              left: 14.0, bottom: 0.0, top: 14.0, right: 14),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.red),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15.0),
+                            contentPadding: const EdgeInsets.only(
+                                left: 14.0, bottom: 0.0, top: 14.0, right: 14),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.red),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: const BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Ink(
-                    decoration: const ShapeDecoration(
-                      color: Color(ConstantColors.KPinkColor),
-                      shape: CircleBorder(),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FilterPage()),
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.menu,
-                        color: Colors.white,
+                    Ink(
+                      decoration: const ShapeDecoration(
+                        color: Color(ConstantColors.KPinkColor),
+                        shape: CircleBorder(),
                       ),
-                      iconSize: 20.0,
-                    ),
-                  ),
-                  const SizedBox(width : 5),
-                  Ink(
-
-                    decoration: const ShapeDecoration(
-                      color: Color(ConstantColors.KPinkColor),
-                      shape: CircleBorder(),
-                    ),
-                    child: IconButton(
-
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FilterPage()),
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FilterPage()),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.menu,
+                          color: Colors.white,
+                        ),
+                        iconSize: 20.0,
                       ),
-                      iconSize: 20.0,
                     ),
-                  )
+                    const SizedBox(width : 5),
+                    Ink(
 
-                ],
-              ),
-              // Expanded(
-              //     child: ListView.builder(
-              //   itemCount: 10,
-              //   itemBuilder: (context, index) {
-              //     return const BoxOfProfessionalService();
-              //   },
-              // ))
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(Icons.search , size :45),
-                  Text('Nothing Found Yet !' , style : TextStyle(
-                    fontSize: 32
-                  )),Text('.....' , style : TextStyle(
-                    fontSize: 32
-                  )),
-                ],
-              )
-            ],
-          ),
-        ));
+                      decoration: const ShapeDecoration(
+                        color: Color(ConstantColors.KPinkColor),
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FilterPage()),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.close,
+                          color: Colors.white,
+                        ),
+                        iconSize: 20.0,
+                      ),
+                    )
+
+                  ],
+                ),
+                // Expanded(
+                //     child: ListView.builder(
+                //   itemCount: 10,
+                //   itemBuilder: (context, index) {
+                //     return const BoxOfProfessionalService();
+                //   },
+                // ))
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.search , size :45),
+                    Text('Nothing Found Yet !' , style : TextStyle(
+                      fontSize: 32
+                    )),Text('.....' , style : TextStyle(
+                      fontSize: 32
+                    )),
+                  ],
+                )
+              ],
+            ),
+          )),
+    );
   }
 }

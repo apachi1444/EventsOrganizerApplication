@@ -14,57 +14,64 @@ class FilterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Filter Your Results')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 15),
-        child: Column(
-          children: [
-            Row(
-              children: const [
-                Text('Price',
-                    style: TextStyle(
-                        color: Color(ConstantColors.KPinkColor),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)),
-              ],
-            ),
-            const SizedBox(height: 15),
-            const CustomPriceFilter(),
-            const SizedBox(height: 15),
-            Row(
-              children: const [
-                Text('Category',
-                    style: TextStyle(
-                        color: Color(ConstantColors.KPinkColor),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)),
-              ],
-            ),
-            const SizedBox(height: 15),
-            const CustomCategoryFilter(),
-            const SizedBox(height: 15),
-            Row(
-              children: const [
-                Text('Localisation',
-                    style: TextStyle(
-                        color: Color(ConstantColors.KPinkColor),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25)),
-              ],
-            ),
-            const SizedBox(height: 15),
-            const CustomLocalisationFilter(),
-            const SizedBox(height: 15),
-            FloatingActionButton.extended(
-              onPressed: () {
-                print('hi');
-              },
-              icon: const Icon(Icons.verified_user),
-              label: const Text('Apply Filters'),
-              backgroundColor: const Color(ConstantColors.KPinkColor),
-            )
-          ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          elevation: 0.5,
+          title: const Text('Filter Your Results'),
+          backgroundColor: const Color(ConstantColors.KPinkColor),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 15),
+          child: Column(
+            children: [
+              Row(
+                children: const [
+                  Text('Price',
+                      style: TextStyle(
+                          color: Color(ConstantColors.KPinkColor),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25)),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const CustomPriceFilter(),
+              const SizedBox(height: 15),
+              Row(
+                children: const [
+                  Text('Category',
+                      style: TextStyle(
+                          color: Color(ConstantColors.KPinkColor),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25)),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const CustomCategoryFilter(),
+              const SizedBox(height: 15),
+              Row(
+                children: const [
+                  Text('Localisation',
+                      style: TextStyle(
+                          color: Color(ConstantColors.KPinkColor),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25)),
+                ],
+              ),
+              const SizedBox(height: 15),
+              const CustomLocalisationFilter(),
+              const SizedBox(height: 15),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  print('hi');
+                },
+                icon: const Icon(Icons.verified_user),
+                label: const Text('Apply Filters'),
+                backgroundColor: const Color(ConstantColors.KPinkColor),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -103,7 +110,8 @@ class CustomPriceFilter extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(spacing: 5, runSpacing: 3, children: const [
-        RectangleOfLocalisationFilter(name: 'Under200', image: 'assets/dollar.png'),
+        RectangleOfLocalisationFilter(
+            name: 'Under200', image: 'assets/dollar.png'),
         // SizedBox(width: 5),
         // RectangleOfLocalisationFilter(name: '>200', image: 'assets/dollar.png'),
       ]),
@@ -164,9 +172,10 @@ class RectangleOfLocalisationFilter extends StatefulWidget {
 class _RectangleOfLocalisationFilterState
     extends State<RectangleOfLocalisationFilter> {
   bool isSelected = false;
+
   @override
   Widget build(BuildContext context) {
-    final String keyPreference = '_key'+widget.name;
+    final String keyPreference = '_key' + widget.name;
     print('this is the value of the key in the preference');
     print(keyPreference);
     return ChoiceChip(
@@ -277,4 +286,3 @@ class CustomLocalisationFilter extends StatelessWidget {
     );
   }
 }
-

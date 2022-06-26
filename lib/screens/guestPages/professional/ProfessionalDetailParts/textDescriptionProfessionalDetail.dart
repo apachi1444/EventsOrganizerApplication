@@ -6,12 +6,27 @@ import 'package:pfs/screens/guestPages/professional/ProfessionalDetailParts/expa
 import '../../../../../extensions/constants.dart';
 
 class TextDescriptionProfessionalDetailPage extends StatelessWidget {
-  const TextDescriptionProfessionalDetailPage({Key? key, required this.description, required this.price, required this.dateTime, required this.image}) : super(key: key);
+  const TextDescriptionProfessionalDetailPage(
+      {Key? key,
+      required this.description,
+      required this.price,
+      required this.dateTime,
+      required this.image,
+      required this.title,
+      required this.firstNameProfessional,
+      required this.lastNameProfessional,
+      required this.imageCategory})
+      : super(key: key);
 
-  final String description ;
+  final String description;
   final String price;
   final String dateTime;
   final String image;
+  final String title;
+  final String imageCategory;
+  final String firstNameProfessional;
+  final String lastNameProfessional;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,13 +36,13 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children:  [
+            children: [
               const Text('Description',
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   )),
-              Row(children:  [
+              Row(children: [
                 const Icon(Icons.date_range_outlined),
                 const SizedBox(width: 6),
                 Text(dateTime,
@@ -36,8 +51,7 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 15),
-          Text(
-              description,
+          Text(description,
               style: const TextStyle(
                   fontWeight: FontWeight.w100, color: Colors.blueGrey)),
 
@@ -45,7 +59,7 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
           // this is for the price of the professionalDetail
 
           Row(
-            children:  [
+            children: [
               const Icon(Icons.monetization_on,
                   color: Color(ConstantColors.KPinkColor), size: 25),
               const SizedBox(width: 10),
@@ -62,12 +76,21 @@ class TextDescriptionProfessionalDetailPage extends StatelessWidget {
           // this is the for the line of the add to list and the call button
 
           Row(
-            children: const [
+            children: [
               Expanded(
-                child: ExpandedButtonProfessionalDetail(),
+                child: ExpandedButtonProfessionalDetail(
+                  firstNameProfessional: firstNameProfessional,
+                  image: image,
+                  dateTime: dateTime,
+                  title: title,
+                  imageCategory: imageCategory,
+                  lastNameProfessional: lastNameProfessional,
+                  description: description,
+                  price: price,
+                ),
               ),
-              SizedBox(width: 15),
-              ButtonCallProfessionalDetail(),
+              const SizedBox(width: 15),
+              const ButtonCallProfessionalDetail(),
               // Ink
             ],
           )

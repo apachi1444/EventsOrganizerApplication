@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pfs/extensions/listOfCategories.dart';
+import 'package:pfs/services/eventsService.dart';
 
 import '../../../extensions/constants.dart';
 import '../../../services/authService.dart';
@@ -7,7 +9,21 @@ import '../../../services/guestService.dart';
 import '../events/event/noDataFoundForEvents.dart';
 
 class DialogShowingListEventsAvailable extends StatelessWidget {
-  const DialogShowingListEventsAvailable({Key? key}) : super(key: key);
+  const DialogShowingListEventsAvailable(
+      {Key? key,
+      required this.title,
+      required this.imageCategory,
+      required this.professionalLastName,
+      required this.professionalFirstName,
+      required this.price,
+      required this.description})
+      : super(key: key);
+  final String title;
+  final String imageCategory;
+  final String professionalLastName;
+  final String professionalFirstName;
+  final String price;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +42,6 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
             if (snapshot.data.docs.length == 0) {
               return const NoDataFoundForEvents();
             } else {
-              // return Expanded(
-              //   child: ListView.builder(
-              //       itemCount: snapshot.data.docs.length,
-              //       itemBuilder: (BuildContext context, int index) {
-              //         var ourLastElement = allDocs[index].data();
-              //         String title = ourLastElement['title'];
-              //         String dateTime = ourLastElement['dateTime'];
-              //         String uid = ourLastElement['uid'];
-              //         print(ourLastElement);
-              //         return const Card(
-              //           child: ListTile(
-              //             leading: FlutterLogo(size: 56.0),
-              //             title: Text('Two-line ListTile'),
-              //             subtitle: Text('Here is a second line'),
-              //             trailing: Icon(Icons.more_vert),
-              //           ),
-              //         );
-              //       }),
-              // );
               return AlertDialog(
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
@@ -63,15 +60,7 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
                     icon: const Icon(Icons.cancel, color: Colors.grey),
                   ),
                 ]),
-                // content: ListView.builder(
-                //   shrinkWrap: false,
-                //   physics: const NeverScrollableScrollPhysics(),
-                //   itemCount: categories.length,
-                //   itemBuilder: (BuildContext context, int index) {
-                //     return Text('this is inside the view builder $index');
-                //   },
-                // )
-                content: Container(
+                content: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.5,
                   width: MediaQuery.of(context).size.width * 0.7,
                   child: ListView.builder(
@@ -93,15 +82,40 @@ class DialogShowingListEventsAvailable extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 17,
                                         backgroundImage:
-                                            AssetImage("assets/eventImage.jpg"),
+                                            AssetImage('assets/eventImage.jpg'),
                                       ),
                                     ),
                                     // SizedBox(width: size.width * 0.01),
-                                    Text('lsdkjf'),
+                                    Text(allDocs[index]['title']),
                                     // SizedBox(width: size.width * 0.32),
                                     GestureDetector(
                                         child: const Icon(Icons.add_box_sharp),
-                                        onTap: () {}),
+                                        onTap: () async {
+                                          String uid = allDocs[index]['uid'];
+                                          EventsService(eventUid: uid)
+                                              .addProfessionalServiceToEvent(
+                                                  title,
+                                                  imageCategory,
+                                                  professionalFirstName,
+                                                  professionalLastName,
+                                                  price,
+                                                  description)
+                                              .then((value) {
+                                            Fluttertoast.showToast(
+                                                msg: 'added Successfully',
+                                                backgroundColor: Colors.green,
+                                                textColor: Colors.white,
+                                                fontSize: 25);
+                                            Navigator.pop(context);
+                                          }).catchError((onError) {
+                                            Fluttertoast.showToast(
+                                                msg:
+                                                    'Error In Adding This Professional In Your Lists',
+                                                backgroundColor: Colors.red,
+                                                textColor: Colors.white,
+                                                fontSize: 25);
+                                          });
+                                        }),
                                   ]),
                             )),
                       );

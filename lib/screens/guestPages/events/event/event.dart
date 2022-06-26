@@ -78,7 +78,7 @@ void _showTheAddingEventAlertModel(BuildContext context) {
       });
 }
 
-Padding CheckingCard(String title, IconData icon) {
+Padding checkingCard(String title, IconData icon) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
     child: Center(

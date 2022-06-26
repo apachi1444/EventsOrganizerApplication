@@ -176,22 +176,43 @@ class EventsService {
 // --------------------------------- //
 // this part for the professionals //
 
-  Future addProfessionalServiceToEvent(Service service) async {
-    // return await guestsCollection
-    //     .doc(guestUid)
-    //     .collection('events')
-    //     .doc(eventUid)
-    //     .collection('servicesWanted')
-    //     .add();
+  Future addProfessionalServiceToEvent(
+      String title,
+      String imageCategory,
+      String professionalFirstName,
+      String professionalLastName,
+      String price,
+      String description) async {
+    return await guestsCollection
+        .doc(guestUid)
+        .collection('events')
+        .doc(eventUid)
+        .collection('professionals')
+        .add({
+      'title': title,
+      'imageCategory': imageCategory,
+      'professionalLastName': professionalLastName,
+      'professionalFirstName': professionalFirstName,
+      'price': price,
+      'description': description,
+      'uid': DateTime.now().toString()
+    }).then((value) => guestsCollection
+            .doc(guestUid)
+            .collection('events')
+            .doc(eventUid)
+            .collection('professionals')
+            .doc(value.id)
+            .update({'uid': value.id}));
   }
 
-  Future<void> deleteSpecificProfessionalFromEventBudget(String budgetUid) async {
+  Future<void> deleteSpecificProfessionalFromEventBudget(
+      String professionalUid) async {
     await guestsCollection
         .doc(guestUid)
         .collection('events')
         .doc(eventUid)
-        .collection('budget')
-        .doc(budgetUid)
+        .collection('professionals')
+        .doc(professionalUid)
         .delete();
   }
 
@@ -200,8 +221,12 @@ class EventsService {
         .doc(guestUid)
         .collection('events')
         .doc(eventUid)
-        .collection('budget')
+        .collection('professionals')
         .snapshots();
+  }
+
+  Future<QuerySnapshot> professionalFutureList() {
+    return guestsCollection.doc(guestUid).collection('professionals').get();
   }
 
   Future<int> getLengthOfProfessionalInEvent() {
@@ -209,13 +234,34 @@ class EventsService {
         .doc(guestUid)
         .collection('events')
         .doc(eventUid)
-        .collection('budget')
+        .collection('professionals')
         .snapshots()
         .length;
   }
 
-
 // --------------------------------- //
 // this part for the professionals //
+
+// this part for all lengths of services //
+// ------------------------------------ //
+
+  Future<List<int>> getLengthOfAllElementsInEvent() async {
+    int lengthProfessional = await getLengthOfProfessionalInEvent();
+    int lengthTasks = await getLengthOfTasksInEvent();
+    print(
+        "this is the length of professionals " + lengthProfessional.toString());
+
+    Future<QuerySnapshot> allProfessionals = professionalFutureList();
+    print("this is the future of all professionals " + allProfessionals.toString());
+
+    List<int> allLengths = [];
+    allLengths.add(lengthProfessional);
+    allLengths.add(lengthTasks);
+
+    return allLengths;
+  }
+
+// this part for all lengths of services //
+// ------------------------------------ //
 
 }

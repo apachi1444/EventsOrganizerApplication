@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pfs/services/guestService.dart';
 import 'package:intl/intl.dart';
 
@@ -101,6 +102,11 @@ class _AddEventState extends State<AddEvent> {
             var finalDate = DateFormat('yMd').format(dateTime!);
             GuestService(guestUid: widget.uid)
                 .addEventToGuestList(title, finalDate);
+            Fluttertoast.showToast(
+                msg: 'Added Successfully',
+                backgroundColor: Colors.green,
+                textColor: Colors.white,
+                fontSize: 25);
             Navigator.pop(context);
           },
           child: const Center(child: Text('add')),

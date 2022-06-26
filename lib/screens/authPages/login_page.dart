@@ -50,7 +50,7 @@
 //                   ),
 //                   SizedBox(height :30),
 //                   Text(
-//                       "Hellow Again Dear User",
+//                       "Hello Again Dear User",
 //                   ),
 //                   SizedBox(height : 10),
 //                   Text(
@@ -198,18 +198,12 @@
 //   }
 // }
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:pfs/extensions/utils.dart';
 import 'package:pfs/extensions/validators.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/change_paswd.dart';
 import 'package:pfs/screens/professionalPages/parametersPages/forgetPassword/enterEmailForResettingPassword.dart';
-import 'package:pfs/screens/professionalPages/parametersPages/profilePage.dart';
 import 'package:pfs/services/authService.dart';
 
 import '../../extensions/constants.dart';
-import '../../main.dart';
 import '../../shared/loading_screen_page.dart';
 import '../welcomePages/navbarItemsStartedPages/navbarItemStartPages.dart';
 import 'inputTextWidget.dart';
@@ -247,7 +241,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool? isChecked = false;
     return loading
         ? const LoadingScreen()
         : Theme(
@@ -308,110 +301,100 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 25),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: const Color(0XFFFF006B),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: GestureDetector(
-                            onTap: () async {
-                              final isValid = _formKey.currentState!.validate();
-                              if (isValid) {
-                                try {
-                                  var doLogin = await doTheLogin();
-                                  print('this is the value of the do login ');
-                                  print(doLogin);
-                                  if (doLogin != null) {
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        '/professional/switchMainPage',
-                                        (r) => false);
-                                  } else {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: const Text(
-                                                  'Error in the Login',
-                                                  style: TextStyle(
-                                                      color: Color(
-                                                          ConstantColors
-                                                              .KPinkColor))),
-                                              content: Text(error),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
-                                                    child:
-                                                        const Text('Cancel')),
-                                              ],
-                                            ));
-                                  }
-                                } catch (e) {
+                        child: GestureDetector(
+                          onTap: () async {
+                            final isValid = _formKey.currentState!.validate();
+                            if (isValid) {
+                              try {
+                                var doLogin = await doTheLogin();
+                                print('this is the value of the do login ');
+                                print(doLogin);
+                                if (doLogin != null) {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/professional/switchMainPage',
+                                      (r) => false);
+                                } else {
                                   showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                            title: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text('Error',
-                                                    style: TextStyle(
-                                                        color: Color(
-                                                            ConstantColors
-                                                                .KPinkColor))),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Icon(Icons.close,
-                                                      color: Color(
-                                                          ConstantColors
-                                                              .KPinkColor)),
-                                                ),
-                                              ],
-                                            ),
+                                            title: const Text(
+                                                'Error in the Login',
+                                                style: TextStyle(
+                                                    color: Color(ConstantColors
+                                                        .KPinkColor))),
                                             content: Text(error),
                                             actions: [
                                               TextButton(
-                                                  // onPressed: () => Navigator.of(
-                                                  //         context)
-                                                  //     .push(MaterialPageRoute(
-                                                  //         builder: (context) =>
-                                                  //             contact_us())),
-                                                  //ici la navigation vers la page contact us
-                                                  onPressed: () {},
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
                                                   child: const Text('Cancel')),
                                             ],
                                           ));
                                 }
-
-                                return;
-
-                                // Utils.showSnackBar(e.toString());
-                                // Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-                              } else {
+                              } catch (e) {
                                 showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                          title: const Text(
-                                              'There is An error in the login',
-                                              style: TextStyle(
-                                                  color: Color(ConstantColors
-                                                      .KPinkColor))),
-                                          content: const Text(
-                                              'There was an error in the login please try again'),
+                                          title: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              const Text('Error',
+                                                  style: TextStyle(
+                                                      color: Color(
+                                                          ConstantColors
+                                                              .KPinkColor))),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Icon(Icons.close,
+                                                    color: Color(ConstantColors
+                                                        .KPinkColor)),
+                                              ),
+                                            ],
+                                          ),
+                                          content: Text(error),
                                           actions: [
                                             TextButton(
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
+                                                onPressed: () {},
                                                 child: const Text('Cancel')),
                                           ],
                                         ));
                               }
-                            },
+
+                              return;
+
+                              // Utils.showSnackBar(e.toString());
+                              // Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: const Text(
+                                            'There is An error in the login',
+                                            style: TextStyle(
+                                                color: Color(ConstantColors
+                                                    .KPinkColor))),
+                                        content: const Text(
+                                            'There was an error in the login please try again'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text('Cancel')),
+                                        ],
+                                      ));
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: const Color(0XFFFF006B),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
                             child: const Center(
                               child: Text('Sign In',
                                   style: TextStyle(

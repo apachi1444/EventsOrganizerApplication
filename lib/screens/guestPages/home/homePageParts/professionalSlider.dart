@@ -30,7 +30,6 @@ class ProfessionalSlider extends StatelessWidget {
               String firstName = snapshotProfessional.data[0].getFirstName();
               String lastName = snapshotProfessional.data[0].getLastName();
               String uid = snapshotProfessional.data[0].getUid();
-              print(firstName + "sdlkqjflksdjf");
               return StreamBuilder(
                   stream: guestService
                       .getServicesOfParticularProfessionalWithParticularCategory(
