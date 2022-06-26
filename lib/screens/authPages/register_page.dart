@@ -56,7 +56,10 @@ class _RegisterPageState extends State<RegisterPage> {
           setState(() {
             error = signUp;
           });
-          return false;
+          return error;
+        }
+        else{
+          return 'Signed Up Successfully';
         }
       } catch (e) {
         setState(() {
@@ -67,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
       setState(() {
         error = "Password don't match";
       });
-      return false;
+      return error;
     }
   }
 
@@ -251,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     _formKey.currentState!.validate();
                                 if (isValid) {
                                   var result = await doTheSignUp();
-
+                                  print("this is the result " + result) ;
                                   if (result == false) {
                                     Fluttertoast.showToast(
                                         msg: error,
